@@ -37,26 +37,51 @@ import java.util.Map;
  */
 public class UrlManipulator {
 	
+	/**
+	 * The scheme for pure HTTP non-SSL
+	 */
 	public static final String HTTP_SCHEME = "http";
 	
+	/**
+	 * Holds the scheme or the protocol
+	 */
 	private String scheme = HTTP_SCHEME;
 	
+	/**
+	 * Holds the host part - the domain
+	 */
 	private String host;
 	
+	/**
+	 * Holds the port
+	 */
 	private int port = 80;
 	
+	/**
+	 * Holds the path
+	 */
 	private String path;
 	
+	/**
+	 * Holds the query parameters
+	 */
 	private final Map<String, String> queryParams = new HashMap<String, String>();
-	
+
+	/**
+	 * Holds the fragment or page anchor
+	 */
 	private String fragment;
 	
 	/**
-	 * Construct a new URL for the given host and path. A default
-	 * scheme of HTTP and default port of 80 is assumed.
+	 * Construct a new URL for the given host and path. A default scheme of HTTP
+	 * and default port of 80 is assumed.
 	 * 
 	 * @param host
+	 *            the domain or host to use
+	 * 
 	 * @param path
+	 *            the server path to use
+	 * 
 	 */
 	public UrlManipulator(String host, String path) {
 		this.host = host;
@@ -64,12 +89,17 @@ public class UrlManipulator {
 	}
 	
 	/**
-	 * Construct a new URL for the given host, port and path. A default
-	 * scheme of HTTP is assumed.
+	 * Construct a new URL for the given host, port and path. A default scheme
+	 * of HTTP is assumed.
 	 * 
 	 * @param host
+	 *            the domain or host to use
+	 * 
 	 * @param port
+	 *            the port number to use
+	 * 
 	 * @param path
+	 *            the server path to use
 	 */
 	public UrlManipulator(String host, int port, String path) {
 		this.host = host;
@@ -78,12 +108,17 @@ public class UrlManipulator {
 	}
 	
 	/**
-	 * Construct a new URL for the given scheme, host and path. A default
-	 * port value of 80 is assumed.
+	 * Construct a new URL for the given scheme, host and path. A default port
+	 * value of 80 is assumed.
 	 * 
 	 * @param scheme
+	 *            the scheme or protocol to use
+	 * 
 	 * @param host
+	 *            the domain or host to use
+	 * 
 	 * @param path
+	 *            the server path to use
 	 */
 	public UrlManipulator(String scheme, String host, String path) {
 		this.scheme = scheme;
@@ -95,9 +130,16 @@ public class UrlManipulator {
 	 * Construct a new URL for the given scheme, host, port and path.
 	 * 
 	 * @param scheme
+	 *            the scheme or protocol to use
+	 * 
 	 * @param host
+	 *            the domain or host to use
+	 * 
 	 * @param port
+	 *            the port number to use
+	 * 
 	 * @param path
+	 *            the server path to use
 	 */
 	public UrlManipulator(String scheme, String host, int port, String path) {
 		this.scheme = scheme;
@@ -218,7 +260,8 @@ public class UrlManipulator {
 	 * obtain the final constructed url. This is the method for the same, to
 	 * obtain the final representation as a String object.
 	 * 
-	 * @return
+	 * @return the final URL representation for details in this manipulator
+	 * 
 	 */
 	public String constructURL() {
 		StringBuilder builder = new StringBuilder();
@@ -476,7 +519,7 @@ public class UrlManipulator {
 	/**
 	 * Return the current scheme
 	 * 
-	 * @return
+	 * @return the current scheme
 	 */
 	public String getScheme() {
 		return this.scheme;
@@ -485,7 +528,7 @@ public class UrlManipulator {
 	/**
 	 * Return the value of the current host.
 	 * 
-	 * @return
+	 * @return the current host
 	 */
 	public String getHost() {
 		return this.host;
@@ -494,7 +537,7 @@ public class UrlManipulator {
 	/**
 	 * Return the value of the current port
 	 * 
-	 * @return
+	 * @return the current port
 	 */
 	public int getPort() {
 		return this.port;
@@ -503,7 +546,7 @@ public class UrlManipulator {
 	/**
 	 * Return the value of the current path
 	 * 
-	 * @return
+	 * @return the current server path
 	 */
 	public String getPath() {
 		return this.path;
@@ -512,7 +555,7 @@ public class UrlManipulator {
 	/**
 	 * Return the value of the current fragment
 	 * 
-	 * @return
+	 * @return the current fragment
 	 */
 	public String getFragment() {
 		return this.fragment;
@@ -521,7 +564,7 @@ public class UrlManipulator {
 	/**
 	 * Return the number of query parameters
 	 * 
-	 * @return
+	 * @return the current query parameters
 	 */
 	public int getNumQueryParams() {
 		if(this.queryParams == null) {
@@ -566,12 +609,18 @@ public class UrlManipulator {
 	}
 	
 	/**
-	 * Extract all the query parameters from this URL. Parse them and extract the key
-	 * value pairs from this segment of the url.
+	 * Extract all the query parameters from this URL. Parse them and extract
+	 * the key value pairs from this segment of the url.
 	 * 
 	 * @param url
+	 *            the url from which query paramters need to be extracted
+	 * 
 	 * @param start
+	 *            the starting index for query parameters
+	 * 
 	 * @param end
+	 *            the ending index for query paramets
+	 * 
 	 */
 	private void extractQueryParams(String url, int start, int end) {
 		String segment = url.substring(start, end);
