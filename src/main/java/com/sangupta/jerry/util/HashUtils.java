@@ -22,6 +22,7 @@
 package com.sangupta.jerry.util;
 
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Mac;
@@ -35,6 +36,218 @@ import com.sangupta.jerry.encoder.Base64Encoder;
  */
 public class HashUtils {
 
+	/**
+	 * Computes the MD5 hash of the given data.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 * 
+	 */
+	public static byte[] getMD5(byte[] data) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] digest = md.digest(data);
+			return digest;
+		} catch (NoSuchAlgorithmException e) {
+			// eat up
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Compute the MD5 of the given string data. It is converted to bytes using
+	 * platform specific default encoding.
+	 * 
+	 * @param data
+	 *            the string for which hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 */
+	public static byte[] getMD5(String data) {
+		return getMD5(data.getBytes());
+	}
+	
+	/**
+	 * Computes the SHA-1 hash of the given data.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array
+	 * 
+	 */
+	public static byte[] getSHA1(byte[] data) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-1");
+			byte[] digest = md.digest(data);
+			return digest;
+		} catch (NoSuchAlgorithmException e) {
+			// eat up
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Computes the SHA-1 hash of the given string data. It is converted to
+	 * bytes using platform specific default encoding.
+	 * 
+	 * @param data
+	 *            the string for which hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 */
+	public static byte[] getSHA1(String data) {
+		return getSHA1(data.getBytes());
+	}
+	
+	/**
+	 * Computes the SHA-256 hash of the given data.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 * 
+	 */
+	public static byte[] getSHA256(byte[] data) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-256");
+			byte[] digest = md.digest(data);
+			return digest;
+		} catch(NoSuchAlgorithmException e) {
+			// eat up
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Computes the SHA-256 hash of the given string data. It is converted to
+	 * bytes using platform specific default encoding.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 */
+	public static byte[] getSHA256(String data) {
+		return getSHA256(data.getBytes());
+	}
+	
+	/**
+	 * Compute the SHA-224 hash for the given bytes.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 */
+	public static byte[] getSHA224(byte[] data) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-224");
+			byte[] digest = md.digest(data);
+			return digest;
+		} catch(NoSuchAlgorithmException e) {
+			// eat up
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Computes the SHA-224 hash of the given string data. It is converted to
+	 * bytes using platform specific default encoding.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 */
+	public static byte[] getSHA224(String data) {
+		return getSHA224(data.getBytes());
+	}
+	
+	/**
+	 * Compute the SHA-384 hash for the given bytes.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 */
+	public static byte[] getSHA384(byte[] data) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-384");
+			byte[] digest = md.digest(data);
+			return digest;
+		} catch(NoSuchAlgorithmException e) {
+			// eat up
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Computes the SHA-384 hash of the given string data. It is converted to
+	 * bytes using platform specific default encoding.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 */
+	public static byte[] getSHA384(String data) {
+		return getSHA384(data.getBytes());
+	}
+	
+	/**
+	 * Compute the SHA-512 hash for the given bytes.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 */
+	public static byte[] getSHA512(byte[] data) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
+			byte[] digest = md.digest(data);
+			return digest;
+		} catch(NoSuchAlgorithmException e) {
+			// eat up
+		}
+		
+		return null;
+	}
+	
+	/**
+	 * Computes the SHA-512 hash of the given string data. It is converted to
+	 * bytes using platform specific default encoding.
+	 * 
+	 * @param data
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented in a byte-array, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
+	 */
+	public static byte[] getSHA512(String data) {
+		return getSHA512(data.getBytes());
+	}
+	
 	/**
 	 * Generate the HMAC_SHA1 signature for the given string using the given key
 	 * string. The method never returns a <code>null</code>.

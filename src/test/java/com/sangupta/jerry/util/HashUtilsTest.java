@@ -28,7 +28,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class CryptoUtilsTest {
+public class HashUtilsTest {
 	
 	private static final String TEXT = "Hello World!";
 	
@@ -48,14 +48,14 @@ public class CryptoUtilsTest {
 	
 	@Test
 	public void testMD5() {
-		Assert.assertEquals("ed076287532e86365e841e92bfc50d8c", CryptoUtil.getMD5Hex(TEXT));
-		Assert.assertEquals("ed076287532e86365e841e92bfc50d8c", CryptoUtil.getMD5Hex(BYTES));
+		Assert.assertEquals("ed076287532e86365e841e92bfc50d8c", StringUtils.getHex(HashUtils.getMD5(TEXT)));
+		Assert.assertEquals("ed076287532e86365e841e92bfc50d8c", StringUtils.getHex(HashUtils.getMD5(BYTES)));
 	}
 	
 	@Test
 	public void testSHA1() {
-		Assert.assertEquals("2ef7bde608ce5404e97d5f042f95f89f1c232871", CryptoUtil.getSHA1Hex(TEXT));
-		Assert.assertEquals("2ef7bde608ce5404e97d5f042f95f89f1c232871", CryptoUtil.getSHA1Hex(BYTES));
+		Assert.assertEquals("2ef7bde608ce5404e97d5f042f95f89f1c232871", StringUtils.getHex(HashUtils.getSHA1(TEXT)));
+		Assert.assertEquals("2ef7bde608ce5404e97d5f042f95f89f1c232871", StringUtils.getHex(HashUtils.getSHA1(BYTES)));
 	}
 
 	@Test
@@ -66,20 +66,20 @@ public class CryptoUtilsTest {
 	
 	@Test
 	public void testSHA256() {
-		Assert.assertEquals("7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069", CryptoUtil.getSHA256Hex(TEXT));
-		Assert.assertEquals("7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069", CryptoUtil.getSHA256Hex(BYTES));
+		Assert.assertEquals("7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069", StringUtils.getHex(HashUtils.getSHA256(TEXT)));
+		Assert.assertEquals("7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069", StringUtils.getHex(HashUtils.getSHA256(BYTES)));
 	}
 	
 	@Test
 	public void testSHA384() {
-		Assert.assertEquals("bfd76c0ebbd006fee583410547c1887b0292be76d582d96c242d2a792723e3fd6fd061f9d5cfd13b8f961358e6adba4a", CryptoUtil.getSHA384Hex(TEXT));
-		Assert.assertEquals("bfd76c0ebbd006fee583410547c1887b0292be76d582d96c242d2a792723e3fd6fd061f9d5cfd13b8f961358e6adba4a", CryptoUtil.getSHA384Hex(BYTES));
+		Assert.assertEquals("bfd76c0ebbd006fee583410547c1887b0292be76d582d96c242d2a792723e3fd6fd061f9d5cfd13b8f961358e6adba4a", StringUtils.getHex(HashUtils.getSHA384(TEXT)));
+		Assert.assertEquals("bfd76c0ebbd006fee583410547c1887b0292be76d582d96c242d2a792723e3fd6fd061f9d5cfd13b8f961358e6adba4a", StringUtils.getHex(HashUtils.getSHA384(BYTES)));
 	}
 	
 	@Test
 	public void testSHA512() {
-		Assert.assertEquals("861844d6704e8573fec34d967e20bcfef3d424cf48be04e6dc08f2bd58c729743371015ead891cc3cf1c9d34b49264b510751b1ff9e537937bc46b5d6ff4ecc8", CryptoUtil.getSHA512Hex(TEXT));
-		Assert.assertEquals("861844d6704e8573fec34d967e20bcfef3d424cf48be04e6dc08f2bd58c729743371015ead891cc3cf1c9d34b49264b510751b1ff9e537937bc46b5d6ff4ecc8", CryptoUtil.getSHA512Hex(BYTES));
+		Assert.assertEquals("861844d6704e8573fec34d967e20bcfef3d424cf48be04e6dc08f2bd58c729743371015ead891cc3cf1c9d34b49264b510751b1ff9e537937bc46b5d6ff4ecc8", StringUtils.getHex(HashUtils.getSHA512(TEXT)));
+		Assert.assertEquals("861844d6704e8573fec34d967e20bcfef3d424cf48be04e6dc08f2bd58c729743371015ead891cc3cf1c9d34b49264b510751b1ff9e537937bc46b5d6ff4ecc8", StringUtils.getHex(HashUtils.getSHA512(BYTES)));
 	}
 	
 	@Test
