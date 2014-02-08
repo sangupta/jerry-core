@@ -33,7 +33,7 @@ Features
 * **UrlCanonicalizer** - basic URL canonicalizer
 * **UrlManipulator** - url builder/manipulator that helps in composing/decomposing/replacing various url pieces
 * **XmlUtils** - functions to extract XML values without parsing
-* **XSteanUtils** - provides singleton XStream instances
+* **XStreamUtils** - provides singleton XStream instances
 * **ZipUtils** - zip entire folder, extract given file from ZIP etc
 
 Downloads
