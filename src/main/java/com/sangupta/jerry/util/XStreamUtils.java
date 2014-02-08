@@ -56,7 +56,8 @@ public class XStreamUtils {
 	 * Returns the {@link XStream} object processing the annotations of
 	 * the class supplied.
 	 * 
-	 * @return
+	 * @return the {@link XStream} object after processing the given classes
+	 * 
 	 */
 	public static XStream getXStream(Class<?> clazz) {
 		synchronized (processed) {
@@ -72,7 +73,7 @@ public class XStreamUtils {
 	/**
 	 * Returns the currently processed {@link XStream} object.
 	 * 
-	 * @return
+	 * @return the current {@link XStream} object
 	 */
 	public static XStream getXStream() {
 		return XSTREAM;

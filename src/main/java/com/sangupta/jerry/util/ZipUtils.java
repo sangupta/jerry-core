@@ -47,19 +47,32 @@ public class ZipUtils {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ZipUtils.class);
 
 	/**
-	 * Read a given file from the ZIP file and store it in a temporary file. The temporary file
-	 * is set to be deleted on exit of application.
+	 * Read a given file from the ZIP file and store it in a temporary file. The
+	 * temporary file is set to be deleted on exit of application.
 	 * 
-	 * @param tempZip
-	 * @param string
-	 * @return
+	 * @param zipFile
+	 *            the zip file from which the file needs to be read
+	 * 
+	 * @param fileName
+	 *            the name of the file that needs to be extracted
+	 * 
+	 * @return the {@link File} handle for the extracted file in the temp
+	 *         directory
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the zipFile is <code>null</code> or the fileName is
+	 *             <code>null</code> or empty.
 	 */
-	public static File readFileFromZip(File tempZip, String fileName) throws FileNotFoundException, IOException {
-		if(tempZip == null) {
-			return null;
+	public static File readFileFromZip(File zipFile, String fileName) throws FileNotFoundException, IOException {
+		if(zipFile == null) {
+			throw new IllegalArgumentException("zip file to extract from cannot be null");
 		}
 		
-		LOGGER.debug("Reading {} from {}", fileName, tempZip.getAbsolutePath());
+		if(AssertUtils.isEmpty(fileName)) {
+			throw new IllegalArgumentException("the filename to extract cannot be null/empty");
+		}
+		
+		LOGGER.debug("Reading {} from {}", fileName, zipFile.getAbsolutePath());
 		
 		ZipInputStream stream = null;
 		BufferedOutputStream outStream = null;
@@ -67,7 +80,7 @@ public class ZipUtils {
 		
 		try {
 			byte[] buf = new byte[1024];
-			stream = new ZipInputStream(new FileInputStream(tempZip));
+			stream = new ZipInputStream(new FileInputStream(zipFile));
 			ZipEntry entry;
 			while((entry = stream.getNextEntry()) != null) {
 				String entryName = entry.getName();
@@ -96,10 +109,13 @@ public class ZipUtils {
 	}
 	
 	/**
-	 * Compresses the provided file into ZIP format adding a '.ZIP' at the end of the filename.
+	 * Compresses the provided file into ZIP format adding a '.ZIP' at the end
+	 * of the filename.
 	 * 
 	 * @param filePath
-	 * @return returns the absolute path of the ZIP file. 
+	 *            the file path that needs to be compressed
+	 * 
+	 * @return returns the absolute path of the ZIP file.
 	 */
 	public String createZipFile(String filePath) {
         LOGGER.debug("Starting compression of " + filePath);
@@ -145,8 +161,11 @@ public class ZipUtils {
 	/**
 	 * Extract the given ZIP file into the given destination folder.
 	 * 
-	 * @param zipFile file to extract
-	 * @param baseFolder destination folder to extract in
+	 * @param zipFile
+	 *            file to extract
+	 *            
+	 * @param baseFolder
+	 *            destination folder to extract in
 	 */
 	public static void extractZipToFolder(File zipFile, File baseFolder) {
 		try {

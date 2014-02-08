@@ -25,10 +25,11 @@ import sun.misc.Unsafe;
 import java.lang.reflect.Field;
 
 /**
- * Provides capability to write to a byte buffer using Java {@link Unsafe} class.
+ * Provides capability to write to a byte buffer using Java {@link Unsafe}
+ * class.
  * 
  * @author sangupta
- *
+ * 
  */
 @SuppressWarnings("restriction")
 public class UnsafeMemory {
@@ -52,11 +53,12 @@ public class UnsafeMemory {
 	}
 	
 	/**
-	 * Method to return the {@link com.sun.misc.Unsafe} object that can
-	 * be used for unsafe operations. Use this method with much caution
-	 * as this can lead to unpredictable results.
-	 *  
-	 * @return
+	 * Method to return the {@link com.sun.misc.Unsafe} object that can be used
+	 * for unsafe operations. Use this method with much caution as this can lead
+	 * to unpredictable results.
+	 * 
+	 * @return the {@link com.sun.misc.Unsafe} object thus obtained
+	 * 
 	 */
 	public static Unsafe getUnsafe() {
 		return UnsafeMemory.UNSAFE;
@@ -143,17 +145,18 @@ public class UnsafeMemory {
 	 * Return the current position of the seek in the internal
 	 * byte buffer.
 	 * 
-	 * @return
+	 * @return the current position in buffer
 	 */
 	public int getPosition() {
 		return this.pos;
 	}
 	
 	/**
-	 * Write a string to the current location in the buffer. The length of the string
-	 * is written first as an {@link Integer}.
+	 * Write a string to the current location in the buffer. The length of the
+	 * string is written first as an {@link Integer}.
 	 * 
 	 * @param value
+	 *            the value to be written to buffer
 	 */
 	public void putString(final String value) {
 		if(value == null) {
@@ -170,8 +173,8 @@ public class UnsafeMemory {
 	}
 	
 	/**
-	 * A method that checks for the position pointer inside the buffer
-	 * to be in the range before making a read call.
+	 * A method that checks for the position pointer inside the buffer to be in
+	 * the range before making a read call.
 	 * 
 	 */
 	private final void positionCheck() {
@@ -181,10 +184,10 @@ public class UnsafeMemory {
 	}
 	
 	/**
-	 * Read a string from the current location in buffer. The first {@link Integer}
-	 * in the string would be its length.
-	 *  
-	 * @return
+	 * Read a string from the current location in buffer. The first
+	 * {@link Integer} in the string would be its length.
+	 * 
+	 * @return the string as read from the buffer
 	 */
 	public String getString() {
 		positionCheck();
@@ -198,11 +201,13 @@ public class UnsafeMemory {
 	}
 	
 	/**
-	 * Read a string from the current location in buffer. The length of the string
-	 * has been provided.
+	 * Read a string from the current location in buffer. The length of the
+	 * string has been provided.
 	 * 
 	 * @param length
-	 * @return
+	 *            the length of the string to read from buffer
+	 *            
+	 * @return the string as read from the buffer
 	 */
 	public String getString(int length) {
 		positionCheck();
@@ -220,7 +225,7 @@ public class UnsafeMemory {
 	/**
 	 * Write a boolean value to the memory buffer.
 	 * 
-	 * @param value
+	 * @param value the value to be written
 	 */
 	public void putBoolean(final boolean value) {
 		positionCheck();
@@ -232,7 +237,7 @@ public class UnsafeMemory {
 	/**
 	 * Read a boolean value from the memory buffer.
 	 * 
-	 * @return
+	 * @return the boolean value read from buffer
 	 */
 	public boolean getBoolean() {
 		positionCheck();
@@ -246,7 +251,7 @@ public class UnsafeMemory {
 	/**
 	 * Write an integer value to the memory buffer.
 	 * 
-	 * @param value
+	 * @param value the integer value to write
 	 */
 	public void putInt(final int value) {
 		UNSAFE.putInt(buffer, byteArrayOffset + pos, value);
@@ -256,7 +261,7 @@ public class UnsafeMemory {
 	/**
 	 * Read an integer value from the memory buffer.
 	 * 
-	 * @return
+	 * @return the read integer value
 	 */
 	public int getInt() {
 		positionCheck();
@@ -268,9 +273,9 @@ public class UnsafeMemory {
 	}
 	
 	/**
-	 * Write  byte into the underlying byte array.
+	 * Write byte into the underlying byte array.
 	 * 
-	 * @param bite
+	 * @param bite the <code>byte</code> to write
 	 */
 	public void putByte(final byte bite) {
 		UNSAFE.putByte(buffer, byteArrayOffset + pos, bite);
@@ -280,7 +285,7 @@ public class UnsafeMemory {
 	/**
 	 * Read a byte from the underlying byte array.
 	 * 
-	 * @return
+	 * @return the read <code>byte</code> value
 	 */
 	public byte getByte() {
 		positionCheck();
@@ -294,7 +299,7 @@ public class UnsafeMemory {
 	/**
 	 * Write a short value into the underlying byte array.
 	 * 
-	 * @param shrt
+	 * @param shrt the <code>short</code> value to write
 	 */
 	public void putShort(final short shrt) {
 		UNSAFE.putShort(buffer, byteArrayOffset + pos, shrt);
@@ -304,7 +309,7 @@ public class UnsafeMemory {
 	/**
 	 * Read a short value from the underlying byte array.
 	 * 
-	 * @return
+	 * @return the read <code>short</code> value
 	 */
 	public short getShort() {
 		positionCheck();
@@ -318,7 +323,7 @@ public class UnsafeMemory {
 	/**
 	 * Write a long value to the memory buffer.
 	 * 
-	 * @param value
+	 * @param value the <code>long<code> value to write
 	 */
 	public void putLong(final long value) {
 		UNSAFE.putLong(buffer, byteArrayOffset + pos, value);
@@ -328,7 +333,7 @@ public class UnsafeMemory {
 	/**
 	 * Read a long value from the memory buffer.
 	 * 
-	 * @return
+	 * @return the read <code>long</code> value
 	 */
 	public long getLong() {
 		positionCheck();
@@ -342,7 +347,7 @@ public class UnsafeMemory {
 	/**
 	 * Write an array of long values to the memory buffer.
 	 * 
-	 * @param values
+	 * @param values the <code>long</code> values to write
 	 */
 	public void putLongArray(final long[] values) {
 		putInt(values.length);
@@ -355,7 +360,7 @@ public class UnsafeMemory {
 	/**
 	 * Read an array of long values from the memory buffer.
 	 * 
-	 * @return
+	 * @return the read <code>long</code> array
 	 */
 	public long[] getLongArray() {
 		positionCheck();
@@ -386,7 +391,7 @@ public class UnsafeMemory {
 	/**
 	 * Read an array of double values from the memory buffer.
 	 * 
-	 * @return
+	 * @return the read <code>double</code> array
 	 */
 	public double[] getDoubleArray() {
 		positionCheck();
@@ -402,14 +407,10 @@ public class UnsafeMemory {
 	}
 
 	/**
-	 * @return the pos
-	 */
-	public int getPos() {
-		return pos;
-	}
-
-	/**
-	 * @return the buffer
+	 * Return the underlying byte buffer.
+	 * 
+	 * @return the underlying byte[] array used as buffer.
+	 * 
 	 */
 	public byte[] getBuffer() {
 		return buffer;

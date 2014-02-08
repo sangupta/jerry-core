@@ -22,18 +22,27 @@
 package com.sangupta.jerry.util;
 
 /**
+ * Utility class to work with XML content. Provides methods to extract
+ * values where in XML content need not be parsed, only searched and then
+ * extracted.
+ * 
  * @author sangupta
  *
  */
 public class XMLUtils {
 	
 	/**
-     * Extract parameter value from XML content.
-     * 
-     * @param content
-     * @param param
-     * @return
-     */
+	 * Extract parameter value from XML content. The content is not XML parsed
+	 * but the parameter searched inside the content.
+	 * 
+	 * @param content
+	 *            the XML
+	 *            
+	 * @param param
+	 *            the parameter that needs to be extracted
+	 * 
+	 * @return the extracted value or <code>null</code> if param is not found.
+	 */
 	public static String extractParam(String content, String param) {
 		String find = param + "=\"";
 		int si = content.indexOf(find);
@@ -50,11 +59,17 @@ public class XMLUtils {
 	}
 
 	/**
-	 * Extract tag content from XML content.
+	 * Extract tag content from XML content. The content is not parsed but the
+	 * tag starting and ending searched in the XML string.
 	 * 
 	 * @param content
+	 *            the XML
+	 * 
 	 * @param tag
-	 * @return
+	 *            the tag that needs to be extracted
+	 * 
+	 * @return the extracted tag, or <code>null</code> if the tag is not found
+	 * 
 	 */
 	public static String extractTag(String content, String tag) {
 		String start = "<" + tag + ">";

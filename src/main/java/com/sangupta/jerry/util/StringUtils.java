@@ -78,7 +78,10 @@ public class StringUtils {
 	 * Function to return a HEX representation of the given byte.
 	 * 
 	 * @param b
-	 * @return
+	 *            the byte value
+	 * 
+	 * @return the hex representation
+	 * 
 	 */
 	public static String getHex(byte b) {
 		return Integer.toHexString(b & 0xFF);

@@ -69,13 +69,19 @@ public class DomUtils {
 	}
 
 	/**
-	 * Returns the value of a given attribute for the given tagName amongst the supplied foreign markup
-	 * values.
+	 * Returns the value of a given attribute for the given tagName amongst the
+	 * supplied foreign markup values.
 	 * 
 	 * @param tagName
+	 *            the tag name to find
+	 * 
 	 * @param attributeName
+	 *            the attribute name to extract
+	 * 
 	 * @param elements
-	 * @return
+	 *            list of elements to search in
+	 * 
+	 * @return the value of the attribute if found, <code>null</code> otherwise
 	 */
 	public static String getTagAttribute(String tagName, String attributeName, List<Element> elements) {
 		for(Element element : elements) {
@@ -91,14 +97,24 @@ public class DomUtils {
 	}
 
 	/**
-	 * Returns the value of the element with the given tagName, where the supplied attribute matches the supplied
-	 * attribute value in the supplied foreign markup values.
+	 * Returns the value of the element with the given tagName, where the
+	 * supplied attribute matches the supplied attribute value in the supplied
+	 * foreign markup values.
 	 * 
 	 * @param tagName
+	 *            the tag to search for
+	 * 
 	 * @param attributeName
+	 *            the attribute name to look for
+	 * 
 	 * @param attributeValue
+	 *            the attribute value to look for
+	 * 
 	 * @param elements
-	 * @return
+	 *            the elements to search in
+	 * 
+	 * @return all the values of the attributes which have matched
+	 * 
 	 */
 	public static List<String> getTagValues(String tagName, String attributeName, String attributeValue, List<Element> elements) {
 		List<String> values = new ArrayList<String>();
@@ -116,12 +132,17 @@ public class DomUtils {
 	}
 	
 	/**
-	 * Returns the value of the element with the given tagName amongst the supplied foreign markup
-	 * values.
+	 * Returns the value of the element with the given tagName amongst the
+	 * supplied foreign markup values.
 	 * 
 	 * @param tagName
+	 *            the tag name to look for
+	 * 
 	 * @param elements
-	 * @return
+	 *            the elements to search in
+	 * 
+	 * @return list of all values that match the tag name
+	 * 
 	 */
 	public static List<String> getTagValues(String tagName, List<Element> elements) {
 		List<String> values = new ArrayList<String>();

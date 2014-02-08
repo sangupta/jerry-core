@@ -24,37 +24,54 @@ package com.sangupta.jerry.util;
 import java.util.Date;
 
 /**
+ * Helper methods to compute time duration between a given date and
+ * current time, or duration between two given dates.
+ * 
  * @author sangupta
  *
  */
 public class TimeDurationUtils {
 	
-	private static final long MINUTE = 60 * 1000;
-	
-	private static final long HOUR = 60 * MINUTE;
-	
-	private static final long DAY = 24 * HOUR;
-	
-	private static final long MONTH = 30 * DAY;
-	
-	private static final long YEAR = 365 * DAY;
-	
 	/**
-	 * Compute the time duration from given date.
+	 * Compute the time duration of the given date from current time.
 	 * 
 	 * @param date
-	 * @return
+	 *            the date before current time
+	 * 
+	 * @return the duration statement from currnet time
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the given date is <code>null</code>
 	 */
 	public static String ago(final Date date) {
-		return ago(date, false);
+		return ago(date, System.currentTimeMillis(), false);
 	}
 	
-	public static String ago(final Date date, final boolean condensed) {
-		if(date == null) {
+	/**
+	 * Compute the time duration between two given dates.
+	 * 
+	 * @param before
+	 *            the older {@link Date}
+	 * 
+	 * @param after
+	 *            the recent {@link Date}
+	 * 
+	 * @param condensed
+	 *            whether to display in the condensed format or not
+	 * 
+	 * @return the string representation of time duration between the two dates
+	 * 
+	 */
+	public static String ago(final Date before, final Date after, final boolean condensed) {
+		if(before == null) {
 			throw new IllegalArgumentException("Date item cannot be null");
 		}
 		
-		long delta = System.currentTimeMillis() - date.getTime();
+		if(after == null) {
+			throw new IllegalArgumentException("Date item cannot be null");
+		}
+		
+		long delta = after.getTime() - before.getTime();
 		if(!condensed) {
 			return fromDelta(delta);
 		}
@@ -63,20 +80,54 @@ public class TimeDurationUtils {
 	}
 	
 	/**
+	 * Compute the time duration between the date and time in millis
+	 * 
+	 * @param before
+	 *            the older {@link Date}
+	 * 
+	 * @param after
+	 *            the current time in millis
+	 * 
+	 * @param condensed
+	 *            whether to display in the condensed format or not
+	 * 
+	 * @return the string representation of time duration between the two dates
+	 */
+	public static String ago(final Date before, final long after, final boolean condensed) {
+		if(before == null) {
+			throw new IllegalArgumentException("Date item cannot be null");
+		}
+		
+		long delta = after - before.getTime();
+		if(!condensed) {
+			return fromDelta(delta);
+		}
+		
+		return fromDeltaCondensed(delta);
+		
+	}
+	
+	/**
 	 * Compute the time duration from given millis.
 	 * 
-	 * @param millis
-	 * @return
+	 * @param millis the duration in millis
+	 * 
+	 * @return the string representation of time duration 
 	 */
 	public static String ago(long millis) {
 		return ago(millis, false);
 	}
 	
 	/**
+	 * Compute the time duration from given millis.
 	 * 
 	 * @param millis
+	 *            the duration in millis
+	 * 
 	 * @param condensed
-	 * @return
+	 *            whether to display in the condensed format or not
+	 * 
+	 * @return the string representation of time duration
 	 */
 	public static String ago(final long millis, final boolean condensed) {
 		long delta = System.currentTimeMillis() - millis;
@@ -88,20 +139,24 @@ public class TimeDurationUtils {
 	}
 	
 	/**
+	 * Compute the time duration string for the given delta in condensed format.
+	 * 
 	 * @param delta
-	 * @return
+	 *            the duration in millis
+	 * 
+	 * @return the string representation of time duration
 	 */
 	private static String fromDeltaCondensed(long delta) {
 		if(delta < 0) {
 			return "now";
 		}
 		
-		if(delta < MINUTE) {
+		if(delta < DateUtils.ONE_MINUTE) {
 			return "now";
 		}
 		
-		if(delta < HOUR) {
-			int minutes = (int) (delta / MINUTE);
+		if(delta < DateUtils.ONE_HOUR) {
+			int minutes = (int) (delta / DateUtils.ONE_MINUTE);
 			if(minutes == 1) {
 				return "1min";
 			}
@@ -109,8 +164,8 @@ public class TimeDurationUtils {
 			return "" + minutes + "min";
 		}
 		
-		if(delta < DAY) {
-			int hours = (int) (delta / HOUR);
+		if(delta < DateUtils.ONE_DAY) {
+			int hours = (int) (delta / DateUtils.ONE_HOUR);
 			if(hours == 1) {
 				return "1h";
 			}
@@ -118,8 +173,8 @@ public class TimeDurationUtils {
 			return "" + hours + "h";
 		}
 		
-		if(delta < MONTH) {
-			int days = (int) (delta / DAY);
+		if(delta < DateUtils.ONE_MONTH) {
+			int days = (int) (delta / DateUtils.ONE_DAY);
 			if(days == 1) {
 				return "1d";
 			}
@@ -127,8 +182,8 @@ public class TimeDurationUtils {
 			return "" + days + "d";
 		}
 		
-		if(delta < YEAR) {
-			int months = (int) (delta / MONTH);
+		if(delta < DateUtils.ONE_YEAR) {
+			int months = (int) (delta / DateUtils.ONE_MONTH);
 			if(months == 1) {
 				return "1mo";
 			}
@@ -136,7 +191,7 @@ public class TimeDurationUtils {
 			return "" + months + "mo";
 		}
 		
-		int years = (int) (delta / YEAR);
+		int years = (int) (delta / DateUtils.ONE_YEAR);
 		if(years == 1) {
 			return "1y";
 		}
@@ -145,21 +200,24 @@ public class TimeDurationUtils {
 	}
 
 	/**
+	 * Compute the time duration string for the given delta in normal format.
 	 * 
 	 * @param delta
-	 * @return
+	 *            the duration in millis
+	 * 
+	 * @return the string representation of time duration
 	 */
 	private static String fromDelta(long delta) {
 		if(delta < 0) {
 			return "moments ago";
 		}
 		
-		if(delta < MINUTE) {
+		if(delta < DateUtils.ONE_MINUTE) {
 			return "less than a minute ago";
 		}
 		
-		if(delta < HOUR) {
-			int minutes = (int) (delta / MINUTE);
+		if(delta < DateUtils.ONE_HOUR) {
+			int minutes = (int) (delta / DateUtils.ONE_MINUTE);
 			if(minutes == 1) {
 				return "about a minute ago";
 			}
@@ -167,8 +225,8 @@ public class TimeDurationUtils {
 			return "about " + minutes + " minutes ago";
 		}
 		
-		if(delta < DAY) {
-			int hours = (int) (delta / HOUR);
+		if(delta < DateUtils.ONE_DAY) {
+			int hours = (int) (delta / DateUtils.ONE_HOUR);
 			if(hours == 1) {
 				return "about an hour ago";
 			}
@@ -176,8 +234,8 @@ public class TimeDurationUtils {
 			return "about " + hours + " hours ago";
 		}
 		
-		if(delta < MONTH) {
-			int days = (int) (delta / DAY);
+		if(delta < DateUtils.ONE_MONTH) {
+			int days = (int) (delta / DateUtils.ONE_DAY);
 			if(days == 1) {
 				return "about a day ago";
 			}
@@ -185,8 +243,8 @@ public class TimeDurationUtils {
 			return "about " + days + " days ago";
 		}
 		
-		if(delta < YEAR) {
-			int months = (int) (delta / MONTH);
+		if(delta < DateUtils.ONE_YEAR) {
+			int months = (int) (delta / DateUtils.ONE_MONTH);
 			if(months == 1) {
 				return "about a month ago";
 			}
@@ -194,7 +252,7 @@ public class TimeDurationUtils {
 			return "about " + months + " months ago";
 		}
 		
-		int years = (int) (delta / YEAR);
+		int years = (int) (delta / DateUtils.ONE_YEAR);
 		if(years == 1) {
 			return "about an year ago";
 		}

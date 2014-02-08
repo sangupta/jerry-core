@@ -311,9 +311,16 @@ public class UriUtils {
 	}
 
 	/**
+	 * URL encode the given list of parameters.
 	 * 
-	 * @param testParams
-	 * @return
+	 * @param params
+	 *            the key-value pair of params that need to be encoded
+	 * 
+	 * @param encodeValues
+	 *            whether the value portions need to be URL-encoded or not
+	 * 
+	 * @return a string representation of the URL parameters
+	 * 
 	 */
 	public static String urlEncode(Map<String, String> params, boolean encodeValues) {
 		if(AssertUtils.isEmpty(params)) {
@@ -348,8 +355,12 @@ public class UriUtils {
 	 * remove port number if it is 80, align the query parameters, then sort them, remove
 	 * the anchor link, change https to http
 	 * 
-	 * @param url
-	 * @return
+	 * @param taintedURL the URL that may be tainted
+	 * 
+	 * @return the normalized URL
+	 * 
+	 * @deprecated {@link UrlCanonicalizer} or {@link UrlManipulator} classes should be used
+	 * instead of this
 	 */
 	public static String normalizeUrl(String taintedURL) {
 		if(AssertUtils.isEmpty(taintedURL)) {
@@ -396,12 +407,17 @@ public class UriUtils {
 	}
 	
 	/**
-     * Takes a query string, separates the constituent name-value pairs, and
-     * stores them in a SortedMap ordered by lexicographical order.
-     * @return Null if there is no query string.
-     */
+	 * Takes a query string, separates the constituent name-value pairs, and
+	 * stores them in a SortedMap ordered by lexicographical order.
+	 * 
+	 * @param queryString
+	 *            the query string that needs to be parsed
+	 * 
+	 * @return a {@link SortedMap} instance of the parameters, or
+	 *         <code>null</code> if the query string is <code>null</code> or empty
+	 */
     private static SortedMap<String, String> createParameterMap(final String queryString) {
-        if (queryString == null || queryString.isEmpty()) {
+        if (AssertUtils.isEmpty(queryString)) {
             return null;
         }
 
@@ -447,7 +463,7 @@ public class UriUtils {
 	 * @param sortedParamMap
 	 *            Parameter name-value pairs in lexicographical order.
 	 *            
-	 * @return Canonical form of query string.
+	 * @return canonical form of query string.
 	 */
     private static String canonicalize(final SortedMap<String, String> sortedParamMap) {
         if (sortedParamMap == null || sortedParamMap.isEmpty()) {
@@ -521,11 +537,15 @@ public class UriUtils {
 	}
 	
 	/**
-	 * Extract the path value from the URL. The path in a URL is considered from the
-	 * first leading slash to the end before the query or the fragment separator.
+	 * Extract the path value from the URL. The path in a URL is considered from
+	 * the first leading slash to the end before the query or the fragment
+	 * separator.
 	 * 
 	 * @param url
-	 * @return
+	 *            the URL from which the path needs to be extracted
+	 * 
+	 * @return the extracted path value, or <code>null</code> if url is
+	 *         <code>null</code> or empty, or empty string if path is not found
 	 */
 	public static String extractPath(String url) {
 		if(AssertUtils.isEmpty(url)) {
@@ -647,11 +667,16 @@ public class UriUtils {
 	}
 
 	/**
-	 * Add two web paths making sure that we only have one forward slash in the URL.
+	 * Add two web paths making sure that we only have one forward slash in the
+	 * URL.
 	 * 
 	 * @param base
+	 *            the base path
+	 * 
 	 * @param suffix
-	 * @return
+	 *            the suffix to add
+	 * 
+	 * @return the combined URL safe string
 	 */
 	public static String addWebPaths(String base, String suffix) {
 		StringBuilder builder = new StringBuilder(base);
@@ -717,7 +742,10 @@ public class UriUtils {
 	 * Simple function to see if a string resembles a URL or not.
 	 * 
 	 * @param url
-	 * @return
+	 *            the string to be tested
+	 * 
+	 * @return <code>true</code> if the string appears to be a valid url,
+	 *         <code>false</code> otherwise
 	 */
 	public static boolean appearsValidUrl(String url) {
 		if(AssertUtils.isEmpty(url)) {

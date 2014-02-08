@@ -34,7 +34,6 @@ public interface UnsafePersistable {
 	 * Serialize the object into an instance of {@link UnsafeMemory} and return
 	 * that back.
 	 * 
-	 * @param stream
 	 */
 	public UnsafeMemory writeUnsafe();
 	
@@ -48,7 +47,9 @@ public interface UnsafePersistable {
 	/**
 	 * De-serialize the object using the given instance of {@link UnsafeMemory}.
 	 * 
-	 * @param stream
+	 * @param memory
+	 *            the {@link UnsafeMemory} instance where the objects serialized
+	 *            bytes are
 	 */
 	public void readUnsafe(UnsafeMemory memory);
 

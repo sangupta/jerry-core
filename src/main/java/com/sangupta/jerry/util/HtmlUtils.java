@@ -109,11 +109,24 @@ public class HtmlUtils {
 	 * attribute is not present in the given attributes of the tag.
 	 * 
 	 * @param htmlBody
+	 *            the html body represented as string
+	 * 
 	 * @param tagName
+	 *            the tag name to look for
+	 * 
 	 * @param attributeToExtract
+	 *            the attribute to extract
+	 * 
 	 * @param matchingAttributes
+	 *            the map of matching attributes and values, that need to be
+	 *            matched if present
+	 * 
 	 * @param ignoreMissingAttributes
-	 * @return
+	 *            should we ignore any missing attribute when matching list of
+	 *            given attributes
+	 * 
+	 * @return the list of all values, of all such matching tags
+	 * 
 	 */
 	public static List<String> getAttributeForAllTags(final String htmlBody, final String tagName, final String attributeToExtract, final Map<String, String> matchingAttributes, final boolean ignoreMissingAttributes) {
 		List<StartTag> tags = getAllTags(htmlBody, tagName);
@@ -274,11 +287,13 @@ public class HtmlUtils {
 	}
 	
 	/**
-	 * Convert the entries in the map to a string object separated by a <code>&lt;br /&gt;</code>
-	 * tag.
+	 * Convert the entries in the map to a string object separated by a
+	 * <code>&lt;br /&gt;</code> tag.
 	 * 
 	 * @param map
-	 * @return
+	 *            the values to convert
+	 * 
+	 * @return the string representation
 	 */
 	public static String mapAsHtmlString(Map<String, String> map) {
 		if(AssertUtils.isEmpty(map)) {

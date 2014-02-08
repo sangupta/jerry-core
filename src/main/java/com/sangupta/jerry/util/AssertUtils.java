@@ -148,12 +148,18 @@ public class AssertUtils {
 	}
 
 	/**
-	 * @param params
-	 * @return
+	 * Check if the given map is <code>null</code> or empty.
+	 * 
+	 * @param map
+	 *            the map to be tested
+	 * 
+	 * @return <code>true</code> if the map is either null or empty,
+	 *         <code>false</code> otherwise.
+	 * 
 	 */
 	@SuppressWarnings("rawtypes")
-	public static boolean isEmpty(Map params) {
-		if(params == null || params.isEmpty()) {
+	public static boolean isEmpty(Map map) {
+		if(map == null || map.isEmpty()) {
 			return true;
 		}
 		
@@ -161,13 +167,17 @@ public class AssertUtils {
 	}
 
 	/**
+	 * Check if the given map is not-<code>null</code> and not-empty.
 	 * 
-	 * @param params
-	 * @return
+	 * @param map
+	 *            the map to be tested
+	 * 
+	 * @return <code>false</code> if the map is either <code>null</code> or
+	 *         empty, <code>true</code> otherwise.
 	 */
 	@SuppressWarnings("rawtypes")
-	public static boolean isNotEmpty(Map params) {
-		if(params == null || params.isEmpty()) {
+	public static boolean isNotEmpty(Map map) {
+		if(map == null || map.isEmpty()) {
 			return false;
 		}
 		
@@ -175,9 +185,13 @@ public class AssertUtils {
 	}
 
 	/**
+	 * Check if the given collection is <code>null</code> or empty.
 	 * 
 	 * @param collection
-	 * @return
+	 *            the collection to be tested
+	 * 
+	 * @return <code>true</code> if the collection is either <code>null</code>
+	 *         or empty, <code>false</code> otherwise.
 	 */
 	@SuppressWarnings("rawtypes")
 	public static boolean isEmpty(Collection collection) {
@@ -189,9 +203,13 @@ public class AssertUtils {
 	}
 
 	/**
+	 * Check if the given collection is not-<code>null</code> and has values.
 	 * 
 	 * @param collection
-	 * @return
+	 *            the collection to be tested
+	 * 
+	 * @return <code>true</code> if the collection is not-empty,
+	 *         <code>false</code> otherwise
 	 */
 	@SuppressWarnings("rawtypes")
 	public static boolean isNotEmpty(Collection collection) {

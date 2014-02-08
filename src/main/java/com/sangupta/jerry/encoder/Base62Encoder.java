@@ -21,6 +21,8 @@
 
 package com.sangupta.jerry.encoder;
 
+import com.sangupta.jerry.util.AssertUtils;
+
 /**
  * Simple class to convert numbers to Base62 and back. The class can encode/decode and compare
  * around 100 million long numbers in around 14 seconds on an i7 quad-core machine with 8 gigs
@@ -43,9 +45,11 @@ public class Base62Encoder {
 	};
 	
 	/**
-	 * Function to encode a given number to Base62
+	 * Function to encode a given number to Base62. Can handle negative numbers
+	 * as well.
 	 * 
-	 * @param number the number to encode
+	 * @param number
+	 *            the number to encode
 	 * 
 	 * @return string representation of number
 	 */
@@ -68,10 +72,14 @@ public class Base62Encoder {
 	}
 	
 	/**
-	 * Function to encode a list of numbers to Base62 all in one string-representation.
+	 * Function to encode a list of numbers to Base62 all in one
+	 * string-representation.
 	 * 
 	 * @param numbers
-	 * @return
+	 *            a list of numbers represented as <code>long</code> values
+	 * 
+	 * @return a string that is a combined Base62 representation of all given
+	 *         numbers
 	 */
 	public static String encode(long... numbers) {
 		StringBuilder builder = new StringBuilder(numbers.length * 10);
@@ -96,13 +104,20 @@ public class Base62Encoder {
 	/**
 	 * Function to decode a given Base62 string back to its original form
 	 * 
-	 * @param string the Base62 representation
+	 * @param string
+	 *            the Base62 representation
 	 * 
-	 * @throws IllegalArgumentException if the base62 encoded string contains foreign characters
-	 *  
+	 * @throws IllegalArgumentException
+	 *             if the base62 encoded string contains foreign characters
+	 *             or, if the string is <code>null</code> or empty 
+	 * 
 	 * @return the number that it represents
 	 */
 	public static long decode(String string) {
+		if(AssertUtils.isEmpty(string)) {
+			throw new IllegalArgumentException("Cannot decode null/empty string");
+		}
+		
 		char[] array = string.toCharArray();
 		long num = 0;
 		int index = array.length - 1;

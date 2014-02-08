@@ -30,50 +30,53 @@ import com.google.gson.GsonBuilder;
 
 /**
  * Cache class that holds various {@link Gson} instances based on their field
- * naming policy. This class is highly recommended for situations where lot
- * of JSON parsing will be done.
+ * naming policy. This class is highly recommended for situations where lot of
+ * JSON parsing will be done.
  * 
  * This class is not recommended for one of usage of {@link Gson} objects as
  * they live in cache for-ever.
- *  
+ * 
  * @author sangupta
- *
+ * 
  */
 public class GsonUtils {
-	
+
 	/**
 	 * Our holder for multiple instances
 	 */
 	private static final Map<FieldNamingPolicy, Gson> gsons = new HashMap<FieldNamingPolicy, Gson>();
-	
+
 	/**
-	 * Returns the {@link Gson} instance based on the {@link FieldNamingPolicy#IDENTITY}.
+	 * Returns the {@link Gson} instance based on the
+	 * {@link FieldNamingPolicy#IDENTITY}.
 	 * 
-	 * @return
+	 * @return the {@link Gson} object
 	 */
 	public static Gson getGson() {
 		return getGson(FieldNamingPolicy.IDENTITY);
 	}
-	
+
 	/**
-	 * Method to fetch the singleton object with the specified naming policy. If one
-	 * does not exist, it is created.
+	 * Method to fetch the singleton object with the specified naming policy. If
+	 * one does not exist, it is created.
 	 * 
-	 * @return
+	 * @return the {@link Gson} object for the given field naming policy
+	 * 
 	 */
 	public static Gson getGson(FieldNamingPolicy fieldNamingPolicy) {
-		if(gsons.containsKey(fieldNamingPolicy)) {
+		if (gsons.containsKey(fieldNamingPolicy)) {
 			return gsons.get(fieldNamingPolicy);
 		}
-		
+
 		// create a new version
-		Gson gson = new GsonBuilder().setFieldNamingPolicy(fieldNamingPolicy).create();
-		synchronized(gsons) {
+		Gson gson = new GsonBuilder().setFieldNamingPolicy(fieldNamingPolicy)
+				.create();
+		synchronized (gsons) {
 			gsons.put(fieldNamingPolicy, gson);
 		}
-		
+
 		// return the created instance
 		return gson;
 	}
-	
+
 }

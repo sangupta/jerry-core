@@ -62,7 +62,8 @@ public class SecurityContext {
 	/**
 	 * Return the currently set principal
 	 * 
-	 * @return
+	 * @return the current principal, or the anonymous principal object if set
+	 * 
 	 */
 	public static Principal getPrincipal() {
 		Principal principal = holder.get();
@@ -73,6 +74,13 @@ public class SecurityContext {
 		return ANONYMOUS_USER_PRINCIPAL;
 	}
 	
+	/**
+	 * Check if the current user is anonymous or not.
+	 * 
+	 * @return <code>true</code> if no principal is set, or if the currently set
+	 *         principal is the anonymous identified principal;
+	 *         <code>false</code> otherwise
+	 */
 	public static boolean isAnonymousUser() {
 		Principal principal = holder.get();
 		if(principal == null) {

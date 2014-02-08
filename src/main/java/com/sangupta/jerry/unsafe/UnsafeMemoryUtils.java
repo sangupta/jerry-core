@@ -42,7 +42,7 @@ public class UnsafeMemoryUtils {
 		BufferedOutputStream boss = null;
 		try {
 			final byte[] bytes = memory.getBuffer();
-			final int length = memory.getPos();
+			final int length = memory.getPosition();
 			
 			stream = new FileOutputStream(file);
 			boss = new BufferedOutputStream(stream);

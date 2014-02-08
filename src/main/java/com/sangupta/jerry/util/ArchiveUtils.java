@@ -52,16 +52,29 @@ import org.slf4j.LoggerFactory;
  */
 public class ArchiveUtils {
 	
+	/**
+	 * Logger
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(ArchiveUtils.class);
 	
 	/**
 	 * Unpack the TAR file into the given output directory.
 	 * 
 	 * @param tarFile
+	 *            the tar file that needs to be unpacked
+	 * 
 	 * @param outputDir
-	 * @return
+	 *            the directory in which the entire file is unpacked
+	 * 
 	 * @throws ArchiveException
+	 *             if the TAR file is corrupt
+	 * 
 	 * @throws IOException
+	 *             if error occurs reading TAR file
+	 * 
+	 * @return a list of {@link File} objects representing the files unpacked
+	 *         from the TAR file
+	 * 
 	 */
 	public static List<File> unpackTAR(final File tarFile, final File outputDir) throws ArchiveException, IOException {
 		LOGGER.info("Untaring {} to dir {}", tarFile.getAbsolutePath(), outputDir.getAbsolutePath());
@@ -115,9 +128,16 @@ public class ArchiveUtils {
 	 * Unpack the Gzip GZ file into the given directory.
 	 * 
 	 * @param gzipFile
+	 *            the file that needs to be unpacked
+	 * 
 	 * @param outputDir
-	 * @return
-	 * @throws FileNotFoundException 
+	 *            the directory in which the archive is unpacked
+	 * 
+	 * @throws FileNotFoundException
+	 *             if the GZ file is not found
+	 * 
+	 * @return a list of {@link File} objects representing the files unpacked
+	 *         from the TAR file
 	 */
 	public static List<File> unpackGZIP(final File gzipFile, final File outputDir) throws IOException {
 		String outputFileName = GzipUtils.getUncompressedFilename(gzipFile.getName());

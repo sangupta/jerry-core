@@ -151,11 +151,14 @@ public class CompressionUtils {
 	/**
 	 * Uncompress the given input byte-array assuming that the max uncompressed
 	 * size is not known. The method will try and allocate a buffer of 3 times
-	 * the size of input array. If the uncompressed size is known, use the method
-	 * {@link CompressionUtils#uncompress(byte[], int)}.
+	 * the size of input array. If the uncompressed size is known, use the
+	 * method {@link CompressionUtils#uncompress(byte[], int)}.
 	 * 
 	 * @param inputBytes
-	 * @return
+	 *            the bytes to uncompress
+	 * 
+	 * @return the uncompressed byte stream
+	 * 
 	 */
 	public static byte[] uncompress(byte[] inputBytes) {
 		if(inputBytes == null) {
@@ -169,8 +172,13 @@ public class CompressionUtils {
 	 * Uncompress the byte-array when the uncompressed size is known.
 	 * 
 	 * @param inputBytes
+	 *            the compressed bytes
+	 * 
 	 * @param uncompressedSize
-	 * @return
+	 *            the uncompressed size of the stream
+	 * 
+	 * @return the uncompressed byte stream
+	 * 
 	 */
 	public static byte[] uncompress(byte[] inputBytes, int uncompressedSize) {
 		if(AssertUtils.isEmpty(inputBytes)) {
@@ -197,7 +205,11 @@ public class CompressionUtils {
 	 * Uncompress the given byte-array and convert it into a string.
 	 * 
 	 * @param inputBytes
-	 * @return
+	 *            the compressed bytes
+	 * 
+	 * @return string representation of the bytes in the default platform
+	 *         encoding
+	 * 
 	 */
 	public static String uncompressToString(byte[] inputBytes) {
 		return new String(uncompress(inputBytes));
@@ -207,9 +219,12 @@ public class CompressionUtils {
 	 * Uncompress the given byte-array and convert it into a string where uncompressed
 	 * size is known.
 	 * 
-	 * @param inputBytes
-	 * @param uncompressedSize
-	 * @return
+	 * @param inputBytes the compressed bytes
+	 * 
+	 * @param uncompressedSize the uncompressed size
+	 * 
+	 * @return string representation of the bytes in the default platform
+	 *         encoding
 	 */
 	public static String uncompressToString(byte[] inputBytes, int uncompressedSize) {
 		return new String(uncompress(inputBytes, uncompressedSize));
@@ -219,8 +234,12 @@ public class CompressionUtils {
 	 * GZip a given byte-array in-memory.
 	 * 
 	 * @param bytes
-	 * @return
+	 *            the uncompressed bytes
+	 * 
+	 * @return the GZipped byte stream
+	 * 
 	 * @throws IOException
+	 *             if something fails
 	 */
 	public static byte[] gzipByteArray(byte[] bytes) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(bytes.length);
