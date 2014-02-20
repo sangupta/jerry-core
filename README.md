@@ -45,9 +45,16 @@ The library can be downloaded from Maven Central using:
 <dependency>
     <groupId>com.sangupta</groupId>
     <artifactId>jerry-core</artifactId>
-    <version>0.9.0</version>
+    <version>1.0.0</version>
 </dependency>
 ```
+
+Changelog
+---------
+
+**1.0.0**
+
+* Initial release
 
 Versioning
 ----------
