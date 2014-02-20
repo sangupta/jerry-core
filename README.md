@@ -51,6 +51,10 @@ The library can be downloaded from Maven Central using:
 
 Changelog
 ---------
+**Current Snapshot**
+
+* Added IntegerCounter to keep track of multiple named counters with max integer capacity
+* Added LongCounter to keep track of multiple named counters with max long capacity
 
 **1.0.0**
 
