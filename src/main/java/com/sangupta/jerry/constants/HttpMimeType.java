@@ -32,6 +32,8 @@ package com.sangupta.jerry.constants;
  *
  */
 public class HttpMimeType {
+	
+	// Image
 
 	public static final String GIF_IMAGE = "image/gif";
 	
@@ -43,7 +45,11 @@ public class HttpMimeType {
 	
 	public static final String SVG_IMAGE = "image/svg+xml";
 	
+	// text formats
+	
 	public static final String TEXT_PLAIN = "text/plain";
+	
+	public static final String CSV = "text/csv";
 	
 	public static final String CSS = "text/css";
 	
@@ -55,9 +61,42 @@ public class HttpMimeType {
 	
 	public static final String XML = "text/xml";
 	
+	// document formats
+	
 	public static final String JSON = "application/json";
 	
 	public static final String ATOM = "application/atom+xml";
 	
 	public static final String PDF = "application/pdf";
+	
+	// binary
+	
+	public static final String BINARY = "application/octet-stream";
+	
+	// music ones
+	
+	public static final String MP4_AUDIO = "audio/mp4";
+	
+	public static final String MP3_AUDIO = "audio/mpeg";
+	
+	public static final String OGG_VORBIS_AUDIO = "audio/ogg";
+	
+	public static final String OPUS_AUDIO = "audio/opus";
+	
+	public static final String VORBIS_AUDIO = "audio/vorbis";
+	
+	public static final String WEBM_AUDIO = "audio/webm";
+	
+	// video
+	
+	public static final String MPEG_VIDEO = "video/mpeg";
+	
+	public static final String MP4_VIDEO = "video/mp4";
+	
+	public static final String OGG_THEORA_VIDEO = "video/ogg";
+	
+	public static final String QUICKTIME_VIDEO = "video/quicktime";
+	
+	public static final String WEBM_VIDEO = "video/webm";
+	
 }
