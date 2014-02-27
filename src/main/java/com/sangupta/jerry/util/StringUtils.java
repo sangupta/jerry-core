@@ -63,7 +63,9 @@ public class StringUtils {
 	/**
 	 * Function to give a HEX representation of the byte array.
 	 * 
-	 * @param bytes the source byte array
+	 * @param bytes
+	 *            the source byte array
+	 *            
 	 * @return the HEX coded string representing the byte array
 	 */
 	public static String getHex(byte bytes[]) {
@@ -88,17 +90,31 @@ public class StringUtils {
 	}
 	
 	/**
-     * Return true if the string is equal to "true" or "yes"
-     * otherwise return false.
-     * 
-     * @param boolString string whose content is checked for true or false
-     * 
-     * @return boolean flag indicating whether the input was true or false
-     */
+	 * Return true if the string is equal to "true" or "yes" otherwise return
+	 * false.
+	 * 
+	 * @param boolString
+	 *            string whose content is checked for true or false
+	 * 
+	 * @return boolean flag indicating whether the input was true or false
+	 */
 	public static boolean getBoolean(String boolString) {
 	    return getBoolean(boolString, false); 
  	}
-		
+
+	/**
+	 * Parse the string and return the boolean value for the same. Text such as
+	 * <code>yes</code> and <code>true</code> is treated as {@link Boolean#TRUE}
+	 * . If the string parsing fails, the default value is returned.
+	 * 
+	 * @param boolString
+	 *            the string to be parsed
+	 * 
+	 * @param defaultValue
+	 *            the value to be returned, if the string does not match
+	 * 
+	 * @return the boolean value as read by parsing the string
+	 */
 	public static boolean getBoolean(String boolString, boolean defaultValue) {
 		if (AssertUtils.isNotEmpty(boolString)) {
 	        boolString = boolString.toLowerCase();
@@ -112,6 +128,18 @@ public class StringUtils {
 	    return defaultValue; 
  	}
 	
+	/**
+	 * Parse and return the int value of the given string. If the string cannot
+	 * be parsed, returns the default value provided
+	 * 
+	 * @param string
+	 *            the string to be parsed
+	 * 
+	 * @param defaultValue
+	 *            the value to be returned if parsing string fails
+	 * 
+	 * @return the 32-bit value of the string
+	 */
 	public static int getIntValue(String string, int defaultValue) {
 		try {
 			if(AssertUtils.isNotEmpty(string)) {
@@ -124,6 +152,18 @@ public class StringUtils {
 		return defaultValue;
 	}
 	
+	/**
+	 * Parse and return the long value of the given string. If the string cannot
+	 * be parsed, returns the default value provided
+	 * 
+	 * @param string
+	 *            the string to be parsed
+	 * 
+	 * @param defaultValue
+	 *            the value to be returned if parsing string fails
+	 * 
+	 * @return the 64-bit value of the string
+	 */
 	public static long getLongValue(String string, long defaultValue) {
 		try {
 			if(AssertUtils.isNotEmpty(string)) {
@@ -136,9 +176,21 @@ public class StringUtils {
 		return defaultValue;
 	}
 	
+	/**
+	 * Generate a given appender delimited string of all items in the list. If
+	 * the list has no elements, an empty string is returned back.
+	 * 
+	 * @param list
+	 *            the list containing objects to be joined
+	 * 
+	 * @param appender
+	 *            the appender to be used
+	 * 
+	 * @return the string representation of list using appender as the delimiter
+	 */
 	public String fromList(List<Object> list, String appender) {
 		if(AssertUtils.isEmpty(list)) {
-			return "";
+			return EMPTY_STRING;
 		}
 		
 		StringBuilder builder = new StringBuilder();
@@ -152,6 +204,19 @@ public class StringUtils {
 		return builder.toString();
 	}
 	
+	/**
+	 * Check if a value is contained in the list.
+	 * 
+	 * @param list
+	 *            the list of values
+	 * 
+	 * @param value
+	 *            the value that needs to be checked for presence in list
+	 * 
+	 * @return <code>true</code> if the value exists in list, <code>false</code>
+	 *         otherwise.
+	 * 
+	 */
 	public static boolean contains(String[] list, String value) {
 		if(list == null) {
 			return false;
