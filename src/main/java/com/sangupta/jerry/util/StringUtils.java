@@ -236,14 +236,21 @@ public class StringUtils {
 	}
 	
 	/**
-	 * Return a subset of string from the location where the given 'from' word exists.
+	 * Return a subset of string from the location where the given 'from' word
+	 * exists.
 	 * 
 	 * @param string
+	 *            the string from which substring needs to be extracted
+	 * 
 	 * @param from
+	 *            the string to be looked
+	 * 
 	 * @param searchIndex
-	 * @return
+	 *            the index from which the string needs to be searched
+	 * 
+	 * @return the substring after the word is found inside the main string
 	 */
-	public static String substringFrom(String string, String from, int searchIndex) {
+	public static String substringAfter(String string, String from, int searchIndex) {
 		if(AssertUtils.isEmpty(string)) {
 			return EMPTY_STRING;
 		}
@@ -260,4 +267,40 @@ public class StringUtils {
 		return string.substring(index + from.length());
 	}
 
+	/**
+	 * Find the substring between the given prefix and suffix.
+	 * 
+	 * @param string the string which needs to be sub-string'ed
+	 * 
+	 * @param prefix the string before
+	 * 
+	 * @param suffix the string after
+	 * 
+	 * @return the sub-string between the prefix and suffix
+	 * 
+	 */
+	public static String substringBetween(String string, String prefix, String suffix) {
+		if(AssertUtils.isEmpty(string)) {
+			return EMPTY_STRING;
+		}
+		
+		int begin = 0, end = string.length();
+		if(AssertUtils.isNotBlank(prefix)) {
+			begin = string.indexOf(prefix);
+			if(begin != -1) {
+				begin += prefix.length();
+			} else {
+				begin = 0;
+			}
+		}
+		
+		if(AssertUtils.isNotEmpty(suffix)) {
+			end = string.indexOf(suffix);
+			if(end == -1) {
+				end = string.length();
+			}
+		}
+		
+		return string.substring(begin, end);
+	}
 }

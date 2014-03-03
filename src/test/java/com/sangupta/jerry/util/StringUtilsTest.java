@@ -34,17 +34,27 @@ import junit.framework.Assert;
 public class StringUtilsTest {
 
 	@Test
-	public void testSubstringFrom() {
+	public void testSubstringAfter() {
 		String test ="this is a test string to test the functionality of substring";
 		String from = "test";
 		
-		String subStr = StringUtils.substringFrom(test, from, 0);
+		String subStr = StringUtils.substringAfter(test, from, 0);
 		Assert.assertEquals(" string to test the functionality of substring", subStr);
 		
-		subStr = StringUtils.substringFrom(test, from, 11);
+		subStr = StringUtils.substringAfter(test, from, 11);
 		Assert.assertEquals(" the functionality of substring", subStr);
 		
-		Assert.assertEquals(test, StringUtils.substringFrom(test, null, 0));
-		Assert.assertEquals("", StringUtils.substringFrom(null, null, 0));
+		Assert.assertEquals(test, StringUtils.substringAfter(test, null, 0));
+		Assert.assertEquals("", StringUtils.substringAfter(null, null, 0));
+	}
+	
+	@Test
+	public void testSubstringBetween() {
+		String test ="this is a test string to test the functionality of substring";
+		
+		Assert.assertEquals("", StringUtils.substringBetween(null, null, null));
+		Assert.assertEquals("this", StringUtils.substringBetween(test, null, " is"));
+		Assert.assertEquals("substring", StringUtils.substringBetween(test, "of ", null));
+		Assert.assertEquals("test the functionality", StringUtils.substringBetween(test, "to ", " of"));
 	}
 }
