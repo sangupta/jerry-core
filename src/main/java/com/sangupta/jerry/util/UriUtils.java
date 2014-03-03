@@ -101,7 +101,7 @@ public class UriUtils {
 					byte[] bytes = e.getBytes("utf-8");
 					for(byte b : bytes) {
 						output.append('%');
-						output.append(StringUtils.getHex(b).toUpperCase());
+						output.append(StringUtils.asHex(b).toUpperCase());
 					}
 					continue;
 				}

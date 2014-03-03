@@ -21,6 +21,8 @@
 
 package com.sangupta.jerry.util;
 
+import java.util.UUID;
+
 import org.junit.Test;
 
 import junit.framework.Assert;
@@ -56,5 +58,67 @@ public class StringUtilsTest {
 		Assert.assertEquals("this", StringUtils.substringBetween(test, null, " is"));
 		Assert.assertEquals("substring", StringUtils.substringBetween(test, "of ", null));
 		Assert.assertEquals("test the functionality", StringUtils.substringBetween(test, "to ", " of"));
+	}
+	
+	@Test
+	public void testGetBoolean() {
+		Assert.assertFalse(StringUtils.getBoolean(null));
+		Assert.assertFalse(StringUtils.getBoolean(""));
+		Assert.assertFalse(StringUtils.getBoolean("abc"));
+		Assert.assertFalse(StringUtils.getBoolean("no"));
+		
+		Assert.assertTrue(StringUtils.getBoolean("yes"));
+		Assert.assertTrue(StringUtils.getBoolean("yEs"));
+		Assert.assertTrue(StringUtils.getBoolean("YES"));
+		Assert.assertTrue(StringUtils.getBoolean("true"));
+		Assert.assertTrue(StringUtils.getBoolean("tRuE"));
+		Assert.assertTrue(StringUtils.getBoolean("TRUE"));
+	}
+	
+	@Test
+	public void testContains() {
+		String[] array =  { "one", "two", "three" };
+		Assert.assertFalse(StringUtils.contains(array, null));
+		Assert.assertFalse(StringUtils.contains(array, ""));
+		Assert.assertFalse(StringUtils.contains(array, "four"));
+		Assert.assertFalse(StringUtils.contains(null, null));
+		Assert.assertFalse(StringUtils.contains(null, ""));
+		Assert.assertFalse(StringUtils.contains(null, "four"));
+		
+		Assert.assertTrue(StringUtils.contains(array, "one"));
+		Assert.assertTrue(StringUtils.contains(array, "two"));
+		Assert.assertTrue(StringUtils.contains(array, "three"));
+	}
+	
+	@Test
+	public void testAsHex() {
+		Assert.assertEquals("41", StringUtils.asHex((byte) 65));
+		Assert.assertEquals("00", StringUtils.asHex((byte) 0));
+		Assert.assertEquals("0a", StringUtils.asHex((byte) 10));
+		Assert.assertEquals("ff", StringUtils.asHex((byte) 255));
+		
+		byte[] bytes = "test".getBytes();
+		Assert.assertEquals("74657374", StringUtils.asHex(bytes));
+	}
+	
+	@Test
+	public void testFromHex() {
+		for(int i = 0; i < 1000; i++) {
+			String uuid = UUID.randomUUID().toString();
+			byte[] bytes = uuid.getBytes();
+			String hex = StringUtils.asHex(bytes);
+			byte[] reversed = StringUtils.fromHex(hex);
+			Assert.assertTrue(EqualUtils.equals(bytes, reversed));
+		}
+	}
+	
+	@Test
+	public void testAsString() {
+		for(int i = 0; i < 1000; i++) {
+			String uuid = UUID.randomUUID().toString();
+			byte[] bytes = uuid.getBytes();
+			String hex = StringUtils.asHex(bytes);
+			Assert.assertEquals(uuid, StringUtils.asString(StringUtils.fromHex(hex)));
+		}
 	}
 }

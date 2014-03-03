@@ -61,14 +61,14 @@ public class StringUtils {
 	public static final String SYSTEM_NEW_LINE = System.getProperty("line.separator");
 	
 	/**
-	 * Function to give a HEX representation of the byte array.
+	 * Function to give a HEX representation of the byte array in small-case.
 	 * 
 	 * @param bytes
 	 *            the source byte array
 	 *            
 	 * @return the HEX coded string representing the byte array
 	 */
-	public static String getHex(byte bytes[]) {
+	public static String asHex(byte bytes[]) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < bytes.length; ++i) {
 			sb.append(Integer.toHexString((bytes[i] & 0xFF) | 0x100).substring(1, 3));
@@ -77,7 +77,7 @@ public class StringUtils {
 	}
 	
 	/**
-	 * Function to return a HEX representation of the given byte.
+	 * Function to return a HEX representation of the given byte in small-case.
 	 * 
 	 * @param b
 	 *            the byte value
@@ -85,8 +85,76 @@ public class StringUtils {
 	 * @return the hex representation
 	 * 
 	 */
-	public static String getHex(byte b) {
-		return Integer.toHexString(b & 0xFF);
+	public static String asHex(byte b) {
+		return Integer.toHexString((b & 0xFF) | 0x100).substring(1, 3);
+	}
+	
+	/**
+	 * Return the {@link String} representation of the byte array. A
+	 * <code>null</code> byte array is converted back to <code>null</code>, an
+	 * empty array to an empty string or the bytes to the actual string based on
+	 * platform encoding.
+	 * 
+	 * @param bytes
+	 *            the byte array
+	 * 
+	 * @return its string representation
+	 */
+	public static String asString(byte[] bytes) {
+		if(bytes == null) {
+			return null;
+		}
+		
+		if(bytes.length == 0) {
+			return EMPTY_STRING;
+		}
+		
+		return new String(bytes);
+	}
+	
+	/**
+	 * Return the {@link String} representation of the byte array. A
+	 * <code>null</code> byte array is converted back to <code>null</code>, an
+	 * empty array to an empty string or the bytes to the actual string in UTF-8
+	 * encoding.
+	 * 
+	 * @param bytes
+	 *            the byte array
+	 * 
+	 * @return its string representation
+	 */
+	public static String asStringUTF8(byte[] bytes) {
+		if(bytes == null) {
+			return null;
+		}
+		
+		if(bytes.length == 0) {
+			return EMPTY_STRING;
+		}
+		
+		return new String(bytes, CHARSET_UTF8);
+	}
+	
+	/**
+	 * Return the actual array that this hex string represents.
+	 * 
+	 * @param hex
+	 *            the hex string
+	 * 
+	 * @return the actual byte array for the hex string
+	 */
+	public static byte[] fromHex(String hex) {
+		if(AssertUtils.isEmpty(hex)) {
+			return null;
+		}
+		
+		int len = hex.length();
+	    byte[] data = new byte[len / 2];
+	    for (int i = 0; i < len; i += 2) {
+	        data[i / 2] = (byte) ((Character.digit(hex.charAt(i), 16) << 4) + Character.digit(hex.charAt(i+1), 16));
+	    }
+	    
+	    return data;
 	}
 	
 	/**
@@ -270,11 +338,14 @@ public class StringUtils {
 	/**
 	 * Find the substring between the given prefix and suffix.
 	 * 
-	 * @param string the string which needs to be sub-string'ed
+	 * @param string
+	 *            the string which needs to be sub-string'ed
 	 * 
-	 * @param prefix the string before
+	 * @param prefix
+	 *            the string before
 	 * 
-	 * @param suffix the string after
+	 * @param suffix
+	 *            the string after
 	 * 
 	 * @return the sub-string between the prefix and suffix
 	 * 
@@ -303,4 +374,5 @@ public class StringUtils {
 		
 		return string.substring(begin, end);
 	}
+	
 }
