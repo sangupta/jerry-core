@@ -234,5 +234,30 @@ public class StringUtils {
 		
 		return false;
 	}
+	
+	/**
+	 * Return a subset of string from the location where the given 'from' word exists.
+	 * 
+	 * @param string
+	 * @param from
+	 * @param searchIndex
+	 * @return
+	 */
+	public static String substringFrom(String string, String from, int searchIndex) {
+		if(AssertUtils.isEmpty(string)) {
+			return EMPTY_STRING;
+		}
+		
+		if(AssertUtils.isEmpty(from)) {
+			return string;
+		}
+		
+		int index = string.indexOf(from, searchIndex);
+		if(index == -1) {
+			return EMPTY_STRING;
+		}
+		
+		return string.substring(index + from.length());
+	}
 
 }
