@@ -245,6 +245,54 @@ public class StringUtils {
 	}
 	
 	/**
+	 * Parse and return the float value of the given string. If the string cannot
+	 * be parsed, returns the default value provided
+	 * 
+	 * @param string
+	 *            the string to be parsed
+	 * 
+	 * @param defaultValue
+	 *            the value to be returned if parsing string fails
+	 * 
+	 * @return the float value of the string
+	 */
+	public static float getFloatValue(String string, float defaultValue) {
+		try {
+			if(AssertUtils.isNotEmpty(string)) {
+				return Float.parseFloat(string);
+			}
+		} catch(NumberFormatException e) {
+			LOGGER.debug("error getting long from string: " + string, e);
+		}
+		
+		return defaultValue;
+	}
+	
+	/**
+	 * Parse and return the double value of the given string. If the string cannot
+	 * be parsed, returns the default value provided
+	 * 
+	 * @param string
+	 *            the string to be parsed
+	 * 
+	 * @param defaultValue
+	 *            the value to be returned if parsing string fails
+	 * 
+	 * @return the double value of the string
+	 */
+	public static double getDoubleValue(String string, double defaultValue) {
+		try {
+			if(AssertUtils.isNotEmpty(string)) {
+				return Double.parseDouble(string);
+			}
+		} catch(NumberFormatException e) {
+			LOGGER.debug("error getting long from string: " + string, e);
+		}
+		
+		return defaultValue;
+	}
+	
+	/**
 	 * Generate a given appender delimited string of all items in the list. If
 	 * the list has no elements, an empty string is returned back.
 	 * 
