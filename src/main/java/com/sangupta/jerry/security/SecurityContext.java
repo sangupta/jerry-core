@@ -24,6 +24,8 @@ package com.sangupta.jerry.security;
 import java.security.Principal;
 
 /**
+ * A simple context that holds the currently valid {@link Principal}
+ * for proper authentication and authorization.
  * 
  * @author sangupta
  *
