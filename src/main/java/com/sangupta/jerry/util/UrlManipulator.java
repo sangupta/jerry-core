@@ -223,6 +223,8 @@ public class UrlManipulator {
 		
 		if(queryStart == -1 && fragmentStart == -1) {
 			// we are done extracting everything from this url
+			// check for path
+			this.path = url.substring(domainPortEnd);
 			return;
 		}
 		

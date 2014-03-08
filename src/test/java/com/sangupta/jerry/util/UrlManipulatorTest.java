@@ -34,13 +34,37 @@ public class UrlManipulatorTest {
 
 	@Test
 	public void testDecomposition() {
-		UrlManipulator manipulator = new UrlManipulator("http://www.some-random-domain.com:80/abc.html?param1=value1&param2=value2#fragmentme");
+		final String url ="http://www.some-random-domain.com:80/abc.html?param1=value1&param2=value2#fragmentme";
+		UrlManipulator manipulator = new UrlManipulator(url);
+		
 		Assert.assertEquals("http", manipulator.getScheme());
 		Assert.assertEquals("www.some-random-domain.com", manipulator.getHost());
 		Assert.assertEquals(80, manipulator.getPort());
 		Assert.assertEquals("abc.html", manipulator.getPath());
 		Assert.assertEquals(2, manipulator.getNumQueryParams());
 		Assert.assertEquals("fragmentme", manipulator.getFragment());
+		Assert.assertEquals("http://www.some-random-domain.com/abc.html?param1=value1&param2=value2#fragmentme", manipulator.constructURL());
+	}
+	
+	@Test
+	public void testSimpleUrl() {
+		String url = "https://accounts.google.com/o/oauth2/auth";
+		UrlManipulator um = new UrlManipulator(url);
+		Assert.assertEquals(url, um.constructURL());
+	}
+	
+	@Test
+	public void testDecomposition2() {
+		final String url ="http://www.some-random-domain.com/abc.html?param1=value1&param2=value2#fragmentme";
+		UrlManipulator manipulator = new UrlManipulator(url);
+		
+		Assert.assertEquals("http", manipulator.getScheme());
+		Assert.assertEquals("www.some-random-domain.com", manipulator.getHost());
+		Assert.assertEquals(80, manipulator.getPort());
+		Assert.assertEquals("abc.html", manipulator.getPath());
+		Assert.assertEquals(2, manipulator.getNumQueryParams());
+		Assert.assertEquals("fragmentme", manipulator.getFragment());
+		Assert.assertEquals(url, manipulator.constructURL());
 	}
 	
 	@Test
