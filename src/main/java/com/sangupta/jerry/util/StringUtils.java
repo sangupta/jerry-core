@@ -382,6 +382,25 @@ public class StringUtils {
 		
 		return string.substring(index + from.length());
 	}
+	
+	/**
+	 * Find the substring between the given prefix and suffix.
+	 * 
+	 * @param string
+	 *            the string which needs to be sub-string'ed
+	 * 
+	 * @param prefix
+	 *            the string before
+	 * 
+	 * @param suffix
+	 *            the string after
+	 *            
+	 * @return the sub-string between the prefix and suffix
+	 * 
+	 */
+	public static String substringBetween(String string, String prefix, String suffix) {
+		return StringUtils.substringBetween(string, prefix, suffix, 0);
+	}
 
 	/**
 	 * Find the substring between the given prefix and suffix.
@@ -395,17 +414,20 @@ public class StringUtils {
 	 * @param suffix
 	 *            the string after
 	 * 
+	 * @param startSearch
+	 * 			  the index to start searching the prefix from
+	 * 
 	 * @return the sub-string between the prefix and suffix
 	 * 
 	 */
-	public static String substringBetween(String string, String prefix, String suffix) {
+	public static String substringBetween(String string, String prefix, String suffix, int startSearch) {
 		if(AssertUtils.isEmpty(string)) {
 			return EMPTY_STRING;
 		}
 		
 		int begin = 0, end = string.length();
 		if(AssertUtils.isNotBlank(prefix)) {
-			begin = string.indexOf(prefix);
+			begin = string.indexOf(prefix, startSearch);
 			if(begin != -1) {
 				begin += prefix.length();
 			} else {
@@ -414,7 +436,7 @@ public class StringUtils {
 		}
 		
 		if(AssertUtils.isNotEmpty(suffix)) {
-			end = string.indexOf(suffix);
+			end = string.indexOf(suffix, begin);
 			if(end == -1) {
 				end = string.length();
 			}
