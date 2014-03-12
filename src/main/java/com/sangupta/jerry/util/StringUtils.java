@@ -445,4 +445,67 @@ public class StringUtils {
 		return string.substring(begin, end);
 	}
 	
+	/**
+	 * Find the last index of searchString inside string, where searchString
+	 * occurs before the suffix in the string.
+	 * 
+	 * @param string
+	 *            the string in which the search will be performed
+	 * 
+	 * @param searchString
+	 *            the string that needs to be searched
+	 * 
+	 * @param suffix
+	 *            the string that decides the end location of the search
+	 * 
+	 * @return the index of searchString inside string, terminated at point
+	 *         where suffix occurs
+	 */
+	public static int lastIndexBefore(String string, String searchString, String suffix) {
+		int index = string.indexOf(suffix);
+		if(index != -1) {
+			string = string.substring(0, index);
+		}
+		
+		return string.lastIndexOf(searchString);
+	}
+	
+	/**
+	 * Find the nth index of a string-part inside another string.
+	 * 
+	 * @param string
+	 *            the string in which the search will be performed
+	 * 
+	 * @param searchString
+	 *            the string that needs to be searched
+	 * 
+	 * @param n
+	 *            the occurrence number that we are looking for
+	 * 
+	 * @return the index of nth occurrence of searchString inside string
+	 */
+	public static int nthIndexOf(String string, String searchString, int n) {
+		if(n <= 0) {
+			throw new IllegalArgumentException("n cannot be less than, or equal to zero");
+		}
+		
+		if(n == 1) {
+			return string.indexOf(searchString);
+		}
+		
+		int count = 0;
+		int index = -1;
+		do {
+			index = string.indexOf(searchString, index + 1);
+			if(index == -1) {
+				return -1;
+			}
+			
+			count++;
+			if(count == n) {
+				return index;
+			}
+		} while(true);
+	}
+
 }

@@ -50,7 +50,7 @@ public class StringUtilsTest {
 		Assert.assertEquals("", StringUtils.substringAfter(null, null, 0));
 	}
 	
-	@Test
+	@Test()
 	public void testSubstringBetween() {
 		String test ="this is a test string to test the functionality of substring";
 		
@@ -120,5 +120,17 @@ public class StringUtilsTest {
 			String hex = StringUtils.asHex(bytes);
 			Assert.assertEquals(uuid, StringUtils.asString(StringUtils.fromHex(hex)));
 		}
+	}
+	
+	@Test
+	public void testNthIndexOf() {
+		String string = "this is a line to test the occurrence of the word test in this test string";
+		String searchString = "test";
+
+		Assert.assertEquals(-1, StringUtils.nthIndexOf(string, "sangupta", 1));
+		Assert.assertEquals(18, StringUtils.nthIndexOf(string, searchString, 1));
+		Assert.assertEquals(50, StringUtils.nthIndexOf(string, searchString, 2));
+		Assert.assertEquals(63, StringUtils.nthIndexOf(string, searchString, 3));
+		Assert.assertEquals(-1, StringUtils.nthIndexOf(string, searchString, 4));
 	}
 }
