@@ -59,6 +59,24 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Computes the MD5 hash of the given data and returns 
+	 * the representation in Hex format.
+	 * 
+	 * @param data the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as String in hex-format
+	 * 
+	 */
+	public static String getMD5Hex(byte[] data) {
+		byte[] digest = getMD5(data);
+		if(digest == null) {
+			return null;
+		}
+		
+		return StringUtils.asHex(digest);
+	}
+	
+	/**
 	 * Compute the MD5 of the given string data. It is converted to bytes using
 	 * platform specific default encoding.
 	 * 
@@ -72,6 +90,15 @@ public class HashUtils {
 		return getMD5(data.getBytes());
 	}
 	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static String getMD5Hex(String data) {
+		return getMD5Hex(data.getBytes());
+	}
+
 	/**
 	 * Computes the SHA-1 hash of the given data.
 	 * 
@@ -91,6 +118,33 @@ public class HashUtils {
 		}
 		
 		return null;
+	}
+	
+	/**
+	 * Computes the SHA-1 hash of the given data and returns the
+	 * representation in Hex format.
+	 * 
+	 * @param data the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as String in hex-format
+	 * 
+	 */
+	public static String getSHA1Hex(byte[] data) {
+		byte[] digest = getSHA1(data);
+		if(digest == null) {
+			return null;
+		}
+		
+		return StringUtils.asHex(digest);
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static String getSHA1Hex(String data) {
+		return getSHA1Hex(data.getBytes());
 	}
 
 	/**
@@ -144,6 +198,33 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Computes the SHA-256 hash of the given data and returns the
+	 * representation in Hex format.
+	 * 
+	 * @param data the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as String in hex-format
+	 * 
+	 */
+	public static String getSHA256Hex(byte[] data) {
+		byte[] digest = getSHA256(data);
+		if(digest == null) {
+			return null;
+		}
+		
+		return StringUtils.asHex(digest);
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static String getSHA256Hex(String data) {
+		return getSHA256Hex(data.getBytes());
+	}
+	
+	/**
 	 * Compute the SHA-224 hash for the given bytes.
 	 * 
 	 * @param data
@@ -176,6 +257,29 @@ public class HashUtils {
 	 */
 	public static byte[] getSHA224(String data) {
 		return getSHA224(data.getBytes());
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static String getSHA224Hex(byte[] data) {
+		byte[] digest = getSHA224(data);
+		if(digest == null) {
+			return null;
+		}
+		
+		return StringUtils.asHex(digest);
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static String getSHA224Hex(String data) {
+		return getSHA224Hex(data.getBytes());
 	}
 	
 	/**
@@ -214,6 +318,29 @@ public class HashUtils {
 	}
 	
 	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static String getSHA384Hex(byte[] data) {
+		byte[] digest = getSHA384(data);
+		if(digest == null) {
+			return null;
+		}
+		
+		return StringUtils.asHex(digest);
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static String getSHA384Hex(String data) {
+		return getSHA384Hex(data.getBytes());
+	}
+	
+	/**
 	 * Compute the SHA-512 hash for the given bytes.
 	 * 
 	 * @param data
@@ -246,6 +373,29 @@ public class HashUtils {
 	 */
 	public static byte[] getSHA512(String data) {
 		return getSHA512(data.getBytes());
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static String getSHA512Hex(byte[] data) {
+		byte[] digest = getSHA512(data);
+		if(digest == null) {
+			return null;
+		}
+		
+		return StringUtils.asHex(digest);
+	}
+	
+	/**
+	 * 
+	 * @param data
+	 * @return
+	 */
+	public static String getSHA512Hex(String data) {
+		return getSHA512Hex(data.getBytes());
 	}
 	
 	/**

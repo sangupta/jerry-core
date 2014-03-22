@@ -119,6 +119,21 @@ public class TimeDurationUtils {
 	}
 	
 	/**
+	 * Compute the time duration from the given date.
+	 * 
+	 * @param date
+	 *            the date from which to compute the delta
+	 * 
+	 * @param condensed
+	 *            whether to display in the condensed format or not
+	 * 
+	 * @return the string representation of time duration
+	 */
+	public static String ago(final Date date, final boolean condensed) {
+		return ago(date.getTime(), condensed);
+	}
+	
+	/**
 	 * Compute the time duration from given millis.
 	 * 
 	 * @param millis
