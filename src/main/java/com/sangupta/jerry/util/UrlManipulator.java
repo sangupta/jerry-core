@@ -650,10 +650,35 @@ public class UrlManipulator {
 		
 		char[] chars = this.scheme.toCharArray();
 		for(char c : chars) {
-			if(!(Character.isDigit(c) || Character.isAlphabetic(c))) {
+			if(!(isDigit(c) || isAlphabet(c))) {
 				throw new IllegalArgumentException("Invalid characters in scheme: " + this.scheme);
 			}
 		}
+	}
+
+	private static boolean isDigit(char c) {
+		if(('0' <= c ) && (c <= '9')) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	/**
+	 * 
+	 * @param c
+	 * @return
+	 */
+	private static boolean isAlphabet(char c) {
+		if(('a' <= c ) && (c <= 'z')) {
+			return true;
+		}
+
+		if(('A' <= c ) && (c <= 'Z')) {
+			return true;
+		}
+
+		return false;
 	}
 	
 }
