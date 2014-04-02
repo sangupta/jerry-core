@@ -30,7 +30,7 @@ import java.util.Map;
  * to the extra overhead of a method call.
  * 
  * @author sangupta
- *
+ * @since 1.0.0
  */
 public class AssertUtils {
 	
@@ -259,4 +259,5 @@ public class AssertUtils {
 		
 		return true;
 	}
+
 }

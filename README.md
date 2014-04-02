@@ -54,6 +54,8 @@ Changelog
 
 **Current Development**
 
+* Added CheckUtils for checking assertions and throwing appropriate exceptions when they are not met
+
 **1.1.0**
 
 * Added IntegerCounter to keep track of multiple named counters with max integer capacity
