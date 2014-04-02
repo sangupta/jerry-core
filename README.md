@@ -51,10 +51,15 @@ The library can be downloaded from Maven Central using:
 
 Changelog
 ---------
-**Current Snapshot**
+**1.1.0**
 
 * Added IntegerCounter to keep track of multiple named counters with max integer capacity
 * Added LongCounter to keep track of multiple named counters with max long capacity
+* Added HttpMimeType constants for common response types
+* Added numerous utility methods to StringUtils
+* Removed dependency on Character.isAlphabetic() from JDK 7
+* Fixed bug in UrlManipulator when URL path is not present
+* Updated javadocs
 
 **1.0.0**
 
