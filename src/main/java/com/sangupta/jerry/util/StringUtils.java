@@ -507,5 +507,78 @@ public class StringUtils {
 			}
 		} while(true);
 	}
+	
+	/**
+	 * Check if the given string starts with the given prefix, ignoring case.
+	 * 
+	 * @param text
+	 *            the string to search in
+	 * 
+	 * @param prefix
+	 *            the prefix to search for
+	 * 
+	 * @return <code>true</code> if the string starts with prefix,
+	 *         <code>false</code> otherwise
+	 */
+	public static boolean startsWithIgnoreCase(String text, String prefix) {
+		if(AssertUtils.isEmpty(text)) {
+			return false;
+		}
+		
+		if(AssertUtils.isEmpty(prefix)) {
+			return false;
+		}
+		
+		if(text == prefix) {
+			return true; // same string
+		}
+		
+		if(prefix.length() > text.length()) {
+			return false;
+		}
+		
+		if(text.substring(0, prefix.length()).equalsIgnoreCase(prefix)) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	/**
+	 * Check if the given string ends with the given suffix, ignoring case.
+	 * 
+	 * @param text
+	 *            the string to search in
+	 * 
+	 * @param suffix
+	 *            the suffix to search for
+	 * 
+	 * @return <code>true</code> if the string ends with suffix,
+	 *         <code>false</code> otherwise
+	 */
+	public static boolean endsWithIgnoreCase(String text, String suffix) {
+		if(AssertUtils.isEmpty(text)) {
+			return false;
+		}
+		
+		if(AssertUtils.isEmpty(suffix)) {
+			return false;
+		}
+		
+		if(text == suffix) {
+			return true; // same string
+		}
+		
+		int start = text.length() - suffix.length();
+		if(start < 0) {
+			return false;
+		}
+		
+		if(text.substring(start).equalsIgnoreCase(suffix)) {
+			return true;
+		}
+		
+		return false;
+	}
 
 }

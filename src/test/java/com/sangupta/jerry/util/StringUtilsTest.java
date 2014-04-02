@@ -133,4 +133,50 @@ public class StringUtilsTest {
 		Assert.assertEquals(63, StringUtils.nthIndexOf(string, searchString, 3));
 		Assert.assertEquals(-1, StringUtils.nthIndexOf(string, searchString, 4));
 	}
+	
+	@Test
+	public void testStartsWithIgnoreCase() {
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase(null, null));
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase("some", null));
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase(null, "some"));
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase("", ""));
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase("", null));
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase(null, ""));
+		
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase("some", "some text"));
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase("some", "come text"));
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase("some", "come"));
+		Assert.assertFalse(StringUtils.startsWithIgnoreCase("some", "c"));
+		
+		Assert.assertTrue(StringUtils.startsWithIgnoreCase("some text", "some"));
+		Assert.assertTrue(StringUtils.startsWithIgnoreCase("some text", "SOME"));
+		Assert.assertTrue(StringUtils.startsWithIgnoreCase("some text", "SoMe"));
+		
+		Assert.assertTrue(StringUtils.startsWithIgnoreCase("SOME text", "some"));
+		Assert.assertTrue(StringUtils.startsWithIgnoreCase("some text", "SOME"));
+		Assert.assertTrue(StringUtils.startsWithIgnoreCase("sOmE text", "SoMe"));
+	}
+	
+	@Test
+	public void testEndsWithIgnoreCase() {
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase(null, null));
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase("some", null));
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase(null, "some"));
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase("", ""));
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase("", null));
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase(null, ""));
+		
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase("find some", "some text"));
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase("find some", "come text"));
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase("find some", "come"));
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase("find some", "c"));
+		
+		Assert.assertTrue(StringUtils.endsWithIgnoreCase("find some", "some"));
+		Assert.assertTrue(StringUtils.endsWithIgnoreCase("find some", "SOME"));
+		Assert.assertTrue(StringUtils.endsWithIgnoreCase("find some", "SoMe"));
+		
+		Assert.assertTrue(StringUtils.endsWithIgnoreCase("find SOME", "some"));
+		Assert.assertTrue(StringUtils.endsWithIgnoreCase("find some", "SOME"));
+		Assert.assertTrue(StringUtils.endsWithIgnoreCase("find sOmE", "SoMe"));
+	}
 }
