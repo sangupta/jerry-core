@@ -74,50 +74,6 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * Check if a given string is <code>non null</code> and non-zero length.
-	 * White-spaces are considered to be non-empty. Use
-	 * {@link AssertUtils#isNotBlank(String)} method to check by ignoring
-	 * white-spaces.
-	 * 
-	 * @param string
-	 *            the string to tested for non-emptiness.
-	 * 
-	 * @return <code>false</code> if string is empty, <code>true</code>
-	 *         otherwise.
-	 */
-	public static boolean isNotEmpty(String string) {
-		if(string == null) {
-			return false;
-		}
-		
-		return string.length() != 0;
-	}
-	
-	/**
-	 * Check if a given string is <code>non null</code> and non-zero length.
-	 * White-spaces are considered to be empty. Use
-	 * {@link AssertUtils#isNotEmpty(String)} method to check without ignoring
-	 * white-spaces.
-	 * 
-	 * @param string
-	 *            the string to tested for non-emptiness.
-	 * 
-	 * @return <code>false</code> if string is empty, <code>true</code>
-	 *         otherwise.
-	 */
-	public static boolean isNotBlank(String string) {
-		if(string == null) {
-			return false;
-		}
-		
-		if(string.trim().length() == 0) {
-			return false;
-		}
-		
-		return true;
-	}
-
-	/**
 	 * Check if given array is <code>null</code> or zero-length.
 	 * 
 	 * @param array
@@ -132,23 +88,6 @@ public class AssertUtils {
 		}
 		
 		return array.length == 0;
-	}
-
-	/**
-	 * Check if given array is not-<code>null</code> and non-zero-length.
-	 * 
-	 * @param array
-	 *            the array to be tested
-	 * 
-	 * @return <code>false</code> if array is <code>null</code> or zero-length,
-	 *         <code>true</code> otherwise.
-	 */
-	public static boolean isNotEmpty(Object[] array) {
-		if(array == null) {
-			return false;
-		}
-		
-		return array.length != 0;
 	}
 
 	/**
@@ -171,24 +110,6 @@ public class AssertUtils {
 	}
 
 	/**
-	 * Check if the given map is not-<code>null</code> and not-empty.
-	 * 
-	 * @param map
-	 *            the map to be tested
-	 * 
-	 * @return <code>false</code> if the map is either <code>null</code> or
-	 *         empty, <code>true</code> otherwise.
-	 */
-	@SuppressWarnings("rawtypes")
-	public static boolean isNotEmpty(Map map) {
-		if(map == null) {
-			return false;
-		}
-		
-		return !map.isEmpty();
-	}
-
-	/**
 	 * Check if the given collection is <code>null</code> or empty.
 	 * 
 	 * @param collection
@@ -207,24 +128,6 @@ public class AssertUtils {
 	}
 
 	/**
-	 * Check if the given collection is not-<code>null</code> and has values.
-	 * 
-	 * @param collection
-	 *            the collection to be tested
-	 * 
-	 * @return <code>true</code> if the collection is not-empty,
-	 *         <code>false</code> otherwise
-	 */
-	@SuppressWarnings("rawtypes")
-	public static boolean isNotEmpty(Collection collection) {
-		if(collection == null) {
-			return false;
-		}
-		
-		return !collection.isEmpty();
-	}
-
-	/**
 	 * Check if an object is <code>null</code>. Ideally this method should
 	 * be replaced by a normal <code>null</code> check. It is there only to
 	 * support the abstraction of this class, when the incoming object type is
@@ -236,32 +139,56 @@ public class AssertUtils {
 	 * @return returns <code>true</code> if object is null,
 	 *         <code>false</code> otherwise.
 	 */
+	@SuppressWarnings("rawtypes")
 	public static boolean isEmpty(Object object) {
 		if(object == null) {
 			return true;
 		}
 		
-		return false;
-	}
-	
-	/**
-	 * Check if an object is NOT-<code>null</code>. Ideally this method should
-	 * be replaced by a normal <code>null</code> check. It is there only to
-	 * support the abstraction of this class, when the incoming object type is
-	 * not known.
-	 * 
-	 * @param object
-	 *            the object to be tested
-	 * 
-	 * @return returns <code>true</code> if object is not-null,
-	 *         <code>false</code> otherwise.
-	 */
-	public static boolean isNotEmpty(Object object) {
-		if(object == null) {
-			return false;
+		// in this method we should be checking for the instance type as well
+		// because it may be called on reference type than actual instance type
+		
+		if(object instanceof String) {
+			return isEmpty((String) object);
 		}
 		
-		return true;
+		if(object instanceof Collection) {
+			return isEmpty((Collection) object);
+		}
+		
+		if(object instanceof Map) {
+			return isEmpty((Map) object);
+		}
+		
+		if(object instanceof int[]) {
+			return isEmpty((int[]) object);
+		}
+		
+		if(object instanceof byte[]) {
+			return isEmpty((byte[]) object);
+		}
+		
+		if(object instanceof char[]) {
+			return isEmpty((char[]) object);
+		}
+		
+		if(object instanceof short[]) {
+			return isEmpty((short[]) object);
+		}
+		
+		if(object instanceof long[]) {
+			return isEmpty((long[]) object);
+		}
+		
+		if(object instanceof float[]) {
+			return isEmpty((float[]) object);
+		}
+		
+		if(object instanceof double[]) {
+			return isEmpty((double[]) object);
+		}
+		
+		return false;
 	}
 	
 	/**
@@ -383,4 +310,186 @@ public class AssertUtils {
 		return array.length == 0;
 	}
 
+	// ALL NOT METHODS GO DOWN HERE
+	
+	/**
+	 * Check if a given string is <code>non null</code> and non-zero length.
+	 * White-spaces are considered to be non-empty. Use
+	 * {@link AssertUtils#isNotBlank(String)} method to check by ignoring
+	 * white-spaces.
+	 * 
+	 * @param string
+	 *            the string to tested for non-emptiness.
+	 * 
+	 * @return <code>false</code> if string is empty, <code>true</code>
+	 *         otherwise.
+	 */
+	public static boolean isNotEmpty(String string) {
+		return !isEmpty(string);
+	}
+	
+	/**
+	 * Check if a given string is <code>non null</code> and non-zero length.
+	 * White-spaces are considered to be empty. Use
+	 * {@link AssertUtils#isNotEmpty(String)} method to check without ignoring
+	 * white-spaces.
+	 * 
+	 * @param string
+	 *            the string to tested for non-emptiness.
+	 * 
+	 * @return <code>false</code> if string is empty, <code>true</code>
+	 *         otherwise.
+	 */
+	public static boolean isNotBlank(String string) {
+		return !isBlank(string);
+	}
+
+	/**
+	 * Check if given array is not-<code>null</code> and non-zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>false</code> if array is <code>null</code> or zero-length,
+	 *         <code>true</code> otherwise.
+	 */
+	public static boolean isNotEmpty(Object[] array) {
+		return !isEmpty(array);
+	}
+
+	/**
+	 * Check if the given map is not-<code>null</code> and not-empty.
+	 * 
+	 * @param map
+	 *            the map to be tested
+	 * 
+	 * @return <code>false</code> if the map is either <code>null</code> or
+	 *         empty, <code>true</code> otherwise.
+	 */
+	@SuppressWarnings("rawtypes")
+	public static boolean isNotEmpty(Map map) {
+		return !isEmpty(map);
+	}
+
+	/**
+	 * Check if the given collection is not-<code>null</code> and has values.
+	 * 
+	 * @param collection
+	 *            the collection to be tested
+	 * 
+	 * @return <code>true</code> if the collection is not-empty,
+	 *         <code>false</code> otherwise
+	 */
+	@SuppressWarnings("rawtypes")
+	public static boolean isNotEmpty(Collection collection) {
+		return !isEmpty(collection);
+	}
+
+	/**
+	 * Check if an object is NOT-<code>null</code>. Ideally this method should
+	 * be replaced by a normal <code>null</code> check. It is there only to
+	 * support the abstraction of this class, when the incoming object type is
+	 * not known.
+	 * 
+	 * @param object
+	 *            the object to be tested
+	 * 
+	 * @return returns <code>true</code> if object is not-null,
+	 *         <code>false</code> otherwise.
+	 */
+	public static boolean isNotEmpty(Object object) {
+		return !isEmpty(object);
+	}
+	
+	/**
+	 * Check if given array is not-<code>null</code> and non-zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>false</code> if array is <code>null</code> or zero-length,
+	 *         <code>true</code> otherwise.
+	 */
+	public static boolean isNotEmpty(short[] array) {
+		return !isEmpty(array);
+	}
+	
+	/**
+	 * Check if given array is not-<code>null</code> and non-zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>false</code> if array is <code>null</code> or zero-length,
+	 *         <code>true</code> otherwise.
+	 */
+	public static boolean isNotEmpty(byte[] array) {
+		return !isEmpty(array);
+	}
+
+	/**
+	 * Check if given array is not-<code>null</code> and non-zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>false</code> if array is <code>null</code> or zero-length,
+	 *         <code>true</code> otherwise.
+	 */
+	public static boolean isNotEmpty(char[] array) {
+		return !isEmpty(array);
+	}
+
+	/**
+	 * Check if given array is not-<code>null</code> and non-zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>false</code> if array is <code>null</code> or zero-length,
+	 *         <code>true</code> otherwise.
+	 */
+	public static boolean isNotEmpty(int[] array) {
+		return !isEmpty(array);
+	}
+
+	/**
+	 * Check if given array is not-<code>null</code> and non-zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>false</code> if array is <code>null</code> or zero-length,
+	 *         <code>true</code> otherwise.
+	 */
+	public static boolean isNotEmpty(long[] array) {
+		return !isEmpty(array);
+	}
+
+	/**
+	 * Check if given array is not-<code>null</code> and non-zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>false</code> if array is <code>null</code> or zero-length,
+	 *         <code>true</code> otherwise.
+	 */
+	public static boolean isNotEmpty(float[] array) {
+		return !isEmpty(array);
+	}
+
+	/**
+	 * Check if given array is not-<code>null</code> and non-zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>false</code> if array is <code>null</code> or zero-length,
+	 *         <code>true</code> otherwise.
+	 */
+	public static boolean isNotEmpty(double[] array) {
+		return !isEmpty(array);
+	}
+	
 }

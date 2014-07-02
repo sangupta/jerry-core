@@ -68,6 +68,46 @@ public class AssertUtilsTest {
 		
 		assertTrue(AssertUtils.isNotEmpty(new String[] { "", "" }));
 		assertFalse(AssertUtils.isEmpty(new String[] { "", "" }));
+		
+		assertTrue(AssertUtils.isEmpty(new byte[] { }));
+		assertTrue(AssertUtils.isEmpty(new char[] { }));
+		assertTrue(AssertUtils.isEmpty(new short[] { }));
+		assertTrue(AssertUtils.isEmpty(new int[] { }));
+		assertTrue(AssertUtils.isEmpty(new long[] { }));
+		assertTrue(AssertUtils.isEmpty(new float[] { }));
+		assertTrue(AssertUtils.isEmpty(new double[] { }));
+
+		assertTrue(AssertUtils.isEmpty((byte[]) null));
+		assertTrue(AssertUtils.isEmpty((char[]) null));
+		assertTrue(AssertUtils.isEmpty((short[]) null));
+		assertTrue(AssertUtils.isEmpty((int[]) null));
+		assertTrue(AssertUtils.isEmpty((long[]) null));
+		assertTrue(AssertUtils.isEmpty((float[]) null));
+		assertTrue(AssertUtils.isEmpty((double[]) null));
+		
+		assertFalse(AssertUtils.isEmpty(new byte[] { 0 }));
+		assertFalse(AssertUtils.isEmpty(new char[] { 0 }));
+		assertFalse(AssertUtils.isEmpty(new short[] { 0 }));
+		assertFalse(AssertUtils.isEmpty(new int[] { 0 }));
+		assertFalse(AssertUtils.isEmpty(new long[] { 0 }));
+		assertFalse(AssertUtils.isEmpty(new float[] { 0 }));
+		assertFalse(AssertUtils.isEmpty(new double[] { 0 }));
+		
+		assertFalse(AssertUtils.isNotEmpty((byte[]) null));
+		assertFalse(AssertUtils.isNotEmpty((char[]) null));
+		assertFalse(AssertUtils.isNotEmpty((short[]) null));
+		assertFalse(AssertUtils.isNotEmpty((int[]) null));
+		assertFalse(AssertUtils.isNotEmpty((long[]) null));
+		assertFalse(AssertUtils.isNotEmpty((float[]) null));
+		assertFalse(AssertUtils.isNotEmpty((double[]) null));
+		
+		assertTrue(AssertUtils.isNotEmpty(new byte[] { 0 }));
+		assertTrue(AssertUtils.isNotEmpty(new char[] { 0 }));
+		assertTrue(AssertUtils.isNotEmpty(new short[] { 0 }));
+		assertTrue(AssertUtils.isNotEmpty(new int[] { 0 }));
+		assertTrue(AssertUtils.isNotEmpty(new long[] { 0 }));
+		assertTrue(AssertUtils.isNotEmpty(new float[] { 0 }));
+		assertTrue(AssertUtils.isNotEmpty(new double[] { 0 }));
 	}
 	
 	@Test
@@ -107,6 +147,19 @@ public class AssertUtilsTest {
 		
 		assertFalse(AssertUtils.isNotEmpty((Object) null));
 		assertTrue(AssertUtils.isNotEmpty(new Object()));
+		
+		assertTrue(AssertUtils.isEmpty((Object) ((String) "")));
+		assertTrue(AssertUtils.isEmpty((Object) (new ArrayList<String>())));
+		assertTrue(AssertUtils.isEmpty((Object) (new HashMap<String, String>())));
+		
+		assertTrue(AssertUtils.isEmpty((Object) (new int[] { })));
+		assertTrue(AssertUtils.isEmpty((Object) (new byte[] { })));
+		assertTrue(AssertUtils.isEmpty((Object) (new char[] { })));
+		assertTrue(AssertUtils.isEmpty((Object) (new long[] { })));
+		assertTrue(AssertUtils.isEmpty((Object) (new short[] { })));
+		assertTrue(AssertUtils.isEmpty((Object) (new long[] { })));
+		assertTrue(AssertUtils.isEmpty((Object) (new float[] { })));
+		assertTrue(AssertUtils.isEmpty((Object) (new double[] { })));
 	}
 
 	@Test
