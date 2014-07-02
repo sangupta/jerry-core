@@ -66,11 +66,11 @@ public class AssertUtils {
 	 *         otherwise.
 	 */
 	public static boolean isBlank(String string) {
-		if(string == null || string.trim().length() == 0) {
+		if(string == null) {
 			return true;
 		}
 		
-		return false;
+		return string.trim().length() == 0;
 	}
 	
 	/**
@@ -86,11 +86,11 @@ public class AssertUtils {
 	 *         otherwise.
 	 */
 	public static boolean isNotEmpty(String string) {
-		if(string == null || string.length() == 0) {
+		if(string == null) {
 			return false;
 		}
 		
-		return true;
+		return string.length() != 0;
 	}
 	
 	/**
@@ -106,7 +106,11 @@ public class AssertUtils {
 	 *         otherwise.
 	 */
 	public static boolean isNotBlank(String string) {
-		if(string == null || string.trim().length() == 0) {
+		if(string == null) {
+			return false;
+		}
+		
+		if(string.trim().length() == 0) {
 			return false;
 		}
 		
@@ -123,11 +127,11 @@ public class AssertUtils {
 	 *         <code>false</code> otherwise.
 	 */
 	public static boolean isEmpty(Object[] array) {
-		if(array == null || array.length == 0) {
+		if(array == null) {
 			return true;
 		}
 		
-		return false;
+		return array.length == 0;
 	}
 
 	/**
@@ -140,11 +144,11 @@ public class AssertUtils {
 	 *         <code>true</code> otherwise.
 	 */
 	public static boolean isNotEmpty(Object[] array) {
-		if(array == null || array.length == 0) {
+		if(array == null) {
 			return false;
 		}
 		
-		return true;
+		return array.length != 0;
 	}
 
 	/**
@@ -159,11 +163,11 @@ public class AssertUtils {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static boolean isEmpty(Map map) {
-		if(map == null || map.isEmpty()) {
+		if(map == null) {
 			return true;
 		}
 		
-		return false;
+		return map.isEmpty();
 	}
 
 	/**
@@ -177,11 +181,11 @@ public class AssertUtils {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static boolean isNotEmpty(Map map) {
-		if(map == null || map.isEmpty()) {
+		if(map == null) {
 			return false;
 		}
 		
-		return true;
+		return !map.isEmpty();
 	}
 
 	/**
@@ -195,11 +199,11 @@ public class AssertUtils {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static boolean isEmpty(Collection collection) {
-		if(collection == null || collection.isEmpty()) {
+		if(collection == null) {
 			return true;
 		}
 		
-		return false;
+		return collection.isEmpty();
 	}
 
 	/**
@@ -213,11 +217,11 @@ public class AssertUtils {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static boolean isNotEmpty(Collection collection) {
-		if(collection == null || collection.isEmpty()) {
+		if(collection == null) {
 			return false;
 		}
 		
-		return true;
+		return !collection.isEmpty();
 	}
 
 	/**
@@ -258,6 +262,125 @@ public class AssertUtils {
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * Check if given array is <code>null</code> or zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>true</code> if array is <code>null</code> or zero-length,
+	 *         <code>false</code> otherwise.
+	 */
+	public static boolean isEmpty(short[] array) {
+		if(array == null) {
+			return true;
+		}
+		
+		return array.length == 0;
+	}
+	
+	/**
+	 * Check if given array is <code>null</code> or zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>true</code> if array is <code>null</code> or zero-length,
+	 *         <code>false</code> otherwise.
+	 */
+	public static boolean isEmpty(byte[] array) {
+		if(array == null) {
+			return true;
+		}
+		
+		return array.length == 0;
+	}
+
+	/**
+	 * Check if given array is <code>null</code> or zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>true</code> if array is <code>null</code> or zero-length,
+	 *         <code>false</code> otherwise.
+	 */
+	public static boolean isEmpty(char[] array) {
+		if(array == null) {
+			return true;
+		}
+		
+		return array.length == 0;
+	}
+
+	/**
+	 * Check if given array is <code>null</code> or zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>true</code> if array is <code>null</code> or zero-length,
+	 *         <code>false</code> otherwise.
+	 */
+	public static boolean isEmpty(int[] array) {
+		if(array == null) {
+			return true;
+		}
+		
+		return array.length == 0;
+	}
+
+	/**
+	 * Check if given array is <code>null</code> or zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>true</code> if array is <code>null</code> or zero-length,
+	 *         <code>false</code> otherwise.
+	 */
+	public static boolean isEmpty(long[] array) {
+		if(array == null) {
+			return true;
+		}
+		
+		return array.length == 0;
+	}
+
+	/**
+	 * Check if given array is <code>null</code> or zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>true</code> if array is <code>null</code> or zero-length,
+	 *         <code>false</code> otherwise.
+	 */
+	public static boolean isEmpty(float[] array) {
+		if(array == null) {
+			return true;
+		}
+		
+		return array.length == 0;
+	}
+
+	/**
+	 * Check if given array is <code>null</code> or zero-length.
+	 * 
+	 * @param array
+	 *            the array to be tested
+	 * 
+	 * @return <code>true</code> if array is <code>null</code> or zero-length,
+	 *         <code>false</code> otherwise.
+	 */
+	public static boolean isEmpty(double[] array) {
+		if(array == null) {
+			return true;
+		}
+		
+		return array.length == 0;
 	}
 
 }

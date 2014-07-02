@@ -38,7 +38,7 @@ import static org.junit.Assert.*;
 public class AssertUtilsTest {
 	
 	@Test
-	public void testIsEmpty() {
+	public void testIsEmptyString() {
 		// strings
 		assertTrue(AssertUtils.isEmpty((String) null));
 		assertFalse(AssertUtils.isNotEmpty((String) null));
@@ -51,18 +51,27 @@ public class AssertUtilsTest {
 		
 		assertTrue(AssertUtils.isNotEmpty(" abc"));
 		assertFalse(AssertUtils.isEmpty(" abc"));
-		
-		// array
+	}
+	
+	@Test
+	public void testIsEmptyArray() {
 		assertTrue(AssertUtils.isEmpty((String[]) null));
 		assertFalse(AssertUtils.isNotEmpty((String[]) null));
 		
 		assertTrue(AssertUtils.isEmpty((Object[]) null));
+		assertTrue(AssertUtils.isEmpty((Object[]) new Object[] { }));
+		assertFalse(AssertUtils.isEmpty((Object[]) new Object[] { new Object() }));
+		
 		assertFalse(AssertUtils.isNotEmpty((Object[]) null));
+		assertFalse(AssertUtils.isNotEmpty((Object[]) new Object[] { }));
+		assertTrue(AssertUtils.isNotEmpty((Object[]) new Object[] { new Object() }));
 		
 		assertTrue(AssertUtils.isNotEmpty(new String[] { "", "" }));
 		assertFalse(AssertUtils.isEmpty(new String[] { "", "" }));
-		
-		// map
+	}
+	
+	@Test
+	public void testIsEmptyMap() {
 		Map<String, String> map = null;
 		assertTrue(AssertUtils.isEmpty(map));
 		assertFalse(AssertUtils.isNotEmpty(map));
@@ -74,8 +83,10 @@ public class AssertUtilsTest {
 		map.put("1", "2");
 		assertTrue(AssertUtils.isNotEmpty(map));
 		assertFalse(AssertUtils.isEmpty(map));
-		
-		// collection
+	}
+	
+	@Test
+	public void testIsEmptyCollection() {
 		Collection<String> coll = null;
 		assertTrue(AssertUtils.isEmpty(coll));
 		assertFalse(AssertUtils.isNotEmpty(coll));
@@ -87,10 +98,30 @@ public class AssertUtilsTest {
 		coll.add("test string");
 		assertTrue(AssertUtils.isNotEmpty(coll));
 		assertFalse(AssertUtils.isEmpty(coll));
-		
-		// object
+	}
+	
+	@Test
+	public void testIsEmptyObject() {
 		assertTrue(AssertUtils.isEmpty((Object) null));
+		assertFalse(AssertUtils.isEmpty(new Object()));
+		
+		assertFalse(AssertUtils.isNotEmpty((Object) null));
 		assertTrue(AssertUtils.isNotEmpty(new Object()));
 	}
 
+	@Test
+	public void testIsBlankString() {
+		assertTrue(AssertUtils.isBlank((String) null));
+		assertFalse(AssertUtils.isNotBlank((String) null));
+		
+		assertTrue(AssertUtils.isBlank(""));
+		assertFalse(AssertUtils.isNotBlank(""));
+		
+		assertTrue(AssertUtils.isNotEmpty(" "));
+		assertFalse(AssertUtils.isNotBlank(" "));
+		
+		assertTrue(AssertUtils.isNotBlank(" abc"));
+		assertFalse(AssertUtils.isBlank(" abc"));
+	}
+	
 }
