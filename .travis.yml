@@ -1,7 +1,8 @@
 language: java
+
 jdk:
   - openjdk7
   - oraclejdk7
 
 after_success:
-  - mvn jacoco:report coveralls:jacoco
+  - mvn clean test cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:cobertura
