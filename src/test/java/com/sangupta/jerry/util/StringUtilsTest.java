@@ -21,6 +21,8 @@
 
 package com.sangupta.jerry.util;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.junit.Test;
@@ -278,6 +280,29 @@ public class StringUtilsTest {
 	
 	@Test
 	public void testLastIndexBefore() {
+		Assert.assertEquals(-1, StringUtils.lastIndexBefore(null, "123", "123"));
+		Assert.assertEquals(-1, StringUtils.lastIndexBefore("", "123", "123"));
 		
+		Assert.assertEquals(-1, StringUtils.lastIndexBefore("123", null, "123"));
+		Assert.assertEquals(-1, StringUtils.lastIndexBefore("123", "", "123"));
+		
+		Assert.assertEquals(8, StringUtils.lastIndexBefore("one two one three one", "one", "three"));
+		Assert.assertEquals(18, StringUtils.lastIndexBefore("one two one three one", "one", "four"));
 	}
+	
+	@Test
+	public void testListToString() {
+		Assert.assertEquals("", StringUtils.listToString(null, ","));
+		Assert.assertEquals("", StringUtils.listToString(new ArrayList<String>(), ","));
+		
+		List<String> list = new ArrayList<String>();
+		list.add("one");
+		list.add("two");
+		list.add("three");
+		
+		Assert.assertEquals("one$#two$#three", StringUtils.listToString(list, "$#"));
+		Assert.assertEquals("onetwothree", StringUtils.listToString(list, null));
+		Assert.assertEquals("onetwothree", StringUtils.listToString(list, ""));
+	}
+	
 }

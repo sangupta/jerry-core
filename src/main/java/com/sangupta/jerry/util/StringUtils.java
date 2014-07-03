@@ -304,14 +304,16 @@ public class StringUtils {
 	 * 
 	 * @return the string representation of list using appender as the delimiter
 	 */
-	public String fromList(List<Object> list, String appender) {
+	public static <T> String listToString(List<T> list, String appender) {
 		if(AssertUtils.isEmpty(list)) {
 			return EMPTY_STRING;
 		}
 		
+		final boolean hasAppender = AssertUtils.isNotEmpty(appender);
+		
 		StringBuilder builder = new StringBuilder();
 		for(int index = 0; index < list.size(); index++) {
-			if(index > 0) {
+			if(hasAppender && index > 0) {
 				builder.append(appender);
 			}
 			builder.append(list.get(index));
@@ -461,9 +463,16 @@ public class StringUtils {
 	 * @return the index of searchString inside string, terminated at point
 	 *         where suffix occurs
 	 *         
-	 * @throws NullPointerException if string is <code>null</code>
 	 */
 	public static int lastIndexBefore(String string, String searchString, String suffix) {
+		if(AssertUtils.isEmpty(string)) {
+			return -1;
+		}
+		
+		if(AssertUtils.isEmpty(searchString)) {
+			return -1;
+		}
+		
 		int index = string.indexOf(suffix);
 		if(index != -1) {
 			string = string.substring(0, index);
