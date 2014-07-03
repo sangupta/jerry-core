@@ -460,6 +460,8 @@ public class StringUtils {
 	 * 
 	 * @return the index of searchString inside string, terminated at point
 	 *         where suffix occurs
+	 *         
+	 * @throws NullPointerException if string is <code>null</code>
 	 */
 	public static int lastIndexBefore(String string, String searchString, String suffix) {
 		int index = string.indexOf(suffix);

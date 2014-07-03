@@ -48,6 +48,10 @@ public class StringUtilsTest {
 		
 		Assert.assertEquals(test, StringUtils.substringAfter(test, null, 0));
 		Assert.assertEquals("", StringUtils.substringAfter(null, null, 0));
+		
+		Assert.assertEquals("", StringUtils.substringAfter("this is a test string", "sangupta", 0));
+		Assert.assertEquals("", StringUtils.substringAfter("this is a test string", "sangupta", 5));
+		Assert.assertEquals("", StringUtils.substringAfter("this is a test string", "sangupta", 10));
 	}
 	
 	@Test()
@@ -58,6 +62,9 @@ public class StringUtilsTest {
 		Assert.assertEquals("this", StringUtils.substringBetween(test, null, " is"));
 		Assert.assertEquals("substring", StringUtils.substringBetween(test, "of ", null));
 		Assert.assertEquals("test the functionality", StringUtils.substringBetween(test, "to ", " of"));
+		
+		Assert.assertEquals("hello", StringUtils.substringBetween("hello world!", "hello", " world", 3));
+		Assert.assertEquals("hello world!", StringUtils.substringBetween("hello world!", "hello", " jerry", 3));
 	}
 	
 	@Test
@@ -88,6 +95,8 @@ public class StringUtilsTest {
 		Assert.assertTrue(StringUtils.contains(array, "one"));
 		Assert.assertTrue(StringUtils.contains(array, "two"));
 		Assert.assertTrue(StringUtils.contains(array, "three"));
+		
+		Assert.assertFalse(StringUtils.contains(new String[] { }, "one"));
 	}
 	
 	@Test
@@ -103,6 +112,9 @@ public class StringUtilsTest {
 	
 	@Test
 	public void testFromHex() {
+		Assert.assertNull(StringUtils.fromHex(null));
+		Assert.assertNull(StringUtils.fromHex(""));
+		
 		for(int i = 0; i < 1000; i++) {
 			String uuid = UUID.randomUUID().toString();
 			byte[] bytes = uuid.getBytes();
@@ -120,12 +132,42 @@ public class StringUtilsTest {
 			String hex = StringUtils.asHex(bytes);
 			Assert.assertEquals(uuid, StringUtils.asString(StringUtils.fromHex(hex)));
 		}
+		
+		Assert.assertNull(StringUtils.asString(null));
+		Assert.assertEquals("", StringUtils.asString(new byte[] { }));
+	}
+	
+	@Test
+	public void testAsStringUTF8() {
+		for(int i = 0; i < 1000; i++) {
+			String uuid = UUID.randomUUID().toString();
+			byte[] bytes = uuid.getBytes(StringUtils.CHARSET_UTF8);
+			String hex = StringUtils.asHex(bytes);
+			Assert.assertEquals(uuid, StringUtils.asStringUTF8(StringUtils.fromHex(hex)));
+		}
+		
+		Assert.assertNull(StringUtils.asStringUTF8(null));
+		Assert.assertEquals("", StringUtils.asStringUTF8(new byte[] { }));
 	}
 	
 	@Test
 	public void testNthIndexOf() {
 		String string = "this is a line to test the occurrence of the word test in this test string";
 		String searchString = "test";
+
+		try {
+			StringUtils.nthIndexOf(string, searchString, 0);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+
+		try {
+			StringUtils.nthIndexOf(string, searchString, -1);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
 
 		Assert.assertEquals(-1, StringUtils.nthIndexOf(string, "sangupta", 1));
 		Assert.assertEquals(18, StringUtils.nthIndexOf(string, searchString, 1));
@@ -136,6 +178,9 @@ public class StringUtilsTest {
 	
 	@Test
 	public void testStartsWithIgnoreCase() {
+		String x = "hello world!";
+		Assert.assertTrue(StringUtils.startsWithIgnoreCase(x, x));
+		
 		Assert.assertFalse(StringUtils.startsWithIgnoreCase(null, null));
 		Assert.assertFalse(StringUtils.startsWithIgnoreCase("some", null));
 		Assert.assertFalse(StringUtils.startsWithIgnoreCase(null, "some"));
@@ -159,6 +204,11 @@ public class StringUtilsTest {
 	
 	@Test
 	public void testEndsWithIgnoreCase() {
+		String x = "hello world!";
+		Assert.assertTrue(StringUtils.endsWithIgnoreCase(x, x));
+		
+		Assert.assertFalse(StringUtils.endsWithIgnoreCase("short string", "a very long string"));
+		
 		Assert.assertFalse(StringUtils.endsWithIgnoreCase(null, null));
 		Assert.assertFalse(StringUtils.endsWithIgnoreCase("some", null));
 		Assert.assertFalse(StringUtils.endsWithIgnoreCase(null, "some"));
@@ -178,5 +228,56 @@ public class StringUtilsTest {
 		Assert.assertTrue(StringUtils.endsWithIgnoreCase("find SOME", "some"));
 		Assert.assertTrue(StringUtils.endsWithIgnoreCase("find some", "SOME"));
 		Assert.assertTrue(StringUtils.endsWithIgnoreCase("find sOmE", "SoMe"));
+	}
+	
+	@Test
+	public void testGetIntValue() {
+		Assert.assertEquals(5, StringUtils.getIntValue(null, 5));
+		Assert.assertEquals(5, StringUtils.getIntValue("", 5));
+		Assert.assertEquals(5, StringUtils.getIntValue("abc", 5));
+		
+		Assert.assertEquals(63, StringUtils.getIntValue("63", 5));
+		Assert.assertEquals(-63, StringUtils.getIntValue("-63", 5));
+	}
+	
+	@Test
+	public void testGetLongValue() {
+		Assert.assertEquals(5l, StringUtils.getLongValue(null, 5l));
+		Assert.assertEquals(5l, StringUtils.getLongValue("", 5l));
+		Assert.assertEquals(5l, StringUtils.getLongValue("abc", 5l));
+		
+		Assert.assertEquals(63l, StringUtils.getLongValue("63", 5l));
+		Assert.assertEquals(-63l, StringUtils.getLongValue("-63", 5l));
+	}
+	
+	@Test
+	public void testGetFloatValue() {
+		Assert.assertEquals(5f, StringUtils.getFloatValue(null, 5f));
+		Assert.assertEquals(5f, StringUtils.getFloatValue("", 5f));
+		Assert.assertEquals(5f, StringUtils.getFloatValue("abc", 5f));
+		
+		Assert.assertEquals(63f, StringUtils.getFloatValue("63", 5f));
+		Assert.assertEquals(-63f, StringUtils.getFloatValue("-63", 5f));
+		
+		Assert.assertEquals(63.2f, StringUtils.getFloatValue("63.200", 5f));
+		Assert.assertEquals(-63.2f, StringUtils.getFloatValue("-63.200", 5f));
+	}
+	
+	@Test
+	public void testGetDoubleValue() {
+		Assert.assertEquals(5d, StringUtils.getDoubleValue(null, 5d));
+		Assert.assertEquals(5d, StringUtils.getDoubleValue("", 5d));
+		Assert.assertEquals(5d, StringUtils.getDoubleValue("abc", 5d));
+		
+		Assert.assertEquals(63d, StringUtils.getDoubleValue("63", 5d));
+		Assert.assertEquals(-63d, StringUtils.getDoubleValue("-63", 5d));
+		
+		Assert.assertEquals(63.2d, StringUtils.getDoubleValue("63.200", 5d));
+		Assert.assertEquals(-63.2d, StringUtils.getDoubleValue("-63.200", 5d));
+	}
+	
+	@Test
+	public void testLastIndexBefore() {
+		
 	}
 }
