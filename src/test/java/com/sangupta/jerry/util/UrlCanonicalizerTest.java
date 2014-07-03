@@ -33,11 +33,24 @@ public class UrlCanonicalizerTest {
 	
 	@Test
 	public void testCanonicalization() {
+		Assert.assertNull(UrlCanonicalizer.canonicalize(null));
+		Assert.assertNull(UrlCanonicalizer.canonicalize(""));
+		Assert.assertNull(UrlCanonicalizer.canonicalize("\t\t"));
+		
 		Assert.assertEquals("http://www.some-random-domain.com", UrlCanonicalizer.canonicalize("http://www.some-random-domain.com/"));
 		Assert.assertEquals("http://www.some-random-domain.com", UrlCanonicalizer.canonicalize("hTTp://www.some-RANDOM-domain.com"));
 		Assert.assertEquals("http://www.some-random-domain.com/abc.html?param1=value1&param2=value2#fragmentme", UrlCanonicalizer.canonicalize("http://www.some-random-domain.com/abc.html#fragmentme?param2=value2&param1=value1"));
 		
+		Assert.assertNull(UrlCanonicalizer.getCanonicalizedBase(null));
+		Assert.assertNull(UrlCanonicalizer.getCanonicalizedBase(""));
+		Assert.assertNull(UrlCanonicalizer.getCanonicalizedBase("\t\t"));
+
 		Assert.assertEquals("http://www.some-random-domain.com/abc.html", UrlCanonicalizer.getCanonicalizedBase("http://www.some-random-domain.com/abc.html#fragmentme?param2=value2&param1=value1"));
+
+		Assert.assertNull(UrlCanonicalizer.getCanonicalizedRoot(null));
+		Assert.assertNull(UrlCanonicalizer.getCanonicalizedRoot(""));
+		Assert.assertNull(UrlCanonicalizer.getCanonicalizedRoot("\t\t"));
+
 		Assert.assertEquals("http://www.some-random-domain.com", UrlCanonicalizer.getCanonicalizedRoot("http://www.some-random-domain.com/abc.html#fragmentme?param2=value2&param1=value1"));
 	}
 

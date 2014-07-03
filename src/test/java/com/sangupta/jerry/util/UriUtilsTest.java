@@ -21,6 +21,9 @@
 
 package com.sangupta.jerry.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -32,6 +35,23 @@ import org.junit.Test;
  *
  */
 public class UriUtilsTest {
+	
+	@Test
+	public void testEncodeURIComponent() {
+		Assert.assertEquals(null, UriUtils.encodeURIComponent(null));
+		Assert.assertEquals("", UriUtils.encodeURIComponent(""));
+
+		Assert.assertEquals("hello%20world!", UriUtils.encodeURIComponent("hello world!"));
+	}
+	
+	@Test
+	public void testDecodeURIComponent() {
+		Assert.assertEquals(null, UriUtils.decodeURIComponent(null));
+		Assert.assertEquals("", UriUtils.decodeURIComponent(""));
+
+		Assert.assertEquals("hello world!", UriUtils.decodeURIComponent("hello%20world!"));
+		Assert.assertEquals("hello world!", UriUtils.decodeURIComponent("hello+world!"));
+	}
 	
 	@Test
 	public void testGetBaseUrl() {
@@ -52,12 +72,12 @@ public class UriUtilsTest {
 	}
 	
 	@Test
-	public void testExtractName() {
-		Assert.assertEquals("abc.html", UriUtils.extractName("http://www.sangupta.com/abc.html"));
-		Assert.assertEquals("abc.html", UriUtils.extractName("http://www.sangupta.com/abc.html?format=xml"));
-		Assert.assertEquals("abc.html", UriUtils.extractName("http://www.sangupta.com/abc.html?format=xml&text=help"));
-		Assert.assertEquals("abc.html", UriUtils.extractName("http://www.sangupta.com/abc.html?format=xml&text=help#anchorName"));
-		Assert.assertEquals("abc.html", UriUtils.extractName("http://www.sangupta.com/abc.html#anchorName?format=xml&text=help"));
+	public void testExtractFileName() {
+		Assert.assertEquals("abc.html", UriUtils.extractFileName("http://www.sangupta.com/abc.html"));
+		Assert.assertEquals("abc.html", UriUtils.extractFileName("http://www.sangupta.com/abc.html?format=xml"));
+		Assert.assertEquals("abc.html", UriUtils.extractFileName("http://www.sangupta.com/abc.html?format=xml&text=help"));
+		Assert.assertEquals("abc.html", UriUtils.extractFileName("http://www.sangupta.com/abc.html?format=xml&text=help#anchorName"));
+		Assert.assertEquals("abc.html", UriUtils.extractFileName("http://www.sangupta.com/abc.html#anchorName?format=xml&text=help"));
 	}
 
 	@Test
@@ -89,6 +109,9 @@ public class UriUtilsTest {
 	
 	@Test
 	public void testExtractPath() {
+		Assert.assertNull(UriUtils.extractPath(null));
+		Assert.assertNull(UriUtils.extractPath("")); 
+		
 		Assert.assertEquals("", UriUtils.extractPath("www.google.com"));
 		Assert.assertEquals("", UriUtils.extractPath("http://www.google.com"));
 		Assert.assertEquals("/", UriUtils.extractPath("www.google.com/"));
@@ -100,4 +123,44 @@ public class UriUtilsTest {
 		Assert.assertEquals("/abc.html", UriUtils.extractPath("http://www.google.com/abc.html#ab"));
 	}
 	
+	@Test
+	public void testExtractProtocol() {
+		Assert.assertNull(UriUtils.extractProtocol(null));
+		Assert.assertNull(UriUtils.extractProtocol(""));
+		
+		Assert.assertNull(UriUtils.extractProtocol("hello world"));
+		Assert.assertNull(UriUtils.extractProtocol("//abc.html"));
+		
+		Assert.assertEquals("http", UriUtils.extractProtocol("http://google.com"));
+		Assert.assertEquals("http", UriUtils.extractProtocol("HTTP://google.com"));
+		Assert.assertEquals("https", UriUtils.extractProtocol("https://google.com"));
+		Assert.assertEquals("xyz", UriUtils.extractProtocol("xyz://google.com"));
+	}
+
+	@Test
+	public void testAppearsValidUrl() {
+		Assert.assertFalse(UriUtils.appearsValidUrl(null));
+		Assert.assertFalse(UriUtils.appearsValidUrl(""));
+		Assert.assertFalse(UriUtils.appearsValidUrl("\t\t"));
+		Assert.assertFalse(UriUtils.appearsValidUrl("\n"));
+		Assert.assertFalse(UriUtils.appearsValidUrl("   "));
+		
+		Assert.assertTrue(UriUtils.appearsValidUrl("abc.html"));
+		Assert.assertFalse(UriUtils.appearsValidUrl("abc"));
+	}
+	
+	@Test
+	public void testUrlEncode() {
+		Map<String, String> map = null;
+		Assert.assertEquals("", UriUtils.urlEncode(map));
+		
+		map = new HashMap<String, String>(); 
+		Assert.assertEquals("", UriUtils.urlEncode(map));
+		
+		map.put("p1", "v1");
+		map.put("p2", "v2");
+		Assert.assertEquals("p2=v2&p1=v1", UriUtils.urlEncode(map));
+		
+		Assert.assertEquals("p2=v2&p1=v1", UriUtils.urlEncode(map, true));
+	}
 }

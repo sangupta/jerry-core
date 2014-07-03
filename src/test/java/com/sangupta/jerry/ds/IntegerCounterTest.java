@@ -55,6 +55,7 @@ public class IntegerCounterTest {
 		// test removal
 		Assert.assertEquals(0, counter.remove("test"));
 		Assert.assertEquals(0, counter.get("test"));
+		Assert.assertEquals(0, counter.remove("test"));
 		
 		// test for new counters with one of the methods
 		Assert.assertEquals(1, counter.increment("test1"));

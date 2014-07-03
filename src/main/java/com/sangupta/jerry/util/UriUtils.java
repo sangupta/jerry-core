@@ -23,8 +23,6 @@ package com.sangupta.jerry.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -192,7 +190,7 @@ public class UriUtils {
 	 * 
 	 * @return extracted filename from the URL
 	 */
-	public static String extractName(String url) {
+	public static String extractFileName(String url) {
 		int index1 = url.indexOf('?');
 		int index2 = url.indexOf('#');
 		
@@ -217,41 +215,6 @@ public class UriUtils {
 		url = url.substring(index + 1);
 		
 		return url;
-	}
-
-	/**
-	 * Extract the filename from the URL.
-	 * 
-	 * @param url
-	 *            the url from which the filename needs to be extracted
-	 * 
-	 * @return the extracted filename
-	 * 
-	 * @throws NullPointerException
-	 *             if the URL presented is <code>null</code>
-	 */
-	public static String extractFileName(String url) {
-		int index = url.lastIndexOf('/');
-		
-		if(index == -1) {
-			return null;
-		}
-		
-		url = url.substring(index + 1);
-		
-		// query param
-		int end = url.indexOf('?');
-		if(end != -1) {
-			url = url.substring(0, end);
-		}
-		
-		// anchor name
-		end = url.indexOf('#');
-		if(end != -1) {
-			url = url.substring(0, end);
-		}
-		
-		return url; 
 	}
 
 	/**
@@ -599,20 +562,12 @@ public class UriUtils {
 			return null;
 		}
 		
-		try {
-			URI uri = new URI(url);
-			return uri.getScheme();
-		} catch (URISyntaxException e) {
-			// eat up
-		}
-		
-		// we will try and fall back to approach of sub-strings
 		int index = url.indexOf("://");
 		if(index == -1) {
 			return null;
 		}
 		
-		return url.substring(0, index);	
+		return url.substring(0, index).toLowerCase();	
 	}
 
 	/**
@@ -748,15 +703,19 @@ public class UriUtils {
 	 *         <code>false</code> otherwise
 	 */
 	public static boolean appearsValidUrl(String url) {
-		if(AssertUtils.isEmpty(url)) {
+		try {
+			UrlManipulator manipulator = new UrlManipulator(url, true);
+			String host = manipulator.getHost();
+			if(host != null) {
+				if(host.indexOf('.') == -1) {
+					return false;
+				}
+			}
+			
+			return true;
+		} catch(IllegalArgumentException e) {
 			return false;
 		}
-		
-		if(!url.contains(".")) {
-			return false;
-		}
-		
-		return true;
 	}
 	
 }
