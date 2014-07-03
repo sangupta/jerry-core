@@ -27,6 +27,8 @@ import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 
+import com.sangupta.jerry.util.AssertUtils;
+
 /**
  * A {@link Properties} based {@link UserLocalStore} that makes use of
  * properties to store all properties.
@@ -42,6 +44,10 @@ public class PropertiesUserLocalStore extends AbstractUserLocalStore {
 	
 	public PropertiesUserLocalStore(String folderName, String fileName) {
 		super(folderName);
+		
+		if(AssertUtils.isEmpty(fileName)) {
+			throw new IllegalArgumentException("Filename cannot be null/empty");
+		}
 		
 		this.propertiesFile = new File(this.dataDirectory, fileName);
 		this.properties = new Properties();
@@ -72,7 +78,7 @@ public class PropertiesUserLocalStore extends AbstractUserLocalStore {
 
 	@Override
 	public void delete(String key) {
-		this.put(key, null);
+		this.properties.remove(key);
 	}
 
 }

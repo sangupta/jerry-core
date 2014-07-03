@@ -38,6 +38,20 @@ public interface UserLocalStore {
 	 * @return
 	 */
 	public String get(String property);
+	
+	/**
+	 * Return the value associated with the property if found, or the provided
+	 * default value.
+	 * 
+	 * @param property
+	 *            the property being looked for
+	 * 
+	 * @param defaultValue
+	 *            the default value
+	 * 
+	 * @return the actual value if found, or the default value
+	 */
+	public String get(String property, String defaultValue);
 
 	/**
 	 * Store the given value in the data-store.
