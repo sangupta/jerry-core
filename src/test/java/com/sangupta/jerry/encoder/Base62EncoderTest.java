@@ -52,6 +52,22 @@ public class Base62EncoderTest {
 				break;
 			}
 		}
+		
+		try { Base62Encoder.decode(null); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Base62Encoder.decode(""); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Base62Encoder.decode("abc++abc"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		
+		String expected = "";
+		long[] values = new long[5];
+		for(int index = 0; index < 5; index++) {
+			values[index] = (long) Math.random() * Long.MAX_VALUE;
+			if(index % 2 == 0) {
+				values[index] = 0 - values[index];
+			}
+			expected += Base62Encoder.encode(values[index]);
+		}
+		
+		Assert.assertEquals(expected, Base62Encoder.encode(values[0], values[1], values[2], values[3], values[4]));
 	}
 
 }
