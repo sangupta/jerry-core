@@ -21,11 +21,14 @@
 
 package com.sangupta.jerry.util;
 
+import java.security.GeneralSecurityException;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Mac;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 import com.sangupta.jerry.encoder.Base64Encoder;
@@ -430,4 +433,31 @@ public class HashUtils {
 		}
 	}
 
+	/**
+	 * Generate the PBKDF2-with-HMAC-SHA1 hash for the given signable string.
+	 * 
+	 * @param signable
+	 *            the string to be hashed
+	 * 
+	 * @param salt
+	 *            the salt to be used
+	 * 
+	 * @param numIterations
+	 *            the number of iterations to run
+	 * 
+	 * @param entropy
+	 *            the entropy to use
+	 * 
+	 * @return the byte-array representing the hash
+	 */
+	public static byte[] getPBKDF2(String signable, String salt, int numIterations, int entropy) {
+		// generate the hash
+		try {
+			PBEKeySpec spec = new PBEKeySpec(signable.toCharArray(), salt.getBytes(), numIterations, entropy);
+	        SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+	        return skf.generateSecret(spec).getEncoded();
+		} catch (GeneralSecurityException e) {
+			throw new RuntimeException("General Security Exception", e);
+		}
+	}
 }
