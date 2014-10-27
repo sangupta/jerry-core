@@ -48,14 +48,17 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 	 * @param folderName
 	 */
 	public AbstractUserLocalStore(String folderName) {
-		if(AssertUtils.isEmpty(folderName)) {
+		if(folderName != null && AssertUtils.isEmpty(folderName)) {
 			throw new IllegalArgumentException("Folder name cannot be empty/null");
 		}
 		
 		File userHome = new File(System.getProperty(SystemProperty.USER_HOME));
-		this.dataDirectory = new File(userHome, folderName);
-		
-		this.dataDirectory.mkdirs();
+		if(folderName != null) {
+			this.dataDirectory = new File(userHome, folderName);
+			this.dataDirectory.mkdirs();
+		} else {
+			this.dataDirectory = userHome;
+		}
 	}
 	
 	/**
