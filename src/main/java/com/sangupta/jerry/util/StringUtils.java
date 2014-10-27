@@ -54,6 +54,11 @@ public class StringUtils {
 	 * A blank string containing one blank white-space character.
 	 */
 	public static final String BLANK_STRING = " ";
+	
+	/**
+	 * A String[] array that is empty and contains no elements
+	 */
+	public static final String[] EMPTY_STRING_LIST = new String[] { };
 
 	/**
 	 * Defines the platform dependent line encoding
@@ -592,4 +597,63 @@ public class StringUtils {
 		return false;
 	}
 
+	/**
+	 * Merge the items into a single string separated by the given delimiter
+	 * 
+	 * @param items
+	 *            Items to be merged into a string
+	 * 
+	 * @param delimiter
+	 *            the character delimiter to be used
+	 * 
+	 * @return the merged string
+	 */
+	public static String merge(String[] items, char delimiter) {
+		if(AssertUtils.isEmpty(items)) {
+			return StringUtils.EMPTY_STRING;
+		}
+		
+		StringBuilder builder = new StringBuilder(1024);
+		for(int index = 0; index < items.length; index++) {
+			if(index > 0) {
+				builder.append(delimiter);
+			}
+			
+			builder.append(items[index]);
+		}
+		
+		return builder.toString();
+	}
+
+	/**
+	 * Merge the items into a single string separated by the given delimiter
+	 * 
+	 * @param items
+	 *            Items to be merged into a string
+	 * 
+	 * @param delimiter
+	 *            the string delimiter to be used
+	 * 
+	 * @return the merged string
+	 */
+	public static String merge(String[] items, String delimiter) {
+		if(AssertUtils.isEmpty(items)) {
+			return StringUtils.EMPTY_STRING;
+		}
+		
+		boolean addDelimiter = AssertUtils.isNotEmpty(delimiter);
+		
+		StringBuilder builder = new StringBuilder(1024);
+		for(int index = 0; index < items.length; index++) {
+			if(addDelimiter) {
+				if(index > 0) {
+					builder.append(delimiter);
+				}
+			}
+			
+			builder.append(items[index]);
+		}
+		
+		return builder.toString();
+	}
 }
