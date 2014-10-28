@@ -62,6 +62,36 @@ public class IntegerCounter {
 	}
 	
 	/**
+	 * Get or create a new counter. The default value of the new counter will be
+	 * <code>0</code>
+	 * 
+	 * @param name
+	 *            the name of the counter
+	 * 
+	 * @param initialValue
+	 *            the initial value to which the counter needs to be set
+	 * 
+	 * @return the current value of the counter
+	 */
+	public long get(final String name, final int initialValue) {
+		if(name == null) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
+		int[] values = counterMap.get(name);
+		if(values == null) {
+			int[] olderValues = counterMap.putIfAbsent(name, new int[] { initialValue });
+			if(olderValues != null) {
+				return olderValues[0];
+			}
+			
+			return initialValue;
+		}
+		
+		return values[0];
+	}
+	
+	/**
 	 * Remove a counter and return its current value.
 	 * 
 	 * @param name
@@ -126,6 +156,35 @@ public class IntegerCounter {
 		
 		values[0]--;
 		return values[0];
+	}
+	
+	/**
+	 * Set the counter to the desired value.
+	 * 
+	 * @param name
+	 *            the name of the counter to set
+	 * 
+	 * @param value
+	 *            the value to which the counter needs to be set
+	 * 
+	 */
+	public void set(String name, int value) {
+		if(name == null) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
+		int[] values = counterMap.get(name);
+		if(values != null) {
+			values[0] = value;
+			return;
+		}
+		
+		int[] olderValues = counterMap.putIfAbsent(name, new int[] { value });
+		if(olderValues == null) {
+			return;
+		}
+		
+		olderValues[0] = value;
 	}
 	
 }

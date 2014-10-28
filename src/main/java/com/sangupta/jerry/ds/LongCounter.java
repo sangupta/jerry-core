@@ -48,6 +48,10 @@ public class LongCounter {
 	 * @return the current value of the counter
 	 */
 	public long get(String name) {
+		if(name == null) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
 		long[] values = counterMap.get(name);
 		if(values == null) {
 			long[] olderValues = counterMap.putIfAbsent(name, new long[] { 0 });
@@ -62,6 +66,36 @@ public class LongCounter {
 	}
 	
 	/**
+	 * Get or create a new counter. The default value of the new counter will be
+	 * <code>0</code>
+	 * 
+	 * @param name
+	 *            the name of the counter
+	 * 
+	 * @param initialValue
+	 *            the initial value to which the counter needs to be set
+	 * 
+	 * @return the current value of the counter
+	 */
+	public long get(final String name, final long initialValue) {
+		if(name == null) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
+		long[] values = counterMap.get(name);
+		if(values == null) {
+			long[] olderValues = counterMap.putIfAbsent(name, new long[] { initialValue });
+			if(olderValues != null) {
+				return olderValues[0];
+			}
+			
+			return initialValue;
+		}
+		
+		return values[0];
+	}
+	
+	/**
 	 * Remove a counter and return its current value.
 	 * 
 	 * @param name
@@ -70,6 +104,10 @@ public class LongCounter {
 	 * @return the current value of the counter
 	 */
 	public long remove(String name) {
+		if(name == null) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
 		long[] values = counterMap.remove(name);
 		if(values == null) {
 			return 0;
@@ -88,6 +126,10 @@ public class LongCounter {
 	 * @return the current value of the counter
 	 */
 	public long increment(String name) {
+		if(name == null) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
 		long[] values = counterMap.get(name);
 		if(values == null) {
 			long[] olderValues = counterMap.putIfAbsent(name, new long[] { 1 });
@@ -113,6 +155,10 @@ public class LongCounter {
 	 * @return the current value of the counter
 	 */
 	public long decrement(String name) {
+		if(name == null) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
 		long[] values = counterMap.get(name);
 		if(values == null) {
 			long[] olderValues = counterMap.putIfAbsent(name, new long[] { -1 });
@@ -126,6 +172,35 @@ public class LongCounter {
 		
 		values[0]--;
 		return values[0];
+	}
+
+	/**
+	 * Set the counter to the desired value.
+	 * 
+	 * @param name
+	 *            the name of the counter to set
+	 * 
+	 * @param value
+	 *            the value to which the counter needs to be set
+	 * 
+	 */
+	public void set(String name, long value) {
+		if(name == null) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
+		long[] values = counterMap.get(name);
+		if(values != null) {
+			values[0] = value;
+			return;
+		}
+		
+		long[] olderValues = counterMap.putIfAbsent(name, new long[] { value });
+		if(olderValues == null) {
+			return;
+		}
+		
+		olderValues[0] = value;
 	}
 	
 }
