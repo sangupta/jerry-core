@@ -202,6 +202,30 @@ public class StringUtils {
  	}
 	
 	/**
+	 * Parse and return the short value of the given string. If the string cannot
+	 * be parsed, returns the default value provided
+	 * 
+	 * @param string
+	 *            the string to be parsed
+	 * 
+	 * @param defaultValue
+	 *            the value to be returned if parsing string fails
+	 * 
+	 * @return the 32-bit value of the string
+	 */
+	public static short getShortValue(String string, short defaultValue) {
+		try {
+			if(AssertUtils.isNotEmpty(string)) {
+				return Short.parseShort(string);
+			}
+		} catch(NumberFormatException e) {
+			LOGGER.debug("error getting integer from string: " + string, e);
+		}
+		
+		return defaultValue;
+	}
+	
+	/**
 	 * Parse and return the int value of the given string. If the string cannot
 	 * be parsed, returns the default value provided
 	 * 
