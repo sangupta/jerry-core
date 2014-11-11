@@ -22,6 +22,7 @@
 package com.sangupta.jerry.util;
 
 import java.nio.charset.Charset;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -679,5 +680,18 @@ public class StringUtils {
 		}
 		
 		return builder.toString();
+	}
+	
+	/**
+	 * Return a string containing the same character the given number of times.
+	 * 
+	 * @param ch
+	 * @param times
+	 * @return
+	 */
+	public static String repeat(char ch, int times) {
+		char[] array = new char[times];
+		Arrays.fill(array, ch);
+		return new String(array);
 	}
 }
