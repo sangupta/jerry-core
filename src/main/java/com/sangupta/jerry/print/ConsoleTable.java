@@ -58,7 +58,7 @@ public class ConsoleTable {
 	 * 
 	 * @param columnNames
 	 */
-	public void addHeaderRow(String... columnNames) {
+	public ConsoleTableRow addHeaderRow(String... columnNames) {
 		if(this.headerRow != null) {
 			throw new IllegalStateException("Table already has a header row");
 		}
@@ -66,6 +66,7 @@ public class ConsoleTable {
 		this.headerRow = new ConsoleTableRow(columnNames);
 		
 		updateColumnSizes(this.headerRow);
+		return this.headerRow;
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class ConsoleTable {
 	 * 
 	 * @param objects
 	 */
-	public void addRow(Object... objects) {
+	public ConsoleTableRow addRow(Object... objects) {
 		if(AssertUtils.isEmpty(objects)) {
 			throw new IllegalArgumentException("Nothing to add for row");
 		}
@@ -82,6 +83,7 @@ public class ConsoleTable {
 		this.rows.add(row);
 		
 		updateColumnSizes(row);
+		return row;
 	}
 
 	/**

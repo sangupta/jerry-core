@@ -67,8 +67,9 @@ public class ConsoleTableRow {
 		}
 	}
 
-	public void addColumn(String value) {
+	public ConsoleTableRow addColumn(String value) {
 		this.columns.add(value.trim());
+		return this;
 	}
 	
 	public int numColumns() {
