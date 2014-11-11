@@ -49,7 +49,7 @@ public class ConsoleTableRow {
 		}
 		
 		for(String columnValue : columnValues) {
-			this.columns.add(columnValue.trim());
+			this.columns.add(columnValue);
 		}
 	}
 
@@ -60,15 +60,15 @@ public class ConsoleTableRow {
 		
 		for(Object object : columnValues) {
 			if(object instanceof String) {
-				this.columns.add(((String) object).trim());
+				this.columns.add(((String) object));
 			} else {
-				this.columns.add(object.toString().trim());
+				this.columns.add(object.toString());
 			}
 		}
 	}
 
 	public ConsoleTableRow addColumn(String value) {
-		this.columns.add(value.trim());
+		this.columns.add(value);
 		return this;
 	}
 	
