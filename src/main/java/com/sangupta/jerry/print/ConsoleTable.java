@@ -39,9 +39,47 @@ import com.sangupta.jerry.util.StringUtils;
 public class ConsoleTable {
 	
 	/**
+	 * Layout options for the table
+	 * 
+	 * @author sangupta
+	 *
+	 */
+	public static enum ConsoleTableLayout {
+		
+		/**
+		 * Default option - run for the full line width
+		 * 
+		 */
+		FULL_WIDTH,
+		
+		/**
+		 * Strip the line when max size specified by user is encountered
+		 * 
+		 */
+		STRIPPED,
+		
+		/**
+		 * Convert the line to multi-line output
+		 * 
+		 */
+		MULTI_LINE;
+		
+	}
+
+	/**
+	 * The current layout for the 
+	 */
+	private ConsoleTableLayout layout;
+	
+	/**
 	 * The header row if specified
 	 */
 	private ConsoleTableRow headerRow;
+	
+	/**
+	 * String used to divide two columns of information
+	 */
+	private String columnSeparator = " | ";
 	
 	/**
 	 * All rows inside the table
@@ -52,6 +90,31 @@ public class ConsoleTable {
 	 * The column size of added rows including header
 	 */
 	private final List<MutableInt> columnSizes = new ArrayList<MutableInt>();
+	
+	/**
+	 * Holds column size as provided by user
+	 */
+	private final List<MutableInt> userSizes = new ArrayList<MutableInt>();
+	
+	/**
+	 * Default constructor
+	 */
+	public ConsoleTable() {
+		this.layout = ConsoleTableLayout.FULL_WIDTH;
+	}
+	
+	/**
+	 * Convenience constructor
+	 * 
+	 * @param layout
+	 */
+	public ConsoleTable(ConsoleTableLayout layout) {
+		if(layout == null) {
+			throw new IllegalArgumentException("Table layout cannot be null");
+		}
+		
+		this.layout = layout;
+	}
 
 	/**
 	 * Add a header row to the table
@@ -65,6 +128,7 @@ public class ConsoleTable {
 		
 		this.headerRow = new ConsoleTableRow(columnNames);
 		
+		updateColumnSizes(this.headerRow);
 		return this.headerRow;
 	}
 
@@ -81,6 +145,7 @@ public class ConsoleTable {
 		ConsoleTableRow row = new ConsoleTableRow(objects);
 		this.rows.add(row);
 		
+		updateColumnSizes(row);
 		return row;
 	}
 
@@ -122,18 +187,58 @@ public class ConsoleTable {
 	 */
 	private void displayRow(PrintStream out, ConsoleTableRow row) {
 		for(int index = 0; index < row.getColumns().size(); index++) {
-			String column = row.column(index);
+			out.print(this.columnSeparator); // prepend every table cell with a space as a separator
 			
-			out.print(' '); // prepend every table cell with a space as a separator
-			out.print(column);;
-			int size = column.length();
-			int delta = this.columnSizes.get(index).get() - size;
+			final String column = row.column(index);
+			final int colSize = getMaxColSize(index);
+			final int size = column.length();
+			final int delta = colSize - size;
+			
+			switch(this.layout) {
+				case FULL_WIDTH:
+					out.print(column);;
+					if(delta > 0) {
+						out.print(StringUtils.repeat(' ', delta));
+					}
+					
+					break;
 
-			if(delta > 0) {
-				out.print(StringUtils.repeat(' ', delta));
+				case MULTI_LINE:
+					break;
+				
+				case STRIPPED:
+					if(delta == 0) {
+						out.print(column);
+					} else {
+						if(delta < 0) {
+							out.print(column.substring(0, colSize));
+						} else {
+							out.print(column);;
+							out.print(StringUtils.repeat(' ', delta));
+						}
+					}
+					break;
+				
+				default:
+					throw new IllegalStateException("Layout has not yet been implemented");
 			}
 		}
 		out.println();
+	}
+
+	private int getMaxColSize(int index) {
+		int colSize = this.columnSizes.get(index).get();
+		int userSize = 0;
+		
+		if(index < this.userSizes.size()) {
+			userSize = this.userSizes.get(index).get();
+		}
+		
+		if(userSize > 0) {
+			return userSize;
+		}
+		
+		return colSize;
 	}
 
 	/**
@@ -150,6 +255,64 @@ public class ConsoleTable {
 				this.columnSizes.get(index).setIfMax(size);
 			}
 		}
+	}
+	
+	/**
+	 * Return the number of columns inside the table
+	 * 
+	 * @return
+	 */
+	public int numColumns() {
+		return this.columnSizes.size();
+	}
+	
+	/**
+	 * Return the column size for the column.
+	 * 
+	 * @param index
+	 * @return
+	 */
+	public int getColumnSize(int index) {
+		return this.columnSizes.get(index).get();
+	}
+	
+	/**
+	 * Change the column separator to be used.
+	 * 
+	 * @param separator
+	 */
+	public void setColumnSeparator(String separator) {
+		if(AssertUtils.isEmpty(separator)) {
+			throw new IllegalArgumentException("Column separator cannot be null/empty");
+		}
+		
+		this.columnSeparator = separator;
+	}
+	
+	/**
+	 * 
+	 * @param index
+	 * @param size
+	 */
+	public void setColumnSize(final int index, final int size) {
+		while(this.userSizes.size() <= index) {
+			this.userSizes.add(new MutableInt());
+		}
+		
+		this.userSizes.get(index).set(size);
+	}
+	
+	// Usual accessors follow
+
+	/**
+	 * @param layout the layout to set
+	 */
+	public void setLayout(ConsoleTableLayout layout) {
+		if(layout == null) {
+			throw new IllegalArgumentException("Table layout cannot be null");
+		}
+		
+		this.layout = layout;
 	}
 
 }
