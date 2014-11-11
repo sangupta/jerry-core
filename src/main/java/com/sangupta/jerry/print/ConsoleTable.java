@@ -155,27 +155,47 @@ public class ConsoleTable {
 	 * @param out
 	 */
 	public void write(PrintStream out) {
-		// update column sizes
+		// update column sizes again
+		// as we may have added columns from outside
 		if(this.headerRow != null) {
 			updateColumnSizes(this.headerRow);
 		}
 		for(ConsoleTableRow row : this.rows) {
 			updateColumnSizes(row);
 		}
+
+		// check for multi-line
+//		boolean multiLineRequired = false;
+//		if(this.layout == ConsoleTableLayout.MULTI_LINE) {
+//			// check if actually need a multi-line output
+//			// this will be where the line length is more than user-specified length
+//			for(int index = 0; index < this.columnSizes.size(); index++) {
+//				int colSize = this.columnSizes.get(index).get();
+//				int maxSize = this.getMaxColSize(index);
+//				
+//				if(maxSize > colSize) {
+//					multiLineRequired = true;
+//					break;
+//				}
+//			}
+//		}
+//		
+		ConsoleTableLayout layout = this.layout;
 		
 		// output header row
 		if(this.headerRow != null) {
-			this.displayRow(out, this.headerRow);
+			this.displayRow(layout, out, this.headerRow);
 			
 			ConsoleTableRow separator = new ConsoleTableRow();
 			for(int index = 0; index < this.columnSizes.size(); index++) {
-				separator.addColumn(StringUtils.repeat('-', this.columnSizes.get(index).get()));
+				separator.addColumn(StringUtils.repeat('-', this.getMaxColSize(index)));
 			}
-			this.displayRow(out, separator);
+			this.displayRow(layout, out, separator);
 		}
 		
+		// output all rows one-by-one
 		for(ConsoleTableRow row : this.rows) {
-			this.displayRow(out, row);
+			this.displayRow(layout, out, row);
 		}
 	}
 	
@@ -185,7 +205,10 @@ public class ConsoleTable {
 	 * @param out
 	 * @param row
 	 */
-	private void displayRow(PrintStream out, ConsoleTableRow row) {
+	private void displayRow(final ConsoleTableLayout layout, final PrintStream out, final ConsoleTableRow row) {
+		final ConsoleTableRow multiLineSplitRow = new ConsoleTableRow();
+		
+		boolean lineWasSplit = false;
 		for(int index = 0; index < row.getColumns().size(); index++) {
 			out.print(this.columnSeparator); // prepend every table cell with a space as a separator
 			
@@ -194,7 +217,7 @@ public class ConsoleTable {
 			final int size = column.length();
 			final int delta = colSize - size;
 			
-			switch(this.layout) {
+			switch(layout) {
 				case FULL_WIDTH:
 					out.print(column);;
 					if(delta > 0) {
@@ -204,6 +227,23 @@ public class ConsoleTable {
 					break;
 
 				case MULTI_LINE:
+					if(delta < 0) {
+						// now break this line into two and push suffix-split to multiLineRows
+						// we will output them at the end again
+						String split = column.substring(0, colSize);
+						multiLineSplitRow.addColumn(column.substring(colSize));
+						lineWasSplit = true;
+						
+						// output the split prefix
+						out.print(split);
+					} else {
+						multiLineSplitRow.addColumn("");
+						out.print(column);;
+						
+						if(delta > 0) {
+							out.print(StringUtils.repeat(' ', delta));
+						}
+					}
 					break;
 				
 				case STRIPPED:
@@ -224,12 +264,20 @@ public class ConsoleTable {
 			}
 		}
 		out.println();
+		
+		// any additional rows to be written again
+		if(lineWasSplit) {
+			displayRow(layout, out, multiLineSplitRow);
+		}
 	}
 
 	private int getMaxColSize(int index) {
 		int colSize = this.columnSizes.get(index).get();
-		int userSize = 0;
+		if(this.layout == ConsoleTableLayout.FULL_WIDTH) {
+			return colSize;
+		}
 		
+		int userSize = 0;
 		if(index < this.userSizes.size()) {
 			userSize = this.userSizes.get(index).get();
 		}
