@@ -230,8 +230,22 @@ public class ConsoleTable {
 					if(delta < 0) {
 						// now break this line into two and push suffix-split to multiLineRows
 						// we will output them at the end again
-						String split = column.substring(0, colSize);
-						multiLineSplitRow.addColumn(column.substring(colSize));
+						// check for new line before colSize
+						int splitPosition = colSize;
+						
+						// check for new line before
+						int search = StringUtils.lastIndexBefore(column, "\n", colSize);
+						if(search > 0 && search < colSize) {
+							splitPosition = search;
+						} else {
+							search = StringUtils.lastIndexBefore(column, " ", colSize);
+							if(search > 0) {
+								splitPosition = search;
+							}
+						}
+						
+						String split = column.substring(0, splitPosition);
+						multiLineSplitRow.addColumn(column.substring(splitPosition));
 						lineWasSplit = true;
 						
 						// output the split prefix

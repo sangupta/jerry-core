@@ -511,6 +511,44 @@ public class StringUtils {
 		return string.lastIndexOf(searchString);
 	}
 	
+	public static int lastIndexBefore(String string, String searchString, int maxSuffix) {
+		if(AssertUtils.isEmpty(string)) {
+			return -1;
+		}
+		
+		if(AssertUtils.isEmpty(searchString)) {
+			return -1;
+		}
+		
+		if(maxSuffix == -1) {
+			return string.lastIndexOf(searchString);
+		}
+		
+		maxSuffix = maxSuffix - searchString.length() + 1;
+		
+		int start = -2;
+		int index = -1;
+		do {
+			index = string.indexOf(searchString, start + 1);
+			if(index == -1) {
+				break;
+			}
+			
+			if(index >= maxSuffix) {
+				index = start;
+				break;
+			}
+			
+			start = index;
+		} while(true);
+		
+		if(start < 0) {
+			return -1;
+		}
+		
+		return start;
+	}
+	
 	/**
 	 * Find the nth index of a string-part inside another string.
 	 * 
