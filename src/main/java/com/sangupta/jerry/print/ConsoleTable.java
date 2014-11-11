@@ -65,7 +65,6 @@ public class ConsoleTable {
 		
 		this.headerRow = new ConsoleTableRow(columnNames);
 		
-		updateColumnSizes(this.headerRow);
 		return this.headerRow;
 	}
 
@@ -82,7 +81,6 @@ public class ConsoleTable {
 		ConsoleTableRow row = new ConsoleTableRow(objects);
 		this.rows.add(row);
 		
-		updateColumnSizes(row);
 		return row;
 	}
 
@@ -92,6 +90,14 @@ public class ConsoleTable {
 	 * @param out
 	 */
 	public void write(PrintStream out) {
+		// update column sizes
+		if(this.headerRow != null) {
+			updateColumnSizes(this.headerRow);
+		}
+		for(ConsoleTableRow row : this.rows) {
+			updateColumnSizes(row);
+		}
+		
 		// output header row
 		if(this.headerRow != null) {
 			this.displayRow(out, this.headerRow);
@@ -122,8 +128,10 @@ public class ConsoleTable {
 			out.print(column);;
 			int size = column.length();
 			int delta = this.columnSizes.get(index).get() - size;
-			
-			out.print(StringUtils.repeat(' ', delta));
+
+			if(delta > 0) {
+				out.print(StringUtils.repeat(' ', delta));
+			}
 		}
 		out.println();
 	}
