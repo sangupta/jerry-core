@@ -690,6 +690,14 @@ public class StringUtils {
 	 * @return
 	 */
 	public static String repeat(char ch, int times) {
+		if(times <= 0) {
+			throw new IllegalArgumentException("Length cannot be less than or equal to zero");
+		}
+		
+		if(times == 1) {
+			return String.valueOf(ch);
+		}
+		
 		char[] array = new char[times];
 		Arrays.fill(array, ch);
 		return new String(array);
