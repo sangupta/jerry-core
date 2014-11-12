@@ -21,6 +21,8 @@
 
 package com.sangupta.jerry.store;
 
+import java.util.List;
+
 /**
  * Contract for a data store that intends to store
  * key-value pairs on behalf of the user in the user's 
@@ -30,7 +32,7 @@ package com.sangupta.jerry.store;
  *
  */
 public interface UserLocalStore {
-
+	
 	/**
 	 * Read the value of the data-store.
 	 * 
@@ -38,6 +40,13 @@ public interface UserLocalStore {
 	 * @return
 	 */
 	public String get(String property);
+	
+	/**
+	 * Return the name of all keys within the data-store
+	 * 
+	 * @return
+	 */
+	public List<String> getAllKeys();
 	
 	/**
 	 * Return the value associated with the property if found, or the provided

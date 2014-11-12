@@ -23,7 +23,10 @@ package com.sangupta.jerry.store;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 
@@ -65,20 +68,41 @@ public class PropertiesUserLocalStore extends AbstractUserLocalStore {
 	public String get(String property) {
 		return this.properties.getProperty(property);
 	}
+	
+	@Override
+	public List<String> getAllKeys() {
+		List<String> list = new ArrayList<String>();
+		
+		Set<Object> set = this.properties.keySet();
+		for(Object o : set) {
+			list.add(o.toString());
+		}
+		
+		return list;
+	}
 
 	@Override
 	public void put(String key, String property) {
 		this.properties.put(key, property);
-		try {
-			this.properties.store(FileUtils.openOutputStream(this.propertiesFile, false), "Updating from Properties data-store");
-		} catch (IOException e) {
-			throw new RuntimeException("Unable to write to the data store", e);
-		}
+		save();
 	}
 
 	@Override
 	public void delete(String key) {
 		this.properties.remove(key);
+		save();
+	}
+	
+	/**
+	 * Save the properties back to underlying storage
+	 * 
+	 */
+	private void save() {
+		try {
+			this.properties.store(FileUtils.openOutputStream(this.propertiesFile, false), " Updating from Properties data-store");
+		} catch (IOException e) {
+			throw new RuntimeException("Unable to write to the data store", e);
+		}
 	}
 
 }
