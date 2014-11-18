@@ -55,9 +55,30 @@ The library can be downloaded from Maven Central using:
 Changelog
 ---------
 
-**Current Development**
+**1.3.0**
 
-* Added CheckUtils for checking assertions and throwing appropriate exceptions when they are not met
+* Updated `UserLocalStore` to allow files to be created in user's home directory
+* Added method to `StringUtils` to merge an array using a given delimiter
+* Added `DesktopUtils` to open a URL in system browser if available
+* Added `StringUtils.getShortValue()` method
+* Updated `IntegerCounter` and `LongCounter` to reset its value, or create a new one with a given initial value
+* Upgraded `Maven` dependencies to latest
+
+**1.2.1**
+
+* Added unit test cases for `UserLocalStore`, `Base62Encoder`
+* Added method in `HashUtils` to hash using `PBKDF2-HMAC-SHA1`
+* Added `CryptoUtils` to encrypt/decrypt text using `AES-256`
+* Added `EnvironmentUtils` to read a given property first by reading Java property, and then using System properties
+* Updated `GsonUtils` to serialize time as `long` epoch values to preserve milli-seconds
+
+**1.2.0**
+
+* Added `UserLocalStore` and corresponding implementations to maintain a user-specific data store
+* Added constants interface for popular system properties in `SystemProperty`
+* Added more utility methods to `AssertUtils` and corresponding unit test cases
+* Added `CheckUtils` for checking assertions and throwing appropriate exceptions when they are not met
+* Added code coverage using `cobertura` maven plugin
 
 **1.1.0**
 
