@@ -55,6 +55,13 @@ The library can be downloaded from Maven Central using:
 Changelog
 ---------
 
+**Current Development**
+
+* Added `StringUtils.repeat` to create a `String` of repeatable characters
+* Added `MutableInt` to create an object instance whose value can be changed as desired
+* Added `ConsoleTable` class to output display to `System.out` or `Console` implementations in a proper tabular format. Can be used to output data to plain text files - three implementations are available, `full-width`, `width-curtail` and `multi-line`
+* Updated `UserLocalStore` to fetch a list of all keys stored within the store
+
 **1.3.0**
 
 * Updated `UserLocalStore` to allow files to be created in user's home directory
