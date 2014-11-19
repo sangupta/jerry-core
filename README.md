@@ -12,6 +12,55 @@ application.
 
 For more information on the project, refer to https://github.com/sangupta/jerry project.
 
+Changelog
+---------
+
+**Current Development**
+
+* Added `StringUtils.repeat` to create a `String` of repeatable characters
+* Added `MutableInt` to create an object instance whose value can be changed as desired
+* Added `ConsoleTable` class to output display to `System.out` or `Console` implementations in a proper tabular format. Can be used to output data to plain text files - three implementations are available, `full-width`, `width-curtail` and `multi-line`
+* Updated `UserLocalStore` to fetch a list of all keys stored within the store
+
+**1.3.0**
+
+* Updated `UserLocalStore` to allow files to be created in user's home directory
+* Added method to `StringUtils` to merge an array using a given delimiter
+* Added `DesktopUtils` to open a URL in system browser if available
+* Added `StringUtils.getShortValue()` method
+* Updated `IntegerCounter` and `LongCounter` to reset its value, or create a new one with a given initial value
+* Upgraded `Maven` dependencies to latest
+
+**1.2.1**
+
+* Added unit test cases for `UserLocalStore`, `Base62Encoder`
+* Added method in `HashUtils` to hash using `PBKDF2-HMAC-SHA1`
+* Added `CryptoUtils` to encrypt/decrypt text using `AES-256`
+* Added `EnvironmentUtils` to read a given property first by reading Java property, and then using System properties
+* Updated `GsonUtils` to serialize time as `long` epoch values to preserve milli-seconds
+
+**1.2.0**
+
+* Added `UserLocalStore` and corresponding implementations to maintain a user-specific data store
+* Added constants interface for popular system properties in `SystemProperty`
+* Added more utility methods to `AssertUtils` and corresponding unit test cases
+* Added `CheckUtils` for checking assertions and throwing appropriate exceptions when they are not met
+* Added code coverage using `cobertura` maven plugin
+
+**1.1.0**
+
+* Added `IntegerCounter` to keep track of multiple named counters with max integer capacity
+* Added `LongCounter` to keep track of multiple named counters with max long capacity
+* Added `HttpMimeType` constants for common response types
+* Added numerous utility methods to `StringUtils`
+* Removed dependency on `Character.isAlphabetic()` from JDK 7
+* Fixed bug in `UrlManipulator` when URL path is not present
+* Updated javadocs
+
+**1.0.0**
+
+* Initial release
+
 Features
 --------
 
@@ -48,30 +97,9 @@ The library can be downloaded from Maven Central using:
 <dependency>
     <groupId>com.sangupta</groupId>
     <artifactId>jerry-core</artifactId>
-    <version>1.1.0</version>
+    <version>1.3.0</version>
 </dependency>
 ```
-
-Changelog
----------
-
-**Current Development**
-
-* Added CheckUtils for checking assertions and throwing appropriate exceptions when they are not met
-
-**1.1.0**
-
-* Added IntegerCounter to keep track of multiple named counters with max integer capacity
-* Added LongCounter to keep track of multiple named counters with max long capacity
-* Added HttpMimeType constants for common response types
-* Added numerous utility methods to StringUtils
-* Removed dependency on Character.isAlphabetic() from JDK 7
-* Fixed bug in UrlManipulator when URL path is not present
-* Updated javadocs
-
-**1.0.0**
-
-* Initial release
 
 Versioning
 ----------
