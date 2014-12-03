@@ -487,7 +487,12 @@ public class UriUtils {
 		
 		int start = url.indexOf("://");
 		if(start == -1) {
-			return null;
+			// we must check if URL startwith //
+			if(!url.startsWith("//")) {
+				return null;
+			}
+			
+			start = -1; // -1 because we add 3 down below considering we matched :// and not //
 		}
 		
 		start += 3;
