@@ -8,9 +8,14 @@ Common Java functionality for core functionality.
 
 `jerry-core` is a module library for the uber `jerry` library project. This module provides core functionality 
 as static helper utility classes that can help reduce the boiler plate code when making even a simple Java
-application.
+application. 
 
-For more information on the project, refer to https://github.com/sangupta/jerry project.
+The core idea of the project is to include all basic functionality that is always used in a normal project. The project
+does not aim to replace the `Apache Commons` framework but onyl extend it to include the otherwise useful functions and
+methods that are missing in there.
+
+_History:_ Ages ago, the project forked from the `https://github.com/sangupta/jerry` project, when all utility classes were extracted
+out into the `jerry-core` project.
 
 Changelog
 ---------
