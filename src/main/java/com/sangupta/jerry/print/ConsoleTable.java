@@ -21,13 +21,9 @@
 
 package com.sangupta.jerry.print;
 
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.commons.io.output.WriterOutputStream;
 
 import com.sangupta.jerry.ds.MutableInt;
 import com.sangupta.jerry.util.AssertUtils;
@@ -78,7 +74,7 @@ public class ConsoleTable {
 	/**
 	 * The header row if specified
 	 */
-	private ConsoleTableRow headerRow;
+	ConsoleTableRow headerRow;
 	
 	/**
 	 * String used to divide two columns of information
@@ -88,7 +84,7 @@ public class ConsoleTable {
 	/**
 	 * All rows inside the table
 	 */
-	private final List<ConsoleTableRow> rows = new ArrayList<ConsoleTableRow>();
+	final List<ConsoleTableRow> rows = new ArrayList<ConsoleTableRow>();
 	
 	/**
 	 * The column size of added rows including header
@@ -151,67 +147,6 @@ public class ConsoleTable {
 		
 		updateColumnSizes(row);
 		return row;
-	}
-	
-	/**
-	 * Output the data of the table as a JSON
-	 * 
-	 * @param out
-	 */
-	public void writeJson(PrintWriter writer) {
-		OutputStream os = new WriterOutputStream(writer);
-		PrintStream ps = new PrintStream(os);
-		try {
-			writeJson(ps);
-		} finally {
-			ps.close();
-		}
-	}
-
-	/**
-	 * Output the data of the table as a JSON
-	 * 
-	 * @param out
-	 */
-	public void writeJson(PrintStream out) {
-		if(out == null) {
-			throw new IllegalArgumentException("PrintStream to write to cannot be null");
-		}
-		
-		if(this.headerRow == null) {
-			throw new IllegalStateException("Header row must be present for conversion to JSON");
-		}
-		
-		List<String> names = new ArrayList<String>();
-		for(int index = 0; index < this.headerRow.numColumns(); index++) {
-			String name = this.headerRow.column(index);
-			
-			name = StringUtils.convertToJsonPropertyName(name);
-			names.add(name);
-		}
-		
-		// now start iterating over each row
-		out.print("[\n");
-		for(int rowIndex = 0; rowIndex < this.rows.size(); rowIndex++) {
-			ConsoleTableRow row = this.rows.get(rowIndex);
-			
-			if(rowIndex > 0) {
-				out.print(", ");
-			}
-			out.print("{\n");
-			for(int index = 0; index < this.headerRow.numColumns(); index++) {
-				if(index > 0) {
-					out.print(", ");
-				}
-				out.print("\"");
-				out.print(names.get(index));
-				out.print("\" : \"");
-				out.print(row.column(index));
-				out.print("\"\n");
-			}
-			out.print("}\n");
-		}
-		out.print("]");
 	}
 	
 	/**

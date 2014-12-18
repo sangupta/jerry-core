@@ -743,7 +743,7 @@ public class StringUtils {
 	
 	/**
 	 * Convert the property name to JSON valid property name. Convert all
-	 * illegal characters to 
+	 * illegal characters to underscore.
 	 * 
 	 * @param name
 	 * @return
@@ -754,6 +754,25 @@ public class StringUtils {
 			char c = chars[index];
 			if(!(('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9') || (c == '_') || (c == '-'))) {
 				chars[index] = '_';
+			}
+		}
+		
+		return new String(chars);
+	}
+	
+	/**
+	 * Convert the property name to XML valid property name. Convert all
+	 * illegal characters to hyphen.
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public static String convertToXmlPropertyName(String name) {
+		char[] chars = name.toCharArray();
+		for(int index = 0; index < chars.length; index++) {
+			char c = chars[index];
+			if(!(('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9') || (c == '_') || (c == '-'))) {
+				chars[index] = '-';
 			}
 		}
 		
