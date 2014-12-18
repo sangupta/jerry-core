@@ -740,4 +740,24 @@ public class StringUtils {
 		Arrays.fill(array, ch);
 		return new String(array);
 	}
+	
+	/**
+	 * Convert the property name to JSON valid property name. Convert all
+	 * illegal characters to 
+	 * 
+	 * @param name
+	 * @return
+	 */
+	public static String convertToJsonPropertyName(String name) {
+		char[] chars = name.toCharArray();
+		for(int index = 0; index < chars.length; index++) {
+			char c = chars[index];
+			if(!(('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z') || ('0' <= c && c <= '9') || (c == '_') || (c == '-'))) {
+				chars[index] = '_';
+			}
+		}
+		
+		return new String(chars);
+	}
+	
 }

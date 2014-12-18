@@ -304,5 +304,16 @@ public class StringUtilsTest {
 		Assert.assertEquals("onetwothree", StringUtils.listToString(list, null));
 		Assert.assertEquals("onetwothree", StringUtils.listToString(list, ""));
 	}
-	
+
+	@Test
+	public void testConvertToJsonPropertyName() {
+		Assert.assertEquals("one", StringUtils.convertToJsonPropertyName("one"));
+		Assert.assertEquals("one-two", StringUtils.convertToJsonPropertyName("one-two"));
+		Assert.assertEquals("one_two", StringUtils.convertToJsonPropertyName("one_two"));
+		Assert.assertEquals("one_two", StringUtils.convertToJsonPropertyName("one two"));
+		Assert.assertEquals("one_two", StringUtils.convertToJsonPropertyName("one)two"));
+		Assert.assertEquals("one_two", StringUtils.convertToJsonPropertyName("one$two"));
+		Assert.assertEquals("one-2", StringUtils.convertToJsonPropertyName("one-2"));
+		Assert.assertEquals("one_2", StringUtils.convertToJsonPropertyName("one$2"));
+	}
 }
