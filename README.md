@@ -8,17 +8,26 @@ Common Java functionality for core functionality.
 
 `jerry-core` is a module library for the uber `jerry` library project. This module provides core functionality 
 as static helper utility classes that can help reduce the boiler plate code when making even a simple Java
-application.
+application. 
 
-For more information on the project, refer to https://github.com/sangupta/jerry project.
+The core idea of the project is to include all basic functionality that is always used in a normal project. The project
+does not aim to replace the `Apache Commons` framework but onyl extend it to include the otherwise useful functions and
+methods that are missing in there.
+
+_History:_ Ages ago, the project forked from the `https://github.com/sangupta/jerry` project, when all utility classes were extracted
+out into the `jerry-core` project.
 
 Changelog
 ---------
 
 **Current Development**
 
+**1.4.0**
+
+* Fixed a critical bug in `UriUtils.extractHost` - when the URL starts with `//` the method was throwing an NPE - which is now fixed and it returns the correct hostname
 * Added `StringUtils.repeat` to create a `String` of repeatable characters
 * Added `MutableInt` to create an object instance whose value can be changed as desired
+* Added `MutableDouble`, `MutableFloat` and `MutableLong` on the lines of `MutableInt`
 * Added `ConsoleTable` class to output display to `System.out` or `Console` implementations in a proper tabular format. Can be used to output data to plain text files - three implementations are available, `full-width`, `width-curtail` and `multi-line`
 * Updated `UserLocalStore` to fetch a list of all keys stored within the store
 
@@ -97,7 +106,7 @@ The library can be downloaded from Maven Central using:
 <dependency>
     <groupId>com.sangupta</groupId>
     <artifactId>jerry-core</artifactId>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
 </dependency>
 ```
 
