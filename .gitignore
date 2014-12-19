@@ -39,3 +39,4 @@ target/*
 .settings/*
 /target
 com/sangupta/jerry/*
+/target/
