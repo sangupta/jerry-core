@@ -22,6 +22,8 @@ Changelog
 
 **Current Development**
 
+* Updated `GsonUtils` to allow for registeration of custom type adapters, and clear previously generated `Gson`s and/or custom adapters
+* Added `SimpleMultiMap` to store multiple values against a given key in a `HashMap`
 * Added `ApplicationContext` class to hold static values for every application
 * Added a `StringLineIterator` that iterates over a string line-by-line and holds start/end position of each line
 * Added functionality to dump `ConsoleTable` into `CSV`, `JSON` and `XML` formats

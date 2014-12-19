@@ -24,8 +24,8 @@ package com.sangupta.jerry.util;
 import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.gson.FieldNamingPolicy;
@@ -38,6 +38,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.sangupta.jerry.ds.SimpleMultiMap;
 
 /**
  * Cache class that holds various {@link Gson} instances based on their field
@@ -60,7 +61,7 @@ public class GsonUtils {
 	/**
 	 * Holds custom adapters
 	 */
-	private static final Map<Type, Object> customAdapters = new HashMap<Type, Object>(); 
+	private static final SimpleMultiMap<Type, Object> customAdapters = new SimpleMultiMap<Type, Object>(); 
 
 	/**
 	 * The date serializer to long
@@ -124,6 +125,43 @@ public class GsonUtils {
 		// return the created instance
 		return gson;
 	}
+	
+	/**
+	 * Register a new custom type adapter.
+	 * 
+	 * @param type
+	 * @param adapter
+	 */
+	public static void addCustomTypeAdapter(Type type, Object adapter) {
+		customAdapters.put(type, adapter);
+	}
+	
+	/**
+	 * Clear all previously generated {@link Gson} instances.
+	 * 
+	 */
+	public static void clearAllGsons() {
+		gsons.clear();
+	}
+	
+	/**
+	 * Remove the {@link Gson} instance against the given {@link FieldNamingPolicy}
+	 * so that it is regenerated again.
+	 * 
+	 * @param policy
+	 */
+	public static void clearGson(FieldNamingPolicy policy) {
+		gsons.remove(policy);
+	}
+	
+	/**
+	 * Remove all custom type adapters for the given type
+	 * 
+	 * @param type
+	 */
+	public static void removeTypeAdapters(Type type) {
+		customAdapters.remove(type);
+	}
 
 	/**
 	 * Register custom adapters for Gson
@@ -131,13 +169,18 @@ public class GsonUtils {
 	 * @param gsonBuilder
 	 */
 	private static void registerMoreTypeAdapters(GsonBuilder gsonBuilder) {
-		if(AssertUtils.isEmpty(customAdapters)) {
+		if(customAdapters == null || customAdapters.isEmpty()) {
 			return;
 		}
 		
-		Set<Entry<Type, Object>> set = customAdapters.entrySet();
-		for(Entry<Type, Object> adapter : set) {
-			gsonBuilder.registerTypeAdapter(adapter.getKey(), adapter.getValue());
+		Set<Type> keySet = customAdapters.keySet();
+		for(Type key : keySet) {
+			List<Object> values = customAdapters.getValues(key);
+			if(values != null) {
+				for(Object value : values) {
+					gsonBuilder.registerTypeAdapter(key, value);
+				}
+			}
 		}
 	}
 
