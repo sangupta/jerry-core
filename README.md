@@ -22,6 +22,9 @@ Changelog
 
 **Current Development**
 
+* Added functionality to dump `ConsoleTable` into `CSV`, `JSON` and `XML` formats
+
+
 **1.4.0**
 
 * Fixed a critical bug in `UriUtils.extractHost` - when the URL starts with `//` the method was throwing an NPE - which is now fixed and it returns the correct hostname
