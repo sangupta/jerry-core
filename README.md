@@ -22,6 +22,8 @@ Changelog
 
 **Current Development**
 
+* Added `ApplicationContext` class to hold static values for every application
+* Added a `StringLineIterator` that iterates over a string line-by-line and holds start/end position of each line
 * Added functionality to dump `ConsoleTable` into `CSV`, `JSON` and `XML` formats
 
 
