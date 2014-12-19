@@ -35,7 +35,7 @@ import junit.framework.Assert;
  * @author sangupta
  *
  */
-public class StringUtilsTest {
+public class TestStringUtils {
 
 	@Test
 	public void testSubstringAfter() {

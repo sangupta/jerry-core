@@ -30,7 +30,7 @@ import static org.junit.Assert.*;
  * @author sangupta
  * @added 13 July 2012
  */
-public class EqualUtilsTest {
+public class TestEqualUtils {
 	
 	@Test
 	public void testEqualsByteArray() {

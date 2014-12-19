@@ -33,7 +33,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class SecurityContextTest {
+public class TestSecurityContext {
 
 	@Test
 	public void testSecurityContext() {

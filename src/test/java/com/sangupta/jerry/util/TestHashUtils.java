@@ -28,7 +28,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class HashUtilsTest {
+public class TestHashUtils {
 	
 	private static final String TEXT = "Hello World!";
 	

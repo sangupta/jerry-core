@@ -34,7 +34,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class UriUtilsTest {
+public class TestUriUtils {
 	
 	@Test
 	public void testEncodeURIComponent() {

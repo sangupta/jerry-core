@@ -29,7 +29,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class UrlCanonicalizerTest {
+public class TestUrlCanonicalizer {
 	
 	@Test
 	public void testCanonicalization() {

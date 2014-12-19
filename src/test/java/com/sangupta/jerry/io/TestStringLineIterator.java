@@ -31,7 +31,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class StringLineIteratorTest {
+public class TestStringLineIterator {
 	
 	@Test
 	public void testNewLines() {

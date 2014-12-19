@@ -35,7 +35,7 @@ import static org.junit.Assert.*;
  * @author sangupta
  * @added 13 July 2012
  */
-public class AssertUtilsTest {
+public class TestAssertUtils {
 	
 	@Test
 	public void testIsEmptyString() {

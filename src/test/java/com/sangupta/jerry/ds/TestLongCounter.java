@@ -33,7 +33,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class LongCounterTest {
+public class TestLongCounter {
 	
 	@Test
 	public void testIntegerCounter() {

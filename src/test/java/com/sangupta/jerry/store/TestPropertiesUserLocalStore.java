@@ -33,7 +33,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class PropertiesUserLocalStoreTest {
+public class TestPropertiesUserLocalStore {
 	
 	@Test
 	public void testStore() {

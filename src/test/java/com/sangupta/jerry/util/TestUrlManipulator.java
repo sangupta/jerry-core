@@ -30,7 +30,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class UrlManipulatorTest {
+public class TestUrlManipulator {
 
 	@Test
 	public void testDecomposition() {

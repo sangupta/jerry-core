@@ -31,7 +31,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class Base62EncoderTest {
+public class TestBase62Encoder {
 
 	/**
 	 * Test encoding and decoding of first 100 million 
