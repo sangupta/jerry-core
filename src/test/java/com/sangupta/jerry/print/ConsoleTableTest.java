@@ -12,7 +12,7 @@ public class ConsoleTableTest {
 		table.addRow("user2", "user2@somedummydomain.com");
 		table.addRow("user3", "user3@somedummydomain.com");
 		
-		ConsoleTableWriter.writeXml(table, System.out, "items", "row");
+		ConsoleTableWriter.writeCsv(table, System.out);
 	}
 
 }

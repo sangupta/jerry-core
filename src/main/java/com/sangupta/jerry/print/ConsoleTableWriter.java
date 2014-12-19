@@ -163,7 +163,7 @@ public class ConsoleTableWriter {
 		}
 		
 		if(table.headerRow == null) {
-			throw new IllegalStateException("Header row must be present for conversion to JSON");
+			throw new IllegalStateException("Header row must be present for conversion to XML");
 		}
 		
 		List<String> names = new ArrayList<String>();
@@ -194,5 +194,65 @@ public class ConsoleTableWriter {
 			out.print("</" + rowTag + ">\n");
 		}
 		out.print("</" + parentXmlTag + ">\n");
+	}
+	
+	/**
+	 * Output the data of the table as a CSV
+	 * 
+	 * @param table
+	 *            the {@link ConsoleTable} to output
+	 * 
+	 * @param out
+	 *            the {@link PrintWriter} to write to
+	 */
+	public void writeCsv(ConsoleTable table, PrintWriter writer) {
+		OutputStream os = new WriterOutputStream(writer);
+		PrintStream ps = new PrintStream(os);
+		try {
+			writeCsv(table, ps);
+		} finally {
+			ps.close();
+		}
+	}
+
+	/**
+	 * Output the data of the table as a CSV
+	 * 
+	 * @param table
+	 *            the {@link ConsoleTable} to output
+	 * 
+	 * @param out
+	 *            the {@link PrintStream} to write to
+	 */
+	public static void writeCsv(ConsoleTable table, PrintStream out) {
+		if(table == null) {
+			throw new IllegalArgumentException("ConsoleTable cannot be null");
+		}
+		
+		if(out == null) {
+			throw new IllegalArgumentException("PrintStream to write to cannot be null");
+		}
+		
+		final int columns = table.headerRow.numColumns();
+		if(table.headerRow != null) {
+			for(int index = 0; index < columns; index++) {
+				if(index > 0) {
+					out.print(",");
+				}
+				out.print(table.headerRow.column(index));
+			}
+			out.print("\n");
+		}
+		
+		// each row
+		for(ConsoleTableRow row : table.rows) {
+			for(int index = 0; index < columns; index++) {
+				if(index > 0) {
+					out.print(",");
+				}
+				out.print(row.column(index));
+			}
+			out.print("\n");
+		}
 	}
 }
