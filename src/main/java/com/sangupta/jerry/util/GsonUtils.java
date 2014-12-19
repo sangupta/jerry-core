@@ -25,6 +25,8 @@ import java.lang.reflect.Type;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -54,8 +56,16 @@ public class GsonUtils {
 	 * Our holder for multiple instances
 	 */
 	private static final Map<FieldNamingPolicy, Gson> gsons = new HashMap<FieldNamingPolicy, Gson>();
+	
+	/**
+	 * Holds custom adapters
+	 */
+	private static final Map<Type, Object> customAdapters = new HashMap<Type, Object>(); 
 
-	private static final JsonSerializer<Date> serializer = new JsonSerializer<Date>() {
+	/**
+	 * The date serializer to long
+	 */
+	private static final JsonSerializer<Date> dateSerializer = new JsonSerializer<Date>() {
 
 		@Override
 		public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
@@ -64,7 +74,10 @@ public class GsonUtils {
 
 	};
 
-	private static final JsonDeserializer<Date> deserializer = new JsonDeserializer<Date>() {
+	/**
+	 * The date deserializer from long
+	 */
+	private static final JsonDeserializer<Date> dateDeserializer = new JsonDeserializer<Date>() {
 	
 		@Override
 		public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
@@ -96,18 +109,36 @@ public class GsonUtils {
 		}
 
 		// create a new version
-		Gson gson = new GsonBuilder()
+		GsonBuilder gsonBuilder= new GsonBuilder()
 						.setFieldNamingPolicy(fieldNamingPolicy)
-						.registerTypeAdapter(Date.class, serializer)
-						.registerTypeAdapter(Date.class, deserializer)
-						.create();
+						.registerTypeAdapter(Date.class, dateSerializer)
+						.registerTypeAdapter(Date.class, dateDeserializer);
 		
+		registerMoreTypeAdapters(gsonBuilder);
+		
+		Gson gson = gsonBuilder.create();
 		synchronized (gsons) {
 			gsons.put(fieldNamingPolicy, gson);
 		}
 
 		// return the created instance
 		return gson;
+	}
+
+	/**
+	 * Register custom adapters for Gson
+	 * 
+	 * @param gsonBuilder
+	 */
+	private static void registerMoreTypeAdapters(GsonBuilder gsonBuilder) {
+		if(AssertUtils.isEmpty(customAdapters)) {
+			return;
+		}
+		
+		Set<Entry<Type, Object>> set = customAdapters.entrySet();
+		for(Entry<Type, Object> adapter : set) {
+			gsonBuilder.registerTypeAdapter(adapter.getKey(), adapter.getValue());
+		}
 	}
 
 }
