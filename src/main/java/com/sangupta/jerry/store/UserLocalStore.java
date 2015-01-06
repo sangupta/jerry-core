@@ -1,7 +1,7 @@
 /**
  *
  * jerry - Common Java Functionality
- * Copyright (c) 2012-2014, Sandeep Gupta
+ * Copyright (c) 2012-2015, Sandeep Gupta
  * 
  * http://sangupta.com/projects/jerry
  * 
@@ -18,7 +18,7 @@
  * limitations under the License.
  * 
  */
-
+ 
 package com.sangupta.jerry.store;
 
 import java.util.List;
