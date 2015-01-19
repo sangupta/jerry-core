@@ -99,7 +99,7 @@ public class FileUtils {
 	 * 
 	 * @return collection of matched files
 	 */
-	public static Collection<File> listFiles(String filePathWithWildCards) {
+	public static List<File> listFiles(String filePathWithWildCards) {
 		return listFiles(new File("."), filePathWithWildCards, false);
 	}
 	
@@ -115,7 +115,7 @@ public class FileUtils {
 	 * 
 	 * @return collection of matched files
 	 */
-	public static Collection<File> listFiles(String filePathWithWildCards, boolean recursive) {
+	public static List<File> listFiles(String filePathWithWildCards, boolean recursive) {
 		return listFiles(new File("."), filePathWithWildCards, recursive);
 	}
 	
@@ -133,7 +133,7 @@ public class FileUtils {
 	 * 
 	 * @return collection of matched files
 	 */
-	public static Collection<File> listFiles(File baseDir, String filePathWithWildCards, boolean recursive) {
+	public static List<File> listFiles(File baseDir, String filePathWithWildCards, boolean recursive) {
 		return listFiles(baseDir, filePathWithWildCards, recursive, (List<IOFileFilter>) null);
 	}
 	
@@ -154,7 +154,7 @@ public class FileUtils {
 	 * 
 	 * @return collection of matched files
 	 */
-	public static Collection<File> listFiles(File baseDir, String filePathWithWildCards, boolean recursive, IOFileFilter[] additionalFilters) {
+	public static List<File> listFiles(File baseDir, String filePathWithWildCards, boolean recursive, IOFileFilter[] additionalFilters) {
 		final List<IOFileFilter> list = new ArrayList<IOFileFilter>();
 		if(AssertUtils.isNotEmpty(additionalFilters)) {
 			list.addAll(Arrays.asList(additionalFilters));
@@ -181,7 +181,7 @@ public class FileUtils {
 	 * 
 	 * @return the list of files and directories that match the criteria
 	 */
-	public static Collection<File> listFiles(File baseDir, String filePathWithWildCards, boolean recursive, List<IOFileFilter> additionalFilters) {
+	public static List<File> listFiles(File baseDir, String filePathWithWildCards, boolean recursive, List<IOFileFilter> additionalFilters) {
 		if(filePathWithWildCards == null) {
 			throw new IllegalArgumentException("Filepath cannot be null");
 		}
@@ -253,7 +253,7 @@ public class FileUtils {
 		
 		Collection<File> files = org.apache.commons.io.FileUtils.listFiles(baseDir, finalFilter, recursive ? TrueFileFilter.INSTANCE : FalseFileFilter.INSTANCE);
 		
-		return files;
+		return (List<File>) files;
 	}
-
+	
 }
