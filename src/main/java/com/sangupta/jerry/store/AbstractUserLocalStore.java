@@ -23,7 +23,7 @@ package com.sangupta.jerry.store;
 
 import java.io.File;
 
-import com.sangupta.jerry.constants.SystemProperty;
+import com.sangupta.jerry.constants.SystemPropertyNames;
 import com.sangupta.jerry.util.AssertUtils;
 
 /**
@@ -52,7 +52,7 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 			throw new IllegalArgumentException("Folder name cannot be empty/null");
 		}
 		
-		File userHome = new File(System.getProperty(SystemProperty.USER_HOME));
+		File userHome = new File(System.getProperty(SystemPropertyNames.USER_HOME));
 		if(folderName != null) {
 			this.dataDirectory = new File(userHome, folderName);
 			this.dataDirectory.mkdirs();
