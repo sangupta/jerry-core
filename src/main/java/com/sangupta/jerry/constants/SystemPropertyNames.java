@@ -28,7 +28,7 @@ package com.sangupta.jerry.constants;
  * @author sangupta
  *
  */
-public interface SystemProperty {
+public interface SystemPropertyNames {
 
 	/**
 	 * Character that separates components of a file path. This is "/" on UNIX and "\" on Windows.
