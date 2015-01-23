@@ -255,5 +255,18 @@ public class FileUtils {
 		
 		return (List<File>) files;
 	}
-	
+
+	public static String getExtension(File file) {
+		if(file == null) {
+			return null;
+		}
+		
+		String name = file.getName();
+		int index = name.lastIndexOf('.');
+		if(index == -1) {
+			return StringUtils.EMPTY_STRING;
+		}
+		
+		return name.substring(index + 1);
+	}
 }
