@@ -66,6 +66,45 @@ public class CheckUtils {
 			throw new IllegalArgumentException("File does not represent a valid file");
 		}
 	}
+	
+	/**
+	 * Check if the file can be read successfully.
+	 * 
+	 * @param file
+	 */
+	public static void checkReadableFile(File file) {
+		CheckUtils.checkFileExists(file);
+		
+		if(!file.canRead()) {
+			throw new IllegalArgumentException("File cannot be read");
+		}
+	}
+	
+	/**
+	 * Check if the file can be written successfully.
+	 * 
+	 * @param file
+	 */
+	public static void checkWritableFile(File file) {
+		CheckUtils.checkFileExists(file);
+		
+		if(!file.canWrite()) {
+			throw new IllegalArgumentException("File cannot be written to");
+		}
+	}
+	
+	/**
+	 * Check if the file can be executed.
+	 * 
+	 * @param file
+	 */
+	public static void checkExecutableFile(File file) {
+		CheckUtils.checkFileExists(file);
+		
+		if(!file.canExecute()) {
+			throw new IllegalArgumentException("File cannot be executed");
+		}
+	}
 
 	/**
 	 * Check whether the directory represented by the given absolute file path
