@@ -22,6 +22,8 @@
 package com.sangupta.jerry.util;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -36,6 +38,8 @@ import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 
 import com.sangupta.jerry.constants.SystemPropertyNames;
+import com.sangupta.jerry.consume.GenericConsumer;
+import com.sangupta.jerry.io.FileByteChunkConsumer;
 
 /**
  * Utility functions around common file operations.
@@ -256,6 +260,15 @@ public class FileUtils {
 		return (List<File>) files;
 	}
 
+	/**
+	 * Find the extension of the file. If the file has no extension, an
+	 * empty string is returned. If the file instance is <code>null</code>,
+	 * a <code>null</code> is returned back.
+	 * 
+	 * @param file file for which extension is needed
+	 * 
+	 * @return
+	 */
 	public static String getExtension(File file) {
 		if(file == null) {
 			return null;
@@ -268,5 +281,34 @@ public class FileUtils {
 		}
 		
 		return name.substring(index + 1);
+	}
+	
+	/**
+	 * Return the MD5 value for the file.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public static byte[] getMD5(File file) {
+		final MessageDigest digest;
+		try {
+			digest = MessageDigest.getInstance("MD5");
+		} catch(NoSuchAlgorithmException e) {
+			return null;
+		}
+		
+		GenericConsumer<byte[]> byteConsumer = new GenericConsumer<byte[]>() {
+
+			@Override
+			public boolean consume(byte[] data) {
+				digest.update(data);
+				return true;
+			}
+			
+		};
+		
+		new FileByteChunkConsumer(file, byteConsumer).consume();
+		
+		return digest.digest();
 	}
 }
