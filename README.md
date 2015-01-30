@@ -22,6 +22,18 @@ Changelog
 
 **Current Development**
 
+* Renamed `SystemProperty` to `SystemPropertyNames` to indicate that this just contains names
+* Added method to `FileUtils` to list files using wild-cards in a given path
+* Added method to `FileUtils` to return the extension of file
+* Added `MimeUtils` to guess the MIME type based on the extension
+* Added methods to `CheckUtils` to see if file can be read, written and/or executed
+* Added a `GenericConsumer` class that allows consuming an entity easily
+* Added a `FileByteChunkConsumer` that allows consuming an entire file chunk-by-chunk of bytes
+* Added methods to `FileUtils` to compute MD5 and SHA-256 of a file
+
+
+**1.5.0**
+
 * Updated `GsonUtils` to allow for registeration of custom type adapters, and clear previously generated `Gson`s and/or custom adapters
 * Added `SimpleMultiMap` to store multiple values against a given key in a `HashMap`
 * Added `ApplicationContext` class to hold static values for every application
