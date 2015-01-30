@@ -24,10 +24,11 @@ package com.sangupta.jerry.util;
 import java.io.File;
 
 /**
- * Common assertions functions that throw a {@link RuntimeException} when the assertion
- * is not met. If you are looking for obtaining a <code>boolean</code> for handling the 
- * assertion failure in code, use {@link AssertUtils}.
- *  
+ * Common assertions functions that throw an {@link IllegalArgumentException},
+ * {@link IllegalStateException} or a {@link RuntimeException} when the
+ * assertion is not met. If you are looking for obtaining a <code>boolean</code>
+ * for handling the assertion failure in code, use {@link AssertUtils}.
+ * 
  * @author sangupta
  * @since 1.2.0
  */
@@ -139,4 +140,26 @@ public class CheckUtils {
 			throw new IllegalArgumentException("File does not represent a valid directory");
 		}
 	}
+	
+	/**
+	 * 
+	 * @param condition
+	 * @param message
+	 */
+	public static void checkArgument(boolean condition, String message) {
+		if(condition) {
+			return;
+		}
+		
+		throw new IllegalArgumentException(message);
+	}
+	
+	public static void checkState(boolean condition, String message) {
+		if(condition) {
+			return;
+		}
+		
+		throw new IllegalStateException(message);
+	}
+	
 }
