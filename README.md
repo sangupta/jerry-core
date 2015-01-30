@@ -30,7 +30,7 @@ Changelog
 * Added a `GenericConsumer` class that allows consuming an entity easily
 * Added a `FileByteChunkConsumer` that allows consuming an entire file chunk-by-chunk of bytes
 * Added methods to `FileUtils` to compute MD5 and SHA-256 of a file
-
+* Added `BitUtils` utility class with basic bit operations 
 
 **1.5.0**
 
@@ -152,7 +152,7 @@ License
 	
 ```
 jerry - Common Java Functionality
-Copyright (c) 2012-2014, Sandeep Gupta
+Copyright (c) 2012-2015, Sandeep Gupta
 
 http://sangupta.com/projects/jerry
 
