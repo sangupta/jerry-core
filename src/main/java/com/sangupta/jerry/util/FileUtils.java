@@ -291,9 +291,48 @@ public class FileUtils {
 	 */
 	public static byte[] getMD5(File file) {
 		final MessageDigest digest;
+		
 		try {
 			digest = MessageDigest.getInstance("MD5");
 		} catch(NoSuchAlgorithmException e) {
+			return null;
+		}
+		
+		return getFileDigestValue(file, digest);
+	}
+	
+	/**
+	 * Return the SHA-256 value for the file.
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public static byte[] getSHA256(File file) {
+		final MessageDigest digest;
+		
+		try {
+			digest = MessageDigest.getInstance("SHA-256");
+		} catch(NoSuchAlgorithmException e) {
+			return null;
+		}
+		
+		return getFileDigestValue(file, digest);
+	}
+	
+	/**
+	 * Run a {@link MessageDigest} algorithm over the contents of the entire
+	 * file
+	 * 
+	 * @param file
+	 * 
+	 * @param digest
+	 * 
+	 * @return <code>null</code> if file is <code>null</code>, cannot be read,
+	 *         or digest is <code>null</code>. Otherwise returns the actual
+	 *         digest value
+	 */
+	public static byte[] getFileDigestValue(File file, final MessageDigest digest) {
+		if(digest == null) {
 			return null;
 		}
 		
@@ -311,5 +350,4 @@ public class FileUtils {
 		
 		return digest.digest();
 	}
-	
 }
