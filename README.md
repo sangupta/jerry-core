@@ -31,6 +31,8 @@ Changelog
 * Added a `FileByteChunkConsumer` that allows consuming an entire file chunk-by-chunk of bytes
 * Added methods to `FileUtils` to compute MD5 and SHA-256 of a file
 * Added `BitUtils` utility class with basic bit operations 
+* Added `EnvironmentUtils.dumpAllProperties()` to dump all system properties and evironment variables into a string for easier debugging
+* Added `areEmpty()` and `areNotEmpty()` in `AssertUtils`
 
 **1.5.0**
 
