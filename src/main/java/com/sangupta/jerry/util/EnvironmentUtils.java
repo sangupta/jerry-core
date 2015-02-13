@@ -21,6 +21,11 @@
  
 package com.sangupta.jerry.util;
 
+import java.util.Enumeration;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
 /**
  * @author sangupta
  *
@@ -60,4 +65,45 @@ public class EnvironmentUtils {
 		return value;
 	}
 
+	/**
+	 * Dump all environment variables and properties as a String
+	 * and return it back. Useful for logging all values for debugging
+	 * purposes.
+	 * 
+	 */
+	public static String dumpAllProperties() {
+		StringBuilder builder = new StringBuilder(4096); // 4KB to start with
+		
+		// first all properties
+		Properties properties = System.getProperties();
+		if(!properties.isEmpty()) {
+			Enumeration<Object> keys = properties.keys();
+			
+			while(keys.hasMoreElements()) {
+				Object key = keys.nextElement();
+				Object value = properties.get(key);
+				builder.append("Property: ");
+				builder.append(key);
+				builder.append('=');
+				builder.append(value);
+				builder.append(StringUtils.SYSTEM_NEW_LINE);
+			}
+		}
+		
+		// next all environment values
+		Map<String, String> map = System.getenv();
+		if(AssertUtils.isNotEmpty(map)) {
+			Set<String> keys = map.keySet();
+			for(String key : keys) {
+				String value = map.get(key);
+				
+				builder.append("Environment: ");
+				builder.append(key);
+				builder.append('=');
+				builder.append(value);
+				builder.append(StringUtils.SYSTEM_NEW_LINE);
+			}
+		}
+		return builder.toString();
+	}
 }
