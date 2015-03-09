@@ -22,6 +22,8 @@ Changelog
 
 **Current Development**
 
+**1.6.0**
+
 * Renamed `SystemProperty` to `SystemPropertyNames` to indicate that this just contains names
 * Added method to `FileUtils` to list files using wild-cards in a given path
 * Added method to `FileUtils` to return the extension of file
@@ -127,7 +129,7 @@ The library can be downloaded from Maven Central using:
 <dependency>
     <groupId>com.sangupta</groupId>
     <artifactId>jerry-core</artifactId>
-    <version>1.4.0</version>
+    <version>1.6.0</version>
 </dependency>
 ```
 
