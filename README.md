@@ -22,6 +22,10 @@ Changelog
 
 **Current Development**
 
+**1.6.1**
+
+* Fixed bug in `CheckUtils.directoryExists` where its existence as a `File` was being tested
+
 **1.6.0**
 
 * Renamed `SystemProperty` to `SystemPropertyNames` to indicate that this just contains names
@@ -129,7 +133,7 @@ The library can be downloaded from Maven Central using:
 <dependency>
     <groupId>com.sangupta</groupId>
     <artifactId>jerry-core</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1</version>
 </dependency>
 ```
 
