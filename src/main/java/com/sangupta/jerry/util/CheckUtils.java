@@ -136,7 +136,7 @@ public class CheckUtils {
 			throw new IllegalArgumentException("Directory does not exist on device");
 		}
 		
-		if(!directory.isFile()) {
+		if(!directory.isDirectory()) {
 			throw new IllegalArgumentException("File does not represent a valid directory");
 		}
 	}
