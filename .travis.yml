@@ -3,7 +3,7 @@ language: java
 jdk:
   - openjdk7
   - oraclejdk7
-  - orackejdk8
+  - oraclejdk8
   
 after_success:
   - mvn clean test cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:cobertura
