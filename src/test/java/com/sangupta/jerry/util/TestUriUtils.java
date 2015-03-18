@@ -21,7 +21,7 @@
  
 package com.sangupta.jerry.util;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import junit.framework.Assert;
@@ -154,13 +154,12 @@ public class TestUriUtils {
 		Map<String, String> map = null;
 		Assert.assertEquals("", UriUtils.urlEncode(map));
 		
-		map = new HashMap<String, String>(); 
+		map = new LinkedHashMap<String, String>(); 
 		Assert.assertEquals("", UriUtils.urlEncode(map));
 		
 		map.put("p1", "v1");
 		map.put("p2", "v2");
-		Assert.assertEquals("p2=v2&p1=v1", UriUtils.urlEncode(map));
-		
-		Assert.assertEquals("p2=v2&p1=v1", UriUtils.urlEncode(map, true));
+		Assert.assertEquals("p1=v1&p2=v2", UriUtils.urlEncode(map));
+		Assert.assertEquals("p1=v1&p2=v2", UriUtils.urlEncode(map, true));
 	}
 }
