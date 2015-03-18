@@ -3,6 +3,7 @@ jerry-core
 
 [![Build Status](https://travis-ci.org/sangupta/jerry-core.svg?branch=master)](https://travis-ci.org/sangupta/jerry-core)
 [![Coverage Status](https://coveralls.io/repos/sangupta/jerry-core/badge.png)](https://coveralls.io/r/sangupta/jerry-core)
+[![Maven Version](https://maven-badges.herokuapp.com/maven-central/com.sangupta/jerry-core/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.sangupta/jerry-core)
 
 Common Java functionality for core functionality.
 
