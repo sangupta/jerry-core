@@ -17,6 +17,12 @@ methods that are missing in there.
 _History:_ Ages ago, the project forked from the `https://github.com/sangupta/jerry` project, when all utility classes were extracted
 out into the `jerry-core` project.
 
+The library is tested on the following JDK versions:
+
+* Oracle JDK 8
+* Oracle JDK 7
+* Open JDK 7
+
 Changelog
 ---------
 
