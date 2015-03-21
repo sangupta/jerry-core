@@ -50,6 +50,26 @@ import com.sangupta.jerry.io.FileByteChunkConsumer;
 public class FileUtils {
 
 	/**
+	 * One KB as number of bytes
+	 */
+	public static final long ONE_KB = 1024l;
+	
+	/**
+	 * One MB as number of bytes
+	 */
+	public static final long ONE_MB = ONE_KB * ONE_KB;
+	
+	/**
+	 * One GB as number of bytes
+	 */
+	public static final long ONE_GB = ONE_MB * ONE_KB;
+	
+	/**
+	 * One GB as number of bytes
+	 */
+	public static final long ONE_TB = ONE_GB * ONE_KB;
+
+	/**
 	 * Return a {@link File} object for the user's home directory.
 	 * 
 	 * @return
