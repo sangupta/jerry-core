@@ -68,6 +68,16 @@ public class FileUtils {
 	 * One GB as number of bytes
 	 */
 	public static final long ONE_TB = ONE_GB * ONE_KB;
+	
+	/**
+	 * One TB as number of bytes
+	 */
+	public static final long ONE_PB = ONE_TB * ONE_KB;
+	
+	/**
+	 * One EB as number of bytes
+	 */
+	public static final long ONE_EB = ONE_PB * ONE_KB;
 
 	/**
 	 * Return a {@link File} object for the user's home directory.
