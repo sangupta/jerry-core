@@ -21,7 +21,12 @@
  
 package com.sangupta.jerry.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -31,6 +36,7 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOCase;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.AndFileFilter;
 import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
@@ -379,5 +385,78 @@ public class FileUtils {
 		new FileByteChunkConsumer(file, byteConsumer).consume();
 		
 		return digest.digest();
+	}
+	
+	/**
+	 * Dump an entire file to HEX
+	 * 
+	 * @param out
+	 * @param file
+	 * @throws IOException
+	 */
+	public static void hexDump(PrintStream out, File file) throws IOException {
+		hexDump(out, file, 0, 0);
+	}
+	
+	/**
+	 * Dump a given file into HEX starting at given offset and reading given number of rows where
+	 * a row consists of 16-bytes.
+	 * 
+	 * @param out
+	 * @param file
+	 * @param offset
+	 * @param maxRows
+	 * @throws IOException
+	 */
+	public static void hexDump(PrintStream out, File file, long offset, int maxRows) throws IOException {
+		InputStream is = null;
+		BufferedInputStream bis = null;
+		
+		try {
+			is = new FileInputStream(file);
+			bis = new BufferedInputStream(is);
+			bis.skip(offset);
+			
+			int row = 0;
+			if(maxRows == 0) {
+				maxRows = Integer.MAX_VALUE;
+			}
+			
+			StringBuilder builder1 = new StringBuilder(100);
+			StringBuilder builder2 = new StringBuilder(100);
+			
+			while (bis.available() > 0) {
+				out.printf("%04X  ", row * 16);
+				for (int j = 0; j < 16; j++) {
+					if (bis.available() > 0) {
+						int value = (int) bis.read();
+						builder1.append(String.format("%02X ", value));
+						
+						if (!Character.isISOControl(value)) {
+							builder2.append((char) value);
+						} else {
+							builder2.append(".");
+						}
+					} else {
+						for (; j < 16; j++) {
+							builder1.append("   ");
+						}
+					}
+				}
+				out.print(builder1);
+				out.println(builder2);
+				row++;
+				
+				if(row > maxRows) {
+					break;
+				}
+				
+				builder1.setLength(0);
+				builder2.setLength(0);
+			}
+		} finally {
+			IOUtils.closeQuietly(bis);
+			IOUtils.closeQuietly(is);
+		}
 	}
 }
