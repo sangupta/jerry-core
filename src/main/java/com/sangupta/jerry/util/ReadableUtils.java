@@ -1,10 +1,46 @@
+/**
+ *
+ * jerry - Common Java Functionality
+ * Copyright (c) 2012-2015, Sandeep Gupta
+ * 
+ * http://sangupta.com/projects/jerry
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ */
+ 
 package com.sangupta.jerry.util;
 
 import java.util.Arrays;
 
+/**
+ * Utility class that provides methods to work between commonly
+ * used values and their human readable equivalents, like date,
+ * time duration, file size etc.
+ * 
+ * @author sangupta
+ *
+ */
 public class ReadableUtils {
 	
-	public static long parseFileSize(String size) {
+	/**
+	 * Convert human readable file size to number of bytes. For example:
+	 * 2k would convert to 2048 etc.
+	 * 
+	 * @param size
+	 * @return
+	 */
+	public static long parseByteCount(String size) {
 		if(AssertUtils.isEmpty(size)) {
 			return 0;
 		}
@@ -54,4 +90,77 @@ public class ReadableUtils {
 		throw new IllegalArgumentException("Unknown size identifier: " + id);
 	}
 
+	/**
+	 * Convert the given number of bytes to human-readable {@link String} format.
+	 * 
+	 * @param bytes
+	 * @return
+	 */
+	public static String getReadableByteCount(long bytes) {
+	    if (bytes < FileUtils.ONE_KB) {
+	    	return bytes + " B";
+	    }
+	    
+	    int exp = (int) (Math.log(bytes) / Math.log(FileUtils.ONE_KB));
+	    String pre = "" + "KMGTPE".charAt(exp - 1);
+	    double value = bytes / Math.pow(FileUtils.ONE_KB, exp);
+	    if(((value * 10) % 10) == 0) {
+	    	return String.format("%.0f %sB", value, pre);
+	    }
+	    
+	    return String.format("%.1f %sB", value, pre);
+	}
+	
+	/**
+	 * Convert the given time duration into a human-readable string format.
+	 * 
+	 * @param millis
+	 * @return
+	 */
+	public static String getReadableTimeDuration(long millis) {
+		long seconds = millis / 1000l;
+		long minutes = seconds / 60l;
+		long hours = minutes / 60l;
+		long days = hours / 24l;
+		
+		hours = hours % 24l;
+		minutes = minutes % 60l;
+		seconds = seconds % 60l;
+		millis = millis % 1000l;
+		
+		String s = "";
+		if(days > 0) {
+			s += days + getPluralIfNeeded(days, " day ", " days ");
+		}
+		if(hours > 0) {
+			s +=  hours + getPluralIfNeeded(hours, " hour ", " hours ");
+		}
+		if(minutes > 0) {
+			 s += minutes + getPluralIfNeeded(minutes, " minute ", " minutes ");
+		}
+		if(seconds > 0) {
+			s += seconds + getPluralIfNeeded(seconds, " second ", " seconds ");
+		}
+		if(millis > 0) {
+			s += millis + getPluralIfNeeded(millis, " milli", " millis");
+		}
+		
+		return s.trim();
+	}
+	
+	/**
+	 * Return the singular string if the value is ONE, or the plural one.
+	 * 
+	 * @param value
+	 * @param singular
+	 * @param plural
+	 * @return
+	 */
+	public static String getPluralIfNeeded(long value, String singular, String plural) {
+		if(value == 1) {
+			return singular;
+		}
+		
+		return plural;
+	}
 }
