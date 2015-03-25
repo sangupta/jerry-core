@@ -295,6 +295,29 @@ public class FileUtils {
 		
 		return (List<File>) files;
 	}
+	
+	/**
+	 * Extract the extension for given file path.
+	 * 
+	 * @param filePath
+	 * @return
+	 */
+	public static String getExtension(String filePath) {
+		if(AssertUtils.isEmpty(filePath)) {
+			return null;
+		}
+		
+		int index = filePath.lastIndexOf('.');
+		if(index == -1) {
+			return null;
+		}
+		
+		if(index == filePath.length() - 1) {
+			return null;
+		}
+		
+		return filePath.substring(index + 1);
+	}
 
 	/**
 	 * Find the extension of the file. If the file has no extension, an

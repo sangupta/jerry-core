@@ -214,10 +214,21 @@ public class TestFileUtils {
 	}
 
 	@Test
-	public void testGetExtension() {
+	public void testGetExtensionFile() {
 		Assert.assertEquals("png", FileUtils.getExtension(new File("temp.png")));
 		Assert.assertEquals("txt", FileUtils.getExtension(new File("temp.txt")));
 		Assert.assertEquals("", FileUtils.getExtension(new File("temp")));
+	}
+	
+	@Test
+	public void testGetExtension() {
+		Assert.assertEquals(null, FileUtils.getExtension(""));
+		Assert.assertEquals(null, FileUtils.getExtension((String) null));
+		Assert.assertEquals(null, FileUtils.getExtension("test"));
+		Assert.assertEquals(null, FileUtils.getExtension("test."));
+		Assert.assertEquals("png", FileUtils.getExtension("temp.png"));
+		Assert.assertEquals("png", FileUtils.getExtension("temp.test.png"));
+		Assert.assertEquals("png", FileUtils.getExtension("temp.another.one.png"));
 	}
 	
 	protected void assertContains(List<File> files, File base, String path) {
