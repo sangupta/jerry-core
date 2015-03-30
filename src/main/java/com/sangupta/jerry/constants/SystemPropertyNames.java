@@ -112,4 +112,10 @@ public interface SystemPropertyNames {
 	 */
 	public static final String USER_NAME = "user.name";
 	
+	/**
+	 * Temporary directory as returned by OS. On Windows it is %TEMP%, except
+	 * on Windows 8 where it is %TMP%.
+	 */
+	public static final String JAVA_TMPDIR = "java.io.tmpdir";
+	
 }
