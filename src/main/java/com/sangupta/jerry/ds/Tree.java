@@ -23,8 +23,10 @@ package com.sangupta.jerry.ds;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
+import com.sangupta.jerry.transform.Transformer;
 import com.sangupta.jerry.util.AssertUtils;
 
 /**
@@ -37,7 +39,7 @@ import com.sangupta.jerry.util.AssertUtils;
  *
  * @param <T>
  */
-public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
+public class Tree<T> implements Iterable<Tree<T>> {
 
 	/**
 	 * The data that this node keeps
@@ -48,20 +50,20 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 	 * The parent node to this node
 	 * 
 	 */
-	private SimpleTree<T> parent;
+	private Tree<T> parent;
 	
 	/**
 	 * List of all child nodes
 	 * 
 	 */
-	private List<SimpleTree<T>> children;
+	private List<Tree<T>> children;
 	
 	/**
 	 * Convenience constructor
 	 * 
 	 * @param data
 	 */
-	public SimpleTree(T data) {
+	public Tree(T data) {
 		this.data = data;
 	}
 	
@@ -123,16 +125,25 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 	 * @param data
 	 * @return
 	 */
-	public SimpleTree<T> addChild(T data) {
+	public Tree<T> addChild(T data) {
 		if(this.children == null) {
-			this.children = new ArrayList<SimpleTree<T>>();
+			this.children = new ArrayList<Tree<T>>();
 		}
 		
-		SimpleTree<T> child = new SimpleTree<T>(data);
+		Tree<T> child = new Tree<T>(data);
 		child.parent = this;
 		this.children.add(child);
 		
 		return child;
+	}
+	
+	/**
+	 * Return the children associated with this node.
+	 * 
+	 * @return
+	 */
+	public List<Tree<T>> getChildren() {
+		return this.children;
 	}
 	
 	/**
@@ -161,7 +172,7 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 	 * @param node
 	 * @return
 	 */
-	boolean removeChild(SimpleTree<T> node) {
+	boolean removeChild(Tree<T> node) {
 		if(node == null) {
 			return false;
 		}
@@ -170,9 +181,9 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 			return false;
 		}
 		
-		Iterator<SimpleTree<T>> childIterator = this.children.iterator();
+		Iterator<Tree<T>> childIterator = this.children.iterator();
 		while(childIterator.hasNext()) {
-			SimpleTree<T> child = childIterator.next();
+			Tree<T> child = childIterator.next();
 			if(node == child) {
 				childIterator.remove();
 				return true;
@@ -188,7 +199,7 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 	 * @param index
 	 * @return
 	 */
-	SimpleTree<T> getChild(int index) {
+	Tree<T> getChild(int index) {
 		if(index < 0) {
 			throw new IllegalArgumentException("Index cannot be negative");
 		}
@@ -210,7 +221,7 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 	 * 
 	 * @return
 	 */
-	public SimpleTree<T> getSibling() {
+	public Tree<T> getSibling() {
 		if(this.parent == null) {
 			return null;
 		}
@@ -225,7 +236,7 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 	 * @param node
 	 * @return
 	 */
-	public SimpleTree<T> nextChild(SimpleTree<T> node) {
+	public Tree<T> nextChild(Tree<T> node) {
 		if(this.isLeaf()) {
 			return null;
 		}
@@ -247,7 +258,7 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 	}
 	
 	@Override
-	public Iterator<SimpleTree<T>> iterator() {
+	public Iterator<Tree<T>> iterator() {
 		return new SimpleTreeIterator<T>(this);
 	}
 	
@@ -262,7 +273,7 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 	
 	// Usual accessors follow
 	
-	public SimpleTree<T> getParent() {
+	public Tree<T> getParent() {
 		return this.parent;
 	}
 	
@@ -284,6 +295,59 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 		this.data = data;
 	}
 
+	/**
+	 * Render the tree into a {@link String}.
+	 * 
+	 * @param transformer
+	 * @return
+	 */
+	public String renderTree(Transformer<T, String> transformer) {
+	    List<StringBuilder> lines = renderTreeLines(this, transformer);
+	    String newline = System.getProperty("line.separator");
+	    StringBuilder sb = new StringBuilder(lines.size() * 20);
+	    for (StringBuilder line : lines) {
+	        sb.append(line);
+	        sb.append(newline);
+	    }
+	    return sb.toString();
+	}
+
+	private List<StringBuilder> renderTreeLines(Tree<T> tree, Transformer<T, String> transformer) {
+	    List<StringBuilder> result = new LinkedList<StringBuilder>();
+	    String treeData = transformer.transform(tree.getData());
+	    result.add(new StringBuilder().append(treeData));
+	    
+	    if(tree.hasChildren()) {
+		    Iterator<Tree<T>> iterator = tree.getChildren().iterator();
+		    while (iterator.hasNext()) {
+		        List<StringBuilder> subtree = renderTreeLines(iterator.next(), transformer);
+		        if (iterator.hasNext()) {
+		            addSubtree(result, subtree);
+		        } else {
+		            addLastSubtree(result, subtree);
+		        }
+		    }
+	    }
+	    
+	    return result;
+	}
+
+	private void addSubtree(List<StringBuilder> result, List<StringBuilder> subtree) {
+	    Iterator<StringBuilder> iterator = subtree.iterator();
+	    result.add(iterator.next().insert(0, "├── "));
+	    while (iterator.hasNext()) {
+	        result.add(iterator.next().insert(0, "│   "));
+	    }
+	}
+
+	private void addLastSubtree(List<StringBuilder> result, List<StringBuilder> subtree) {
+	    Iterator<StringBuilder> iterator = subtree.iterator();
+	    result.add(iterator.next().insert(0, "└── "));
+	    while (iterator.hasNext()) {
+	        result.add(iterator.next().insert(0, "    "));
+	    }
+	}
+	
 	// STATIC CLASS FOR ITERATOR follows
 	
 	/**
@@ -293,12 +357,12 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 	 *
 	 * @param <T>
 	 */
-	public static class SimpleTreeIterator<T> implements Iterator<SimpleTree<T>> {
+	public static class SimpleTreeIterator<T> implements Iterator<Tree<T>> {
 		
 		/**
 		 * The node that will be returned next
 		 */
-		private SimpleTree<T> nextNode = null;
+		private Tree<T> nextNode = null;
 		
 		/**
 		 * Whether the root node has been consumed by the iterator or not
@@ -311,7 +375,7 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 		 * 
 		 * @param rootNode
 		 */
-		public SimpleTreeIterator(SimpleTree<T> rootNode) {
+		public SimpleTreeIterator(Tree<T> rootNode) {
 			if(rootNode == null) {
 				throw new IllegalArgumentException("Rootnode to iterate on cannot be null");
 			}
@@ -334,7 +398,7 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 			}
 			
 			do {
-				SimpleTree<T> sibling = this.nextNode.getSibling();
+				Tree<T> sibling = this.nextNode.getSibling();
 				if(sibling != null) {
 					this.nextNode = sibling;
 					return true;
@@ -350,7 +414,7 @@ public class SimpleTree<T> implements Iterable<SimpleTree<T>> {
 		}
 
 		@Override
-		public SimpleTree<T> next() {
+		public Tree<T> next() {
 			return this.nextNode;
 		}
 
