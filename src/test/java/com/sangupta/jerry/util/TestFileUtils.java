@@ -2,6 +2,7 @@ package com.sangupta.jerry.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -9,6 +10,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.sangupta.jerry.constants.SystemPropertyNames;
+import com.sangupta.jerry.ds.Tree;
 
 public class TestFileUtils {
 
@@ -35,6 +37,7 @@ public class TestFileUtils {
 	@Test
 	public void testIsAbsolutePath() {
 		Assert.assertFalse(FileUtils.isAbsolutePath("file.txt"));
+		Assert.assertFalse(FileUtils.isAbsolutePath("../file.txt"));
 		Assert.assertFalse(FileUtils.isAbsolutePath("./../file.txt"));
 		Assert.assertFalse(FileUtils.isAbsolutePath("./file.txt"));
 		Assert.assertFalse(FileUtils.isAbsolutePath("test/file.txt"));
@@ -44,6 +47,18 @@ public class TestFileUtils {
 		Assert.assertTrue(FileUtils.isAbsolutePath("~/file.txt"));
 		Assert.assertFalse(FileUtils.isAbsolutePath("./../~/file.txt"));
 	}
+	
+//	@Test
+//	public void tesRresolveFilePath() {
+//		File currentDir = new File(".");
+//		Assert.assertEquals(currentDir.getAbsoluteFile().getParentFile().getAbsolutePath() + File.separatorChar + "file.txt", FileUtils.resolveFilePath("file.txt").getAbsolutePath());
+//		Assert.assertEquals(currentDir.getAbsoluteFile().getParentFile().getAbsolutePath() + File.separatorChar + "file.txt", FileUtils.resolveFilePath("../file.txt").getAbsolutePath());
+//		Assert.assertEquals(currentDir.getAbsoluteFile().getParentFile().getAbsolutePath() + File.separatorChar + "file.txt", FileUtils.resolveFilePath("./../file.txt").getAbsolutePath());
+//		Assert.assertEquals(currentDir.getAbsoluteFile().getParentFile().getAbsolutePath() + File.separatorChar + "file.txt", FileUtils.resolveFilePath("./file.txt").getAbsolutePath());
+//		Assert.assertEquals(currentDir.getAbsoluteFile().getParentFile().getAbsolutePath() + File.separatorChar + "file.txt", FileUtils.resolveFilePath("test/file.txt").getAbsolutePath());
+//		Assert.assertEquals(currentDir.getAbsoluteFile().getParentFile().getAbsolutePath() + File.separatorChar + "file.txt", FileUtils.resolveFilePath("/file.txt").getAbsolutePath());
+//		Assert.assertEquals(currentDir.getAbsoluteFile().getParentFile().getAbsolutePath() + File.separatorChar + "file.txt", FileUtils.resolveFilePath("../file.txt").getAbsolutePath());
+//	}
 	
 	@Test
 	public void listFiles() {
@@ -287,6 +302,14 @@ public class TestFileUtils {
 			org.apache.commons.io.FileUtils.write(file, data);
 		} catch (IOException e) {
 			Assert.assertFalse("File creation for test data failed", false);
+		}
+	}
+	
+	public static void main(String[] args) {
+		Tree<File> tree = FileUtils.getDirTree(new File("c:/git/sangupta/s3"));
+		Iterator<Tree<File>> iter = tree.iterator();
+		while(iter.hasNext()) {
+			System.out.println(iter.next().getData().getAbsolutePath());
 		}
 	}
 }

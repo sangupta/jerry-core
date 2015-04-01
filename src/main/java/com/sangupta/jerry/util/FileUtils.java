@@ -23,6 +23,7 @@ package com.sangupta.jerry.util;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,6 +39,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOCase;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.AndFileFilter;
+import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.FalseFileFilter;
 import org.apache.commons.io.filefilter.IOFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
@@ -45,6 +47,7 @@ import org.apache.commons.io.filefilter.WildcardFileFilter;
 
 import com.sangupta.jerry.constants.SystemPropertyNames;
 import com.sangupta.jerry.consume.GenericConsumer;
+import com.sangupta.jerry.ds.Tree;
 import com.sangupta.jerry.io.FileByteChunkConsumer;
 
 /**
@@ -129,6 +132,72 @@ public class FileUtils {
 		
 		return true;
 	}
+	
+	/**
+	 * Return a {@link Tree} that contains a list of all directories
+	 * and their children in the given folder.
+	 * 
+	 * @param dir
+	 * @return
+	 */
+	public static Tree<File> getDirTree(File dir) {
+		CheckUtils.checkDirectoryExists(dir);
+		
+		Tree<File> tree = new Tree<File>(dir);
+		recurseDirInternal(dir, tree);
+		return tree;
+	}
+	
+	/**
+	 * Recurse all child directories and add to tree node.
+	 * 
+	 * @param dir
+	 * @param node
+	 */
+	private static void recurseDirInternal(File dir, Tree<File> node) {
+		File[] childDirs = dir.listFiles((FileFilter) DirectoryFileFilter.INSTANCE);
+		if(AssertUtils.isEmpty(childDirs)) {
+			return;
+		}
+		
+		for(File childDir : childDirs) {
+			recurseDirInternal(childDir, node.addChild(childDir));
+		}
+	}
+	
+//	/**
+//	 * Resolve a file path into its corresponding {@link File} object. This method
+//	 * also makes sure that '~' can be used to refer to the user's home directory - the
+//	 * standard way on Linux and OS X.
+//	 * 
+//	 * @param filePath
+//	 * @return <code>null</code> if filePath is empty, {@link File} instance otherwise.
+//	 * 
+//	 */
+//	public static File resolveFilePath(String filePath) {
+//		if(AssertUtils.isEmpty(filePath)) {
+//			return null;
+//		}
+//		
+//		if(!isAbsolutePath(filePath)) {
+//			return new File(filePath);
+//		}
+//		
+//		// check for user home
+//		if(filePath.charAt(0) == '~') {
+//			if(filePath.length() == 1) {
+//				return getUsersHomeDirectory();
+//			}
+//			
+//			if(filePath.length() == 2 && filePath.equals("~/")) {
+//				return getUsersHomeDirectory();
+//			}
+//			
+//			return new File(getUsersHomeDirectory(), filePath.substring(2));
+//		}
+//		
+//		return new File(filePath);
+//	}
 	
 	/**
 	 * List all files in the given path, assuming the current directory to be
