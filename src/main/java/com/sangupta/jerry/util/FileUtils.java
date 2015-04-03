@@ -165,39 +165,59 @@ public class FileUtils {
 		}
 	}
 	
-//	/**
-//	 * Resolve a file path into its corresponding {@link File} object. This method
-//	 * also makes sure that '~' can be used to refer to the user's home directory - the
-//	 * standard way on Linux and OS X.
-//	 * 
-//	 * @param filePath
-//	 * @return <code>null</code> if filePath is empty, {@link File} instance otherwise.
-//	 * 
-//	 */
-//	public static File resolveFilePath(String filePath) {
-//		if(AssertUtils.isEmpty(filePath)) {
-//			return null;
-//		}
-//		
-//		if(!isAbsolutePath(filePath)) {
-//			return new File(filePath);
-//		}
-//		
-//		// check for user home
-//		if(filePath.charAt(0) == '~') {
-//			if(filePath.length() == 1) {
-//				return getUsersHomeDirectory();
-//			}
-//			
-//			if(filePath.length() == 2 && filePath.equals("~/")) {
-//				return getUsersHomeDirectory();
-//			}
-//			
-//			return new File(getUsersHomeDirectory(), filePath.substring(2));
-//		}
-//		
-//		return new File(filePath);
-//	}
+	/**
+	 * Resolve a file path into its corresponding {@link File} object. This method
+	 * also makes sure that '~' can be used to refer to the user's home directory - the
+	 * standard way on Linux and OS X.
+	 * 
+	 * @param filePath
+	 * @return <code>null</code> if filePath is empty, {@link File} instance otherwise.
+	 * 
+	 */
+	public static File resolveToFile(String filePath) {
+		if(AssertUtils.isEmpty(filePath)) {
+			return null;
+		}
+
+		if("..".equals(filePath)) {
+			return new File(".").getAbsoluteFile().getParentFile().getParentFile();
+		}
+		
+		if(filePath.startsWith("../") || filePath.startsWith("..\\")) {
+			// replace initial path with current path
+			filePath = new File(".").getAbsoluteFile().getParentFile().getParentFile().getAbsolutePath() + File.separator + filePath.substring(2);
+		}
+		
+		if(filePath.startsWith("./") || filePath.startsWith(".\\")) {
+			// replace initial path with current path
+			filePath = new File(".").getAbsoluteFile().getParentFile().getAbsolutePath() + File.separator + filePath.substring(2);
+		}
+		
+		// normalize
+		filePath = FilenameUtils.normalize(filePath);
+		
+		// now check
+		String prefix = FilenameUtils.getPrefix(filePath);
+		
+		if(AssertUtils.isEmpty(prefix)) {
+			return new File(filePath);
+		}
+		
+		// check for user home
+		if(filePath.charAt(0) == '~') {
+			if(filePath.length() == 1) {
+				return getUsersHomeDirectory();
+			}
+			
+			if(filePath.length() == 2 && filePath.equals("~/")) {
+				return getUsersHomeDirectory();
+			}
+			
+			return new File(getUsersHomeDirectory(), filePath.substring(2));
+		}
+		
+		return new File(filePath);
+	}
 	
 	/**
 	 * List all files in the given path, assuming the current directory to be
