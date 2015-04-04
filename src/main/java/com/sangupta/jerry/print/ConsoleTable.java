@@ -21,9 +21,12 @@
  
 package com.sangupta.jerry.print;
 
+import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.compress.utils.IOUtils;
 
 import com.sangupta.jerry.ds.MutableInt;
 import com.sangupta.jerry.util.AssertUtils;
@@ -149,6 +152,17 @@ public class ConsoleTable {
 		return row;
 	}
 	
+	@Override
+	public String toString() {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream stream = new PrintStream(baos);
+		this.write(stream);
+		IOUtils.closeQuietly(stream);
+		IOUtils.closeQuietly(baos);
+		
+		return baos.toString();
+	}
+	
 	/**
 	 * Write the table to a {@link PrintStream}.
 	 * 
@@ -164,23 +178,7 @@ public class ConsoleTable {
 			updateColumnSizes(row);
 		}
 
-		// check for multi-line
-//		boolean multiLineRequired = false;
-//		if(this.layout == ConsoleTableLayout.MULTI_LINE) {
-//			// check if actually need a multi-line output
-//			// this will be where the line length is more than user-specified length
-//			for(int index = 0; index < this.columnSizes.size(); index++) {
-//				int colSize = this.columnSizes.get(index).get();
-//				int maxSize = this.getMaxColSize(index);
-//				
-//				if(maxSize > colSize) {
-//					multiLineRequired = true;
-//					break;
-//				}
-//			}
-//		}
-//		
-		ConsoleTableLayout layout = this.layout;
+		final ConsoleTableLayout layout = this.layout;
 		
 		// output header row
 		if(this.headerRow != null) {
