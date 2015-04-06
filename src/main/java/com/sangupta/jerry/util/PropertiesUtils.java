@@ -43,5 +43,30 @@ public class PropertiesUtils {
 		
 		return map;
 	}
+
+	/**
+	 * Convert a given {@link Map} instance to a corresponding
+	 * {@link Properties} instance
+	 * 
+	 * @param map
+	 * @return
+	 */
+	public static Properties fromMap(Map<String, String> map) {
+		if(map == null) {
+			return null;
+		}
+		
+		Properties properties = new Properties();
+		if(map.isEmpty()) {
+			return properties;
+		}
+		
+		Set<String> keys = map.keySet();
+		for(String key : keys) {
+			properties.setProperty(key, map.get(key));
+		}
+		
+		return properties;
+	}
 	
 }
