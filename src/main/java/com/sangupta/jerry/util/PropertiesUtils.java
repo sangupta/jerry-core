@@ -69,4 +69,17 @@ public class PropertiesUtils {
 		return properties;
 	}
 	
+	public static boolean getBoolean(Properties properties, String key) {
+		return getBoolean(properties, key, false);
+	}
+	
+	public static boolean getBoolean(Properties properties, String key, boolean defaultValue) {
+		if(AssertUtils.isEmpty(properties)) {
+			return defaultValue;
+		}
+		
+		String value = properties.getProperty(key);
+		return StringUtils.getBoolean(value, defaultValue);
+	}
+	
 }
