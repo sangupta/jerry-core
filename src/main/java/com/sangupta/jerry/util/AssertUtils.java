@@ -23,6 +23,7 @@ package com.sangupta.jerry.util;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * Common assertion functions that are null safe. These may not be
@@ -523,5 +524,20 @@ public class AssertUtils {
 	public static boolean areNotEmpty(String... strings) {
 		return !areEmpty(strings);
 	}
+
+	public static boolean isEmpty(Properties properties) {
+		if(properties == null) {
+			return true;
+		}
+		
+		return properties.isEmpty();
+	}
 	
+	public static boolean isNotEmpty(Properties properties) {
+		if(properties == null) {
+			return false;
+		}
+		
+		return !properties.isEmpty();
+	}
 }
