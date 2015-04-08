@@ -69,11 +69,11 @@ public class PropertiesUtils {
 		return properties;
 	}
 	
-	public static boolean getBoolean(Properties properties, String key) {
-		return getBoolean(properties, key, false);
+	public static boolean getBooleanValue(Properties properties, String key) {
+		return getBooleanValue(properties, key, false);
 	}
 	
-	public static boolean getBoolean(Properties properties, String key, boolean defaultValue) {
+	public static boolean getBooleanValue(Properties properties, String key, boolean defaultValue) {
 		if(AssertUtils.isEmpty(properties)) {
 			return defaultValue;
 		}
@@ -82,4 +82,48 @@ public class PropertiesUtils {
 		return StringUtils.getBoolean(value, defaultValue);
 	}
 	
+	public static short getShortValue(Properties properties, String key, short defaultValue) {
+		if(AssertUtils.isEmpty(properties)) {
+			return defaultValue;
+		}
+		
+		String value = properties.getProperty(key);
+		return StringUtils.getShortValue(value, defaultValue);
+	}
+	
+	public static int getIntValue(Properties properties, String key, int defaultValue) {
+		if(AssertUtils.isEmpty(properties)) {
+			return defaultValue;
+		}
+		
+		String value = properties.getProperty(key);
+		return StringUtils.getIntValue(value, defaultValue);
+	}
+	
+	public static long getLongValue(Properties properties, String key, long defaultValue) {
+		if(AssertUtils.isEmpty(properties)) {
+			return defaultValue;
+		}
+		
+		String value = properties.getProperty(key);
+		return StringUtils.getLongValue(value, defaultValue);
+	}
+	
+	public static float getFloatValue(Properties properties, String key, float defaultValue) {
+		if(AssertUtils.isEmpty(properties)) {
+			return defaultValue;
+		}
+		
+		String value = properties.getProperty(key);
+		return StringUtils.getFloatValue(value, defaultValue);
+	}
+
+	public static double getDoubleValue(Properties properties, String key, double defaultValue) {
+		if(AssertUtils.isEmpty(properties)) {
+			return defaultValue;
+		}
+		
+		String value = properties.getProperty(key);
+		return StringUtils.getDoubleValue(value, defaultValue);
+	}
 }
