@@ -68,11 +68,38 @@ public class PropertiesUtils {
 		
 		return properties;
 	}
-	
+
+	/**
+	 * Convert and return a {@link Boolean} value after reading from
+	 * {@link Properties} the {@link String} value against the given
+	 * <code>key</code>. If no value exists a <code>false</code> is returned.
+	 * 
+	 * @param properties
+	 *            the {@link Properties} instance to read from
+	 * 
+	 * @param key
+	 *            the <code>key</code> to look for
+	 * 
+	 * @return the {@link Boolean} value thus deciphered
+	 */
 	public static boolean getBooleanValue(Properties properties, String key) {
 		return getBooleanValue(properties, key, false);
 	}
 	
+	/**
+	 * Convert and return a {@link Boolean} value after reading from
+	 * {@link Properties} the {@link String} value against the given
+	 * <code>key</code>. If no value exists the given <code>defaultValue</code>
+	 * is returned.
+	 * 
+	 * @param properties
+	 *            the {@link Properties} instance to read from
+	 * 
+	 * @param key
+	 *            the <code>key</code> to look for
+	 * 
+	 * @return the {@link Boolean} value thus deciphered
+	 */
 	public static boolean getBooleanValue(Properties properties, String key, boolean defaultValue) {
 		if(AssertUtils.isEmpty(properties)) {
 			return defaultValue;
@@ -82,6 +109,20 @@ public class PropertiesUtils {
 		return StringUtils.getBoolean(value, defaultValue);
 	}
 	
+	/**
+	 * Convert and return a {@link Short} value after reading from
+	 * {@link Properties} the {@link String} value against the given
+	 * <code>key</code>. If no value exists the given <code>defaultValue</code>
+	 * is returned.
+	 * 
+	 * @param properties
+	 *            the {@link Properties} instance to read from
+	 * 
+	 * @param key
+	 *            the <code>key</code> to look for
+	 * 
+	 * @return the {@link Short} value thus deciphered
+	 */
 	public static short getShortValue(Properties properties, String key, short defaultValue) {
 		if(AssertUtils.isEmpty(properties)) {
 			return defaultValue;
@@ -91,6 +132,20 @@ public class PropertiesUtils {
 		return StringUtils.getShortValue(value, defaultValue);
 	}
 	
+	/**
+	 * Convert and return a {@link Integer} value after reading from
+	 * {@link Properties} the {@link String} value against the given
+	 * <code>key</code>. If no value exists the given <code>defaultValue</code>
+	 * is returned.
+	 * 
+	 * @param properties
+	 *            the {@link Properties} instance to read from
+	 * 
+	 * @param key
+	 *            the <code>key</code> to look for
+	 * 
+	 * @return the {@link Integer} value thus deciphered
+	 */
 	public static int getIntValue(Properties properties, String key, int defaultValue) {
 		if(AssertUtils.isEmpty(properties)) {
 			return defaultValue;
@@ -100,6 +155,20 @@ public class PropertiesUtils {
 		return StringUtils.getIntValue(value, defaultValue);
 	}
 	
+	/**
+	 * Convert and return a {@link Long} value after reading from
+	 * {@link Properties} the {@link String} value against the given
+	 * <code>key</code>. If no value exists the given <code>defaultValue</code>
+	 * is returned.
+	 * 
+	 * @param properties
+	 *            the {@link Properties} instance to read from
+	 * 
+	 * @param key
+	 *            the <code>key</code> to look for
+	 * 
+	 * @return the {@link Long} value thus deciphered
+	 */
 	public static long getLongValue(Properties properties, String key, long defaultValue) {
 		if(AssertUtils.isEmpty(properties)) {
 			return defaultValue;
@@ -109,6 +178,20 @@ public class PropertiesUtils {
 		return StringUtils.getLongValue(value, defaultValue);
 	}
 	
+	/**
+	 * Convert and return a {@link Float} value after reading from
+	 * {@link Properties} the {@link String} value against the given
+	 * <code>key</code>. If no value exists the given <code>defaultValue</code>
+	 * is returned.
+	 * 
+	 * @param properties
+	 *            the {@link Properties} instance to read from
+	 * 
+	 * @param key
+	 *            the <code>key</code> to look for
+	 * 
+	 * @return the {@link Float} value thus deciphered
+	 */
 	public static float getFloatValue(Properties properties, String key, float defaultValue) {
 		if(AssertUtils.isEmpty(properties)) {
 			return defaultValue;
@@ -118,6 +201,20 @@ public class PropertiesUtils {
 		return StringUtils.getFloatValue(value, defaultValue);
 	}
 
+	/**
+	 * Convert and return a {@link Double} value after reading from
+	 * {@link Properties} the {@link String} value against the given
+	 * <code>key</code>. If no value exists the given <code>defaultValue</code>
+	 * is returned.
+	 * 
+	 * @param properties
+	 *            the {@link Properties} instance to read from
+	 * 
+	 * @param key
+	 *            the <code>key</code> to look for
+	 * 
+	 * @return the {@link Double} value thus deciphered
+	 */
 	public static double getDoubleValue(Properties properties, String key, double defaultValue) {
 		if(AssertUtils.isEmpty(properties)) {
 			return defaultValue;
@@ -126,4 +223,5 @@ public class PropertiesUtils {
 		String value = properties.getProperty(key);
 		return StringUtils.getDoubleValue(value, defaultValue);
 	}
+	
 }
