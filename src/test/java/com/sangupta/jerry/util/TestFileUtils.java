@@ -2,7 +2,6 @@ package com.sangupta.jerry.util;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -10,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.sangupta.jerry.constants.SystemPropertyNames;
-import com.sangupta.jerry.ds.Tree;
 
 public class TestFileUtils {
 
@@ -306,10 +304,21 @@ public class TestFileUtils {
 	}
 	
 	public static void main(String[] args) {
-		Tree<File> tree = FileUtils.getDirTree(new File("c:/git/sangupta/s3"));
-		Iterator<Tree<File>> iter = tree.iterator();
-		while(iter.hasNext()) {
-			System.out.println(iter.next().getData().getAbsolutePath());
-		}
+		test("/");
+		test("pom.xml");
+		test(".");
+		test("target/../pom.xml");
+		test("..");
+		test("./");
+		test("./..");
+		test("./../");
+		test("../sqlutil.zip");
+		test("./../sqlutil.zip");
+		test("./../../../git/../git/sangupta/../../sqlutil.zip");
+		test("~");
+	}
+	
+	private static void test(String fp) {
+		System.out.println(fp + ":: " + FileUtils.resolveToFile(fp).getAbsoluteFile().getAbsolutePath());
 	}
 }

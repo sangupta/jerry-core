@@ -27,7 +27,7 @@ import java.util.UUID;
 
 import org.junit.Test;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 /**
  * Unit tests for {@link StringUtils} class.
@@ -254,28 +254,28 @@ public class TestStringUtils {
 	
 	@Test
 	public void testGetFloatValue() {
-		Assert.assertEquals(5f, StringUtils.getFloatValue(null, 5f));
-		Assert.assertEquals(5f, StringUtils.getFloatValue("", 5f));
-		Assert.assertEquals(5f, StringUtils.getFloatValue("abc", 5f));
+		Assert.assertEquals(5f, StringUtils.getFloatValue(null, 5f), 0f);
+		Assert.assertEquals(5f, StringUtils.getFloatValue("", 5f), 0f);
+		Assert.assertEquals(5f, StringUtils.getFloatValue("abc", 5f), 0f);
 		
-		Assert.assertEquals(63f, StringUtils.getFloatValue("63", 5f));
-		Assert.assertEquals(-63f, StringUtils.getFloatValue("-63", 5f));
+		Assert.assertEquals(63f, StringUtils.getFloatValue("63", 5f), 0f);
+		Assert.assertEquals(-63f, StringUtils.getFloatValue("-63", 5f), 0f);
 		
-		Assert.assertEquals(63.2f, StringUtils.getFloatValue("63.200", 5f));
-		Assert.assertEquals(-63.2f, StringUtils.getFloatValue("-63.200", 5f));
+		Assert.assertEquals(63.2f, StringUtils.getFloatValue("63.200", 5f), 0f);
+		Assert.assertEquals(-63.2f, StringUtils.getFloatValue("-63.200", 5f), 0f);
 	}
 	
 	@Test
 	public void testGetDoubleValue() {
-		Assert.assertEquals(5d, StringUtils.getDoubleValue(null, 5d));
-		Assert.assertEquals(5d, StringUtils.getDoubleValue("", 5d));
-		Assert.assertEquals(5d, StringUtils.getDoubleValue("abc", 5d));
+		Assert.assertEquals(5d, StringUtils.getDoubleValue(null, 5d), 0d);
+		Assert.assertEquals(5d, StringUtils.getDoubleValue("", 5d), 0d);
+		Assert.assertEquals(5d, StringUtils.getDoubleValue("abc", 5d), 0d);
 		
-		Assert.assertEquals(63d, StringUtils.getDoubleValue("63", 5d));
-		Assert.assertEquals(-63d, StringUtils.getDoubleValue("-63", 5d));
+		Assert.assertEquals(63d, StringUtils.getDoubleValue("63", 5d), 0d);
+		Assert.assertEquals(-63d, StringUtils.getDoubleValue("-63", 5d), 0d);
 		
-		Assert.assertEquals(63.2d, StringUtils.getDoubleValue("63.200", 5d));
-		Assert.assertEquals(-63.2d, StringUtils.getDoubleValue("-63.200", 5d));
+		Assert.assertEquals(63.2d, StringUtils.getDoubleValue("63.200", 5d), 0d);
+		Assert.assertEquals(-63.2d, StringUtils.getDoubleValue("-63.200", 5d), 0d);
 	}
 	
 	@Test

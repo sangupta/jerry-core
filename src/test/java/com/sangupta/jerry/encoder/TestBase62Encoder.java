@@ -21,7 +21,7 @@
  
 package com.sangupta.jerry.encoder;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
 
