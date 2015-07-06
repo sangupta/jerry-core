@@ -19,7 +19,7 @@
  * 
  */
  
-package com.sangupta.jerry.ds;
+package com.sangupta.jerry.ds.counter;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -30,13 +30,13 @@ import java.util.concurrent.ConcurrentMap;
  * @author sangupta
  * @since 1.1
  */
-public class LongCounter {
+public class IntegerCounter {
 
 	/**
 	 * Holds all counters for us.
 	 * 
 	 */
-	private final ConcurrentMap<String, long[]> counterMap = new ConcurrentHashMap<String, long[]>();
+	private final ConcurrentMap<String, int[]> counterMap = new ConcurrentHashMap<String, int[]>();
 
 	/**
 	 * Get or create a new counter. The default value of the new counter will be
@@ -47,14 +47,10 @@ public class LongCounter {
 	 * 
 	 * @return the current value of the counter
 	 */
-	public long get(String name) {
-		if(name == null) {
-			throw new IllegalArgumentException("Counter name cannot be null");
-		}
-		
-		long[] values = counterMap.get(name);
+	public int get(String name) {
+		int[] values = counterMap.get(name);
 		if(values == null) {
-			long[] olderValues = counterMap.putIfAbsent(name, new long[] { 0 });
+			int[] olderValues = counterMap.putIfAbsent(name, new int[] { 0 });
 			if(olderValues != null) {
 				return olderValues[0];
 			}
@@ -77,14 +73,14 @@ public class LongCounter {
 	 * 
 	 * @return the current value of the counter
 	 */
-	public long get(final String name, final long initialValue) {
+	public long get(final String name, final int initialValue) {
 		if(name == null) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		
-		long[] values = counterMap.get(name);
+		int[] values = counterMap.get(name);
 		if(values == null) {
-			long[] olderValues = counterMap.putIfAbsent(name, new long[] { initialValue });
+			int[] olderValues = counterMap.putIfAbsent(name, new int[] { initialValue });
 			if(olderValues != null) {
 				return olderValues[0];
 			}
@@ -103,12 +99,8 @@ public class LongCounter {
 	 * 
 	 * @return the current value of the counter
 	 */
-	public long remove(String name) {
-		if(name == null) {
-			throw new IllegalArgumentException("Counter name cannot be null");
-		}
-		
-		long[] values = counterMap.remove(name);
+	public int remove(String name) {
+		int[] values = counterMap.remove(name);
 		if(values == null) {
 			return 0;
 		}
@@ -125,14 +117,10 @@ public class LongCounter {
 	 * 
 	 * @return the current value of the counter
 	 */
-	public long increment(String name) {
-		if(name == null) {
-			throw new IllegalArgumentException("Counter name cannot be null");
-		}
-		
-		long[] values = counterMap.get(name);
+	public int increment(String name) {
+		int[] values = counterMap.get(name);
 		if(values == null) {
-			long[] olderValues = counterMap.putIfAbsent(name, new long[] { 1 });
+			int[] olderValues = counterMap.putIfAbsent(name, new int[] { 1 });
 			if(olderValues != null) {
 				olderValues[0]++;
 				return olderValues[0];
@@ -154,14 +142,10 @@ public class LongCounter {
 	 * 
 	 * @return the current value of the counter
 	 */
-	public long decrement(String name) {
-		if(name == null) {
-			throw new IllegalArgumentException("Counter name cannot be null");
-		}
-		
-		long[] values = counterMap.get(name);
+	public int decrement(String name) {
+		int[] values = counterMap.get(name);
 		if(values == null) {
-			long[] olderValues = counterMap.putIfAbsent(name, new long[] { -1 });
+			int[] olderValues = counterMap.putIfAbsent(name, new int[] { -1 });
 			if(olderValues != null) {
 				olderValues[0]--;
 				return olderValues[0];
@@ -173,7 +157,7 @@ public class LongCounter {
 		values[0]--;
 		return values[0];
 	}
-
+	
 	/**
 	 * Set the counter to the desired value.
 	 * 
@@ -184,18 +168,18 @@ public class LongCounter {
 	 *            the value to which the counter needs to be set
 	 * 
 	 */
-	public void set(String name, long value) {
+	public void set(String name, int value) {
 		if(name == null) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		
-		long[] values = counterMap.get(name);
+		int[] values = counterMap.get(name);
 		if(values != null) {
 			values[0] = value;
 			return;
 		}
 		
-		long[] olderValues = counterMap.putIfAbsent(name, new long[] { value });
+		int[] olderValues = counterMap.putIfAbsent(name, new int[] { value });
 		if(olderValues == null) {
 			return;
 		}
