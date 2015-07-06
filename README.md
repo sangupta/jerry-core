@@ -29,6 +29,29 @@ Changelog
 
 **Current Development**
 
+The current development snapshot `JAR` can be obtained using `JitPack.io` as:
+
+Add the following `repository` to Maven,
+
+```xml
+<repository>
+	<id>jitpack.io</id>
+	<url>https://jitpack.io</url>
+</repository>
+```
+
+Then add the dependency as,
+
+```xml
+<dependency>
+    <groupId>com.github.sangupta</groupId>
+    <artifactId>jerry-core</artifactId>
+    <version>-SNAPSHOT</version>
+</dependency>
+```
+
+**Released Versions**
+
 **2.0.0**
 
 * Moved `MutableInt`, `MutableLong`, `MutableFloat` and `MutableDouble` to a sub-package
@@ -162,7 +185,7 @@ The library can be downloaded from Maven Central using:
 <dependency>
     <groupId>com.sangupta</groupId>
     <artifactId>jerry-core</artifactId>
-    <version>1.6.1</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
