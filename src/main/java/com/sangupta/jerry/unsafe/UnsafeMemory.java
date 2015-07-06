@@ -53,11 +53,11 @@ public class UnsafeMemory {
 	}
 	
 	/**
-	 * Method to return the {@link com.sun.misc.Unsafe} object that can be used
+	 * Method to return the <code>com.sun.misc.Unsafe</code> object that can be used
 	 * for unsafe operations. Use this method with much caution as this can lead
 	 * to unpredictable results.
 	 * 
-	 * @return the Unsafe instance obtained
+	 * @return the <code>com.sun.misc.Unsafe</code> instance obtained
 	 * 
 	 */
 	public static Unsafe getUnsafe() {
