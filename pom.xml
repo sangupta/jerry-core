@@ -27,10 +27,11 @@
 	</licenses>
 	
 	<scm>
-		<connection>scm:git:git://github.com/sangupta/jerry-core.git</connection>
-		<developerConnection>scm:git:http://git@github.com/sangupta/jerry-core.git</developerConnection>
-		<url>https://github.com/sangupta/jerry-core</url>
-	</scm>
+	    <connection>scm:git:ssh://git@github.com/sangupta/jerry-core.git</connection>
+	    <developerConnection>scm:git:ssh://git@github.com/sangupta/jerry-core.git</developerConnection>
+	    <url>https://github.com/sangupta/jerry-core</url>
+	  <tag>HEAD</tag>
+  	</scm>
 	
 	<developers>
 		<developer>
