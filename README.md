@@ -33,14 +33,21 @@ Changelog
 
 * Moved `MutableInt`, `MutableLong`, `MutableFloat` and `MutableDouble` to a sub-package
 * Moved `IntegerCounter` and `LongCounter` to a sub-package
-* Added a `Tree` implementation that stores an n-ary tree and can render its flat view
+* Added a `Tree` implementation that stores an n-ary tree and can render its flat view, allows for depth-first traversal
 * Updated JavaDocs to remove all missing docs and removed all warnings
 * Added `BitArray` and its multiple implementations: an in-memory `FastBitArray`, a simple `FileBackedBitArray`, an implementation using standard `JavaBitArray` and a fast memory-mapped file based `MMapFileBackedBitArray`
 * Added Jersey 1.0 and 2.0 based `GsonJsonProvider` for building REST services
 * Added `DumpUtils` to contruct a reflection-based string representation of an object useful for debugging purposes
 * Added `CookieUtils`, `ResponseUtils`, and `RequestUtils` to work with Servlet specification based objects
 * Added `PropertiesUtils` to work with `Properties` objects easily
+* Added method to resolve a file path to `File` instance taking care of all `..`, and `~`
+* Added `Transformer` construct to transform an object from one form to another
+* Added constant to `SystemPropertyNames` for fetching java temporary folder
+* Added `FileUtils.getExtension` method to extract file extension
+* Added `FileUtils.hexDump` method to dump file contents in hex-notation
+* Added `ReadableUtils` to parse number of bytes/time in milliseconds to human readable form
 * Added `OSUtils` to retrieve operating-system based information
+* Added Oracle JDK 8 as one of the test environments
 * Updated copyright headers
 
 
