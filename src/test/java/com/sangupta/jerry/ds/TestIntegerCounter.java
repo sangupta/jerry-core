@@ -23,9 +23,11 @@ package com.sangupta.jerry.ds;
 
 import java.util.Random;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 
 import org.junit.Test;
+
+import com.sangupta.jerry.ds.counter.IntegerCounter;
 
 /**
  * Test cases for {@link IntegerCounter} class.

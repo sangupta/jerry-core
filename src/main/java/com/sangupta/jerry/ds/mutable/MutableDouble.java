@@ -19,35 +19,35 @@
  * 
  */
  
-package com.sangupta.jerry.ds;
+package com.sangupta.jerry.ds.mutable;
 
 import java.util.Collections;
 
 /**
- * A simple wrapper over an integer to be used in {@link Collections}
+ * A simple wrapper over a double to be used in {@link Collections}
  * where the value can be changed as and when needed.
  * 
  * @author sangupta
  *
  */
-public class MutableInt {
+public class MutableDouble {
 
-	private int value;
+	private double value;
 	
 	/**
-	 * Create a mutable integer with initial value of <code>0</code>.
+	 * Create a mutable <code>double</code> with initial value of <code>0</code>.
 	 * 
 	 */
-	public MutableInt() {
+	public MutableDouble() {
 		
 	}
 	
 	/**
-	 * Create a mutable integer with the given initial value
+	 * Create a mutable double with the given initial value
 	 * 
 	 * @param value
 	 */
-	public MutableInt(int value) {
+	public MutableDouble(float value) {
 		this.value = value;
 	}
 	
@@ -56,16 +56,16 @@ public class MutableInt {
 	 * 
 	 * @return
 	 */
-	public int get() {
+	public double get() {
 		return this.value;
 	}
 	
 	/**
-	 * Set the current value of this mutable integer to the given value
+	 * Set the current value of this mutable double to the given value
 	 * 
 	 * @param value
 	 */
-	public void set(int value) {
+	public void set(double value) {
 		this.value = value;
 	}
 	
@@ -74,7 +74,7 @@ public class MutableInt {
 	 * 
 	 * @param value
 	 */
-	public void setIfMax(int value) {
+	public void setIfMax(double value) {
 		if(this.value < value) {
 			this.value = value;
 		}
@@ -85,7 +85,7 @@ public class MutableInt {
 	 * 
 	 * @param value
 	 */
-	public void setIfMin(int value) {
+	public void setIfMin(double value) {
 		if(this.value < value) {
 			this.value = value;
 		}

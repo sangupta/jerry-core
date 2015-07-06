@@ -19,35 +19,35 @@
  * 
  */
  
-package com.sangupta.jerry.ds;
+package com.sangupta.jerry.ds.mutable;
 
 import java.util.Collections;
 
 /**
- * A simple wrapper over a long to be used in {@link Collections}
+ * A simple wrapper over a float to be used in {@link Collections}
  * where the value can be changed as and when needed.
  * 
  * @author sangupta
  *
  */
-public class MutableLong {
+public class MutableFloat {
 
-	private long value;
+	private float value;
 	
 	/**
-	 * Create a mutable <code>long</code> with initial value of <code>0</code>.
+	 * Create a mutable <code>float</code> with initial value of <code>0</code>.
 	 * 
 	 */
-	public MutableLong() {
+	public MutableFloat() {
 		
 	}
 	
 	/**
-	 * Create a mutable long with the given initial value
+	 * Create a mutable float with the given initial value
 	 * 
 	 * @param value
 	 */
-	public MutableLong(long value) {
+	public MutableFloat(float value) {
 		this.value = value;
 	}
 	
@@ -56,16 +56,16 @@ public class MutableLong {
 	 * 
 	 * @return
 	 */
-	public long get() {
+	public float get() {
 		return this.value;
 	}
 	
 	/**
-	 * Set the current value of this mutable long to the given value
+	 * Set the current value of this mutable float to the given value
 	 * 
 	 * @param value
 	 */
-	public void set(long value) {
+	public void set(float value) {
 		this.value = value;
 	}
 	
@@ -74,7 +74,7 @@ public class MutableLong {
 	 * 
 	 * @param value
 	 */
-	public void setIfMax(long value) {
+	public void setIfMax(float value) {
 		if(this.value < value) {
 			this.value = value;
 		}
@@ -85,7 +85,7 @@ public class MutableLong {
 	 * 
 	 * @param value
 	 */
-	public void setIfMin(long value) {
+	public void setIfMin(float value) {
 		if(this.value < value) {
 			this.value = value;
 		}
