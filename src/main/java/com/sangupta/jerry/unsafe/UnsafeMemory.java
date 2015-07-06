@@ -57,7 +57,7 @@ public class UnsafeMemory {
 	 * for unsafe operations. Use this method with much caution as this can lead
 	 * to unpredictable results.
 	 * 
-	 * @return the {@link com.sun.misc.Unsafe} object thus obtained
+	 * @return the Unsafe instance obtained
 	 * 
 	 */
 	public static Unsafe getUnsafe() {

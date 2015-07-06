@@ -724,8 +724,16 @@ public class StringUtils {
 	 * Return a string containing the same character the given number of times.
 	 * 
 	 * @param ch
+	 *            the character to repeat
+	 * 
 	 * @param times
-	 * @return
+	 *            the number of times to use
+	 * 
+	 * @return the {@link String} instance thus created
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the number of times to repeat is less than or equal to
+	 *             ZERO
 	 */
 	public static String repeat(char ch, int times) {
 		if(times <= 0) {
@@ -746,7 +754,9 @@ public class StringUtils {
 	 * illegal characters to underscore.
 	 * 
 	 * @param name
-	 * @return
+	 *            the property name to convert
+	 * 
+	 * @return the converted property name
 	 */
 	public static String convertToJsonPropertyName(String name) {
 		char[] chars = name.toCharArray();
@@ -761,11 +771,13 @@ public class StringUtils {
 	}
 	
 	/**
-	 * Convert the property name to XML valid property name. Convert all
-	 * illegal characters to hyphen.
+	 * Convert the property name to XML valid property name. Convert all illegal
+	 * characters to hyphen.
 	 * 
 	 * @param name
-	 * @return
+	 *            the property name to convert
+	 * 
+	 * @return the converted property name
 	 */
 	public static String convertToXmlPropertyName(String name) {
 		char[] chars = name.toCharArray();

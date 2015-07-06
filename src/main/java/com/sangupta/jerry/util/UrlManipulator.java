@@ -665,9 +665,13 @@ public class UrlManipulator {
 	}
 
 	/**
+	 * Check if the given character is an alphabet in English or not
 	 * 
 	 * @param c
-	 * @return
+	 *            the character to test
+	 * 
+	 * @return <code>true</code> if char is alphabet, <code>false</code>
+	 *         otherwise
 	 */
 	private static boolean isAlphabet(char c) {
 		if(('a' <= c ) && (c <= 'z')) {

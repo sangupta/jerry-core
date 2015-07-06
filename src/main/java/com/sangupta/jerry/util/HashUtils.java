@@ -94,9 +94,14 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Compute the MD5 of the given string data. It is converted to bytes using
+	 * platform specific default encoding.
 	 * 
 	 * @param data
-	 * @return
+	 *            the string for which hash needs to be computed
+	 * 
+	 * @return the hash represented as a {@link String}, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
 	 */
 	public static String getMD5Hex(String data) {
 		return getMD5Hex(data.getBytes());
@@ -124,10 +129,11 @@ public class HashUtils {
 	}
 	
 	/**
-	 * Computes the SHA-1 hash of the given data and returns the
-	 * representation in Hex format.
+	 * Computes the SHA-1 hash of the given data and returns the representation
+	 * in Hex format.
 	 * 
-	 * @param data the data for which the hash needs to be computed
+	 * @param data
+	 *            the data for which the hash needs to be computed
 	 * 
 	 * @return the hash represented as String in hex-format
 	 * 
@@ -142,9 +148,13 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Computes the SHA-1 hash of the given data and returns the representation
+	 * in Hex format.
 	 * 
 	 * @param data
-	 * @return
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as String in hex-format
 	 */
 	public static String getSHA1Hex(String data) {
 		return getSHA1Hex(data.getBytes());
@@ -204,7 +214,8 @@ public class HashUtils {
 	 * Computes the SHA-256 hash of the given data and returns the
 	 * representation in Hex format.
 	 * 
-	 * @param data the data for which the hash needs to be computed
+	 * @param data
+	 *            the data for which the hash needs to be computed
 	 * 
 	 * @return the hash represented as String in hex-format
 	 * 
@@ -219,9 +230,13 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Computes the SHA-256 hash of the given data and returns the
+	 * representation in Hex format.
 	 * 
 	 * @param data
-	 * @return
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as String in hex-format
 	 */
 	public static String getSHA256Hex(String data) {
 		return getSHA256Hex(data.getBytes());
@@ -263,9 +278,13 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Computes the SHA-224 hash of the given byte data. 
 	 * 
 	 * @param data
-	 * @return
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as {@link String}, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
 	 */
 	public static String getSHA224Hex(byte[] data) {
 		byte[] digest = getSHA224(data);
@@ -277,9 +296,14 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Computes the SHA-224 hash of the given string data. It is converted to
+	 * bytes using platform specific default encoding.
 	 * 
 	 * @param data
-	 * @return
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as {@link String}, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
 	 */
 	public static String getSHA224Hex(String data) {
 		return getSHA224Hex(data.getBytes());
@@ -321,9 +345,13 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Computes the SHA-384 hash of the given byte data.
 	 * 
 	 * @param data
-	 * @return
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as {@link String}, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
 	 */
 	public static String getSHA384Hex(byte[] data) {
 		byte[] digest = getSHA384(data);
@@ -335,9 +363,14 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Computes the SHA-384 hash of the given {@link String} data. It is converted to
+	 * bytes using platform specific default encoding.
 	 * 
 	 * @param data
-	 * @return
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as {@link String}, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
 	 */
 	public static String getSHA384Hex(String data) {
 		return getSHA384Hex(data.getBytes());
@@ -379,9 +412,13 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Compute the SHA-512 hash for the given bytes.
 	 * 
 	 * @param data
-	 * @return
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as {@link String}, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
 	 */
 	public static String getSHA512Hex(byte[] data) {
 		byte[] digest = getSHA512(data);
@@ -393,9 +430,14 @@ public class HashUtils {
 	}
 	
 	/**
+	 * Compute the SHA-512 hash for the given bytes. It is converted to
+	 * bytes using platform specific default encoding.
 	 * 
 	 * @param data
-	 * @return
+	 *            the data for which the hash needs to be computed
+	 * 
+	 * @return the hash represented as {@link String}, or <code>null</code> if
+	 *         there is no provider available for the given hash algorithm.
 	 */
 	public static String getSHA512Hex(String data) {
 		return getSHA512Hex(data.getBytes());

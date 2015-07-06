@@ -494,11 +494,14 @@ public class AssertUtils {
 	}
 
 	/**
-	 * Check if all provided {@link String}s are empty. Even if a single one
-	 * is not empty, this will return a <code>false</code>.
+	 * Check if all provided {@link String}s are empty. Even if a single one is
+	 * not empty, this will return a <code>false</code>.
 	 * 
 	 * @param strings
-	 * @return
+	 *            the strings to check
+	 * 
+	 * @return <code>true</code> if all strings are empty, <code>false</code>
+	 *         otherwise
 	 */
 	public static boolean areEmpty(String... strings) {
 		if(AssertUtils.isEmpty(strings)) {
@@ -515,11 +518,14 @@ public class AssertUtils {
 	}
 	
 	/**
-	 * Check if all provided {@link String}s are not empty. Even if a single
-	 * one is empty, this method will return a <code>false</code>.
+	 * Check if all provided {@link String}s are not empty. Even if a single one
+	 * is empty, this method will return a <code>false</code>.
 	 * 
 	 * @param strings
-	 * @return
+	 *            the strings to check
+	 * 
+	 * @return <code>false</code> if all the strings are NOT-empty,
+	 *         <code>true</code> otherwise
 	 */
 	public static boolean areNotEmpty(String... strings) {
 		return !areEmpty(strings);

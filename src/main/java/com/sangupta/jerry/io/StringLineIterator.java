@@ -132,7 +132,7 @@ public class StringLineIterator implements Iterator<String> {
 	/**
 	 * Return the current line number.
 	 * 
-	 * @return
+	 * @return the current line number
 	 */
 	public int getLineNumber() {
 		return this.lineNumber;
@@ -141,7 +141,7 @@ public class StringLineIterator implements Iterator<String> {
 	/**
 	 * Return the index position at which the current line starts.
 	 * 
-	 * @return
+	 * @return the index for the beginning of thi sline
 	 */
 	public int getLineBegin() {
 		return this.lineBegin;
@@ -150,17 +150,16 @@ public class StringLineIterator implements Iterator<String> {
 	/**
 	 * Return the index position at which the current line ends.
 	 * 
-	 * @return
+	 * @return the index position of line end
 	 */
 	public int getLineEnd() {
 		return this.lineEnd;
 	}
 	
 	/**
-	 * Return the index position at which the next read for the line will
-	 * occur.
+	 * Return the index position at which the next read for the line will occur.
 	 * 
-	 * @return
+	 * @return the index at which read will occur
 	 */
 	public int getNextLineBegin() {
 		if(this.current >= this.length) {

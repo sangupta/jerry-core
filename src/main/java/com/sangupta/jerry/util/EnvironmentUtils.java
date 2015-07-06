@@ -33,11 +33,13 @@ import java.util.Set;
 public class EnvironmentUtils {
 	
 	/**
-	 * Read an environment variable first from the java command line, and
-	 * then from the system variables. If none is found, return <code>null</code>
+	 * Read an environment variable first from the java command line, and then
+	 * from the system variables. If none is found, return <code>null</code>
 	 * 
 	 * @param name
-	 * @return
+	 *            the property name to read
+	 * 
+	 * @return the value of the property
 	 */
 	public static String readProperty(String name) {
 		String value = System.getProperty(name);
@@ -53,8 +55,12 @@ public class EnvironmentUtils {
 	 * from the system variables. If none is found, return the default value.
 	 * 
 	 * @param name
+	 *            the property name to read
+	 * 
 	 * @param defaultValue
-	 * @return
+	 *            the value of return in case no such property is found
+	 * 
+	 * @return the value of the property or defaultValue
 	 */
 	public static String readProperty(String name, String defaultValue) {
 		String value = readProperty(name);

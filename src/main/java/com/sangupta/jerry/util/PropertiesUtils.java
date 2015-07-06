@@ -70,7 +70,9 @@ public class PropertiesUtils {
 	 * {@link Properties} instance
 	 * 
 	 * @param map
-	 * @return
+	 *            the map to convert
+	 * 
+	 * @return the {@link Properties} instance thus created and populated
 	 */
 	public static Properties fromMap(Map<String, String> map) {
 		if(map == null) {

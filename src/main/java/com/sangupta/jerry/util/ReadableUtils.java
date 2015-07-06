@@ -34,11 +34,13 @@ import java.util.Arrays;
 public class ReadableUtils {
 	
 	/**
-	 * Convert human readable file size to number of bytes. For example:
-	 * 2k would convert to 2048 etc.
+	 * Convert human readable file size to number of bytes. For example: 2k
+	 * would convert to 2048 etc.
 	 * 
 	 * @param size
-	 * @return
+	 *            the size as {@link String}
+	 * 
+	 * @return the number of bytes represented
 	 */
 	public static long parseByteCount(String size) {
 		if(AssertUtils.isEmpty(size)) {
@@ -91,10 +93,13 @@ public class ReadableUtils {
 	}
 
 	/**
-	 * Convert the given number of bytes to human-readable {@link String} format.
+	 * Convert the given number of bytes to human-readable {@link String}
+	 * format. For example 2048 will be said as 2K.
 	 * 
 	 * @param bytes
-	 * @return
+	 *            the number of bytes
+	 * 
+	 * @return size represented as {@link String} instance
 	 */
 	public static String getReadableByteCount(long bytes) {
 	    if (bytes < FileUtils.ONE_KB) {
@@ -115,7 +120,9 @@ public class ReadableUtils {
 	 * Convert the given time duration into a human-readable string format.
 	 * 
 	 * @param millis
-	 * @return
+	 *            the duration in millseconds
+	 * 
+	 * @return the human readable time
 	 */
 	public static String getReadableTimeDuration(long millis) {
 		long seconds = millis / 1000l;
@@ -152,9 +159,16 @@ public class ReadableUtils {
 	 * Return the singular string if the value is ONE, or the plural one.
 	 * 
 	 * @param value
+	 *            the value to test for
+	 * 
 	 * @param singular
+	 *            the representation when value is ONE
+	 * 
 	 * @param plural
-	 * @return
+	 *            the representation when value is MORE than ONE
+	 * 
+	 * @return the {@link String} representations
+	 * 
 	 */
 	public static String getPluralIfNeeded(long value, String singular, String plural) {
 		if(value == 1) {

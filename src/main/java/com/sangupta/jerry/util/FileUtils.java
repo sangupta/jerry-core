@@ -431,7 +431,7 @@ public class FileUtils {
 	 * 
 	 * @param file file for which extension is needed
 	 * 
-	 * @return
+	 * @return the extension for the file, or <code>null</code>
 	 */
 	public static String getExtension(File file) {
 		if(file == null) {
@@ -451,9 +451,13 @@ public class FileUtils {
 	 * Return the MD5 value for the file.
 	 * 
 	 * @param file
-	 * @return
+	 *            the {@link File} instance to compute MD5 of
+	 * 
+	 * @return the MD5 value represented as byte-array
 	 */
 	public static byte[] getMD5(File file) {
+		CheckUtils.checkFileExists(file);
+		
 		final MessageDigest digest;
 		
 		try {
@@ -469,7 +473,9 @@ public class FileUtils {
 	 * Return the SHA-256 value for the file.
 	 * 
 	 * @param file
-	 * @return
+	 *            the {@link File} isntance to compute SHA256 of
+	 * 
+	 * @return the SHA256 value represented as byte-array
 	 */
 	public static byte[] getSHA256(File file) {
 		final MessageDigest digest;
@@ -488,16 +494,25 @@ public class FileUtils {
 	 * file
 	 * 
 	 * @param file
+	 *            the {@link File} instance to work on
 	 * 
 	 * @param digest
+	 *            the {@link MessageDigest} instance to use
 	 * 
 	 * @return <code>null</code> if file is <code>null</code>, cannot be read,
 	 *         or digest is <code>null</code>. Otherwise returns the actual
 	 *         digest value
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if {@link File} is <code>null</code>, not a valid file, does
+	 *             not exists, or if the {@link MessageDigest} instance is
+	 *             <code>null</code>
 	 */
 	public static byte[] getFileDigestValue(File file, final MessageDigest digest) {
+		CheckUtils.checkFileExists(file);
+		
 		if(digest == null) {
-			return null;
+			throw new IllegalArgumentException("MessageDigest instance cannot be null");
 		}
 		
 		GenericConsumer<byte[]> byteConsumer = new GenericConsumer<byte[]>() {
@@ -519,24 +534,45 @@ public class FileUtils {
 	 * Dump an entire file to HEX
 	 * 
 	 * @param out
+	 *            the {@link PrintStream} to write to
+	 * 
 	 * @param file
+	 *            the {@link File} handle to dump contents from
+	 * 
 	 * @throws IOException
+	 *             if something fails
 	 */
 	public static void hexDump(PrintStream out, File file) throws IOException {
 		hexDump(out, file, 0, 0);
 	}
 	
 	/**
-	 * Dump a given file into HEX starting at given offset and reading given number of rows where
-	 * a row consists of 16-bytes.
+	 * Dump a given file into HEX starting at given offset and reading given
+	 * number of rows where a row consists of 16-bytes.
 	 * 
 	 * @param out
+	 *            the {@link PrintStream} to write to
+	 * 
 	 * @param file
+	 *            the {@link File} handle to dump contents from
+	 * 
 	 * @param offset
+	 *            the file offset to start reading from
+	 * 
 	 * @param maxRows
+	 *            the maximum number of rows (one row consisting of 16 bytes) to
+	 *            display
+	 * 
 	 * @throws IOException
+	 *             if something fails
 	 */
 	public static void hexDump(PrintStream out, File file, long offset, int maxRows) throws IOException {
+		if(out == null) {
+			throw new IllegalArgumentException("PrintStream cannot be null");
+		}
+		
+		CheckUtils.checkFileExists(file);
+		
 		InputStream is = null;
 		BufferedInputStream bis = null;
 		

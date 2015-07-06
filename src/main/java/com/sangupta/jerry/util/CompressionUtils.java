@@ -102,7 +102,7 @@ public class CompressionUtils {
 	 * @param string
 	 *            the string to be compressed
 	 * 
-	 * @param charsetName
+	 * @param charset
 	 *            the character set to use for converting string to byte-array
 	 *            
 	 * @return the bytes of the compressed representation, or <code>null</code>

@@ -72,17 +72,18 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	/**
 	 * Check if this node is the root of the tree.
 	 * 
-	 * @return
+	 * @return <code>true</code> if this node is root, <code>false</code>
+	 *         otherwise
 	 */
 	public boolean isRoot() {
 		return this.parent == null;
 	}
 	
 	/**
-	 * Check if this node is a leaf node, one without any
-	 * children.
+	 * Check if this node is a leaf node, one without any children.
 	 * 
-	 * @return
+	 * @return <code>true</code> if this node is leaf, <code>false</code>
+	 *         otherwise
 	 */
 	public boolean isLeaf() {
 		if(this.children == null) {
@@ -95,7 +96,8 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	/**
 	 * Check if this node has child elements or not.
 	 * 
-	 * @return
+	 * @return <code>true</code> if this node has atleast one child,
+	 *         <code>false</code> otherwise
 	 */
 	public boolean hasChildren() {
 		if(this.children == null) {
@@ -108,7 +110,8 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	/**
 	 * Return the level of this node in the tree.
 	 * 
-	 * @return
+	 * @return the level for this node, where ROOT node is assigned a level of
+	 *         zero
 	 */
 	public int getLevel() {
 		if(this.isRoot()) {
@@ -119,11 +122,13 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	}
 	
 	/**
-	 * Add a new node as a child node to this node and return
-	 * the newly added node back.
+	 * Add a new node as a child node to this node and return the newly added
+	 * node back.
 	 * 
 	 * @param data
-	 * @return
+	 *            the data for the added child node
+	 *            
+	 * @return the added child node
 	 */
 	public Tree<T> addChild(T data) {
 		if(this.children == null) {
@@ -140,7 +145,7 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	/**
 	 * Return the children associated with this node.
 	 * 
-	 * @return
+	 * @return a list of all child {@link Tree} nodes
 	 */
 	public List<Tree<T>> getChildren() {
 		return this.children;
@@ -149,7 +154,8 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	/**
 	 * Remove this very node from the tree.
 	 * 
-	 * @return
+	 * @return <code>true</code> if we could successfully remove the node from
+	 *         its parent, <code>false</code> otherwise
 	 */
 	boolean removeSelf() {
 		if(this.isRoot()) {
@@ -166,11 +172,13 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	}
 	
 	/**
-	 * Remove the given child from the list of children for this
-	 * node.
+	 * Remove the given child from the list of children for this node.
 	 * 
 	 * @param node
-	 * @return
+	 *            the node to be removed from this node's children
+	 * 
+	 * @return <code>true</code> if node was removed, <code>false</code>
+	 *         otherwise
 	 */
 	boolean removeChild(Tree<T> node) {
 		if(node == null) {
@@ -195,9 +203,17 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	
 	/**
 	 * Get the child node at the given index
-	 *  
+	 * 
 	 * @param index
-	 * @return
+	 *            the index for which the children is desired
+	 * 
+	 * @return the child node at given index
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if index is less than zero
+	 * 
+	 * @throws IndexOutOfBoundsException
+	 *             if index is not valid, or there are no children present
 	 */
 	Tree<T> getChild(int index) {
 		if(index < 0) {
@@ -219,7 +235,7 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	/**
 	 * Get the next sibling for this node.
 	 * 
-	 * @return
+	 * @return the next sibling for this node, <code>null</code> otherwise
 	 */
 	public Tree<T> getSibling() {
 		if(this.parent == null) {
@@ -230,11 +246,13 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	}
 	
 	/**
-	 * Get the next child node from this node where the node being
-	 * searched is provided.
+	 * Get the next child node from this node where the node being searched is
+	 * provided.
 	 * 
 	 * @param node
-	 * @return
+	 *            the node whose next sibling is desired
+	 * 
+	 * @return the next node {@link Tree} instance, <code>null</code> otherwise
 	 */
 	public Tree<T> nextChild(Tree<T> node) {
 		if(this.isLeaf()) {
@@ -280,7 +298,7 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	/**
 	 * Read the data stored in this node.
 	 * 
-	 * @return
+	 * @return the data in this node
 	 */
 	public T getData() {
 		return this.data;
@@ -289,7 +307,7 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	/**
 	 * Change the data stored in this node.
 	 * 
-	 * @param data
+	 * @param data the data to be set 
 	 */
 	public void setData(T data) {
 		this.data = data;
@@ -299,7 +317,10 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	 * Render the tree into a {@link String}.
 	 * 
 	 * @param transformer
-	 * @return
+	 *            the {@link Transformer} instance to call on each node
+	 * 
+	 * @return the {@link String} representation of the tree as generated using
+	 *         the given {@link Transformer} instance
 	 */
 	public String renderTree(Transformer<T, String> transformer) {
 	    List<StringBuilder> lines = renderTreeLines(this, transformer);
@@ -379,6 +400,7 @@ public class Tree<T> implements Iterable<Tree<T>> {
 		 * The constructor to generate the iterator
 		 * 
 		 * @param rootNode
+		 *            the node that will act as the root
 		 */
 		public SimpleTreeIterator(Tree<T> rootNode) {
 			if(rootNode == null) {
@@ -394,10 +416,11 @@ public class Tree<T> implements Iterable<Tree<T>> {
 		}
 		
 		/**
-		 * Internal method that fills in the next node that will be returned
-		 * to the user.
+		 * Internal method that fills in the next node that will be returned to
+		 * the user.
 		 * 
-		 * @return
+		 * @return <code>true</code> if there is a next node present,
+		 *         <code>false</code> otherwise
 		 */
 		private boolean hasNextInternal() {
 			// send the root first

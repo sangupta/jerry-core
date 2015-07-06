@@ -320,7 +320,7 @@ public class ConsoleTable {
 	/**
 	 * Return the number of columns inside the table
 	 * 
-	 * @return
+	 * @return the number of columns
 	 */
 	public int numColumns() {
 		return this.columnSizes.size();
@@ -330,7 +330,9 @@ public class ConsoleTable {
 	 * Return the column size for the column.
 	 * 
 	 * @param index
-	 * @return
+	 *            the column index for which size is required
+	 * 
+	 * @return the column size
 	 */
 	public int getColumnSize(int index) {
 		return this.columnSizes.get(index).get();
@@ -340,6 +342,7 @@ public class ConsoleTable {
 	 * Change the column separator to be used.
 	 * 
 	 * @param separator
+	 *            the separator to use for columns
 	 */
 	public void setColumnSeparator(String separator) {
 		if(AssertUtils.isEmpty(separator)) {
@@ -365,7 +368,10 @@ public class ConsoleTable {
 	// Usual accessors follow
 
 	/**
-	 * @param layout the layout to set
+	 * Set the layout for this table to the given {@link ConsoleTableLayout}
+	 * 
+	 * @param layout
+	 *            the layout to set
 	 */
 	public void setLayout(ConsoleTableLayout layout) {
 		if(layout == null) {

@@ -46,7 +46,7 @@ public class ConsoleTableWriter {
 	 * @param table
 	 *            the {@link ConsoleTable} to output
 	 * 
-	 * @param out
+	 * @param writer
 	 *            the {@link PrintWriter} to write to
 	 */
 	public void writeJson(ConsoleTable table, PrintWriter writer) {
@@ -119,7 +119,7 @@ public class ConsoleTableWriter {
 	 * @param table
 	 *            the {@link ConsoleTable} to output
 	 * 
-	 * @param out
+	 * @param writer
 	 *            the {@link PrintStream} to write to
 	 * 
 	 * @param parentXmlTag
@@ -202,7 +202,7 @@ public class ConsoleTableWriter {
 	 * @param table
 	 *            the {@link ConsoleTable} to output
 	 * 
-	 * @param out
+	 * @param writer
 	 *            the {@link PrintWriter} to write to
 	 */
 	public void writeCsv(ConsoleTable table, PrintWriter writer) {

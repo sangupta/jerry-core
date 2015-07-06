@@ -39,8 +39,12 @@ public class BitUtils {
 	 * Check if a bit is set in an int value.
 	 * 
 	 * @param value
+	 *            the integer value to look in
+	 * 
 	 * @param bit
-	 * @return
+	 *            the bit number to look for
+	 * 
+	 * @return <code>true</code> if bit is set, <code>false</code> otherwise
 	 */
 	public static boolean isBitSet(int value, int bit) {
 	    CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
@@ -53,8 +57,13 @@ public class BitUtils {
 	 * Set a bit in an int value
 	 * 
 	 * @param value
+	 *            the integer value to operate on
+	 * 
 	 * @param bit
-	 * @return
+	 *            the bit to set
+	 * 
+	 * @return <code>true</code> if the bit was modified, <code>false</code>
+	 *         otherwise
 	 */
 	public static int setBit(int value, int bit) {
 		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
@@ -67,8 +76,13 @@ public class BitUtils {
 	 * Clear a bit in an int value
 	 * 
 	 * @param value
+	 *            the integer value to operate on
+	 * 
 	 * @param bit
-	 * @return
+	 *            the bit to clear
+	 * 
+	 * @return <code>true</code> if bit was modified, <code>false</code>
+	 *         otherwise
 	 */
 	public static int clearBit(int value, int bit) {
 		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
@@ -81,8 +95,13 @@ public class BitUtils {
 	 * Check if a bit is set in a long value
 	 * 
 	 * @param value
+	 *            the long value to operate on
+	 * 
 	 * @param bit
-	 * @return
+	 *            the bit to check
+	 * 
+	 * @return <code>true</code> if bit is set, <code>false</code>
+	 *         otherwise
 	 */
 	public static boolean isBitSet(long value, int bit) {
 	    CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
@@ -95,8 +114,13 @@ public class BitUtils {
 	 * Set a bit in a long value
 	 * 
 	 * @param value
+	 *            the long value to operate on
+	 * 
 	 * @param bit
-	 * @return
+	 *            the bit to set
+	 * 
+	 * @return <code>true</code> if bit was modified, <code>false</code>
+	 *         otherwise
 	 */
 	public static long setBit(long value, int bit) {
 		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
@@ -109,8 +133,13 @@ public class BitUtils {
 	 * Clear a bit in a long value
 	 * 
 	 * @param value
+	 *            the long value to operate on
+	 * 
 	 * @param bit
-	 * @return
+	 *            the bit to clear
+	 * 
+	 * @return <code>true</code> if bit was modified, <code>false</code>
+	 *         otherwise
 	 */
 	public static long clearBit(long value, int bit) {
 		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");

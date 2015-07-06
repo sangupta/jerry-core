@@ -37,14 +37,17 @@ public interface UserLocalStore {
 	 * Read the value of the data-store.
 	 * 
 	 * @param property
-	 * @return
+	 *            the property to read
+	 * 
+	 * @return the value of the property or <code>null</code>
 	 */
 	public String get(String property);
 	
 	/**
 	 * Return the name of all keys within the data-store
 	 * 
-	 * @return
+	 * @return a {@link List} instance consisting of all property names within
+	 *         the store
 	 */
 	public List<String> getAllKeys();
 	
@@ -64,9 +67,12 @@ public interface UserLocalStore {
 
 	/**
 	 * Store the given value in the data-store.
-	 *  
+	 * 
 	 * @param key
+	 *            the key to use
+	 * 
 	 * @param property
+	 *            the value of the property
 	 */
 	public void put(String key, String property);
 	
@@ -74,6 +80,7 @@ public interface UserLocalStore {
 	 * Delete the value associated with the key in the data-store.
 	 * 
 	 * @param key
+	 *            the property name to delete
 	 */
 	public void delete(String key);
 	
