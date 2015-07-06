@@ -371,6 +371,11 @@ public class Tree<T> implements Iterable<Tree<T>> {
 		private boolean rootConsumed = false; 
 
 		/**
+		 * Indicates if we have the next node available or not
+		 */
+		protected volatile boolean hasNextNode;
+		
+		/**
 		 * The constructor to generate the iterator
 		 * 
 		 * @param rootNode
@@ -385,6 +390,16 @@ public class Tree<T> implements Iterable<Tree<T>> {
 
 		@Override
 		public boolean hasNext() {
+			return this.hasNextNode;
+		}
+		
+		/**
+		 * Internal method that fills in the next node that will be returned
+		 * to the user.
+		 * 
+		 * @return
+		 */
+		private boolean hasNextInternal() {
 			// send the root first
 			if(!rootConsumed) {
 				this.rootConsumed = true;
@@ -415,6 +430,7 @@ public class Tree<T> implements Iterable<Tree<T>> {
 
 		@Override
 		public Tree<T> next() {
+			this.hasNextNode = hasNextInternal();
 			return this.nextNode;
 		}
 
