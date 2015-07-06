@@ -29,6 +29,21 @@ Changelog
 
 **Current Development**
 
+**2.0.0**
+
+* Moved `MutableInt`, `MutableLong`, `MutableFloat` and `MutableDouble` to a sub-package
+* Moved `IntegerCounter` and `LongCounter` to a sub-package
+* Added a `Tree` implementation that stores an n-ary tree and can render its flat view
+* Updated JavaDocs to remove all missing docs and removed all warnings
+* Added `BitArray` and its multiple implementations: an in-memory `FastBitArray`, a simple `FileBackedBitArray`, an implementation using standard `JavaBitArray` and a fast memory-mapped file based `MMapFileBackedBitArray`
+* Added Jersey 1.0 and 2.0 based `GsonJsonProvider` for building REST services
+* Added `DumpUtils` to contruct a reflection-based string representation of an object useful for debugging purposes
+* Added `CookieUtils`, `ResponseUtils`, and `RequestUtils` to work with Servlet specification based objects
+* Added `PropertiesUtils` to work with `Properties` objects easily
+* Added `OSUtils` to retrieve operating-system based information
+* Updated copyright headers
+
+
 **1.6.1**
 
 * Fixed bug in `CheckUtils.directoryExists` where its existence as a `File` was being tested
