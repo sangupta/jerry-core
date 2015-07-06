@@ -43,10 +43,11 @@ public class SecurityContext {
 	private static Principal ANONYMOUS_USER_PRINCIPAL = null;
 	
 	/**
-	 * Method that sets up the anonymous user account. If no user is assigned
-	 * to the request, the anonymous user account will be returned.
+	 * Method that sets up the anonymous user account. If no user is assigned to
+	 * the request, the anonymous user account will be returned.
 	 * 
 	 * @param principal
+	 *            the {@link Principal} instance to use for anonymous users
 	 */
 	public static void setupAnonymousUserAccount(Principal principal) {
 		ANONYMOUS_USER_PRINCIPAL = principal;
@@ -54,8 +55,10 @@ public class SecurityContext {
 	
 	/**
 	 * Setup a principal in this context
-	 *  
+	 * 
 	 * @param principal
+	 *            the {@link Principal} instance of use for the currently
+	 *            signed-in user
 	 */
 	public static void setContext(Principal principal) {
 		holder.set(principal);

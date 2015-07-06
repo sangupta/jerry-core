@@ -421,10 +421,11 @@ public class UrlManipulator {
 	}
 	
 	/**
-	 * Set the new fragment. A value of <code>null</code> or empty string, or a string full
-	 * of white-spaces, indicate that we don't need a fragment.
+	 * Set the new fragment. A value of <code>null</code> or empty string, or a
+	 * string full of white-spaces, indicate that we don't need a fragment.
 	 * 
 	 * @param fragment
+	 *            the fragment to set
 	 */
 	public void setFragment(String fragment) {
 		if(fragment == null) {

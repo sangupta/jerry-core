@@ -100,6 +100,10 @@ public class GsonUtils {
 	/**
 	 * Method to fetch the singleton object with the specified naming policy. If
 	 * one does not exist, it is created.
+	 *
+	 * @param fieldNamingPolicy
+	 *            the field naming policy for which the {@link Gson} instance is
+	 *            required
 	 * 
 	 * @return the {@link Gson} object for the given field naming policy
 	 * 
@@ -130,7 +134,10 @@ public class GsonUtils {
 	 * Register a new custom type adapter.
 	 * 
 	 * @param type
+	 *            the type for which the adapter is to be added
+	 * 
 	 * @param adapter
+	 *            the adapter itself
 	 */
 	public static void addCustomTypeAdapter(Type type, Object adapter) {
 		customAdapters.put(type, adapter);
@@ -145,10 +152,12 @@ public class GsonUtils {
 	}
 	
 	/**
-	 * Remove the {@link Gson} instance against the given {@link FieldNamingPolicy}
-	 * so that it is regenerated again.
+	 * Remove the {@link Gson} instance against the given
+	 * {@link FieldNamingPolicy} so that it is regenerated again.
 	 * 
 	 * @param policy
+	 *            the {@link FieldNamingPolicy} for which to remove previosuly
+	 *            created {@link Gson} instance is to be removed
 	 */
 	public static void clearGson(FieldNamingPolicy policy) {
 		gsons.remove(policy);
@@ -158,6 +167,7 @@ public class GsonUtils {
 	 * Remove all custom type adapters for the given type
 	 * 
 	 * @param type
+	 *            the type for which adapters are to be removed
 	 */
 	public static void removeTypeAdapters(Type type) {
 		customAdapters.remove(type);

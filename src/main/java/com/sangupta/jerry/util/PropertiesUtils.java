@@ -121,6 +121,10 @@ public class PropertiesUtils {
 	 * @param key
 	 *            the <code>key</code> to look for
 	 * 
+	 * @param defaultValue
+	 *            the default value to return if the property cannot be found or
+	 *            the value specified for property is <code>null</code> or empty
+	 * 
 	 * @return the {@link Boolean} value thus deciphered
 	 */
 	public static boolean getBooleanValue(Properties properties, String key, boolean defaultValue) {
@@ -143,6 +147,10 @@ public class PropertiesUtils {
 	 * 
 	 * @param key
 	 *            the <code>key</code> to look for
+	 * 
+	 * @param defaultValue
+	 *            the default value to return if the property cannot be found or
+	 *            the value specified for property is <code>null</code> or empty
 	 * 
 	 * @return the {@link Short} value thus deciphered
 	 */
@@ -167,6 +175,10 @@ public class PropertiesUtils {
 	 * @param key
 	 *            the <code>key</code> to look for
 	 * 
+	 * @param defaultValue
+	 *            the default value to return if the property cannot be found or
+	 *            the value specified for property is <code>null</code> or empty
+	 * 
 	 * @return the {@link Integer} value thus deciphered
 	 */
 	public static int getIntValue(Properties properties, String key, int defaultValue) {
@@ -189,6 +201,10 @@ public class PropertiesUtils {
 	 * 
 	 * @param key
 	 *            the <code>key</code> to look for
+	 * 
+	 * @param defaultValue
+	 *            the default value to return if the property cannot be found or
+	 *            the value specified for property is <code>null</code> or empty
 	 * 
 	 * @return the {@link Long} value thus deciphered
 	 */
@@ -213,6 +229,10 @@ public class PropertiesUtils {
 	 * @param key
 	 *            the <code>key</code> to look for
 	 * 
+	 * @param defaultValue
+	 *            the default value to return if the property cannot be found or
+	 *            the value specified for property is <code>null</code> or empty
+	 * 
 	 * @return the {@link Float} value thus deciphered
 	 */
 	public static float getFloatValue(Properties properties, String key, float defaultValue) {
@@ -235,6 +255,10 @@ public class PropertiesUtils {
 	 * 
 	 * @param key
 	 *            the <code>key</code> to look for
+	 *
+	 * @param defaultValue
+	 *            the default value to return if the property cannot be found or
+	 *            the value specified for property is <code>null</code> or empty
 	 * 
 	 * @return the {@link Double} value thus deciphered
 	 */

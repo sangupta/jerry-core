@@ -42,10 +42,11 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 	protected final File dataDirectory;
 	
 	/**
-	 * Create a new data-store and initialize the directory in user-home
-	 * and create any pending folders if needed.
+	 * Create a new data-store and initialize the directory in user-home and
+	 * create any pending folders if needed.
 	 * 
 	 * @param folderName
+	 *            the name of the folder to create data-store in
 	 */
 	public AbstractUserLocalStore(String folderName) {
 		if(folderName != null && AssertUtils.isEmpty(folderName)) {

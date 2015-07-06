@@ -33,7 +33,8 @@ public interface UnsafePersistable {
 	/**
 	 * Serialize the object into an instance of {@link UnsafeMemory} and return
 	 * that back.
-	 * 
+	 *
+	 * @return the {@link UnsafeMemory} instance where object was serialized
 	 */
 	public UnsafeMemory writeUnsafe();
 	
@@ -41,6 +42,7 @@ public interface UnsafePersistable {
 	 * Serialize the object into the given instance of {@link UnsafeMemory}.
 	 * 
 	 * @param memory
+	 *            the {@link UnsafeMemory} to write to
 	 */
 	public void writeUnsafe(UnsafeMemory memory);
 	

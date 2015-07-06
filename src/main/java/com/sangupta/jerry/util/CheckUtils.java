@@ -35,10 +35,11 @@ import java.io.File;
 public class CheckUtils {
 
 	/**
-	 * Check whether the file represented by the given absolute file path is a valid
-	 * file, and does exists on the disk.
+	 * Check whether the file represented by the given absolute file path is a
+	 * valid file, and does exists on the disk.
 	 * 
 	 * @param absoluteFilePath
+	 *            the absolute file path to test
 	 */
 	public static void checkFileExists(String absoluteFilePath) {
 		if(AssertUtils.isEmpty(absoluteFilePath)) {
@@ -53,17 +54,18 @@ public class CheckUtils {
 	 * Check whether the file represented by the given {@link File} object
 	 * exists and is a valid file.
 	 * 
-	 * @param file
+	 * @param absoluteFilePath
+	 *            the absolute file path to test
 	 */
-	public static void checkFileExists(File file) {
-		if(file == null) {
+	public static void checkFileExists(File absoluteFilePath) {
+		if(absoluteFilePath == null) {
 			throw new IllegalArgumentException("File instance cannot be null");
 		}
-		if(!file.exists()) {
+		if(!absoluteFilePath.exists()) {
 			throw new IllegalArgumentException("File does not exist on device");
 		}
 		
-		if(!file.isFile()) {
+		if(!absoluteFilePath.isFile()) {
 			throw new IllegalArgumentException("File does not represent a valid file");
 		}
 	}
@@ -71,12 +73,13 @@ public class CheckUtils {
 	/**
 	 * Check if the file can be read successfully.
 	 * 
-	 * @param file
+	 * @param absoluteFilePath
+	 *            the absolute file path to test
 	 */
-	public static void checkReadableFile(File file) {
-		CheckUtils.checkFileExists(file);
+	public static void checkReadableFile(File absoluteFilePath) {
+		CheckUtils.checkFileExists(absoluteFilePath);
 		
-		if(!file.canRead()) {
+		if(!absoluteFilePath.canRead()) {
 			throw new IllegalArgumentException("File cannot be read");
 		}
 	}
@@ -84,12 +87,13 @@ public class CheckUtils {
 	/**
 	 * Check if the file can be written successfully.
 	 * 
-	 * @param file
+	 * @param absoluteFilePath
+	 *            the absolute file path to test
 	 */
-	public static void checkWritableFile(File file) {
-		CheckUtils.checkFileExists(file);
+	public static void checkWritableFile(File absoluteFilePath) {
+		CheckUtils.checkFileExists(absoluteFilePath);
 		
-		if(!file.canWrite()) {
+		if(!absoluteFilePath.canWrite()) {
 			throw new IllegalArgumentException("File cannot be written to");
 		}
 	}
@@ -97,12 +101,13 @@ public class CheckUtils {
 	/**
 	 * Check if the file can be executed.
 	 * 
-	 * @param file
+	 * @param absoluteFilePath
+	 *            the absolute file path to test
 	 */
-	public static void checkExecutableFile(File file) {
-		CheckUtils.checkFileExists(file);
+	public static void checkExecutableFile(File absoluteFilePath) {
+		CheckUtils.checkFileExists(absoluteFilePath);
 		
-		if(!file.canExecute()) {
+		if(!absoluteFilePath.canExecute()) {
 			throw new IllegalArgumentException("File cannot be executed");
 		}
 	}
@@ -112,6 +117,7 @@ public class CheckUtils {
 	 * is a valid directory, and does exists on the disk.
 	 * 
 	 * @param absoluteDirPath
+	 *            the absolute folder path to test
 	 */
 	public static void checkDirectoryExists(String absoluteDirPath) {
 		if(AssertUtils.isEmpty(absoluteDirPath)) {
@@ -126,17 +132,18 @@ public class CheckUtils {
 	 * Check whether the directory represented by the given {@link File} object
 	 * exists and is a valid directory.
 	 * 
-	 * @param directory
+	 * @param absoluteDirPath
+	 *            the absolute folder path to test
 	 */
-	public static void checkDirectoryExists(File directory) {
-		if(directory == null) {
+	public static void checkDirectoryExists(File absoluteDirPath) {
+		if(absoluteDirPath == null) {
 			throw new IllegalArgumentException("File instance cannot be null");
 		}
-		if(!directory.exists()) {
+		if(!absoluteDirPath.exists()) {
 			throw new IllegalArgumentException("Directory does not exist on device");
 		}
 		
-		if(!directory.isDirectory()) {
+		if(!absoluteDirPath.isDirectory()) {
 			throw new IllegalArgumentException("File does not represent a valid directory");
 		}
 	}

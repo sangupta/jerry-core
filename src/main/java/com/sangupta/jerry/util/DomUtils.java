@@ -42,7 +42,9 @@ public class DomUtils {
 	 * 
 	 * @param attributeName
 	 *            the attribute name
-	 *            
+	 *
+	 * @return the value of the attribute
+	 * 
 	 * @throws IllegalArgumentException
 	 *             if <code>element</code> or <code>attributeName</code> are
 	 *             null

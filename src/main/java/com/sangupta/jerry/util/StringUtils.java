@@ -332,6 +332,9 @@ public class StringUtils {
 	 * @param appender
 	 *            the appender to be used
 	 * 
+	 * @param <T>
+	 *            the type of instances contained in the collection
+	 * 
 	 * @return the string representation of list using appender as the delimiter
 	 */
 	public static <T> String listToString(List<T> list, String appender) {

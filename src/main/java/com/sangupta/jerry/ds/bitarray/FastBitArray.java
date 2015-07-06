@@ -163,6 +163,8 @@ public class FastBitArray {
 	 * @param mode
 	 *            the {@link RoundingMode} to use
 	 * 
+	 * @return the division result thus rounded
+	 * 
 	 * @throws ArithmeticException
 	 *             if {@code q == 0}, or if {@code mode == UNNECESSARY} and
 	 *             {@code a} is not an integer multiple of {@code b}

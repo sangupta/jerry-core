@@ -121,7 +121,9 @@ public class UnsafeMemory {
 
 	/**
 	 * Create a new instance of {@link UnsafeMemory} that we work upon.
-	 * 
+	 *
+	 * @param buffer
+	 *            the buffer to use to work with
 	 */
 	public UnsafeMemory(final byte[] buffer) {
 		if (null == buffer) {
@@ -323,7 +325,7 @@ public class UnsafeMemory {
 	/**
 	 * Write a long value to the memory buffer.
 	 * 
-	 * @param value the <code>long<code> value to write
+	 * @param value the <code>long</code> value to write
 	 */
 	public void putLong(final long value) {
 		UNSAFE.putLong(buffer, byteArrayOffset + pos, value);
@@ -379,6 +381,7 @@ public class UnsafeMemory {
 	 * Write an array of double values into the memory buffer.
 	 * 
 	 * @param values
+	 *            the values to write
 	 */
 	public void putDoubleArray(final double[] values) {
 		putInt(values.length);

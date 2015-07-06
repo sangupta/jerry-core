@@ -30,14 +30,15 @@ import com.sangupta.jerry.transform.Transformer;
 import com.sangupta.jerry.util.AssertUtils;
 
 /**
- * A simple n-ary Tree data-structure useful to keep arbitrary data
- * in a tree-shape form.
+ * A simple n-ary Tree data-structure useful to keep arbitrary data in a
+ * tree-shape form.
  * 
  * This class is NOT thread-safe.
  * 
  * @author sangupta
  *
  * @param <T>
+ *            the type of instance, that nodes of this {@link Tree} will hold
  */
 public class Tree<T> implements Iterable<Tree<T>> {
 
@@ -62,6 +63,7 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	 * Convenience constructor
 	 * 
 	 * @param data
+	 *            the data to hold in this node of {@link Tree}
 	 */
 	public Tree(T data) {
 		this.data = data;
@@ -377,6 +379,7 @@ public class Tree<T> implements Iterable<Tree<T>> {
 	 * @author sangupta
 	 *
 	 * @param <T>
+	 *            the type of instance, the nodes of this {@link Iterator} holds
 	 */
 	public static class SimpleTreeIterator<T> implements Iterator<Tree<T>> {
 		

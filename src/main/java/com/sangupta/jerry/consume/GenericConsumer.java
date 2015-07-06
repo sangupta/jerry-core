@@ -18,18 +18,18 @@
  * limitations under the License.
  * 
  */
- 
+
 package com.sangupta.jerry.consume;
 
 import java.io.IOException;
 
 /**
- * A generic processing class that can be used to consume
- * an entity.
+ * A generic processing class that can be used to consume an entity.
  * 
  * @author sangupta
  *
  * @param <T>
+ *            the type of instance that this consumer can consume
  */
 public abstract class GenericConsumer<T> {
 
@@ -43,17 +43,18 @@ public abstract class GenericConsumer<T> {
 	public boolean before() {
 		return true;
 	}
-	
+
 	/**
 	 * Called for processing of the entity.
 	 * 
-	 * @param data the entity data to consume
+	 * @param data
+	 *            the entity data to consume
 	 * 
 	 * @return <code>true</code> if consumption should continue, or
 	 *         <code>false</code> if processing should stop immediately.
 	 */
 	public abstract boolean consume(T data);
-	
+
 	/**
 	 * Called after completing of processing when the entity was consumed
 	 * successfully, and not stopped in between either by returning a
@@ -64,14 +65,15 @@ public abstract class GenericConsumer<T> {
 	public void after() {
 		// do nothing
 	}
-	
+
 	/**
 	 * Called when an exception is raised during the processing of file.
 	 * 
-	 * @param e the {@link IOException} that was raised.
+	 * @param e
+	 *            the {@link IOException} that was raised.
 	 */
 	public void onException(Exception e) {
 		// do nothing
 	}
-	
+
 }

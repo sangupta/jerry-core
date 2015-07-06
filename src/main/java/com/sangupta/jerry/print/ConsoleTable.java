@@ -110,6 +110,7 @@ public class ConsoleTable {
 	 * Convenience constructor
 	 * 
 	 * @param layout
+	 *            the {@link ConsoleTableLayout} to use for this table
 	 */
 	public ConsoleTable(ConsoleTableLayout layout) {
 		if(layout == null) {
@@ -123,6 +124,9 @@ public class ConsoleTable {
 	 * Add a header row to the table
 	 * 
 	 * @param columnNames
+	 *            the names of columns to use as header
+	 * 
+	 * @return the {@link ConsoleTableRow} thus created
 	 */
 	public ConsoleTableRow addHeaderRow(String... columnNames) {
 		if(this.headerRow != null) {
@@ -139,6 +143,10 @@ public class ConsoleTable {
 	 * Add a row to the table
 	 * 
 	 * @param objects
+	 *            the objects to add to each column
+	 *            
+	 * @return the {@link ConsoleTableRow} thus created
+	 * 
 	 */
 	public ConsoleTableRow addRow(Object... objects) {
 		if(AssertUtils.isEmpty(objects)) {
@@ -167,6 +175,7 @@ public class ConsoleTable {
 	 * Write the table to a {@link PrintStream}.
 	 * 
 	 * @param out
+	 *            the {@link PrintStream} to write to
 	 */
 	public void write(PrintStream out) {
 		// update column sizes again
@@ -199,9 +208,15 @@ public class ConsoleTable {
 	
 	/**
 	 * Display one row of information
-	 *  
+	 * 
+	 * @param layout
+	 *            the layout to use
+	 * 
 	 * @param out
+	 *            the {@link PrintStream} to write to
+	 * 
 	 * @param row
+	 *            the {@link ConsoleTableRow} to write
 	 */
 	private void displayRow(final ConsoleTableLayout layout, final PrintStream out, final ConsoleTableRow row) {
 		final ConsoleTableRow multiLineSplitRow = new ConsoleTableRow();
@@ -353,9 +368,13 @@ public class ConsoleTable {
 	}
 	
 	/**
+	 * Set the column size for the column at given index
 	 * 
 	 * @param index
+	 *            the index of the column being modified
+	 * 
 	 * @param size
+	 *            the size of the column in number of characters
 	 */
 	public void setColumnSize(final int index, final int size) {
 		while(this.userSizes.size() <= index) {

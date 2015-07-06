@@ -219,10 +219,11 @@ public class MMapFileBackedBitArray implements BitArray {
 	 * Method that helps unmap a memory-mapped file before being
 	 * garbage-collected.
 	 * 
-	 * @param cb
+	 * @param byteBuffer
+	 *            the {@link ByteBuffer} instance to close
 	 */
-	protected void closeDirectBuffer(ByteBuffer cb) {
-	    if (!cb.isDirect()) {
+	protected void closeDirectBuffer(ByteBuffer byteBuffer) {
+	    if (!byteBuffer.isDirect()) {
 	    	return;
 	    }
 
@@ -230,16 +231,16 @@ public class MMapFileBackedBitArray implements BitArray {
 	    // but static import from sun.* package is risky for non-SUN virtual machine.
 	    //try { ((sun.nio.ch.DirectBuffer)cb).cleaner().clean(); } catch (Exception ex) { }
 	    try {
-	        Method cleaner = cb.getClass().getMethod("cleaner");
+	        Method cleaner = byteBuffer.getClass().getMethod("cleaner");
 	        cleaner.setAccessible(true);
 	        Method clean = Class.forName("sun.misc.Cleaner").getMethod("clean");
 	        clean.setAccessible(true);
-	        clean.invoke(cleaner.invoke(cb));
+	        clean.invoke(cleaner.invoke(byteBuffer));
 	    } catch(Exception ex) { 
 	    	
 	    }
 	    
-	    cb = null;
+	    byteBuffer = null;
 	}
 
 }

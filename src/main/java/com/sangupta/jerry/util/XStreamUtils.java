@@ -53,8 +53,11 @@ public class XStreamUtils {
 	private static Set<Class<?>> processed = new HashSet<Class<?>>();
 	
 	/**
-	 * Returns the {@link XStream} object processing the annotations of
-	 * the class supplied.
+	 * Returns the {@link XStream} object processing the annotations of the
+	 * class supplied.
+	 * 
+	 * @param clazz
+	 *            the {@link Class} type to process annotations for
 	 * 
 	 * @return the {@link XStream} object after processing the given classes
 	 * 

@@ -72,6 +72,7 @@ public class StringLineIterator implements Iterator<String> {
 	 * Create a new instance of the {@link StringLineIterator}.
 	 * 
 	 * @param input
+	 *            the {@link String} instance to read from
 	 */
 	public StringLineIterator(String input) {
 		this.chars = input.toCharArray();

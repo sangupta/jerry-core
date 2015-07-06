@@ -58,6 +58,12 @@ public class ZipUtils {
 	 * 
 	 * @return the {@link File} handle for the extracted file in the temp
 	 *         directory
+	 *
+	 * @throws FileNotFoundException
+	 *             if the zip file does not exist
+	 * 
+	 * @throws IOException
+	 *             if something fails while reading the ZIP file
 	 * 
 	 * @throws IllegalArgumentException
 	 *             if the zipFile is <code>null</code> or the fileName is
