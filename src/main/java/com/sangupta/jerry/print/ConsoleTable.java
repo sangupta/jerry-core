@@ -28,7 +28,7 @@ import java.util.List;
 
 import org.apache.commons.compress.utils.IOUtils;
 
-import com.sangupta.jerry.ds.MutableInt;
+import com.sangupta.jerry.ds.mutable.MutableInt;
 import com.sangupta.jerry.util.AssertUtils;
 import com.sangupta.jerry.util.StringUtils;
 
