@@ -142,9 +142,18 @@ public class CheckUtils {
 	}
 	
 	/**
+	 * Check if the given argument is <code>true</code> or not. If the condition
+	 * is <code>false</code>, an {@link IllegalArgumentException} with the
+	 * supplied message is thrown
 	 * 
 	 * @param condition
+	 *            the condition to evaluate
+	 * 
 	 * @param message
+	 *            if the condition evaluates to <code>false</code>
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the condition evaluates to <code>false</code>
 	 */
 	public static void checkArgument(boolean condition, String message) {
 		if(condition) {

@@ -66,10 +66,11 @@ public class EnvironmentUtils {
 	}
 
 	/**
-	 * Dump all environment variables and properties as a String
-	 * and return it back. Useful for logging all values for debugging
-	 * purposes.
+	 * Dump all environment variables and properties as a String and return it
+	 * back. Useful for logging all values for debugging purposes.
 	 * 
+	 * @return a {@link String} instance consisting of all system properties
+	 *         separated by system new line
 	 */
 	public static String dumpAllProperties() {
 		StringBuilder builder = new StringBuilder(4096); // 4KB to start with

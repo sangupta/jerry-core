@@ -17,7 +17,7 @@ public interface BitArray extends Closeable {
 	 * @param index
 	 *            the index of the bit in the array
 	 * 
-	 * @return <code>true<code> if the but is set, <code>false</code> otherwise
+	 * @return <code>true</code> if the bit is set, <code>false</code> otherwise
 	 */
 	public boolean getBit(int index);
 	

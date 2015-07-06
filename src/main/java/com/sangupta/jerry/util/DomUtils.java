@@ -38,9 +38,24 @@ public class DomUtils {
 	 * Returns the value of the attribute from the element.
 	 * 
 	 * @param element
+	 *            the element from which the attribute is to be read
+	 * 
 	 * @param attributeName
+	 *            the attribute name
+	 *            
+	 * @throws IllegalArgumentException
+	 *             if <code>element</code> or <code>attributeName</code> are
+	 *             null
 	 */
 	public static String getAttributeValue(Element element, String attributeName) {
+		if(element == null) {
+			throw new IllegalArgumentException("Element cannot be null");
+		}
+		
+		if(AssertUtils.isEmpty(attributeName)) {
+			throw new IllegalArgumentException("Attribute name cannot be null/empty");
+		}
+		
 		Attribute attribute = element.getAttribute(attributeName);
 		if(attribute != null) {
 			return attribute.getValue();
@@ -53,9 +68,26 @@ public class DomUtils {
 	 * Returns the integer value of the attribute from the element.
 	 * 
 	 * @param element
+	 *            the element from which the attribute is to be read
+	 * 
 	 * @param attributeName
+	 *            the attribute name
+	 * 
+	 * @return the value of the attribute
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if <code>element</code> or <code>attributeName</code> are
+	 *             null
 	 */
 	public static int getAttributeValueAsInt(Element element, String attributeName) {
+		if(element == null) {
+			throw new IllegalArgumentException("Element cannot be null");
+		}
+		
+		if(AssertUtils.isEmpty(attributeName)) {
+			throw new IllegalArgumentException("Attribute name cannot be null/empty");
+		}
+		
 		Attribute attribute = element.getAttribute(attributeName);
 		if(attribute != null) {
 			try {

@@ -45,7 +45,7 @@ public class MutableLong {
 	/**
 	 * Create a mutable long with the given initial value
 	 * 
-	 * @param value
+	 * @param value the value to set initially
 	 */
 	public MutableLong(long value) {
 		this.value = value;
@@ -54,7 +54,7 @@ public class MutableLong {
 	/**
 	 * Get the current value
 	 * 
-	 * @return
+	 * @return the current value
 	 */
 	public long get() {
 		return this.value;
@@ -64,6 +64,7 @@ public class MutableLong {
 	 * Set the current value of this mutable long to the given value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void set(long value) {
 		this.value = value;
@@ -73,6 +74,7 @@ public class MutableLong {
 	 * Change the value if the given value is more than the current value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void setIfMax(long value) {
 		if(this.value < value) {
@@ -84,6 +86,7 @@ public class MutableLong {
 	 * Change the value if the given value is less than the current value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void setIfMin(long value) {
 		if(this.value < value) {

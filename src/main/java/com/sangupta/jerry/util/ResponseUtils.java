@@ -219,6 +219,7 @@ public class ResponseUtils {
 	 * Set cache headers to one month from today.
 	 * 
 	 * @param response
+	 *            the {@link HttpServletResponse} object
 	 */
 	public static void setCacheHeaders(HttpServletResponse response) {
 		setCacheHeaders(response, DateUtils.ONE_MONTH);
@@ -228,7 +229,10 @@ public class ResponseUtils {
 	 * Set cache headers to given time from today.
 	 * 
 	 * @param response
+	 *            the {@link HttpServletResponse} object
+	 * 
 	 * @param ageInMillis
+	 *            the age in milliseconds
 	 */
 	public static void setCacheHeaders(HttpServletResponse response, long ageInMillis) {
 		response.addDateHeader("Expires", System.currentTimeMillis() + ageInMillis);
@@ -236,8 +240,16 @@ public class ResponseUtils {
 	}
 
 	/**
-	 * @param string
-	 * @return
+	 * Construct the URL prefixed with the context path in which the app is
+	 * deployed
+	 * 
+	 * @param request
+	 *            the {@link HttpServletRequest} object
+	 * 
+	 * @param url
+	 *            the URL to be prefixed
+	 * 
+	 * @return the constructed URL
 	 */
 	public static String getUrlWithContext(HttpServletRequest request, String url) {
 		return UriUtils.addWebPaths(request.getContextPath(), url);

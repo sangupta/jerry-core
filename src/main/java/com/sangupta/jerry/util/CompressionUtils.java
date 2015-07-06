@@ -76,9 +76,12 @@ public class CompressionUtils {
 	 * @param string
 	 *            the string to be compressed
 	 * 
+	 * @param charsetName
+	 *            the character set to use for converting string to byte-array
+	 * 
 	 * @return the bytes of the compressed representation, or <code>null</code>
 	 *         if incoming string is null.
-	 *         
+	 * 
 	 * @throws UnsupportedEncodingException
 	 *             if the incoming string cannot be converted into bytes using
 	 *             the given charset name.
@@ -99,6 +102,9 @@ public class CompressionUtils {
 	 * @param string
 	 *            the string to be compressed
 	 * 
+	 * @param charsetName
+	 *            the character set to use for converting string to byte-array
+	 *            
 	 * @return the bytes of the compressed representation, or <code>null</code>
 	 *         if incoming string is null.
 	 *         

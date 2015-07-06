@@ -129,7 +129,9 @@ public class SimpleMultiMap<K, V> {
 	 * Remove and return all values associated with the given key.
 	 * 
 	 * @param key
-	 * @return
+	 *            the key to remove
+	 * 
+	 * @return the list of values stored against the removed key
 	 */
 	public List<V> remove(K key) {
 		return this.map.remove(key);
@@ -138,7 +140,7 @@ public class SimpleMultiMap<K, V> {
 	/**
 	 * Return a {@link Set} of all keys in this map.
 	 * 
-	 * @return
+	 * @return all the keys in the map
 	 */
 	public Set<K> keySet() {
 		return this.map.keySet();

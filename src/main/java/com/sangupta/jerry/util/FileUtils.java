@@ -91,7 +91,7 @@ public class FileUtils {
 	/**
 	 * Return a {@link File} object for the user's home directory.
 	 * 
-	 * @return
+	 * @return the {@link File} instance
 	 */
 	public static File getUsersHomeDirectory() {
 		return new File(System.getProperty(SystemPropertyNames.USER_HOME));
@@ -100,7 +100,7 @@ public class FileUtils {
 	/**
 	 * Return a {@link File} object for the user's working directory.
 	 * 
-	 * @return
+	 * @return the {@link File} instance
 	 */
 	public static File getUsersWorkingDirectory() {
 		return new File(System.getProperty(SystemPropertyNames.USER_DIR));
@@ -134,11 +134,17 @@ public class FileUtils {
 	}
 	
 	/**
-	 * Return a {@link Tree} that contains a list of all directories
-	 * and their children in the given folder.
+	 * Return a {@link Tree} that contains a list of all directories and their
+	 * children in the given folder.
 	 * 
 	 * @param dir
-	 * @return
+	 *            the folder to return a directory tree of
+	 * 
+	 * @return a {@link Tree} instance consisting of all sub-directories
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if dir is <code>null</code>, is not a valid directory or does
+	 *             not exists
 	 */
 	public static Tree<File> getDirTree(File dir) {
 		CheckUtils.checkDirectoryExists(dir);
@@ -152,7 +158,10 @@ public class FileUtils {
 	 * Recurse all child directories and add to tree node.
 	 * 
 	 * @param dir
+	 *            the directory to recurse on
+	 * 
 	 * @param node
+	 *            the parent {@link Tree} node to add children to
 	 */
 	private static void recurseDirInternal(File dir, Tree<File> node) {
 		File[] childDirs = dir.listFiles((FileFilter) DirectoryFileFilter.INSTANCE);
@@ -166,13 +175,18 @@ public class FileUtils {
 	}
 	
 	/**
-	 * Resolve a file path into its corresponding {@link File} object. This method
-	 * also makes sure that '~' can be used to refer to the user's home directory - the
-	 * standard way on Linux and OS X.
+	 * Resolve a file path into its corresponding {@link File} object. This
+	 * method also makes sure that '~' can be used to refer to the user's home
+	 * directory - the standard way on Linux and OS X.
 	 * 
 	 * @param filePath
-	 * @return <code>null</code> if filePath is empty, {@link File} instance otherwise.
+	 *            the file path to resolve
 	 * 
+	 * @return <code>null</code> if filePath is empty, {@link File} instance
+	 *         otherwise.
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if given file path is empty or <code>null</code>
 	 */
 	public static File resolveToFile(String filePath) {
 		if(AssertUtils.isEmpty(filePath)) {
@@ -389,7 +403,9 @@ public class FileUtils {
 	 * Extract the extension for given file path.
 	 * 
 	 * @param filePath
-	 * @return
+	 *            the file path to extract extension from
+	 * 
+	 * @return the file extension if present, or <code>null</code>
 	 */
 	public static String getExtension(String filePath) {
 		if(AssertUtils.isEmpty(filePath)) {

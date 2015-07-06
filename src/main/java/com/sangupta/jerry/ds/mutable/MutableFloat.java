@@ -45,7 +45,7 @@ public class MutableFloat {
 	/**
 	 * Create a mutable float with the given initial value
 	 * 
-	 * @param value
+	 * @param value the value to set initially
 	 */
 	public MutableFloat(float value) {
 		this.value = value;
@@ -54,7 +54,7 @@ public class MutableFloat {
 	/**
 	 * Get the current value
 	 * 
-	 * @return
+	 * @return the current value
 	 */
 	public float get() {
 		return this.value;
@@ -64,6 +64,7 @@ public class MutableFloat {
 	 * Set the current value of this mutable float to the given value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void set(float value) {
 		this.value = value;
@@ -73,6 +74,7 @@ public class MutableFloat {
 	 * Change the value if the given value is more than the current value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void setIfMax(float value) {
 		if(this.value < value) {
@@ -84,6 +86,7 @@ public class MutableFloat {
 	 * Change the value if the given value is less than the current value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void setIfMin(float value) {
 		if(this.value < value) {

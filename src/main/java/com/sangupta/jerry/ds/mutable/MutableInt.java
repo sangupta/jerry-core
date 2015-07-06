@@ -45,7 +45,7 @@ public class MutableInt {
 	/**
 	 * Create a mutable integer with the given initial value
 	 * 
-	 * @param value
+	 * @param value the value to set initially
 	 */
 	public MutableInt(int value) {
 		this.value = value;
@@ -54,7 +54,7 @@ public class MutableInt {
 	/**
 	 * Get the current value
 	 * 
-	 * @return
+	 * @return the current value
 	 */
 	public int get() {
 		return this.value;
@@ -64,6 +64,7 @@ public class MutableInt {
 	 * Set the current value of this mutable integer to the given value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void set(int value) {
 		this.value = value;
@@ -73,6 +74,7 @@ public class MutableInt {
 	 * Change the value if the given value is more than the current value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void setIfMax(int value) {
 		if(this.value < value) {
@@ -84,6 +86,7 @@ public class MutableInt {
 	 * Change the value if the given value is less than the current value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void setIfMin(int value) {
 		if(this.value < value) {

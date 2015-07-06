@@ -49,7 +49,19 @@ public class MMapFileBackedBitArray implements BitArray {
 	 * reasons.
 	 * 
 	 * @param backingFile
-	 * @throws IOException 
+	 *            the file that needs to store the bit-array
+	 * 
+	 * @param maxElements
+	 *            the number of maximum elements that this {@link BitArray}
+	 *            implementation will store
+	 * 
+	 * @throws IOException
+	 *             if something fails while reading the file initially
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the {@link #backingFile} is <code>null</code>, is not a
+	 *             file, or the number of {@link #maxElements} are less than
+	 *             equal to zero
 	 */
 	public MMapFileBackedBitArray(File backingFile, int maxElements) throws IOException {
 		if(backingFile == null) {
@@ -175,9 +187,13 @@ public class MMapFileBackedBitArray implements BitArray {
 	}
 	
 	/**
+	 * Extend this file to the given new length filling extra bytes with zeros.
 	 * 
 	 * @param newLength
+	 *            the new length expected for this file
+	 * 
 	 * @throws IOException
+	 *             if file operation fails
 	 */
 	protected void extendFile(final long newLength) throws IOException {
 		long current = this.backingFile.length();

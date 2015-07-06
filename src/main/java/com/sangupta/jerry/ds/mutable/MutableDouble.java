@@ -45,7 +45,7 @@ public class MutableDouble {
 	/**
 	 * Create a mutable double with the given initial value
 	 * 
-	 * @param value
+	 * @param value the value to set initially
 	 */
 	public MutableDouble(float value) {
 		this.value = value;
@@ -54,7 +54,7 @@ public class MutableDouble {
 	/**
 	 * Get the current value
 	 * 
-	 * @return
+	 * @return the current value that is stored
 	 */
 	public double get() {
 		return this.value;
@@ -64,6 +64,7 @@ public class MutableDouble {
 	 * Set the current value of this mutable double to the given value
 	 * 
 	 * @param value
+	 *            the current value to be set
 	 */
 	public void set(double value) {
 		this.value = value;
@@ -73,6 +74,7 @@ public class MutableDouble {
 	 * Change the value if the given value is more than the current value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void setIfMax(double value) {
 		if(this.value < value) {
@@ -84,6 +86,7 @@ public class MutableDouble {
 	 * Change the value if the given value is less than the current value
 	 * 
 	 * @param value
+	 *            the value to set
 	 */
 	public void setIfMin(double value) {
 		if(this.value < value) {

@@ -153,18 +153,29 @@ public class FastBitArray {
 	 * Returns the result of dividing {@code p} by {@code q}, rounding using the
 	 * specified {@code RoundingMode}.
 	 * 
+	 * 
+	 * @param numerator
+	 *            the value to be divided
+	 * 
+	 * @param denominator
+	 *            the value with which to divide
+	 * 
+	 * @param mode
+	 *            the {@link RoundingMode} to use
+	 * 
 	 * @throws ArithmeticException
 	 *             if {@code q == 0}, or if {@code mode == UNNECESSARY} and
 	 *             {@code a} is not an integer multiple of {@code b}
+	 * 
 	 */
 	@SuppressWarnings("fallthrough")
-	public static long divide(long p, long q, RoundingMode mode) {
+	public static long divide(long numerator, long denominator, RoundingMode mode) {
 		if(mode == null) {
 			throw new IllegalArgumentException("Rounding mode cannot be null");
 		}
 		
-		long div = p / q; // throws if q == 0
-		long rem = p - q * div; // equals p % q
+		long div = numerator / denominator; // throws if q == 0
+		long rem = numerator - denominator * div; // equals p % q
 
 		if (rem == 0) {
 			return div;
@@ -178,7 +189,7 @@ public class FastBitArray {
 		 * signum is 1 if p and q are both nonnegative or both negative, and -1
 		 * otherwise.
 		 */
-		int signum = 1 | (int) ((p ^ q) >> (Long.SIZE - 1));
+		int signum = 1 | (int) ((numerator ^ denominator) >> (Long.SIZE - 1));
 		boolean increment;
 		switch (mode) {
 		case UNNECESSARY:
@@ -200,7 +211,7 @@ public class FastBitArray {
 		case HALF_DOWN:
 		case HALF_UP:
 			long absRem = abs(rem);
-			long cmpRemToHalfDivisor = absRem - (abs(q) - absRem);
+			long cmpRemToHalfDivisor = absRem - (abs(denominator) - absRem);
 			// subtracting two nonnegative longs can't overflow
 			// cmpRemToHalfDivisor has the same sign as compare(abs(rem), abs(q)
 			// / 2).

@@ -41,7 +41,19 @@ public class FileBackedBitArray implements BitArray {
 	 * reasons.
 	 * 
 	 * @param backingFile
-	 * @throws IOException 
+	 *            the file that needs to store the bit-array
+	 * 
+	 * @param maxElements
+	 *            the number of maximum elements that this {@link BitArray}
+	 *            implementation will store
+	 * 
+	 * @throws IOException
+	 *             if something fails while reading the file initially
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the {@link #backingFile} is <code>null</code>, is not a
+	 *             file, or the number of {@link #maxElements} are less than
+	 *             equal to zero
 	 */
 	public FileBackedBitArray(File backingFile, int maxElements) throws IOException {
 		if(backingFile == null) {
@@ -193,9 +205,13 @@ public class FileBackedBitArray implements BitArray {
 	}
 	
 	/**
+	 * Extend the file to its new length filling extra bytes with zeroes.
 	 * 
 	 * @param newLength
+	 *            the new length of the file that we need
+	 * 
 	 * @throws IOException
+	 *             if something fails
 	 */
 	protected void extendFile(final long newLength) throws IOException {
 		long current = this.backingFile.length();
