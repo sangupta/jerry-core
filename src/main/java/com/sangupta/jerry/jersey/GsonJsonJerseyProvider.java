@@ -47,7 +47,7 @@ import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider;
  * for serialization for its better performance and support.
  * 
  * @author sangupta
- *
+ * @since 2.0
  */
 @Produces({ MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_JSON })
