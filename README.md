@@ -12,7 +12,7 @@ as static helper utility classes that can help reduce the boiler plate code when
 application. 
 
 The core idea of the project is to include all basic functionality that is always used in a normal project. The project
-does not aim to replace the `Apache Commons` framework but onyl extend it to include the otherwise useful functions and
+does not aim to replace the `Apache Commons` framework but only extend it to include the otherwise useful functions and
 methods that are missing in there.
 
 _History:_ Ages ago, the project forked from the `https://github.com/sangupta/jerry` project, when all utility classes were extracted
