@@ -52,7 +52,7 @@ import com.sun.jersey.core.provider.AbstractMessageReaderWriterProvider;
 @Produces({ MediaType.APPLICATION_JSON })
 @Consumes({ MediaType.APPLICATION_JSON })
 @Provider
-public class GsonJsonProvider extends AbstractMessageReaderWriterProvider<Object> {
+public class GsonJsonJerseyProvider extends AbstractMessageReaderWriterProvider<Object> {
 
     private static final String DEFAULT_ENCODING = "utf-8";
     
