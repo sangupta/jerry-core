@@ -24,33 +24,7 @@ The library is tested on the following JDK versions:
 * Oracle JDK 7
 * Open JDK 7
 
-Changelog
----------
-
-**Current Development**
-
-The current development snapshot `JAR` can be obtained using `JitPack.io` as:
-
-Add the following `repository` to Maven,
-
-```xml
-<repository>
-	<id>jitpack.io</id>
-	<url>https://jitpack.io</url>
-</repository>
-```
-
-Then add the dependency as,
-
-```xml
-<dependency>
-    <groupId>com.github.sangupta</groupId>
-    <artifactId>jerry-core</artifactId>
-    <version>-SNAPSHOT</version>
-</dependency>
-```
-
-**Released Versions**
+**Change Log**
 
 [Release Notes](https://github.com/sangupta/jerry-core/blob/master/RELEASE-NOTES.md) are available here.
 
@@ -84,13 +58,34 @@ Features
 Downloads
 ---------
 
-The library can be downloaded from Maven Central using:
+The latest released library can be downloaded from Maven Central using:
 
 ```xml
 <dependency>
     <groupId>com.sangupta</groupId>
     <artifactId>jerry-core</artifactId>
     <version>2.0.0</version>
+</dependency>
+```
+
+The current development snapshot `JAR` can be obtained using `JitPack.io` as:
+
+Add the following `repository` to Maven,
+
+```xml
+<repository>
+	<id>jitpack.io</id>
+	<url>https://jitpack.io</url>
+</repository>
+```
+
+Then add the dependency as,
+
+```xml
+<dependency>
+    <groupId>com.github.sangupta</groupId>
+    <artifactId>jerry-core</artifactId>
+    <version>-SNAPSHOT</version>
 </dependency>
 ```
 
