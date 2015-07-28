@@ -3,6 +3,8 @@ package com.sangupta.jerry.ds.bitarray;
 import java.io.IOException;
 import java.util.BitSet;
 
+import net.jcip.annotations.NotThreadSafe;
+
 /**
  * A {@link BitArray} implementation that uses the standard Java {@link BitSet}
  * as the underlying implementation.
@@ -10,6 +12,7 @@ import java.util.BitSet;
  * @author sangupta
  * @since 1.7
  */
+@NotThreadSafe
 public class JavaBitSetArray implements BitArray {
 	
 	final BitSet bitSet;

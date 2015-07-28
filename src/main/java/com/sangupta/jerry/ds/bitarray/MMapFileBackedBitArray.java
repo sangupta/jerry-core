@@ -9,6 +9,8 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel.MapMode;
 import java.util.Arrays;
 
+import net.jcip.annotations.NotThreadSafe;
+
 /**
  * An implementation of {@link BitArray} that uses a memory-mapped
  * file to persist all changes synchronously for the underlying bit
@@ -18,6 +20,7 @@ import java.util.Arrays;
  * @author sangupta
  * @since 1.7
  */
+@NotThreadSafe
 public class MMapFileBackedBitArray implements BitArray {
 	
 	/**

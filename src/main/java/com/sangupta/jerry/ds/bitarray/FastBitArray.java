@@ -31,6 +31,8 @@ import java.util.Arrays;
 
 import com.sangupta.jerry.util.ByteArrayUtils;
 
+import net.jcip.annotations.NotThreadSafe;
+
 /**
  * A fast bit-set implementation that allows direct access to data
  * property so that it can be easily serialized.
@@ -38,6 +40,7 @@ import com.sangupta.jerry.util.ByteArrayUtils;
  * @author sangupta
  * @since 1.7
  */
+@NotThreadSafe
 public class FastBitArray implements BitArray {
 
 	/**

@@ -144,6 +144,13 @@
 		    <version>18.0</version>
 		    <scope>provided</scope>
 		</dependency>
+		
+		<!-- For thread-safety annotations -->
+		<dependency>
+		    <groupId>net.jcip</groupId>
+		    <artifactId>jcip-annotations</artifactId>
+		    <version>1.0</version>
+		</dependency>
 	</dependencies>
 	
 	<build>

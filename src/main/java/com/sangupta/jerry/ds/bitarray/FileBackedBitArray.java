@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
 
+import net.jcip.annotations.NotThreadSafe;
+
 /**
  * An implementation of {@link BitArray} that uses a normal random
  * file to persist all changes synchronously for the underlying bit
@@ -15,6 +17,7 @@ import java.util.Arrays;
  * @author sangupta
  * @since 1.7
  */
+@NotThreadSafe
 public class FileBackedBitArray implements BitArray {
 	
 	/**
@@ -183,7 +186,26 @@ public class FileBackedBitArray implements BitArray {
 	 */
 	@Override
 	public void or(BitArray bitArray) {
+		if(bitArray == null) {
+			throw new IllegalArgumentException("BitArray to be combined with cannot be null");
+		}
 		
+		if(this.numBytes != bitArray.numBytes()) {
+			throw new IllegalArgumentException("BitArray to be combined with must be of equal length");
+		}
+		
+		try {
+			this.backingFile.seek(0);
+			byte[] bytes = bitArray.toByteArray();
+			for(int index = 0; index < this.backingFile.length(); index++) {
+				byte bite = this.backingFile.readByte();
+				bite |= bytes[index];
+				this.backingFile.seek(this.backingFile.getFilePointer() - 1);
+				this.backingFile.write(bite);
+			}
+		} catch(IOException e) {
+			throw new RuntimeException("Unable to read/write bit-array from disk", e);
+		}
 	}
 
 	/**
@@ -191,8 +213,26 @@ public class FileBackedBitArray implements BitArray {
 	 */
 	@Override
 	public void and(BitArray bitArray) {
-		// TODO Auto-generated method stub
+		if(bitArray == null) {
+			throw new IllegalArgumentException("BitArray to be combined with cannot be null");
+		}
 		
+		if(this.numBytes != bitArray.numBytes()) {
+			throw new IllegalArgumentException("BitArray to be combined with must be of equal length");
+		}
+		
+		try {
+			this.backingFile.seek(0);
+			byte[] bytes = bitArray.toByteArray();
+			for(int index = 0; index < this.backingFile.length(); index++) {
+				byte bite = this.backingFile.readByte();
+				bite &= bytes[index];
+				this.backingFile.seek(this.backingFile.getFilePointer() - 1);
+				this.backingFile.write(bite);
+			}
+		} catch(IOException e) {
+			throw new RuntimeException("Unable to read/write bit-array from disk", e);
+		}
 	}
 
 	/**
