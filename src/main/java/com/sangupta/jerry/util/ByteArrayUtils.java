@@ -42,6 +42,14 @@ public class ByteArrayUtils {
 	 * @return the long value thus read
 	 */
 	public static long readLong(byte[] bytes, int offset) {
+		if(bytes == null) {
+			throw new IllegalArgumentException("Byte-array cannot be null");
+		}
+		
+		if((offset + 7) >= bytes.length) {
+			throw new IndexOutOfBoundsException("Byte-array is smaller than the provided offset");
+		}
+		
 		int position = offset + 7;
 		long value = bytes[position--] & 0xFF;
 		
@@ -70,10 +78,42 @@ public class ByteArrayUtils {
 	 *            the offset to write at
 	 */
 	public static void writeLong(byte[] bytes, long value, int offset) {
+		if(bytes == null) {
+			throw new IllegalArgumentException("Byte-array cannot be null");
+		}
+		
+		if((offset + 7) >= bytes.length) {
+			throw new IndexOutOfBoundsException("Byte-array is smaller than the provided offset");
+		}
+		
 		for (int index = 7; index >= 0; index--) {
 			bytes[offset + index] = (byte) (value & 0xFF);
 			value >>= 8;
 		}
 	}
 
+	/**
+	 * Return the cardinality of this byte-array. Cardinality is defined as the number of <code>true</code>
+	 * bits in the bit-array.
+	 * 
+	 * @param bytes the byte-array to find cardinality of
+	 * 
+	 * @return the computed cardinality
+	 */
+	public static long cardinality(byte[] bytes) {
+		if(bytes == null) {
+			throw new IllegalArgumentException("Byte-array cannot be null");
+		}
+		
+		if(bytes.length == 0) {
+			return 0;
+		}
+		
+		long cardinality = 0;
+		for(int index = 0; index < bytes.length; index++) {
+			cardinality += Integer.bitCount(bytes[index] & 0xFF);
+		}
+		
+		return cardinality;
+	}
 }

@@ -24,5 +24,32 @@ public class TestByteArrayUtils {
 			Assert.assertEquals(num, read);
 		}
 	}
+	
+	@Test
+	public void testCardinality() {
+		byte[] bytes = new byte[8];
+		
+		// run for random 1-million long values
+		for(int index = 0; index < 1000 * 1000; index++) {
+			double rand = Math.random();
+			long num = (long) (((double) Long.MAX_VALUE) * rand);
+			
+			num = 2;
+			
+			ByteArrayUtils.writeLong(bytes, num, 0);
+			
+			// now test
+			long actual = ByteArrayUtils.cardinality(bytes);
+			
+			long expected = 0; 
+			for(int bitPos = 0; bitPos < 64; bitPos++) {
+				if(BitUtils.isBitSet(num, bitPos)) {
+					expected++;
+				}
+			}
+			
+			Assert.assertEquals(expected, actual);
+		}
+	}
 
 }
