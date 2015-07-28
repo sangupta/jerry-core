@@ -33,9 +33,6 @@ public class TestByteArrayUtils {
 		for(int index = 0; index < 1000 * 1000; index++) {
 			double rand = Math.random();
 			long num = (long) (((double) Long.MAX_VALUE) * rand);
-			
-			num = 2;
-			
 			ByteArrayUtils.writeLong(bytes, num, 0);
 			
 			// now test
