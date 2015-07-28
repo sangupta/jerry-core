@@ -75,10 +75,24 @@ public interface BitArray extends Closeable {
 	public void and(BitArray bitArray);
 	
 	/**
+	 * The space used by this {@link BitArray} in number of bits.
+	 * 
+	 * @return the number of bits being used
+	 */
+	public int bitSize();
+	
+	/**
 	 * The space used by this {@link BitArray} in number of bytes.
 	 * 
 	 * @return the number of bytes being used
 	 */
-	public int bitSize();
+	public int numBytes();
 
+	/**
+	 * Return the byte-array representation
+	 * 
+	 * @return the byte-array representation for this {@link BitArray}
+	 */
+	byte[] toByteArray();
+	
 }

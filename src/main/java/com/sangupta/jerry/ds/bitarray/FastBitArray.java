@@ -4,6 +4,7 @@ import static java.lang.Math.abs;
 import static java.math.RoundingMode.HALF_EVEN;
 import static java.math.RoundingMode.HALF_UP;
 
+import java.io.IOException;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
@@ -14,7 +15,7 @@ import java.util.Arrays;
  * @author sangupta
  * @since 1.7
  */
-public class FastBitArray {
+public class FastBitArray implements BitArray {
 
 	/**
 	 * The data-set
@@ -36,7 +37,11 @@ public class FastBitArray {
 		this(new long[checkedCast(divide(bits, 64, RoundingMode.CEILING))]);
 	}
 
-	// Used by serialization
+	/**
+	 * Construct an implementation with the given long[] array
+	 * 
+	 * @param data
+	 */
 	public FastBitArray(long[] data) {
 		if(data == null || data.length == 0) {
 			throw new IllegalArgumentException("Data is either null or zero-length");
@@ -51,21 +56,6 @@ public class FastBitArray {
 		this.bitCount = bitCount;
 	}
 
-	/** Returns true if the bit changed value. */
-	boolean set(int index) {
-		if (!get(index)) {
-			data[index >> 6] |= (1L << index);
-			bitCount++;
-			return true;
-		}
-		
-		return false;
-	}
-
-	boolean get(int index) {
-		return (data[index >> 6] & (1L << index)) != 0;
-	}
-
 	/**
 	 * Number of bits
 	 * 
@@ -74,7 +64,17 @@ public class FastBitArray {
 	public int bitSize() {
 		return data.length * Long.SIZE;
 	}
-
+	
+	/**
+	 * Number of bytes
+	 * 
+	 * @return total number of bytes being used
+	 * 
+	 */
+	public int numBytes() {
+		return this.bitSize() >>> 3;
+	}
+	
 	/**
 	 * Number of set bits (1s)
 	 * 
@@ -94,7 +94,11 @@ public class FastBitArray {
 		return new FastBitArray(data.clone());
 	}
 
-	/** Combines the two BitArrays using bitwise OR. */
+	/**
+	 * Combines the two BitArrays using bitwise OR.
+	 * 
+	 * @param array
+	 */
 	void putAll(FastBitArray array) {
 		if(array == null) {
 			throw new IllegalArgumentException("Array to be combined with cannot be null");
@@ -127,6 +131,91 @@ public class FastBitArray {
 		return Arrays.hashCode(data);
 	}
 
+	@Override
+	public void close() throws IOException {
+		// nothing to do - we are in-memory
+	}
+
+	@Override
+	public boolean getBit(int index) {
+		return (data[index >> 6] & (1L << index)) != 0;
+	}
+
+	@Override
+	public boolean setBit(int index) {
+		if (!this.getBit(index)) {
+			data[index >> 6] |= (1L << index);
+			bitCount++;
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public void clear() {
+		Arrays.fill(this.data, 0);
+	}
+
+	@Override
+	public void clearBit(int index) {
+		if (!this.getBit(index)) {
+			return;
+		}
+		
+		data[index >> 6] &= ~(1L << index);
+	}
+
+	@Override
+	public boolean setBitIfUnset(int index) {
+		return this.setBit(index);
+	}
+
+	@Override
+	public void or(BitArray array) {
+		if(array == null) {
+			throw new IllegalArgumentException("Array to be combined with cannot be null");
+		}
+		
+		if(this.data.length != array.bitSize()) {
+			throw new IllegalArgumentException("Array to be combined with must be of equal length");
+		}
+		
+		if(array instanceof FastBitArray) {
+			FastBitArray fastArray = (FastBitArray) array;
+			for (int i = 0; i < data.length; i++) {
+				data[i] = data[i] | fastArray.data[i];
+			}
+			
+			return;
+		}
+	}
+
+	@Override
+	public void and(BitArray bitArray) {
+		
+	}
+	
+	@Override
+	public byte[] toByteArray() {
+		byte[] bytes = new byte[this.numBytes()];
+		
+		// now for each long - put the bytes in the right order
+		for(int index = 0; index < this.data.length; index++) {
+			populateLong(bytes, this.data[index], index);
+		}
+		
+		return bytes;
+	}
+	
+	private static void populateLong(byte[] bytes, long value, int index) {
+		int pointer = index << 3;
+		for (int i = 7; i >= 0; i--) {
+			bytes[pointer + i] = (byte) (value & 0xFF);
+			value >>= 8;
+		}
+	}
+	
 	/**
 	 * Returns the {@code int} value that is equal to {@code value}, if
 	 * possible.
@@ -235,4 +324,5 @@ public class FastBitArray {
 					"mode was UNNECESSARY, but rounding was necessary");
 		}
 	}
+
 }

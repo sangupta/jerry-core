@@ -243,4 +243,22 @@ public class MMapFileBackedBitArray implements BitArray {
 	    byteBuffer = null;
 	}
 
+	@Override
+	public int numBytes() {
+		return this.numBytes;
+	}
+	
+	@Override
+	public byte[] toByteArray() {
+		if(this.buffer.hasArray()) {
+			return this.buffer.array();
+		}
+		
+		byte[] bytes = new byte[this.numBytes];
+		for(int index = 0; index < this.numBytes; index++) {
+			bytes[index]  = this.buffer.get(index);
+		}
+		
+		return bytes;
+	}
 }

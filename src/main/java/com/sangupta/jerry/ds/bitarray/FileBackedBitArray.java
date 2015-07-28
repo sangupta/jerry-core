@@ -183,7 +183,6 @@ public class FileBackedBitArray implements BitArray {
 	 */
 	@Override
 	public void or(BitArray bitArray) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -230,6 +229,24 @@ public class FileBackedBitArray implements BitArray {
 	@Override
 	public void close() throws IOException {
 		this.backingFile.close();
+	}
+	
+	@Override
+	public int numBytes() {
+		return this.numBytes;
+	}
+	
+	@Override
+	public byte[] toByteArray() {
+		byte[] bytes = new byte[this.numBytes];
+		
+		try {
+			this.backingFile.seek(0);
+			this.backingFile.readFully(bytes);
+			return bytes;
+		} catch(IOException e) {
+			throw new RuntimeException("Unable to read bit-array from disk", e);
+		}
 	}
 	
 }

@@ -81,6 +81,16 @@ public class JavaBitSetArray implements BitArray {
 	public int bitSize() {
 		return this.size;
 	}
+	
+	@Override
+	public int numBytes() {
+		return this.bitSize() >>> 8;
+	}
+	
+	@Override
+	public byte[] toByteArray() {
+		return this.bitSet.toByteArray();
+	}
 
 	@Override
 	public void close() throws IOException {
