@@ -1,5 +1,13 @@
 ## Release Notes
 
+**2.1.0**
+
+* Udpated `BitArray` and its various implementation for many bug-fixes and enhancements
+* Added JCIP thread-safety annotations to `BitArray` and its implementations
+* Added `HttpHeaderName` constants from jerry-http project
+* Renamed `GsonJsonProvider` to `GsonJsonJerseyProvider` for better clarity
+* Added `Gson` based `JAX-RS` handler for use with RestEasy
+
 **2.0.0**
 
 * Moved `MutableInt`, `MutableLong`, `MutableFloat` and `MutableDouble` to a sub-package
