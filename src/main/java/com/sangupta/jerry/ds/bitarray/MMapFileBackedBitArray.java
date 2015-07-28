@@ -168,8 +168,20 @@ public class MMapFileBackedBitArray implements BitArray {
 	 */
 	@Override
 	public void or(BitArray bitArray) {
-		// TODO Auto-generated method stub
+		if(bitArray == null) {
+			throw new IllegalArgumentException("BitArray to OR with cannot be null");
+		}
 		
+		if(this.numBytes != bitArray.numBytes()) {
+			throw new IllegalArgumentException("BitArray to OR with is of different length");
+		}
+		
+		byte[] bytes = bitArray.toByteArray();
+		for(int index = 0; index < this.numBytes; index++) {
+			byte bite = this.buffer.get(index);
+			bite = (byte) (bite | bytes[index]);
+			this.buffer.put(index, bite);
+		}
 	}
 
 	/**
@@ -177,8 +189,20 @@ public class MMapFileBackedBitArray implements BitArray {
 	 */
 	@Override
 	public void and(BitArray bitArray) {
-		// TODO Auto-generated method stub
+		if(bitArray == null) {
+			throw new IllegalArgumentException("BitArray to OR with cannot be null");
+		}
 		
+		if(this.numBytes != bitArray.numBytes()) {
+			throw new IllegalArgumentException("BitArray to OR with is of different length");
+		}
+		
+		byte[] bytes = bitArray.toByteArray();
+		for(int index = 0; index < this.numBytes; index++) {
+			byte bite = this.buffer.get(index);
+			bite = (byte) (bite & bytes[index]);
+			this.buffer.put(index, bite);
+		}
 	}
 
 	/**

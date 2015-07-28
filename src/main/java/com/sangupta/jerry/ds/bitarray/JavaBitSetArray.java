@@ -64,7 +64,8 @@ public class JavaBitSetArray implements BitArray {
 			throw new IllegalArgumentException("BitArray to OR with is of different length");
 		}
 		
-		throw new RuntimeException("Operation not yet supported");
+		BitSet bs = BitSet.valueOf(bitArray.toByteArray());
+		this.bitSet.or(bs);
 	}
 
 	@Override
@@ -77,7 +78,8 @@ public class JavaBitSetArray implements BitArray {
 			throw new IllegalArgumentException("BitArray to OR with is of different length");
 		}
 		
-		throw new RuntimeException("Operation not yet supported");
+		BitSet bs = BitSet.valueOf(bitArray.toByteArray());
+		this.bitSet.and(bs);
 	}
 
 	@Override
