@@ -106,8 +106,8 @@ public class BitUtils {
 	public static boolean isBitSet(long value, int bit) {
 	    CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
 	    CheckUtils.checkArgument(bit <= MAX_BIT_LONG, "Bit to set cannot be greater than " + MAX_BIT_LONG);
-	    long mask = 1 << bit;
-	    return (value & mask) != 0;
+	    long mask = 1l << bit;
+	    return ((long) (value & mask)) != 0l;
 	}
 	
 	/**
