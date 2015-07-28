@@ -1,3 +1,24 @@
+/**
+ *
+ * jerry - Common Java Functionality
+ * Copyright (c) 2012-2015, Sandeep Gupta
+ * 
+ * http://sangupta.com/projects/jerry
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ */
+ 
 package com.sangupta.jerry.ds.bitarray;
 
 import static java.lang.Math.abs;
@@ -7,6 +28,8 @@ import static java.math.RoundingMode.HALF_UP;
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.util.Arrays;
+
+import com.sangupta.jerry.util.ByteArrayUtils;
 
 /**
  * A fast bit-set implementation that allows direct access to data
@@ -184,16 +207,43 @@ public class FastBitArray implements BitArray {
 		if(array instanceof FastBitArray) {
 			FastBitArray fastArray = (FastBitArray) array;
 			for (int i = 0; i < data.length; i++) {
-				data[i] = data[i] | fastArray.data[i];
+				data[i] |= fastArray.data[i];
 			}
 			
 			return;
 		}
+		
+		// work on the byte-array
+		byte[] bytes = array.toByteArray();
+		for(int index = 0; index < this.data.length; index++) {
+			this.data[index] |= ByteArrayUtils.readLong(bytes, index << 3);
+		}
 	}
 
 	@Override
-	public void and(BitArray bitArray) {
+	public void and(BitArray array) {
+		if(array == null) {
+			throw new IllegalArgumentException("Array to be combined with cannot be null");
+		}
 		
+		if(this.data.length != array.bitSize()) {
+			throw new IllegalArgumentException("Array to be combined with must be of equal length");
+		}
+		
+		if(array instanceof FastBitArray) {
+			FastBitArray fastArray = (FastBitArray) array;
+			for (int i = 0; i < data.length; i++) {
+				data[i] &= fastArray.data[i];
+			}
+			
+			return;
+		}
+		
+		// work on the byte-array
+		byte[] bytes = array.toByteArray();
+		for(int index = 0; index < this.data.length; index++) {
+			this.data[index] &= ByteArrayUtils.readLong(bytes, index << 3);
+		}
 	}
 	
 	@Override
@@ -202,18 +252,10 @@ public class FastBitArray implements BitArray {
 		
 		// now for each long - put the bytes in the right order
 		for(int index = 0; index < this.data.length; index++) {
-			populateLong(bytes, this.data[index], index);
+			ByteArrayUtils.writeLong(bytes, this.data[index], index << 3);
 		}
 		
 		return bytes;
-	}
-	
-	private static void populateLong(byte[] bytes, long value, int index) {
-		int pointer = index << 3;
-		for (int i = 7; i >= 0; i--) {
-			bytes[pointer + i] = (byte) (value & 0xFF);
-			value >>= 8;
-		}
 	}
 	
 	/**
