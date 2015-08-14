@@ -74,18 +74,18 @@ public class TestBitUtils {
 
 	@Test
 	public void testGetHighestBitSetIndexLong() {
-		Assert.assertEquals(63, BitUtils.getHighestBitSetIndex(Long.MAX_VALUE + 1));
-		Assert.assertEquals(62, BitUtils.getHighestBitSetIndex(Long.MAX_VALUE));
+		Assert.assertEquals(63, BitUtils.getHighestSetBitIndex(Long.MAX_VALUE + 1));
+		Assert.assertEquals(62, BitUtils.getHighestSetBitIndex(Long.MAX_VALUE));
 		
 		for(long bit = 62; bit >= 0; bit--) {
 			long first = (1l << (bit + 1l)) - 1l;
 			long second = 1l << bit;
 			
-			Assert.assertEquals(bit, BitUtils.getHighestBitSetIndex((long) first));
-			Assert.assertEquals("Failed for " + bit, bit, BitUtils.getHighestBitSetIndex((long) second));
+			Assert.assertEquals(bit, BitUtils.getHighestSetBitIndex((long) first));
+			Assert.assertEquals("Failed for " + bit, bit, BitUtils.getHighestSetBitIndex((long) second));
 		}
 
-		Assert.assertEquals(0, BitUtils.getHighestBitSetIndex((long) 1));
-		Assert.assertEquals(-1, BitUtils.getHighestBitSetIndex((long) 0));
+		Assert.assertEquals(0, BitUtils.getHighestSetBitIndex((long) 1));
+		Assert.assertEquals(-1, BitUtils.getHighestSetBitIndex((long) 0));
 	}
 }

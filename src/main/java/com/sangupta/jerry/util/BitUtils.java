@@ -235,7 +235,7 @@ public class BitUtils {
 	 * @param value the value to check 
 	 * @return
 	 */
-	public static int getHighestBitSetIndex(long value) {
+	public static int getHighestSetBitIndex(long value) {
 		if(value < 0) {
 			value = value & 0xFFFFFFFF;
 		}
