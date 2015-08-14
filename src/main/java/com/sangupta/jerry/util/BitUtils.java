@@ -147,4 +147,110 @@ public class BitUtils {
 		long mask = ~setBit(0L, bit);
 		return value & mask;
 	}
+	
+	/**
+	 * Find the index of the highest bit that is set. Bits on the left are considered
+	 * the highest bit.
+	 *  
+	 * @param value the value to check 
+	 * @return
+	 */
+	public static int getHighestBitSetIndex(byte byteValue) {
+		int value = byteValue;
+		if(byteValue < 0) {
+			value = byteValue & 0xFF;
+		}
+		
+		if(value == 0) {
+			return -1;
+		}
+		
+		for(int index = 7; index >= 0; index--) {
+			int bitValue = 1 << index;
+			if((value & bitValue) == bitValue) {
+				return index;
+			}
+		}
+		
+		return -1;
+	}
+	
+	/**
+	 * Find the index of the highest bit that is set. Bits on the left are considered
+	 * the highest bit.
+	 *  
+	 * @param value the value to check 
+	 * @return
+	 */
+	public static int getHighestBitSetIndex(short shortValue) {
+		int value = shortValue;
+		if(shortValue < 0) {
+			value = shortValue & 0xFFFF;
+		}
+		
+		if(value == 0) {
+			return -1;
+		}
+		
+		for(int index = 15; index >= 0; index--) {
+			int bitValue = 1 << index;
+			if((value & bitValue) == bitValue) {
+				return index;
+			}
+		}
+		
+		return -1;
+	}
+	
+	/**
+	 * Find the index of the highest bit that is set. Bits on the left are considered
+	 * the highest bit.
+	 *  
+	 * @param value the value to check 
+	 * @return
+	 */
+	public static int getHighestBitSetIndex(int value) {
+		if(value < 0) {
+			value = value & 0xFFFFFFFF;
+		}
+		
+		if(value == 0) {
+			return -1;
+		}
+		
+		for(int index = 31; index >= 0; index--) {
+			int bitValue = 1 << index;
+			if((value & bitValue) == bitValue) {
+				return index;
+			}
+		}
+		
+		return -1;
+	}
+	
+	/**
+	 * Find the index of the highest bit that is set. Bits on the left are considered
+	 * the highest bit.
+	 *  
+	 * @param value the value to check 
+	 * @return
+	 */
+	public static int getHighestBitSetIndex(long value) {
+		if(value < 0) {
+			value = value & 0xFFFFFFFF;
+		}
+		
+		if(value == 0) {
+			return -1;
+		}
+		
+		for(int index = 63; index >= 0; index--) {
+			long bitValue = 1l << index;
+			if((value & bitValue) == bitValue) {
+				return index;
+			}
+		}
+		
+		return -1;
+	}
 }
