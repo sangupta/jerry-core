@@ -301,7 +301,7 @@ public class BitUtils {
 	 * Find the index of the lowest bit that is set. Bits on the left are
 	 * considered the highest bit.
 	 * 
-	 * @param value
+	 * @param intValue
 	 *            the value to check
 	 * 
 	 * @return the index of the lowest bit set, or <code>-1</code> if none is
