@@ -1,5 +1,11 @@
 ## Release Notes
 
+**2.2.0**
+* Added `ListUtils` with `listOf` methods to construct `ArrayList` of arrays
+* Added `getLowestSetBitIndex` and `getHighestSetBitIndex` methods to `BitUtils`
+* Added `getHighestBitSet` and `getLowestBitSet` methods to `BitArray` and its implementations
+* Added test-cases to `BitUtils` and `BitArray` implementations
+
 **2.1.0**
 
 * Udpated `BitArray` and its various implementation for many bug-fixes and enhancements
