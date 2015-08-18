@@ -28,7 +28,7 @@ import org.junit.Test;
 
 public class TestJavaBitSetArray {
 	
-	private static final int MAX_ELEMENTS = 1000 * 1000;
+	private static final int MAX_ELEMENTS = 1000 * 10;
 	
 	@Test
 	public void testGetAndSet() throws Exception {
