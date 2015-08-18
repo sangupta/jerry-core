@@ -149,11 +149,14 @@ public class BitUtils {
 	}
 	
 	/**
-	 * Find the index of the highest bit that is set. Bits on the left are considered
-	 * the highest bit.
-	 *  
-	 * @param value the value to check 
-	 * @return
+	 * Find the index of the highest bit that is set. Bits on the left are
+	 * considered the highest bit.
+	 * 
+	 * @param byteValue
+	 *            the value to check
+	 *            
+	 * @return the index of the highest bit set, or <code>-1</code> if none is
+	 *         set
 	 */
 	public static int getHighestSetBitIndex(byte byteValue) {
 		int value = byteValue;
@@ -176,11 +179,14 @@ public class BitUtils {
 	}
 	
 	/**
-	 * Find the index of the lowest bit that is set. Bits on the left are considered
-	 * the highest bit.
-	 *  
-	 * @param value the value to check 
-	 * @return
+	 * Find the index of the lowest bit that is set. Bits on the left are
+	 * considered the highest bit.
+	 * 
+	 * @param byteValue
+	 *            the value to check
+	 * 
+	 * @return the index of the lowest bit set, or <code>-1</code> if none is
+	 *         set
 	 */
 	public static int getLowestSetBitIndex(byte byteValue) {
 		int value = byteValue;
@@ -203,11 +209,14 @@ public class BitUtils {
 	}
 	
 	/**
-	 * Find the index of the highest bit that is set. Bits on the left are considered
-	 * the highest bit.
-	 *  
-	 * @param value the value to check 
-	 * @return
+	 * Find the index of the highest bit that is set. Bits on the left are
+	 * considered the highest bit.
+	 * 
+	 * @param shortValue
+	 *            the value to check
+	 *            
+	 * @return the index of the highest bit set, or <code>-1</code> if none is
+	 *         set
 	 */
 	public static int getHighestSetBitIndex(short shortValue) {
 		int value = shortValue;
@@ -230,16 +239,19 @@ public class BitUtils {
 	}
 	
 	/**
-	 * Find the index of the lowest bit that is set. Bits on the left are considered
-	 * the highest bit.
-	 *  
-	 * @param value the value to check 
-	 * @return
+	 * Find the index of the lowest bit that is set. Bits on the left are
+	 * considered the highest bit.
+	 * 
+	 * @param shortValue
+	 *            the value to check
+	 * 
+	 * @return the index of the lowest bit set, or <code>-1</code> if none is
+	 *         set
 	 */
-	public static int getLowestSetBitIndex(short byteValue) {
-		int value = byteValue;
-		if(byteValue < 0) {
-			value = byteValue & 0xFFFF;
+	public static int getLowestSetBitIndex(short shortValue) {
+		int value = shortValue;
+		if(shortValue < 0) {
+			value = shortValue & 0xFFFF;
 		}
 		
 		if(value == 0) {
@@ -257,24 +269,27 @@ public class BitUtils {
 	}
 	
 	/**
-	 * Find the index of the highest bit that is set. Bits on the left are considered
-	 * the highest bit.
-	 *  
-	 * @param value the value to check 
-	 * @return
+	 * Find the index of the highest bit that is set. Bits on the left are
+	 * considered the highest bit.
+	 * 
+	 * @param intValue
+	 *            the value to check
+	 * 
+	 * @return the index of the highest bit set, or <code>-1</code> if none is
+	 *         set
 	 */
-	public static int getHighestSetBitIndex(int value) {
-		if(value < 0) {
-			value = value & 0xFFFFFFFF;
+	public static int getHighestSetBitIndex(int intValue) {
+		if(intValue < 0) {
+			intValue = intValue & 0xFFFFFFFF;
 		}
 		
-		if(value == 0) {
+		if(intValue == 0) {
 			return -1;
 		}
 		
 		for(int index = 31; index >= 0; index--) {
 			int bitValue = 1 << index;
-			if((value & bitValue) == bitValue) {
+			if((intValue & bitValue) == bitValue) {
 				return index;
 			}
 		}
@@ -283,16 +298,19 @@ public class BitUtils {
 	}
 	
 	/**
-	 * Find the index of the lowest bit that is set. Bits on the left are considered
-	 * the highest bit.
-	 *  
-	 * @param value the value to check 
-	 * @return
+	 * Find the index of the lowest bit that is set. Bits on the left are
+	 * considered the highest bit.
+	 * 
+	 * @param value
+	 *            the value to check
+	 * 
+	 * @return the index of the lowest bit set, or <code>-1</code> if none is
+	 *         set
 	 */
-	public static int getLowestSetBitIndex(int byteValue) {
-		int value = byteValue;
-		if(byteValue < 0) {
-			value = byteValue & 0xFFFFFFFF;
+	public static int getLowestSetBitIndex(int intValue) {
+		int value = intValue;
+		if(intValue < 0) {
+			value = intValue & 0xFFFFFFFF;
 		}
 		
 		if(value == 0) {
@@ -310,24 +328,27 @@ public class BitUtils {
 	}
 	
 	/**
-	 * Find the index of the highest bit that is set. Bits on the left are considered
-	 * the highest bit.
-	 *  
-	 * @param value the value to check 
-	 * @return
+	 * Find the index of the highest bit that is set. Bits on the left are
+	 * considered the highest bit.
+	 * 
+	 * @param longValue
+	 *            the value to check
+	 * 
+	 * @return the index of the highest bit set, or <code>-1</code> if none is
+	 *         set
 	 */
-	public static int getHighestSetBitIndex(long value) {
-		if(value < 0) {
-			value = value & 0xFFFFFFFF;
+	public static int getHighestSetBitIndex(long longValue) {
+		if(longValue < 0) {
+			longValue = longValue & 0xFFFFFFFF;
 		}
 		
-		if(value == 0) {
+		if(longValue == 0) {
 			return -1;
 		}
 		
 		for(int index = 63; index >= 0; index--) {
 			long bitValue = 1l << index;
-			if((value & bitValue) == bitValue) {
+			if((longValue & bitValue) == bitValue) {
 				return index;
 			}
 		}
@@ -339,21 +360,23 @@ public class BitUtils {
 	 * Find the index of the lowest bit that is set. Bits on the left are considered
 	 * the highest bit.
 	 *  
-	 * @param value the value to check 
-	 * @return
+	 * @param longValue the value to check 
+	 * 
+	 * @return the index of the lowest bit set, or <code>-1</code> if none is
+	 *         set
 	 */
-	public static int getLowestSetBitIndex(long value) {
-		if(value < 0) {
-			value = value & 0xFFFFFFFF;
+	public static int getLowestSetBitIndex(long longValue) {
+		if(longValue < 0) {
+			longValue = longValue & 0xFFFFFFFF;
 		}
 		
-		if(value == 0) {
+		if(longValue == 0) {
 			return -1;
 		}
 		
 		for(int index = 0; index < 64; index++) {
 			long bitValue = 1l << index;
-			if((value & bitValue) == bitValue) {
+			if((longValue & bitValue) == bitValue) {
 				return index;
 			}
 		}
