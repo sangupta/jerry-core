@@ -1,3 +1,24 @@
+/**
+ *
+ * jerry - Common Java Functionality
+ * Copyright (c) 2012-2015, Sandeep Gupta
+ * 
+ * http://sangupta.com/projects/jerry
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * 
+ */
+ 
 package com.sangupta.jerry.ds.bitarray;
 
 import java.io.File;
@@ -8,6 +29,8 @@ import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel.MapMode;
 import java.util.Arrays;
+
+import com.sangupta.jerry.util.BitUtils;
 
 import net.jcip.annotations.NotThreadSafe;
 
@@ -287,5 +310,41 @@ public class MMapFileBackedBitArray implements BitArray {
 		}
 		
 		return bytes;
+	}
+
+	@Override
+	public int getHighestBitSet() {
+		for(int index = this.numBytes - 1; index >= 0; index--) {
+			byte bite = this.buffer.get(index);
+			if(bite != 0) {
+				// this is the highest set bit
+				if(index > 0) {
+					return (index * 8) + BitUtils.getHighestSetBitIndex(bite);
+				}
+				
+				return BitUtils.getHighestSetBitIndex(bite);
+			}
+		}
+		
+		// not found
+		return -1;
+	}
+
+	@Override
+	public int getLowestBitSet() {
+		for(int index = 0; index < this.numBytes; index++) {
+			byte bite = this.buffer.get(index);
+			if(bite != 0) {
+				// this is the highest set bit
+				if(index > 0) {
+					return (index * 8) + BitUtils.getLowestSetBitIndex(bite);
+				}
+				
+				return BitUtils.getLowestSetBitIndex(bite);
+			}
+		}
+		
+		// not found
+		return -1;
 	}
 }

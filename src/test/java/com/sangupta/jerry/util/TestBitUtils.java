@@ -34,12 +34,12 @@ public class TestBitUtils {
 			int first = (1 << (bit + 1)) - 1;
 			int second = 1 << bit;
 			
-			Assert.assertEquals(bit, BitUtils.getHighestBitSetIndex((byte) first));
-			Assert.assertEquals(bit, BitUtils.getHighestBitSetIndex((byte) second));
+			Assert.assertEquals(bit, BitUtils.getHighestSetBitIndex((byte) first));
+			Assert.assertEquals(bit, BitUtils.getHighestSetBitIndex((byte) second));
 		}
 
-		Assert.assertEquals(0, BitUtils.getHighestBitSetIndex((byte) 1));
-		Assert.assertEquals(-1, BitUtils.getHighestBitSetIndex((byte) 0));
+		Assert.assertEquals(0, BitUtils.getHighestSetBitIndex((byte) 1));
+		Assert.assertEquals(-1, BitUtils.getHighestSetBitIndex((byte) 0));
 	}
 	
 	@Test
@@ -48,28 +48,28 @@ public class TestBitUtils {
 			int first = (1 << (bit + 1)) - 1;
 			int second = 1 << bit;
 			
-			Assert.assertEquals(bit, BitUtils.getHighestBitSetIndex((short) first));
-			Assert.assertEquals(bit, BitUtils.getHighestBitSetIndex((short) second));
+			Assert.assertEquals(bit, BitUtils.getHighestSetBitIndex((short) first));
+			Assert.assertEquals(bit, BitUtils.getHighestSetBitIndex((short) second));
 		}
 
-		Assert.assertEquals(0, BitUtils.getHighestBitSetIndex((short) 1));
-		Assert.assertEquals(-1, BitUtils.getHighestBitSetIndex((short) 0));
+		Assert.assertEquals(0, BitUtils.getHighestSetBitIndex((short) 1));
+		Assert.assertEquals(-1, BitUtils.getHighestSetBitIndex((short) 0));
 	}
 
 	@Test
 	public void testGetHighestBitSetIndexInt() {
-		Assert.assertEquals(31, BitUtils.getHighestBitSetIndex(Integer.MAX_VALUE + 1));
+		Assert.assertEquals(31, BitUtils.getHighestSetBitIndex(Integer.MAX_VALUE + 1));
 
 		for(int bit = 30; bit >= 0; bit--) {
 			int first = (1 << (bit + 1)) - 1;
 			int second = 1 << bit;
 			
-			Assert.assertEquals(bit, BitUtils.getHighestBitSetIndex((int) first));
-			Assert.assertEquals(bit, BitUtils.getHighestBitSetIndex((int) second));
+			Assert.assertEquals(bit, BitUtils.getHighestSetBitIndex((int) first));
+			Assert.assertEquals(bit, BitUtils.getHighestSetBitIndex((int) second));
 		}
 
-		Assert.assertEquals(0, BitUtils.getHighestBitSetIndex((int) 1));
-		Assert.assertEquals(-1, BitUtils.getHighestBitSetIndex((int) 0));
+		Assert.assertEquals(0, BitUtils.getHighestSetBitIndex((int) 1));
+		Assert.assertEquals(-1, BitUtils.getHighestSetBitIndex((int) 0));
 	}
 
 	@Test

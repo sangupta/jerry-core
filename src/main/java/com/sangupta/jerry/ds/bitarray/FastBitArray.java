@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
+import com.sangupta.jerry.util.BitUtils;
 import com.sangupta.jerry.util.ByteArrayUtils;
 
 import net.jcip.annotations.NotThreadSafe;
@@ -368,6 +369,44 @@ public class FastBitArray implements BitArray {
 			throw new ArithmeticException(
 					"mode was UNNECESSARY, but rounding was necessary");
 		}
+	}
+
+	@Override
+	public int getHighestBitSet() {
+		int length = this.data.length;
+		for(int index = length - 1; index >= 0; index--) {
+			long value = this.data[index];
+			if(value != 0) {
+				// this is the highest set bit
+				if(index > 0) {
+					return (index * 64) + BitUtils.getHighestSetBitIndex(value);
+				}
+				
+				return BitUtils.getHighestSetBitIndex(value);
+			}
+		}
+		
+		// not found
+		return -1;
+	}
+
+	@Override
+	public int getLowestBitSet() {
+		int length = this.data.length;
+		for(int index = 0; index < length; index++) {
+			long value = this.data[index];
+			if(value != 0) {
+				// this is the highest set bit
+				if(index > 0) {
+					return (index * 64) + BitUtils.getLowestSetBitIndex(value);
+				}
+				
+				return BitUtils.getLowestSetBitIndex(value);
+			}
+		}
+		
+		// not found
+		return -1;
 	}
 
 }
