@@ -101,7 +101,10 @@ public class TestUriUtils {
 	
 	@Test
 	public void testExtractHost() {
+		Assert.assertEquals(null, UriUtils.extractHost(null));
+		Assert.assertEquals(null, UriUtils.extractHost(""));
 		Assert.assertEquals(null, UriUtils.extractHost("www.google.com"));
+		Assert.assertEquals("www.google.com", UriUtils.extractHost("//www.google.com"));
 		Assert.assertEquals("www.google.com", UriUtils.extractHost("http://www.google.com"));
 		Assert.assertEquals("www.google.com", UriUtils.extractHost("http://www.google.com/"));
 		Assert.assertEquals("www.google.com", UriUtils.extractHost("http://www.google.com/abc.html"));
@@ -162,4 +165,13 @@ public class TestUriUtils {
 		Assert.assertEquals("p1=v1&p2=v2", UriUtils.urlEncode(map));
 		Assert.assertEquals("p1=v1&p2=v2", UriUtils.urlEncode(map, true));
 	}
+	
+	@Test
+	public void testAddWebPaths() {
+		Assert.assertEquals("http://google.com/hello", UriUtils.addWebPaths("http://google.com", "hello"));
+		Assert.assertEquals("http://google.com/hello", UriUtils.addWebPaths("http://google.com/", "hello"));
+		Assert.assertEquals("http://google.com/hello", UriUtils.addWebPaths("http://google.com", "/hello"));
+		Assert.assertEquals("http://google.com/hello", UriUtils.addWebPaths("http://google.com/", "/hello"));
+	}
+	
 }

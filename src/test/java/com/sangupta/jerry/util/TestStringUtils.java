@@ -316,4 +316,42 @@ public class TestStringUtils {
 		Assert.assertEquals("one-2", StringUtils.convertToJsonPropertyName("one-2"));
 		Assert.assertEquals("one_2", StringUtils.convertToJsonPropertyName("one$2"));
 	}
+	
+	@Test
+	public void testConvertToXmlPropertyName() {
+		Assert.assertEquals("one", StringUtils.convertToXmlPropertyName("one"));
+		Assert.assertEquals("one-two", StringUtils.convertToXmlPropertyName("one-two"));
+		Assert.assertEquals("one_two", StringUtils.convertToXmlPropertyName("one_two"));
+		Assert.assertEquals("one-two", StringUtils.convertToXmlPropertyName("one two"));
+		Assert.assertEquals("one-two", StringUtils.convertToXmlPropertyName("one)two"));
+		Assert.assertEquals("one-two", StringUtils.convertToXmlPropertyName("one$two"));
+		Assert.assertEquals("one-2", StringUtils.convertToXmlPropertyName("one-2"));
+		Assert.assertEquals("one-2", StringUtils.convertToXmlPropertyName("one$2"));
+	}
+	
+	@Test
+	public void testGetShortValue() {
+		Assert.assertEquals(-1, StringUtils.getShortValue(null, (short) -1));
+		Assert.assertEquals(-1, StringUtils.getShortValue("", (short) -1));
+		Assert.assertEquals(-1, StringUtils.getShortValue("abc", (short) -1));
+		Assert.assertEquals(15, StringUtils.getShortValue("15", (short) -1));
+	}
+	
+	@Test
+	public void testMerge() {
+		Assert.assertEquals("", StringUtils.merge(null, ','));
+		Assert.assertEquals("", StringUtils.merge(new String[] { }, ','));
+		Assert.assertEquals("1,2,3", StringUtils.merge(new String[] { "1", "2", "3" }, ','));		
+
+		Assert.assertEquals("", StringUtils.merge(null, ","));
+		Assert.assertEquals("", StringUtils.merge(new String[] { }, ","));
+		Assert.assertEquals("1,2,3", StringUtils.merge(new String[] { "1", "2", "3" }, ","));		
+	}
+	
+	@Test
+	public void testRepeat() {
+		Assert.assertEquals("s", StringUtils.repeat('s', 1));
+		Assert.assertEquals("ss", StringUtils.repeat('s', 2));
+		Assert.assertEquals("ssssssssss", StringUtils.repeat('s', 10));
+	}
 }
