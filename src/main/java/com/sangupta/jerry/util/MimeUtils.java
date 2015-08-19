@@ -24,12 +24,14 @@ package com.sangupta.jerry.util;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.sangupta.jerry.constants.HttpMimeType;
+
 /**
  * 
  * @author sangupta
  *
  */
-public class MimeUtils {
+public class MimeUtils implements HttpMimeType {
 
 	/**
 	 * Mappings between extension and MIME type
@@ -38,18 +40,18 @@ public class MimeUtils {
 	
 	static {
 		// custom
-		EXTENSION_MIME_MAP.put("pdf", "application/pdf");
-		EXTENSION_MIME_MAP.put("ps", "application/postscript");
-		EXTENSION_MIME_MAP.put("xls", "application/vnd.ms-excel");
-		EXTENSION_MIME_MAP.put("xlsx", "application/vnd.ms-excel");
-		EXTENSION_MIME_MAP.put("ppt", "application/vnd.ms-powerpoint");
-		EXTENSION_MIME_MAP.put("pptx", "application/vnd.ms-powerpoint");
-		EXTENSION_MIME_MAP.put("xps", "application/vnd.ms-xpsdocument");
+		EXTENSION_MIME_MAP.put("pdf", PDF);
+		EXTENSION_MIME_MAP.put("ps", POSTSCRIPT);
+		EXTENSION_MIME_MAP.put("xls", XLS);
+		EXTENSION_MIME_MAP.put("xlsx", XLSX);
+		EXTENSION_MIME_MAP.put("ppt", PPT);
+		EXTENSION_MIME_MAP.put("pptx", PPTX);
+		EXTENSION_MIME_MAP.put("xps", XPS);
 		
 		// rss and all
-		EXTENSION_MIME_MAP.put("atom", "application/atom+xml");
-		EXTENSION_MIME_MAP.put("rdf", "application/rdf+xml");
-		EXTENSION_MIME_MAP.put("rss", "application/rss+xml");
+		EXTENSION_MIME_MAP.put("atom", ATOM);
+		EXTENSION_MIME_MAP.put("rdf", RDF);
+		EXTENSION_MIME_MAP.put("rss", RSS);
 		
 		// fonts
 		EXTENSION_MIME_MAP.put("woff", "aplication/font-woff");
@@ -76,21 +78,21 @@ public class MimeUtils {
 		EXTENSION_MIME_MAP.put("apk", "application/vnd.android.package-archive");
 		
 		// audio
-		EXTENSION_MIME_MAP.put("ogg", "application/ogg");
-		EXTENSION_MIME_MAP.put("mp4", "audio/mp4");
-		EXTENSION_MIME_MAP.put("mp3", "audio/mpeg");
-		EXTENSION_MIME_MAP.put("vorbis", "audio/vorbis");
-		EXTENSION_MIME_MAP.put("webm", "audio/webm");
+		EXTENSION_MIME_MAP.put("ogg", OGG_VORBIS_AUDIO);
+		EXTENSION_MIME_MAP.put("mp4", MP4_AUDIO);
+		EXTENSION_MIME_MAP.put("mp3", MP3_AUDIO);
+		EXTENSION_MIME_MAP.put("vorbis", VORBIS_AUDIO);
+		EXTENSION_MIME_MAP.put("webm", WEBM_AUDIO);
 		EXTENSION_MIME_MAP.put("aac", "audio/x-aac");
 		EXTENSION_MIME_MAP.put("caf", "audio/x-caf");
 		
 		// image
-		EXTENSION_MIME_MAP.put("gif", "image/gif");
-		EXTENSION_MIME_MAP.put("jpeg", "image/jpeg");
-		EXTENSION_MIME_MAP.put("jpg", "image/jpg");
-		EXTENSION_MIME_MAP.put("png", "image/png");
-		EXTENSION_MIME_MAP.put("svg", "image/svg+xml");
-		EXTENSION_MIME_MAP.put("tiff", "image/tiff");
+		EXTENSION_MIME_MAP.put("gif", GIF_IMAGE);
+		EXTENSION_MIME_MAP.put("jpeg", JPEG_IMAGE);
+		EXTENSION_MIME_MAP.put("jpg", JPG_IMAGE);
+		EXTENSION_MIME_MAP.put("png", PNG_IMAGE);
+		EXTENSION_MIME_MAP.put("svg", SVG_IMAGE);
+		EXTENSION_MIME_MAP.put("tiff", TIFF_IMAGE);
 		
 		// text
 		EXTENSION_MIME_MAP.put("dart", "application/dart");
@@ -99,8 +101,8 @@ public class MimeUtils {
 		EXTENSION_MIME_MAP.put("htm", "text/html");
 		EXTENSION_MIME_MAP.put("html", "text/html");
 		EXTENSION_MIME_MAP.put("rtf", "text/rtf");
-		EXTENSION_MIME_MAP.put("txt", "text/plain");
-		EXTENSION_MIME_MAP.put("text", "text/plain");
+		EXTENSION_MIME_MAP.put("txt", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("text", TEXT_PLAIN);
 		
 		// video
 		EXTENSION_MIME_MAP.put("avi", "video/avi");
@@ -111,34 +113,34 @@ public class MimeUtils {
 		EXTENSION_MIME_MAP.put("flv", "video/x-flv");
 		
 		// code files - should be text/plain
-		EXTENSION_MIME_MAP.put("java", "text/plain");
-		EXTENSION_MIME_MAP.put("h", "text/plain");
-		EXTENSION_MIME_MAP.put("c", "text/plain");
-		EXTENSION_MIME_MAP.put("cpp", "text/plain");
-		EXTENSION_MIME_MAP.put("m", "text/plain");
-		EXTENSION_MIME_MAP.put("py", "text/plain");
-		EXTENSION_MIME_MAP.put("pl", "text/plain");
-		EXTENSION_MIME_MAP.put("rb", "text/plain");
-		EXTENSION_MIME_MAP.put("asp", "text/plain");
-		EXTENSION_MIME_MAP.put("vb", "text/plain");
-		EXTENSION_MIME_MAP.put("bas", "text/plain");
-		EXTENSION_MIME_MAP.put("cs", "text/plain");
-		EXTENSION_MIME_MAP.put("pas", "text/plain");
-		EXTENSION_MIME_MAP.put("go", "text/plain");
-		EXTENSION_MIME_MAP.put("php", "text/plain");
-		EXTENSION_MIME_MAP.put("scala", "text/plain");
-		EXTENSION_MIME_MAP.put("asm", "text/plain");
-		EXTENSION_MIME_MAP.put("lsp", "text/plain");
+		EXTENSION_MIME_MAP.put("java", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("h", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("c", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("cpp", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("m", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("py", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("pl", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("rb", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("asp", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("vb", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("bas", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("cs", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("pas", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("go", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("php", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("scala", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("asm", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("lsp", TEXT_PLAIN);
 		
 		// shell scripts
-		EXTENSION_MIME_MAP.put("sh", "text/plain");
-		EXTENSION_MIME_MAP.put("zsh", "text/plain");
-		EXTENSION_MIME_MAP.put("bat", "text/plain");
+		EXTENSION_MIME_MAP.put("sh", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("zsh", TEXT_PLAIN);
+		EXTENSION_MIME_MAP.put("bat", TEXT_PLAIN);
 	}
 
 	public static String getMimeTypeForFileExtension(String extension) {
 		if(AssertUtils.isEmpty(extension)) {
-			return "application/octet-stream";
+			return BINARY;
 		}
 		
 		// convert to lower case
@@ -146,7 +148,7 @@ public class MimeUtils {
 		
 		// not found - we use default of octet/stream
 		if(!EXTENSION_MIME_MAP.containsKey(extension)) {
-			return "application/octet-stream";
+			return BINARY;
 		}
 		
 		return EXTENSION_MIME_MAP.get(extension);

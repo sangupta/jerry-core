@@ -31,7 +31,7 @@ package com.sangupta.jerry.constants;
  * @author sangupta
  *
  */
-public class HttpMimeType {
+public interface HttpMimeType {
 	
 	// Image
 
@@ -44,6 +44,8 @@ public class HttpMimeType {
 	public static final String JPG_IMAGE = "image/jpg";
 	
 	public static final String SVG_IMAGE = "image/svg+xml";
+	
+	public static final String TIFF_IMAGE = "image/tiff";
 	
 	// text formats
 	
@@ -68,6 +70,18 @@ public class HttpMimeType {
 	public static final String ATOM = "application/atom+xml";
 	
 	public static final String PDF = "application/pdf";
+	
+	public static final String POSTSCRIPT = "application/postscript";
+	
+	public static final String XLS = "application/vnd.ms-excel";
+	
+	public static final String XLSX = "application/vnd.ms-excel";
+	
+	public static final String PPT = "application/vnd.ms-powerpoint";
+	
+	public static final String PPTX = "application/vnd.ms-powerpoint";
+	
+	public static final String XPS = "application/vnd.ms-xpsdocument";
 	
 	// binary
 	
@@ -98,5 +112,11 @@ public class HttpMimeType {
 	public static final String QUICKTIME_VIDEO = "video/quicktime";
 	
 	public static final String WEBM_VIDEO = "video/webm";
+	
+	// feeds
+	
+	public static final String RDF = "application/rdf+xml";
+	
+	public static final String RSS = "application/rss+xml";
 	
 }
