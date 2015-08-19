@@ -92,6 +92,64 @@ public class TestFileBackedBitArray {
 	}
 	
 	@Test
+	public void testOr() throws Exception {
+		File file1 = File.createTempFile("test-ba-", ".bin");
+		file1.deleteOnExit();
+		BitArray ba1 = new FileBackedBitArray(file1, MAX_ELEMENTS);
+		
+		File file2 = File.createTempFile("test-ba-", ".bin");
+		file2.deleteOnExit();
+		BitArray ba2 = new FileBackedBitArray(file2, MAX_ELEMENTS);
+		
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			if((index & 1) == 1) {
+				// odd
+				ba1.setBit(index);
+			} else {
+				ba2.setBit(index);
+			}
+		}
+		
+		// check
+		ba1.or(ba2);
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			Assert.assertTrue(ba1.getBit(index));
+		}
+		
+		ba1.close();
+		ba2.close();
+	}
+	
+	@Test
+	public void testAnd() throws Exception {
+		File file1 = File.createTempFile("test-ba-", ".bin");
+		file1.deleteOnExit();
+		BitArray ba1 = new FileBackedBitArray(file1, MAX_ELEMENTS);
+		
+		File file2 = File.createTempFile("test-ba-", ".bin");
+		file2.deleteOnExit();
+		BitArray ba2 = new FileBackedBitArray(file2, MAX_ELEMENTS);
+		
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			if((index & 1) == 1) {
+				// odd
+				ba1.setBit(index);
+			} else {
+				ba2.setBit(index);
+			}
+		}
+		
+		// check
+		ba1.and(ba2);
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			Assert.assertFalse(ba1.getBit(index));
+		}
+		
+		ba1.close();
+		ba2.close();
+	}
+	
+	@Test
 	public void testGetHighestBitSet() throws Exception {
 		File file = File.createTempFile("test-ba-", ".bin");
 		file.deleteOnExit();

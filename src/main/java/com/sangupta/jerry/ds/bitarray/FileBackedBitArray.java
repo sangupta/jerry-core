@@ -220,7 +220,7 @@ public class FileBackedBitArray implements BitArray {
 		try {
 			this.backingFile.seek(0);
 			byte[] bytes = bitArray.toByteArray();
-			for(int index = 0; index < this.backingFile.length(); index++) {
+			for(int index = 0; index < bytes.length; index++) {
 				byte bite = this.backingFile.readByte();
 				bite |= bytes[index];
 				this.backingFile.seek(this.backingFile.getFilePointer() - 1);
@@ -247,7 +247,7 @@ public class FileBackedBitArray implements BitArray {
 		try {
 			this.backingFile.seek(0);
 			byte[] bytes = bitArray.toByteArray();
-			for(int index = 0; index < this.backingFile.length(); index++) {
+			for(int index = 0; index < bytes.length; index++) {
 				byte bite = this.backingFile.readByte();
 				bite &= bytes[index];
 				this.backingFile.seek(this.backingFile.getFilePointer() - 1);
