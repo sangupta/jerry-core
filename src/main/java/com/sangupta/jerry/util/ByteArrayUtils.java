@@ -46,6 +46,10 @@ public class ByteArrayUtils {
 			throw new IllegalArgumentException("Byte-array cannot be null");
 		}
 		
+		if(offset < 0) {
+			throw new IndexOutOfBoundsException("Offset cannot be negative");
+		}
+		
 		if((offset + 7) >= bytes.length) {
 			throw new IndexOutOfBoundsException("Byte-array is smaller than the provided offset");
 		}
@@ -80,6 +84,10 @@ public class ByteArrayUtils {
 	public static void writeLong(byte[] bytes, long value, int offset) {
 		if(bytes == null) {
 			throw new IllegalArgumentException("Byte-array cannot be null");
+		}
+		
+		if(offset < 0) {
+			throw new IndexOutOfBoundsException("Offset cannot be negative");
 		}
 		
 		if((offset + 7) >= bytes.length) {

@@ -12,6 +12,65 @@ import org.junit.Test;
 public class TestByteArrayUtils {
 	
 	@Test
+	public void testExceptions() {
+		// during read
+		try {
+			ByteArrayUtils.readLong(null, 0);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+
+		try {
+			byte[] bytes = new byte[100];
+			ByteArrayUtils.readLong(bytes, 120);
+			Assert.assertTrue(false);
+		} catch(IndexOutOfBoundsException e) {
+			Assert.assertTrue(true);
+		}
+
+		try {
+			byte[] bytes = new byte[100];
+			ByteArrayUtils.readLong(bytes, -5);
+			Assert.assertTrue(false);
+		} catch(IndexOutOfBoundsException e) {
+			Assert.assertTrue(true);
+		}
+
+		// during write
+		try {
+			ByteArrayUtils.writeLong(null, 3l, 0);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+
+		try {
+			byte[] bytes = new byte[100];
+			ByteArrayUtils.writeLong(bytes, 3l, 120);
+			Assert.assertTrue(false);
+		} catch(IndexOutOfBoundsException e) {
+			Assert.assertTrue(true);
+		}
+
+		try {
+			byte[] bytes = new byte[100];
+			ByteArrayUtils.writeLong(bytes, 3l, -5);
+			Assert.assertTrue(false);
+		} catch(IndexOutOfBoundsException e) {
+			Assert.assertTrue(true);
+		}
+		
+		// during cardinality
+		try {
+			ByteArrayUtils.cardinality(null);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+	}
+	
+	@Test
 	public void testLongConversions() {
 		byte[] bytes = new byte[8];
 		
@@ -46,6 +105,7 @@ public class TestByteArrayUtils {
 			}
 			
 			Assert.assertEquals(expected, actual);
+			Assert.assertEquals(0, ByteArrayUtils.cardinality(new byte[] { }));
 		}
 	}
 
