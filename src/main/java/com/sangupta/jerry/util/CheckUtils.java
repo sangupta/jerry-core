@@ -41,13 +41,13 @@ public class CheckUtils {
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
 	 */
-	public static void checkFileExists(String absoluteFilePath) {
+	public static boolean checkFileExists(String absoluteFilePath) {
 		if(AssertUtils.isEmpty(absoluteFilePath)) {
 			throw new IllegalArgumentException("Absolute file path cannot be null/empty");
 		}
 		
 		File file = new File(absoluteFilePath);
-		checkFileExists(file);
+		return checkFileExists(file);
 	}
 	
 	/**
@@ -57,7 +57,7 @@ public class CheckUtils {
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
 	 */
-	public static void checkFileExists(File absoluteFilePath) {
+	public static boolean checkFileExists(File absoluteFilePath) {
 		if(absoluteFilePath == null) {
 			throw new IllegalArgumentException("File instance cannot be null");
 		}
@@ -68,6 +68,8 @@ public class CheckUtils {
 		if(!absoluteFilePath.isFile()) {
 			throw new IllegalArgumentException("File does not represent a valid file");
 		}
+		
+		return true;
 	}
 	
 	/**
@@ -76,12 +78,14 @@ public class CheckUtils {
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
 	 */
-	public static void checkReadableFile(File absoluteFilePath) {
+	public static boolean checkReadableFile(File absoluteFilePath) {
 		CheckUtils.checkFileExists(absoluteFilePath);
 		
 		if(!absoluteFilePath.canRead()) {
 			throw new IllegalArgumentException("File cannot be read");
 		}
+		
+		return true;
 	}
 	
 	/**
@@ -90,12 +94,14 @@ public class CheckUtils {
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
 	 */
-	public static void checkWritableFile(File absoluteFilePath) {
+	public static boolean checkWritableFile(File absoluteFilePath) {
 		CheckUtils.checkFileExists(absoluteFilePath);
 		
 		if(!absoluteFilePath.canWrite()) {
 			throw new IllegalArgumentException("File cannot be written to");
 		}
+		
+		return true;
 	}
 	
 	/**
@@ -104,12 +110,14 @@ public class CheckUtils {
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
 	 */
-	public static void checkExecutableFile(File absoluteFilePath) {
+	public static boolean checkExecutableFile(File absoluteFilePath) {
 		CheckUtils.checkFileExists(absoluteFilePath);
 		
 		if(!absoluteFilePath.canExecute()) {
 			throw new IllegalArgumentException("File cannot be executed");
 		}
+		
+		return true;
 	}
 
 	/**
@@ -119,13 +127,13 @@ public class CheckUtils {
 	 * @param absoluteDirPath
 	 *            the absolute folder path to test
 	 */
-	public static void checkDirectoryExists(String absoluteDirPath) {
+	public static boolean checkDirectoryExists(String absoluteDirPath) {
 		if(AssertUtils.isEmpty(absoluteDirPath)) {
 			throw new IllegalArgumentException("Absolute dir path cannot be null/empty");
 		}
 		
 		File file = new File(absoluteDirPath);
-		checkDirectoryExists(file);
+		return checkDirectoryExists(file);
 	}
 	
 	/**
@@ -135,7 +143,7 @@ public class CheckUtils {
 	 * @param absoluteDirPath
 	 *            the absolute folder path to test
 	 */
-	public static void checkDirectoryExists(File absoluteDirPath) {
+	public static boolean checkDirectoryExists(File absoluteDirPath) {
 		if(absoluteDirPath == null) {
 			throw new IllegalArgumentException("File instance cannot be null");
 		}
@@ -146,6 +154,8 @@ public class CheckUtils {
 		if(!absoluteDirPath.isDirectory()) {
 			throw new IllegalArgumentException("File does not represent a valid directory");
 		}
+		
+		return true;
 	}
 	
 	/**
@@ -161,18 +171,38 @@ public class CheckUtils {
 	 * 
 	 * @throws IllegalArgumentException
 	 *             if the condition evaluates to <code>false</code>
+	 * 
+	 * @return <code>true</code> if everything is fine, will never return a
+	 *         <code>false</code>
 	 */
-	public static void checkArgument(boolean condition, String message) {
+	public static boolean checkArgument(boolean condition, String message) {
 		if(condition) {
-			return;
+			return true;
 		}
 		
 		throw new IllegalArgumentException(message);
 	}
 	
-	public static void checkState(boolean condition, String message) {
+	/**
+	 * Check if the given argument is <code>true</code> or not. If the condition
+	 * is <code>false</code>, an {@link IllegalStateException} with the
+	 * supplied message is thrown
+	 * 
+	 * @param condition
+	 *            the condition to evaluate
+	 * 
+	 * @param message
+	 *            if the condition evaluates to <code>false</code>
+	 * 
+	 * @throws IllegalStateException
+	 *             if the condition evaluates to <code>false</code>
+	 *             
+	 * @return <code>true</code> if everything is fine, will never return a
+	 *         <code>false</code>
+	 */
+	public static boolean checkState(boolean condition, String message) {
 		if(condition) {
-			return;
+			return true;
 		}
 		
 		throw new IllegalStateException(message);
