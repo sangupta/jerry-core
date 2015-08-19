@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -177,4 +178,32 @@ public class TestAssertUtils {
 		assertFalse(AssertUtils.isBlank(" abc"));
 	}
 	
+	@Test
+	public void testAreEmpty() {
+		assertTrue(AssertUtils.areEmpty((String[]) null));
+		assertTrue(AssertUtils.areEmpty(new String[] { } ));
+		assertTrue(AssertUtils.areEmpty(new String[] { null, null, "" } ));
+		assertFalse(AssertUtils.areEmpty(new String[] { null, "", "123" } ));
+	}
+	
+	@Test
+	public void testAreNotEmpty() {
+		assertFalse(AssertUtils.areNotEmpty((String[]) null));
+		assertFalse(AssertUtils.areNotEmpty(new String[] { } ));
+		assertFalse(AssertUtils.areNotEmpty(new String[] { null, null, "" } ));
+		assertFalse(AssertUtils.areNotEmpty(new String[] { null, "", "123" } ));
+		assertTrue(AssertUtils.areNotEmpty(new String[] { "123", "123", "123" } ));
+	}
+	
+	@Test
+	public void testIsNotEmptyProperties() {
+		assertFalse(AssertUtils.isNotEmpty((Properties) null));
+		
+		Properties properties = new Properties();
+		assertFalse(AssertUtils.isNotEmpty((Properties) properties));
+		properties.setProperty("123", "123");
+		assertTrue(AssertUtils.isNotEmpty((Properties) properties));
+		properties.clear();
+		assertFalse(AssertUtils.isNotEmpty((Properties) properties));
+	}
 }

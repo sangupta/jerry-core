@@ -528,7 +528,17 @@ public class AssertUtils {
 	 *         <code>true</code> otherwise
 	 */
 	public static boolean areNotEmpty(String... strings) {
-		return !areEmpty(strings);
+		if(AssertUtils.isEmpty(strings)) {
+			return false;
+		}
+		
+		for(String string : strings) {
+			if(AssertUtils.isEmpty(string)) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 
 	public static boolean isEmpty(Properties properties) {
