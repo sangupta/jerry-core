@@ -89,7 +89,7 @@ public class MutableInt {
 	 *            the value to set
 	 */
 	public void setIfMin(int value) {
-		if(this.value < value) {
+		if(this.value > value) {
 			this.value = value;
 		}
 	}

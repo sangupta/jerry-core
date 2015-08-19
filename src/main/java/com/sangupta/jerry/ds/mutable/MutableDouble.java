@@ -89,7 +89,7 @@ public class MutableDouble {
 	 *            the value to set
 	 */
 	public void setIfMin(double value) {
-		if(this.value < value) {
+		if(this.value > value) {
 			this.value = value;
 		}
 	}

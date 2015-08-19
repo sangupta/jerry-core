@@ -89,7 +89,7 @@ public class MutableLong {
 	 *            the value to set
 	 */
 	public void setIfMin(long value) {
-		if(this.value < value) {
+		if(this.value > value) {
 			this.value = value;
 		}
 	}
