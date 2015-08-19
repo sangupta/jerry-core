@@ -51,6 +51,54 @@ public class TestFastBitArray {
 	}
 	
 	@Test
+	public void testOr() throws Exception {
+		BitArray ba1 = new FastBitArray(MAX_ELEMENTS);
+		BitArray ba2 = new FastBitArray(MAX_ELEMENTS);
+		
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			if((index & 1) == 1) {
+				// odd
+				ba1.setBit(index);
+			} else {
+				ba2.setBit(index);
+			}
+		}
+		
+		// check
+		ba1.or(ba2);
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			Assert.assertTrue(ba1.getBit(index));
+		}
+		
+		ba1.close();
+		ba2.close();
+	}
+	
+	@Test
+	public void testAnd() throws Exception {
+		BitArray ba1 = new FastBitArray(MAX_ELEMENTS);
+		BitArray ba2 = new FastBitArray(MAX_ELEMENTS);
+		
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			if((index & 1) == 1) {
+				// odd
+				ba1.setBit(index);
+			} else {
+				ba2.setBit(index);
+			}
+		}
+		
+		// check
+		ba1.and(ba2);
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			Assert.assertFalse(ba1.getBit(index));
+		}
+		
+		ba1.close();
+		ba2.close();
+	}
+	
+	@Test
 	public void testGetHighestBitSet() throws Exception {
 		BitArray ba = new FastBitArray(MAX_ELEMENTS);
 		

@@ -204,7 +204,7 @@ public class FastBitArray implements BitArray {
 			throw new IllegalArgumentException("Array to be combined with cannot be null");
 		}
 		
-		if(this.data.length != array.bitSize()) {
+		if(this.numBytes() != array.numBytes()) {
 			throw new IllegalArgumentException("Array to be combined with must be of equal length");
 		}
 		
@@ -230,7 +230,7 @@ public class FastBitArray implements BitArray {
 			throw new IllegalArgumentException("Array to be combined with cannot be null");
 		}
 		
-		if(this.data.length != array.bitSize()) {
+		if(this.numBytes() != array.numBytes()) {
 			throw new IllegalArgumentException("Array to be combined with must be of equal length");
 		}
 		
