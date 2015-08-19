@@ -197,7 +197,7 @@ public class FileBackedBitArray implements BitArray {
 	 */
 	@Override
 	public boolean setBitIfUnset(int index) {
-		if(this.getBit(index)) {
+		if(!this.getBit(index)) {
 			return this.setBit(index);
 		}
 		

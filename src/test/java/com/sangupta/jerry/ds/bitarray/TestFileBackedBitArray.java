@@ -37,6 +37,7 @@ public class TestFileBackedBitArray {
 		file.deleteOnExit();
 		BitArray ba = new FileBackedBitArray(file, MAX_ELEMENTS);
 		
+		// run normal tests
 		Random random = new Random();
 		for(int index = 0; index < MAX_ELEMENTS; index++) {
 			int nextBit = random.nextInt(MAX_ELEMENTS);
@@ -50,6 +51,43 @@ public class TestFileBackedBitArray {
 			}
 		}
 		
+		// index out of bounds test
+		try {
+			ba.getBit(MAX_ELEMENTS + 1);
+			Assert.assertTrue(false);
+		} catch(IndexOutOfBoundsException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			ba.setBit(MAX_ELEMENTS + 1);
+			Assert.assertTrue(false);
+		} catch(IndexOutOfBoundsException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			ba.clearBit(MAX_ELEMENTS + 1);
+			Assert.assertTrue(false);
+		} catch(IndexOutOfBoundsException e) {
+			Assert.assertTrue(true);
+		}
+		
+		// set all bits
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			ba.setBit(index);
+		}
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			Assert.assertTrue(ba.getBit(index));
+			Assert.assertFalse(ba.setBitIfUnset(index));
+		}
+		ba.clear();
+		for(int index = 0; index < MAX_ELEMENTS; index++) {
+			Assert.assertFalse(ba.getBit(index));
+			Assert.assertTrue(ba.setBitIfUnset(index));
+		}
+		
+		// close the reader
 		ba.close();
 	}
 	
