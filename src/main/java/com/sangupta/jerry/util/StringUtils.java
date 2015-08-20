@@ -793,5 +793,25 @@ public class StringUtils {
 		
 		return new String(chars);
 	}
-	
+
+	/**
+	 * Returns a {@link String} filled with random characters of given length.
+	 *  
+	 * @param length
+	 *            the number of characters to create. If value is less than or equal
+	 *            to zero, an {@link IllegalArgumentException} is thrown
+	 * 
+	 * @return the randomly generated string
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if length is less than or equal to zero
+	 */
+	public static String getRandomString(int length) {
+		if(length <= 0) {
+			throw new IllegalArgumentException("Length cannot be less than or equal to zero");
+		}
+		
+		byte[] bytes = ByteArrayUtils.getRandomBytes(length);
+		return new String(bytes);
+	}
 }
