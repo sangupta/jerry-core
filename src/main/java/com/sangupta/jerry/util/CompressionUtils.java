@@ -21,6 +21,7 @@
  
 package com.sangupta.jerry.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -28,9 +29,11 @@ import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import java.util.zip.Inflater;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -248,11 +251,42 @@ public class CompressionUtils {
 	 *             if something fails
 	 */
 	public static byte[] gzipByteArray(byte[] bytes) throws IOException {
+		if(bytes == null) {
+			throw new IllegalArgumentException("byte-array cannot be null");
+		}
+		
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(bytes.length);
 		
 		GZIPOutputStream gzip = new GZIPOutputStream(baos);
 		gzip.write(bytes);
 		gzip.close();
+		
+		return baos.toByteArray();
+	}
+	
+	/**
+	 * De-compress a GZipped byte-array in-memory.
+	 * 
+	 * @param bytes
+	 *            the GZipped compressed bytes
+	 * 
+	 * @return the uncompressed bytes
+	 * 
+	 * @throws IOException
+	 *             if something fails
+	 */
+	public static byte[] ungzipByteArray(byte[] bytes) throws IOException {
+		if(bytes == null) {
+			throw new IllegalArgumentException("byte-array cannot be null");
+		}
+		
+		ByteArrayOutputStream baos = new ByteArrayOutputStream(bytes.length);
+		
+		try{
+            IOUtils.copy(new GZIPInputStream(new ByteArrayInputStream(bytes)), baos);
+        } catch(IOException e){
+            throw new RuntimeException(e);
+        }
 		
 		return baos.toByteArray();
 	}
