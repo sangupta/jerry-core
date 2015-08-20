@@ -24,6 +24,8 @@ package com.sangupta.jerry.ds.counter;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import com.sangupta.jerry.util.AssertUtils;
+
 /**
  * An efficient way to count multiple named entities.
  *  
@@ -48,7 +50,7 @@ public class LongCounter {
 	 * @return the current value of the counter
 	 */
 	public long get(String name) {
-		if(name == null) {
+		if(AssertUtils.isEmpty(name)) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		
@@ -78,7 +80,7 @@ public class LongCounter {
 	 * @return the current value of the counter
 	 */
 	public long get(final String name, final long initialValue) {
-		if(name == null) {
+		if(AssertUtils.isEmpty(name)) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		
@@ -104,7 +106,7 @@ public class LongCounter {
 	 * @return the current value of the counter
 	 */
 	public long remove(String name) {
-		if(name == null) {
+		if(AssertUtils.isEmpty(name)) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		
@@ -126,7 +128,7 @@ public class LongCounter {
 	 * @return the current value of the counter
 	 */
 	public long increment(String name) {
-		if(name == null) {
+		if(AssertUtils.isEmpty(name)) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		
@@ -155,7 +157,7 @@ public class LongCounter {
 	 * @return the current value of the counter
 	 */
 	public long decrement(String name) {
-		if(name == null) {
+		if(AssertUtils.isEmpty(name)) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		
@@ -185,7 +187,7 @@ public class LongCounter {
 	 * 
 	 */
 	public void set(String name, long value) {
-		if(name == null) {
+		if(AssertUtils.isEmpty(name)) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		

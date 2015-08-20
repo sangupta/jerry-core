@@ -24,7 +24,6 @@ package com.sangupta.jerry.ds;
 import java.util.Random;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
 import com.sangupta.jerry.ds.counter.LongCounter;
@@ -61,6 +60,64 @@ public class TestLongCounter {
 		// test for new counters with one of the methods
 		Assert.assertEquals(1, counter.increment("test1"));
 		Assert.assertEquals(-1, counter.decrement("test2"));
+		
+		// test for set
+		counter.set("txt", 15);
+		Assert.assertEquals(15, counter.get("txt"));
+		counter.increment("txt");
+		counter.set("txt", 15);
+		Assert.assertEquals(15, counter.get("txt"));
+	}
+	
+	@Test
+	public void testExceptions() {
+		LongCounter counter = new LongCounter();
+		
+		// get(String)
+		try {
+			counter.get(null);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			counter.get("");
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		// get(String, int)
+		try {
+			counter.get(null, 15);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			counter.get("", 15);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		
+		// set(String, int)
+		try {
+			counter.get(null, 15);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			counter.get("", 15);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
 	}
 
 	private int getRandomValue() {

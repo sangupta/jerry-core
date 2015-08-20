@@ -24,6 +24,8 @@ package com.sangupta.jerry.ds.counter;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import com.sangupta.jerry.util.AssertUtils;
+
 /**
  * An efficient way to count multiple named entities.
  *  
@@ -48,6 +50,10 @@ public class IntegerCounter {
 	 * @return the current value of the counter
 	 */
 	public int get(String name) {
+		if(AssertUtils.isEmpty(name)) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
 		int[] values = counterMap.get(name);
 		if(values == null) {
 			int[] olderValues = counterMap.putIfAbsent(name, new int[] { 0 });
@@ -73,8 +79,8 @@ public class IntegerCounter {
 	 * 
 	 * @return the current value of the counter
 	 */
-	public long get(final String name, final int initialValue) {
-		if(name == null) {
+	public int get(final String name, final int initialValue) {
+		if(AssertUtils.isEmpty(name)) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		
@@ -100,6 +106,10 @@ public class IntegerCounter {
 	 * @return the current value of the counter
 	 */
 	public int remove(String name) {
+		if(AssertUtils.isEmpty(name)) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
 		int[] values = counterMap.remove(name);
 		if(values == null) {
 			return 0;
@@ -118,6 +128,10 @@ public class IntegerCounter {
 	 * @return the current value of the counter
 	 */
 	public int increment(String name) {
+		if(AssertUtils.isEmpty(name)) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
 		int[] values = counterMap.get(name);
 		if(values == null) {
 			int[] olderValues = counterMap.putIfAbsent(name, new int[] { 1 });
@@ -143,6 +157,10 @@ public class IntegerCounter {
 	 * @return the current value of the counter
 	 */
 	public int decrement(String name) {
+		if(AssertUtils.isEmpty(name)) {
+			throw new IllegalArgumentException("Counter name cannot be null");
+		}
+		
 		int[] values = counterMap.get(name);
 		if(values == null) {
 			int[] olderValues = counterMap.putIfAbsent(name, new int[] { -1 });
@@ -169,7 +187,7 @@ public class IntegerCounter {
 	 * 
 	 */
 	public void set(String name, int value) {
-		if(name == null) {
+		if(AssertUtils.isEmpty(name)) {
 			throw new IllegalArgumentException("Counter name cannot be null");
 		}
 		

@@ -43,6 +43,7 @@ public class TestIntegerCounter {
 		
 		// get the value of a counter
 		Assert.assertEquals(0, counter.get("test"));
+		Assert.assertEquals(0, counter.get("test"));
 		
 		// add some random values to it
 		int max = getRandomValue();
@@ -58,10 +59,69 @@ public class TestIntegerCounter {
 		Assert.assertEquals(0, counter.remove("test"));
 		Assert.assertEquals(0, counter.get("test"));
 		Assert.assertEquals(0, counter.remove("test"));
+		Assert.assertEquals(0, counter.remove("test"));
 		
 		// test for new counters with one of the methods
 		Assert.assertEquals(1, counter.increment("test1"));
 		Assert.assertEquals(-1, counter.decrement("test2"));
+
+		// test for set
+		counter.set("txt", 15);
+		Assert.assertEquals(15, counter.get("txt"));
+		counter.increment("txt");
+		counter.set("txt", 15);
+		Assert.assertEquals(15, counter.get("txt"));
+	}
+	
+	@Test
+	public void testExceptions() {
+		IntegerCounter counter = new IntegerCounter();
+		
+		// get(String)
+		try {
+			counter.get(null);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			counter.get("");
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		// get(String, int)
+		try {
+			counter.get(null, 15);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			counter.get("", 15);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		
+		// set(String, int)
+		try {
+			counter.get(null, 15);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			counter.get("", 15);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
 	}
 
 	private int getRandomValue() {
