@@ -1,6 +1,20 @@
 ## Release Notes
 
+**Current Development SnapShot**
+
+* Added method to generate a random string in `StringUtils.getRandomString()`
+* Added method to generate/fill random bytes in `ByteUtils.getRandomBytes()` and `ByteUtils.fillRandomBytes()`
+* Fixed bug in `setIfMin` methods of `MutableInt`, `MutableLong`, `MutableFloat`, and `MutableDouble`
+* Updated methods in `CheckUtils` class to return boolean `true` when everthing is fine
+* Fixed `and()` and `or()` methods of `FastBitArray`
+* Fixed bug in `setBitIfUnset()` in `MMapFileBackedBitArray`
+* Fixed bug in `setBitIfUnset()` in `FileBackedBitArray`
+* Fixed bug in `AssertUtils.areNotEmpty()`
+* Added unit tests for `jersey` and `jersey2` packages
+* Added unit tests for many utility classes
+
 **2.2.0**
+
 * Added `ListUtils` with `listOf` methods to construct `ArrayList` of arrays
 * Added `getLowestSetBitIndex` and `getHighestSetBitIndex` methods to `BitUtils`
 * Added `getHighestBitSet` and `getLowestBitSet` methods to `BitArray` and its implementations
