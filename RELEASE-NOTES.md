@@ -2,6 +2,8 @@
 
 **Current Development SnapShot**
 
+* Modified `TestBase64Encoder` and `TestCompressionUtils` to use method from `StringUtils` class
+* Updated `CryptoUtils` to make `encrypt`/`decrypt` methods `static`
 * Added method to generate a random string in `StringUtils.getRandomString()`
 * Added method to generate/fill random bytes in `ByteUtils.getRandomBytes()` and `ByteUtils.fillRandomBytes()`
 * Fixed bug in `setIfMin` methods of `MutableInt`, `MutableLong`, `MutableFloat`, and `MutableDouble`
