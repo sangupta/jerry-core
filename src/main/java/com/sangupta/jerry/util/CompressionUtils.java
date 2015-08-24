@@ -68,7 +68,7 @@ public class CompressionUtils {
 			return null;
 		}
 		
-		return compress(string.getBytes());
+		return compress(string.getBytes(StringUtils.DEFAULT_CHARSET));
 	}
 	
 	/**
@@ -221,7 +221,24 @@ public class CompressionUtils {
 	 * 
 	 */
 	public static String uncompressToString(byte[] inputBytes) {
-		return new String(uncompress(inputBytes));
+		return new String(uncompress(inputBytes), StringUtils.DEFAULT_CHARSET);
+	}
+	
+	/**
+	 * Uncompress the given byte-array and convert it into a string.
+	 * 
+	 * @param inputBytes
+	 *            the compressed bytes
+	 * 
+	 * @param charset 
+	 * 			  the charset in which to construct {@link String} back
+	 * 
+	 * @return string representation of the bytes in the default platform
+	 *         encoding
+	 * 
+	 */
+	public static String uncompressToString(byte[] inputBytes, Charset charset) {
+		return new String(uncompress(inputBytes), charset);
 	}
 
 	/**

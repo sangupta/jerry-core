@@ -47,6 +47,11 @@ public class StringUtils {
 	public static final Charset CHARSET_UTF8 = Charset.forName("UTF8");
 	
 	/**
+	 * Platform specific charset
+	 */
+	public static final Charset DEFAULT_CHARSET = Charset.defaultCharset();
+	
+	/**
 	 * An empty string object containing nothing.
 	 */
 	public static final String EMPTY_STRING = "";

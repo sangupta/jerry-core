@@ -26,7 +26,7 @@ public class TestCompressionUtils {
 			Assert.assertEquals(text, textBack);
 			
 			// other methods
-			byte[] bytes = text.getBytes();
+			byte[] bytes = text.getBytes(StringUtils.DEFAULT_CHARSET);
 			bytes1 = CompressionUtils.compress(bytes);
 			byte[] bytesBack = CompressionUtils.uncompress(bytes1);
 			Assert.assertArrayEquals(bytes, bytesBack);
@@ -35,8 +35,8 @@ public class TestCompressionUtils {
 			textBack = CompressionUtils.uncompressToString(bytes1);
 			Assert.assertEquals(text, textBack);
 			
-			bytes1 = CompressionUtils.compress(text, "UTF-8");
-			textBack = CompressionUtils.uncompressToString(bytes1);
+			bytes1 = CompressionUtils.compress(text, StringUtils.CHARSET_UTF8);
+			textBack = CompressionUtils.uncompressToString(bytes1, StringUtils.CHARSET_UTF8);
 			Assert.assertEquals(text, textBack);
 		}
 	}
@@ -46,7 +46,7 @@ public class TestCompressionUtils {
 		for(int index = 0; index < MAX_RUNS; index++) {
 			String text = StringUtils.getRandomString(1000);
 			
-			byte[] bytes = text.getBytes();
+			byte[] bytes = text.getBytes(StringUtils.DEFAULT_CHARSET);
 			byte[] compressed = CompressionUtils.gzipByteArray(bytes);
 			byte[] uncompressed = CompressionUtils.ungzipByteArray(compressed);
 			
