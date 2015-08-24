@@ -2,7 +2,6 @@ package com.sangupta.jerry.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.UUID;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,7 +19,7 @@ public class TestCompressionUtils {
 	@Test
 	public void testCompressDecompress() throws UnsupportedEncodingException {
 		for(int index = 0; index < MAX_RUNS; index++) {
-			String text = getRandomString();
+			String text = StringUtils.getRandomString(1000);
 			
 			byte[] bytes1 = CompressionUtils.compress(text);
 			String textBack = CompressionUtils.uncompressToString(bytes1);
@@ -45,7 +44,7 @@ public class TestCompressionUtils {
 	@Test
 	public void testGzip() throws IOException {
 		for(int index = 0; index < MAX_RUNS; index++) {
-			String text = getRandomString();
+			String text = StringUtils.getRandomString(1000);
 			
 			byte[] bytes = text.getBytes();
 			byte[] compressed = CompressionUtils.gzipByteArray(bytes);
@@ -55,12 +54,4 @@ public class TestCompressionUtils {
 		}
 	}
 	
-	private String getRandomString() {
-		StringBuilder builder = new StringBuilder(1000);
-		for(int index = 0; index < 25; index++) {
-			builder.append(UUID.randomUUID().toString());
-		}
-		
-		return builder.toString();
-	}
 }

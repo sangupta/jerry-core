@@ -1,9 +1,9 @@
 package com.sangupta.jerry.encoder;
 
-import java.util.UUID;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.sangupta.jerry.util.StringUtils;
 
 /**
  * Unit tests for {@link Base64Encoder}
@@ -18,7 +18,7 @@ public class TestBase64Encoder {
 	@Test
 	public void testEncodeDecode() {
 		for(int index = 0; index < MAX_RUNS; index++) {
-			String random = getRandomString();
+			String random = StringUtils.getRandomString(1000);
 			byte[] bytes = random.getBytes();
 			byte[] encoded = Base64Encoder.encodeToByte(bytes, false);
 
@@ -37,7 +37,7 @@ public class TestBase64Encoder {
 	@Test
 	public void testEncodeDecodeChar() {
 		for(int index = 0; index < MAX_RUNS; index++) {
-			String random = getRandomString();
+			String random = StringUtils.getRandomString(1000);
 			byte[] bytes = random.getBytes();
 			char[] encoded = Base64Encoder.encodeToChar(bytes, false);
 
@@ -56,7 +56,7 @@ public class TestBase64Encoder {
 	@Test
 	public void testEncodeDecodeString() {
 		for(int index = 0; index < MAX_RUNS; index++) {
-			String random = getRandomString();
+			String random = StringUtils.getRandomString(1000);
 			byte[] bytes = random.getBytes();
 			String encoded = Base64Encoder.encodeToString(bytes, false);
 
@@ -70,15 +70,6 @@ public class TestBase64Encoder {
 			decoded = Base64Encoder.decodeFast(encoded);
 			Assert.assertArrayEquals(bytes, decoded);
 		}
-	}
-	
-	private String getRandomString() {
-		StringBuilder builder = new StringBuilder(1000);
-		for(int index = 0; index < 25; index++) {
-			builder.append(UUID.randomUUID().toString());
-		}
-		
-		return builder.toString();
 	}
 	
 }

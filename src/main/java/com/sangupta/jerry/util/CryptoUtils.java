@@ -66,7 +66,7 @@ public class CryptoUtils {
 	 * @throws Exception
 	 *             if something fails
 	 */
-	public String[] encryptAES256(String plainText, char[] password, byte[] saltBytes, int iterations, int keySize) throws Exception {   
+	public static String[] encryptAES256(String plainText, char[] password, byte[] saltBytes, int iterations, int keySize) throws Exception {   
         // Derive the key
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         PBEKeySpec spec = new PBEKeySpec(password, saltBytes, iterations, keySize);
@@ -111,7 +111,7 @@ public class CryptoUtils {
 	 * @throws Exception
 	 *             if something fails
 	 */
-	public String decryptAES256(String encryptedText, char[] password, byte[] salt, int iterations, int keySize, String base64IV) throws Exception {
+	public static String decryptAES256(String encryptedText, char[] password, byte[] salt, int iterations, int keySize, String base64IV) throws Exception {
         byte[] encryptedTextBytes = Base64Encoder.decode(encryptedText);
  
         // Derive the key
