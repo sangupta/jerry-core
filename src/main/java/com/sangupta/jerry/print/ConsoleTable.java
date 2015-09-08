@@ -189,14 +189,15 @@ public class ConsoleTable {
 
 		final ConsoleTableLayout layout = this.layout;
 		
+		ConsoleTableRow separator = new ConsoleTableRow();
+		for(int index = 0; index < this.columnSizes.size(); index++) {
+			separator.addColumn(StringUtils.repeat('-', this.getMaxColSize(index)));
+		}
+		
 		// output header row
 		if(this.headerRow != null) {
+			this.displayRow(layout, out, separator);
 			this.displayRow(layout, out, this.headerRow);
-			
-			ConsoleTableRow separator = new ConsoleTableRow();
-			for(int index = 0; index < this.columnSizes.size(); index++) {
-				separator.addColumn(StringUtils.repeat('-', this.getMaxColSize(index)));
-			}
 			this.displayRow(layout, out, separator);
 		}
 		
@@ -204,6 +205,8 @@ public class ConsoleTable {
 		for(ConsoleTableRow row : this.rows) {
 			this.displayRow(layout, out, row);
 		}
+		this.displayRow(layout, out, separator);
+		
 	}
 	
 	/**
@@ -290,6 +293,8 @@ public class ConsoleTable {
 					throw new IllegalStateException("Layout has not yet been implemented");
 			}
 		}
+		
+		out.print(this.columnSeparator);
 		out.println();
 		
 		// any additional rows to be written again
