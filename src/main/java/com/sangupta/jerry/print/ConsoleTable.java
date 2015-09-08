@@ -160,6 +160,17 @@ public class ConsoleTable {
 		return row;
 	}
 	
+	public ConsoleTable addRow(ConsoleTableRow row) {
+		if(row == null) {
+			throw new IllegalArgumentException("Row to add cannot be null");
+		}
+		
+		this.rows.add(row);
+		
+		updateColumnSizes(row);
+		return this;
+	}
+	
 	@Override
 	public String toString() {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
