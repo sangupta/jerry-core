@@ -168,6 +168,7 @@ public class TestUriUtils {
 	
 	@Test
 	public void testAddWebPaths() {
+		Assert.assertEquals("", UriUtils.addWebPaths("", "", null, "", ""));
 		Assert.assertEquals("http://google.com/hello", UriUtils.addWebPaths("http://google.com", "hello"));
 		Assert.assertEquals("http://google.com/hello", UriUtils.addWebPaths("http://google.com/", "hello"));
 		Assert.assertEquals("http://google.com/hello", UriUtils.addWebPaths("http://google.com", "/hello"));

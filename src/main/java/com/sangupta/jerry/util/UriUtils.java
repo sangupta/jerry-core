@@ -680,7 +680,11 @@ public class UriUtils {
 		for(int index = 1; index < components.length; index++) {
 			String suffix = components[index];
 			
-			if(builder.charAt(builder.length() - 1) == '/') {
+			if(AssertUtils.isEmpty(suffix)) {
+				continue;
+			}
+			
+			if(builder.length() > 2 && builder.charAt(builder.length() - 1) == '/') {
 				if(suffix.startsWith("/")) {
 					builder.append(suffix.substring(1));
 				} else {
