@@ -1,5 +1,10 @@
 ## Release Notes
 
+**SNAPSHOT**
+
+* `ConsoleTable` now supports pagination
+* Added a `ConsoleTablePaginationBreakHandler` to interrupt pagination at breaks
+
 **2.2.2**
 
 * Fixed bug in `UriUtils.addWebPaths(String... )` to take care of null checks

@@ -189,6 +189,14 @@ public class ConsoleTable {
 	 *            the {@link PrintStream} to write to
 	 */
 	public void write(PrintStream out) {
+		this.write(out, -1, null);
+	}
+	
+	public void write(PrintStream out, int rowsToPaginateAt) {
+		this.write(out, rowsToPaginateAt, null);
+	}
+	
+	public void write(PrintStream out, int rowsToPaginateAt, ConsoleTablePaginationBreakHandler handler) {
 		// update column sizes again
 		// as we may have added columns from outside
 		if(this.headerRow != null) {
@@ -206,18 +214,51 @@ public class ConsoleTable {
 		}
 		
 		// output header row
+		writeHeader(out, layout, separator);
+		
+		// output all rows one-by-one
+		final int numRows = this.rows.size();
+		int rowsDisplayed = 0;
+		for(int index = 0; index < numRows; index++) {
+			ConsoleTableRow row = this.rows.get(index);
+			this.displayRow(layout, out, row);
+			rowsDisplayed++;
+			
+			int rowsRemaining = numRows - index - 1;
+			if(rowsRemaining == 0) {
+				break;
+			}
+			
+			// pagination enabled
+			if(rowsToPaginateAt > 0) {
+				if(rowsDisplayed % rowsToPaginateAt == 0) {
+					// we need a pagination break
+					this.displayRow(layout, out, separator);
+					
+					// check for handler
+					if(handler != null) {
+						boolean moveAhead = handler.continuePagination(this);
+						if(!moveAhead) {
+							return;
+						}
+					}
+					
+					// display the header row
+					writeHeader(out, layout, separator);
+				}
+			}
+		}
+		
+		this.displayRow(layout, out, separator);
+		
+	}
+
+	private void writeHeader(PrintStream out, final ConsoleTableLayout layout, ConsoleTableRow separator) {
 		if(this.headerRow != null) {
 			this.displayRow(layout, out, separator);
 			this.displayRow(layout, out, this.headerRow);
 			this.displayRow(layout, out, separator);
 		}
-		
-		// output all rows one-by-one
-		for(ConsoleTableRow row : this.rows) {
-			this.displayRow(layout, out, row);
-		}
-		this.displayRow(layout, out, separator);
-		
 	}
 	
 	/**

@@ -35,11 +35,30 @@ public class TestConsoleTable {
 	public void testTableJson() {
 		ConsoleTable table = new ConsoleTable();
 		table.addHeaderRow("name", "email");
-		table.addRow("user1", "user1@somedummydomain.com");
-		table.addRow("user2", "user2@somedummydomain.com");
-		table.addRow("user3", "user3@somedummydomain.com");
 		
-		ConsoleTableWriter.writeCsv(table, System.out);
+		for(int index = 0; index < 20; index++) {
+			table.addRow("user" + index, "user" + index + "@somedummydomain.com");
+		}
+
+		// no pagination
+		table.write(System.out);
+		
+		System.out.println("\n\n\n");
+		
+		// pagination at 10
+		table.write(System.out, 10);
+		
+		System.out.println("\n\n\n");
+
+		// pagination at 10 with break line
+		table.write(System.out, 10, new ConsoleTablePaginationBreakHandler() {
+			
+			@Override
+			public boolean continuePagination(ConsoleTable table) {
+				System.out.println("Another table break");
+				return true;
+			}
+		});
 	}
 
 }
