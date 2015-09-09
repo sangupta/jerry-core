@@ -1,6 +1,11 @@
 ## Release Notes
 
-**Current Development SnapShot**
+**2.2.2**
+
+* Fixed bug in `UriUtils.addWebPaths(String... )` to take care of null checks
+* Updated `ConsoleTable` to properly display the table - some formatting before the header and at row-end was missing
+
+**2.2.1**
 
 * Modified `TestBase64Encoder` and `TestCompressionUtils` to use method from `StringUtils` class
 * Updated `CryptoUtils` to make `encrypt`/`decrypt` methods `static`
