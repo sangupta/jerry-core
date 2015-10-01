@@ -39,7 +39,7 @@ public class TestBase64Encoder {
 
 	@Test
 	public void testEncodeDecode() {
-		if(JDKUtils.isOpenJDK()) {
+		if(JDKUtils.isJDK7()) {
 			return;
 		}
 		
@@ -62,7 +62,7 @@ public class TestBase64Encoder {
 	
 	@Test
 	public void testEncodeDecodeChar() {
-		if(JDKUtils.isOpenJDK()) {
+		if(JDKUtils.isJDK7()) {
 			return;
 		}
 		
@@ -85,7 +85,7 @@ public class TestBase64Encoder {
 	
 	@Test
 	public void testEncodeDecodeString() {
-		if(JDKUtils.isOpenJDK()) {
+		if(JDKUtils.isJDK7()) {
 			return;
 		}
 		
