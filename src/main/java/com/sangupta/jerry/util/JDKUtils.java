@@ -30,8 +30,10 @@ public class JDKUtils {
 	 * @return
 	 */
 	public static boolean isOpenJDK() {
+		String properties = EnvironmentUtils.dumpAllProperties();
+		System.out.println("All properties: " + properties);
+		
 		String name = System.getProperty("java.vm.vendor");
-		System.out.println("java.vm.vendor: " + name);
 		name = name.toLowerCase();
 		if(name.contains("openjdk")) {
 			return true;
