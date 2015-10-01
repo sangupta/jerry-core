@@ -129,6 +129,10 @@ public class CookieUtils {
 		
 		if(cookies != null && cookies.length > 0) {
 			for(Cookie cookie : cookies) {
+				if(cookie == null) {
+					continue;
+				}
+				
 				if(cookie.getName().equals(cookieName)) {
 					return cookie;
 				}
@@ -163,6 +167,10 @@ public class CookieUtils {
 		
 		if(cookies != null && cookies.length > 0) {
 			for(Cookie cookie : cookies) {
+				if(cookie == null) {
+					continue;
+				}
+				
 				if(cookie.getName().equals(cookieName) && domain.equals(cookie.getDomain())) {
 					return cookie;
 				}
