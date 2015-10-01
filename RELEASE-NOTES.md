@@ -1,6 +1,8 @@
 ## Release Notes
 
-**SNAPSHOT**
+**Current Development Snapshot**
+
+**2.3.0**
 
 * `ConsoleTable` now supports pagination
 * Added a `ConsoleTablePaginationBreakHandler` to interrupt pagination at breaks
