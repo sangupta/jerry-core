@@ -84,9 +84,13 @@ public class TestCookieUtils {
 		cookies[1] = CookieUtils.createCookie("cookie2", "value2", "domain", "path");
 		
 		Assert.assertNull(CookieUtils.getCookie(cookies, "sangupta"));
+		Assert.assertNull(CookieUtils.getCookie(cookies, null));
+		Assert.assertNull(CookieUtils.getCookie(cookies, ""));
 		Assert.assertNotNull(CookieUtils.getCookie(cookies, "cookie1"));
 		Assert.assertNotNull(CookieUtils.getCookie(cookies, "cookie2"));
 
+		Assert.assertNull(CookieUtils.getCookie(cookies, null, "domain2"));
+		Assert.assertNull(CookieUtils.getCookie(cookies, "", "domain2"));
 		Assert.assertNull(CookieUtils.getCookie(cookies, "sangupta", "domain2"));
 		Assert.assertNull(CookieUtils.getCookie(cookies, "cookie1", "domain2"));
 		Assert.assertNull(CookieUtils.getCookie(cookies, "cookie2", "domain2"));
@@ -99,6 +103,8 @@ public class TestCookieUtils {
 		cookies[0] = CookieUtils.createCookie("cookie", "value1", "domain", "path");
 		cookies[1] = CookieUtils.createCookie("cookie", "value2", "domain", "path");
 		
+		Assert.assertNull(CookieUtils.getCookiesWithName(cookies, null));
+		Assert.assertNull(CookieUtils.getCookiesWithName(cookies, ""));
 		Assert.assertNotNull(CookieUtils.getCookiesWithName(cookies, "cookie"));
 		Assert.assertEquals(2, CookieUtils.getCookiesWithName(cookies, "cookie").length);
 	}
@@ -134,12 +140,18 @@ public class TestCookieUtils {
 		
 		Assert.assertEquals(-1, cookie.getMaxAge());
 		
+		CookieUtils.setMaxAgeInDays(null, 1);
+		CookieUtils.setMaxAgeInDays(cookie, 0);
 		CookieUtils.setMaxAgeInDays(cookie, 1);
 		Assert.assertEquals(86400, cookie.getMaxAge());
 
+		CookieUtils.setMaxAgeInHours(null, 1);
+		CookieUtils.setMaxAgeInHours(cookie, 0);
 		CookieUtils.setMaxAgeInHours(cookie, 1);
 		Assert.assertEquals(3600, cookie.getMaxAge());
 		
+		CookieUtils.setMaxAgeInMinutes(null, 1);
+		CookieUtils.setMaxAgeInMinutes(cookie, 0);
 		CookieUtils.setMaxAgeInMinutes(cookie, 1);
 		Assert.assertEquals(60, cookie.getMaxAge());
 	}

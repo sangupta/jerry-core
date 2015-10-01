@@ -288,6 +288,16 @@ public class TestStringUtils {
 		
 		Assert.assertEquals(8, StringUtils.lastIndexBefore("one two one three one", "one", "three"));
 		Assert.assertEquals(18, StringUtils.lastIndexBefore("one two one three one", "one", "four"));
+		
+		String text = null;
+		Assert.assertEquals(-1, StringUtils.lastIndexBefore(text, "num", 100));
+		text = "num one num two num three num four";
+		Assert.assertEquals(-1, StringUtils.lastIndexBefore(text, null, 100));
+		
+		Assert.assertEquals(26, StringUtils.lastIndexBefore(text, "num", -1));
+		Assert.assertEquals(16, StringUtils.lastIndexBefore(text, "num", 26));
+		Assert.assertEquals(0, StringUtils.lastIndexBefore(text, "num", 3));
+		Assert.assertEquals(-1, StringUtils.lastIndexBefore(text, "4", 3));
 	}
 	
 	@Test
@@ -387,4 +397,5 @@ public class TestStringUtils {
 			Assert.assertTrue(true);
 		}
 	}
+	
 }
