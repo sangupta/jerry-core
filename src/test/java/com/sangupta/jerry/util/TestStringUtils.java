@@ -353,5 +353,38 @@ public class TestStringUtils {
 		Assert.assertEquals("s", StringUtils.repeat('s', 1));
 		Assert.assertEquals("ss", StringUtils.repeat('s', 2));
 		Assert.assertEquals("ssssssssss", StringUtils.repeat('s', 10));
+		
+		// check exceptions
+		try {
+			StringUtils.repeat('a', 0);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			StringUtils.repeat('a', -5);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void testGetRandomString() {
+		// check exceptions
+		try {
+			StringUtils.getRandomString(0);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
+		
+		try {
+			StringUtils.getRandomString(-10);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
 	}
 }
