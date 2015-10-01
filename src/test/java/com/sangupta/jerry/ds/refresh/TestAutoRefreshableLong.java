@@ -54,7 +54,7 @@ public class TestAutoRefreshableLong {
 		try {
 			Thread.sleep(DateUtils.ONE_SECOND * 2l);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		
 		Assert.assertTrue(i.get() > 0);

@@ -38,10 +38,12 @@ public class TestAutoRefreshableFloat {
 	public void test() {
 		AutoRefreshableFloat i = new AutoRefreshableFloat(DateUtils.ONE_SECOND) {
 			
+			private float value = 20f;
+			
 			@Override
 			public float refresh() {
-				Long x = System.currentTimeMillis();
-				return x.floatValue();
+				this.value = this.value * 2f;
+				return this.value;
 			}
 			
 		};
@@ -54,7 +56,7 @@ public class TestAutoRefreshableFloat {
 		try {
 			Thread.sleep(DateUtils.ONE_SECOND * 2l);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		
 		Assert.assertTrue(i.get() > 0);

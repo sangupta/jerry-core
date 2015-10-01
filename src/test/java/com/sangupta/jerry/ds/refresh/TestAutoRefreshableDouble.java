@@ -38,10 +38,12 @@ public class TestAutoRefreshableDouble {
 	public void test() {
 		AutoRefreshableDouble i = new AutoRefreshableDouble(DateUtils.ONE_SECOND) {
 			
+			private double value = 20d;
+			
 			@Override
 			public double refresh() {
-				Long x = System.currentTimeMillis();
-				return x.doubleValue();
+				this.value = this.value * 2d;
+				return this.value;
 			}
 			
 		};
@@ -54,7 +56,7 @@ public class TestAutoRefreshableDouble {
 		try {
 			Thread.sleep(DateUtils.ONE_SECOND * 2l);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		
 		Assert.assertTrue(i.get() > 0);
