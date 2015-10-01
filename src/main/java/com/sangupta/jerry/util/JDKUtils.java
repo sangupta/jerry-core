@@ -14,10 +14,9 @@ public class JDKUtils {
 	 * @return
 	 */
 	public static boolean isOracleJDK() {
-		String name = System.getProperty("java.vm.vendor");
-		System.out.println("java.vm.vendor: " + name);
+		String name = System.getProperty("java.vm.name");
 		name = name.toLowerCase();
-		if(name.contains("oracle")) {
+		if(name.contains("java hotspot(tm)")) {
 			return true;
 		}
 		
@@ -30,10 +29,7 @@ public class JDKUtils {
 	 * @return
 	 */
 	public static boolean isOpenJDK() {
-		String properties = EnvironmentUtils.dumpAllProperties();
-		System.out.println("All properties: " + properties);
-		
-		String name = System.getProperty("java.vm.vendor");
+		String name = System.getProperty("java.vm.name");
 		name = name.toLowerCase();
 		if(name.contains("openjdk")) {
 			return true;
