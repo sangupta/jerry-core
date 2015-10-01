@@ -34,9 +34,16 @@ public class RangeUtils {
 	 * Check if a character is in the given range.
 	 * 
 	 * @param valueToTest
+	 *            the value to be checked if it is range or not
+	 * 
 	 * @param minValue
+	 *            the minimum value of the range, inclusive
+	 * 
 	 * @param maxValue
-	 * @return
+	 *            the maximum value of the range, inclusive
+	 * 
+	 * @return <code>true</code> if value to test is in range,
+	 *         <code>false</code> otherwise
 	 */
 	public static boolean isChar(char valueToTest, char minValue, char maxValue) {
 		if((minValue <= valueToTest) && (valueToTest <= maxValue)) {
@@ -50,9 +57,16 @@ public class RangeUtils {
 	 * Check if an integer value is in the given range
 	 * 
 	 * @param valueToTest
+	 *            the value to be checked if it is range or not
+	 * 
 	 * @param minValue
+	 *            the minimum value of the range, inclusive
+	 * 
 	 * @param maxValue
-	 * @return
+	 *            the maximum value of the range, inclusive
+	 * 
+	 * @return <code>true</code> if value to test is in range,
+	 *         <code>false</code> otherwise
 	 */
 	public static boolean isInt(int valueToTest, int minValue, int maxValue) {
 		if((minValue <= valueToTest) && (valueToTest <= maxValue)) {
@@ -66,9 +80,16 @@ public class RangeUtils {
 	 * Check if a long value is in the given range.
 	 * 
 	 * @param valueToTest
+	 *            the value to be checked if it is range or not
+	 * 
 	 * @param minValue
+	 *            the minimum value of the range, inclusive
+	 * 
 	 * @param maxValue
-	 * @return
+	 *            the maximum value of the range, inclusive
+	 * 
+	 * @return <code>true</code> if value to test is in range,
+	 *         <code>false</code> otherwise
 	 */
 	public static boolean isLong(long valueToTest, long minValue, long maxValue) {
 		if((minValue <= valueToTest) && (valueToTest <= maxValue)) {
