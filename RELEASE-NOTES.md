@@ -5,6 +5,8 @@
 * `ConsoleTable` now supports pagination
 * Added a `ConsoleTablePaginationBreakHandler` to interrupt pagination at breaks
 * Added `AutoRefreshable*` classes for values that can be auto-refreshed after a certain time
+* Added `BoundedInt` and `BoundedLong` to allow for working with values within bounds
+* Added unit-tests for `AutoRefreshable*` and `Bounded*` classes
 
 **2.2.2**
 
