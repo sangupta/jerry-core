@@ -17,6 +17,7 @@ public class TestMimeUtils {
 	public void testGetMimeTypeForExtension() {
 		Assert.assertEquals(HttpMimeType.BINARY, MimeUtils.getMimeTypeForFileExtension(null));
 		Assert.assertEquals(HttpMimeType.BINARY, MimeUtils.getMimeTypeForFileExtension(""));
+		Assert.assertEquals(HttpMimeType.BINARY, MimeUtils.getMimeTypeForFileExtension("sangupta"));
 		
 		Assert.assertEquals(HttpMimeType.TEXT_PLAIN, MimeUtils.getMimeTypeForFileExtension("txt"));
 	}
