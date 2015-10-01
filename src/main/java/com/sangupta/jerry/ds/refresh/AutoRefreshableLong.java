@@ -18,15 +18,15 @@
  * limitations under the License.
  * 
  */
- 
+
 package com.sangupta.jerry.ds.refresh;
 
 /**
- * A value that will auto-refresh when certain time expires
- * using the <code>refresh</code> method provided.
+ * A value that will auto-refresh when certain time expires using the
+ * <code>refresh</code> method provided.
  * 
- * The expiration is checked only at access time, when a call
- * to <code>get()</code> method is made.
+ * The expiration is checked only at access time, when a call to
+ * <code>get()</code> method is made.
  * 
  * Usage is simple as:
  * 
@@ -35,39 +35,37 @@ package com.sangupta.jerry.ds.refresh;
  * AutoRefreshableLong config = new AutoRefreshableLong(60000);
  * 
  * // calls the refresh method to fetch the value, say at 10:00:00
- * long value = config.get(); 
+ * long value = config.get();
  * 
  * // any call before 10:01:00 will return the same value
- * value = config.get(); 
+ * value = config.get();
  * 
  * // a call on or after 10:01:00 will call the refresh method again
  * // and then return the value
- * value = config.get(); 
+ * value = config.get();
  * </pre>
  * 
  * @author sangupta
  *
- * @param <T> the type of value that is to be contained within
- * 
  * @since 2.3
  */
 public abstract class AutoRefreshableLong {
-	
+
 	/**
 	 * The value being cached
 	 */
 	protected long value;
-	
+
 	/**
 	 * The time for which the value must be cached
 	 */
 	protected final long cacheMillis;
-	
+
 	/**
 	 * The time when the value was last refreshed
 	 */
 	protected volatile long lastRefreshed = 0;
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -75,13 +73,13 @@ public abstract class AutoRefreshableLong {
 	 *            the milliseconds for which to cache the value
 	 */
 	public AutoRefreshableLong(long cacheMillis) {
-		if(cacheMillis <= 0) {
+		if (cacheMillis <= 0) {
 			throw new IllegalArgumentException("Cache time in millis should be greater than zero");
 		}
-		
+
 		this.cacheMillis = cacheMillis;
 	}
-	
+
 	/**
 	 * Read the value that is held within
 	 * 
@@ -89,11 +87,11 @@ public abstract class AutoRefreshableLong {
 	 */
 	public long get() {
 		long delta = System.currentTimeMillis() - this.lastRefreshed;
-		if(delta > this.cacheMillis) {
+		if (delta > this.cacheMillis) {
 			this.value = refresh();
 			this.lastRefreshed = System.currentTimeMillis();
 		}
-		
+
 		return this.value;
 	}
 

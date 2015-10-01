@@ -47,8 +47,6 @@ package com.sangupta.jerry.ds.refresh;
  * 
  * @author sangupta
  *
- * @param <T> the type of value that is to be contained within
- * 
  * @since 2.3
  */
 public abstract class AutoRefreshableInt {

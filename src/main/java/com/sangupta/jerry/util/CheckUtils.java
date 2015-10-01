@@ -40,6 +40,9 @@ public class CheckUtils {
 	 * 
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
+	 * 
+	 * @return <code>true</code> if the file exists, <code>false</code>
+	 *         otherwise
 	 */
 	public static boolean checkFileExists(String absoluteFilePath) {
 		if(AssertUtils.isEmpty(absoluteFilePath)) {
@@ -56,6 +59,9 @@ public class CheckUtils {
 	 * 
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
+	 * 
+	 * @return <code>true</code> if the file exists, <code>false</code>
+	 *         otherwise
 	 */
 	public static boolean checkFileExists(File absoluteFilePath) {
 		if(absoluteFilePath == null) {
@@ -77,6 +83,9 @@ public class CheckUtils {
 	 * 
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
+	 * 
+	 * @return <code>true</code> if the file is readable, <code>false</code>
+	 *         otherwise
 	 */
 	public static boolean checkReadableFile(File absoluteFilePath) {
 		CheckUtils.checkFileExists(absoluteFilePath);
@@ -93,6 +102,9 @@ public class CheckUtils {
 	 * 
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
+	 * 
+	 * @return <code>true</code> if the file can be written to,
+	 *         <code>false</code> otherwise
 	 */
 	public static boolean checkWritableFile(File absoluteFilePath) {
 		CheckUtils.checkFileExists(absoluteFilePath);
@@ -109,6 +121,9 @@ public class CheckUtils {
 	 * 
 	 * @param absoluteFilePath
 	 *            the absolute file path to test
+	 * 
+	 * @return <code>true</code> if the file can be executed, <code>false</code>
+	 *         otherwise
 	 */
 	public static boolean checkExecutableFile(File absoluteFilePath) {
 		CheckUtils.checkFileExists(absoluteFilePath);
@@ -126,6 +141,9 @@ public class CheckUtils {
 	 * 
 	 * @param absoluteDirPath
 	 *            the absolute folder path to test
+	 * 
+	 * @return <code>true</code> if the directory exists, <code>false</code>
+	 *         otherwise
 	 */
 	public static boolean checkDirectoryExists(String absoluteDirPath) {
 		if(AssertUtils.isEmpty(absoluteDirPath)) {
@@ -142,6 +160,9 @@ public class CheckUtils {
 	 * 
 	 * @param absoluteDirPath
 	 *            the absolute folder path to test
+	 * 
+	 * @return <code>true</code> if the directory exists, <code>false</code>
+	 *         otherwise
 	 */
 	public static boolean checkDirectoryExists(File absoluteDirPath) {
 		if(absoluteDirPath == null) {

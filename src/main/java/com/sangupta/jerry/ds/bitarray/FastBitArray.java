@@ -68,6 +68,7 @@ public class FastBitArray implements BitArray {
 	 * Construct an implementation with the given long[] array
 	 * 
 	 * @param data
+	 *            the long[] array from which to construct the bit array
 	 */
 	public FastBitArray(long[] data) {
 		if(data == null || data.length == 0) {
