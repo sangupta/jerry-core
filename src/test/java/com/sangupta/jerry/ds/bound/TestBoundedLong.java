@@ -33,6 +33,7 @@ public class TestBoundedLong {
 		Assert.assertEquals(5, bounded.set(5));
 		Assert.assertEquals(5, bounded.checkAndSet(20));
 		Assert.assertEquals(5, bounded.checkAndSet(-20));
+		Assert.assertEquals(7, bounded.checkAndSet(7));
 		
 		// add/subtract/multiply/divide
 		Assert.assertEquals(5, bounded.set(5));
@@ -45,5 +46,13 @@ public class TestBoundedLong {
 		
 		Assert.assertEquals(10, bounded.multiply(10));
 		Assert.assertEquals(0, bounded.divide(-5));
+		
+		// exception
+		try {
+			bounded = new BoundedLong(5, 20, 10);
+			Assert.assertTrue(false);
+		} catch(IllegalArgumentException e) {
+			Assert.assertTrue(true);
+		}
 	}
 }
