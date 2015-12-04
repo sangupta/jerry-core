@@ -207,6 +207,26 @@ public class StringUtils {
 	    return defaultValue; 
  	}
 	
+	public static byte getByteValue(String string, byte defaultValue) {
+		try {
+			if(AssertUtils.isNotEmpty(string)) {
+				return Byte.parseByte(string);
+			}
+		} catch(NumberFormatException e) {
+			LOGGER.debug("error getting byte from string: " + string, e);
+		}
+		
+		return defaultValue;
+	}
+	
+	public static char getCharValue(String string, char defaultValue) {
+		if(AssertUtils.isNotEmpty(string)) {
+			return string.charAt(0);
+		}
+		
+		return defaultValue;
+	}
+	
 	/**
 	 * Parse and return the short value of the given string. If the string cannot
 	 * be parsed, returns the default value provided
@@ -225,7 +245,7 @@ public class StringUtils {
 				return Short.parseShort(string);
 			}
 		} catch(NumberFormatException e) {
-			LOGGER.debug("error getting integer from string: " + string, e);
+			LOGGER.debug("error getting short from string: " + string, e);
 		}
 		
 		return defaultValue;
