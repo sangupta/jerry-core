@@ -22,9 +22,12 @@
 package com.sangupta.jerry.store;
 
 import java.io.File;
+import java.lang.reflect.Field;
 
 import com.sangupta.jerry.constants.SystemPropertyNames;
 import com.sangupta.jerry.util.AssertUtils;
+import com.sangupta.jerry.util.ReflectionUtils;
+import com.sangupta.jerry.util.StringUtils;
 
 /**
  * Abstract implementation of the {@link UserLocalStore} that provides
@@ -82,5 +85,115 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 		
 		return value;
 	}
+	
+	@Override
+	public boolean getBoolean(String property, boolean defaultValue) {
+		return StringUtils.getBoolean(this.get(property), defaultValue);
+	}
+	
+	public int getInt(String property, int defaultValue) {
+		return StringUtils.getIntValue(this.get(property), defaultValue);
+	}
+	
+	public long getLong(String property, long defaultValue) {
+		return StringUtils.getLongValue(this.get(property), defaultValue);
+	}
+	
+	public float getFloat(String property, float defaultValue) {
+		return StringUtils.getFloatValue(this.get(property), defaultValue);
+	}
+	
+	public double getDouble(String property, double defaultValue) {
+		return StringUtils.getDoubleValue(this.get(property), defaultValue);
+	}
+	
+	public boolean readTo(Object instance) {
+		if(instance == null) {
+			return false;
+		}
+		
+		Field[] fields = instance.getClass().getDeclaredFields();
+		if(AssertUtils.isEmpty(fields)) {
+			return true;
+		}
+		
+		for(Field field : fields) {
+			// check if fields has the annotation of property name
+			PropertyName propertyName = field.getAnnotation(PropertyName.class);
+			
+			// get name to read from
+			String name;
+			if(propertyName != null) {
+				name = propertyName.value();
+			} else {
+				name = field.getName();
+			}
+			
+			// read the value from underlying store
+			Object value = this.get(name);
+			if(value == null) {
+				// there is nothing for us to do
+				continue;
+			}
+			
+			// set this value back to the instance
+			ReflectionUtils.bindValue(field, instance, value);
+		}
+		
+		return true;
+	}
+	
+	public boolean saveFrom(Object instance) {
+		if(instance == null) {
+			return false;
+		}
+		
+		Field[] fields = instance.getClass().getDeclaredFields();
+		if(AssertUtils.isEmpty(fields)) {
+			return true;
+		}
+		
+		for(Field field : fields) {
+			// check if fields has the annotation of property name
+			PropertyName propertyName = field.getAnnotation(PropertyName.class);
+			
+			// get name to save to
+			String name;
+			if(propertyName != null) {
+				name = propertyName.value();
+			} else {
+				name = field.getName();
+				
+				// skip if field is transient
+				if(ReflectionUtils.isTransient(field)) {
+					continue;
+				}
+			}
+			
+			// read the fields value
+			Object value = null;
+			try {
+				value = field.get(instance);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+			
+			// save the value
+			if(value != null) {
+				this.putNoSave(name, value.toString());
+			} else {
+				this.putNoSave(name, null);
+			}
+		}
+		
+		this.save();
+		return true;
+	}
+
+	protected abstract void save();
+	
+	protected abstract void putNoSave(String key, String property);
 	
 }

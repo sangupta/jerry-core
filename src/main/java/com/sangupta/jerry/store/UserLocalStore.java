@@ -21,6 +21,7 @@
  
 package com.sangupta.jerry.store;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -43,13 +44,27 @@ public interface UserLocalStore {
 	 */
 	public String get(String property);
 	
+	public boolean getBoolean(String property, boolean defaultValue);
+	
+	public int getInt(String property, int defaultValue);
+	
+	public long getLong(String property, long defaultValue);
+	
+	public float getFloat(String property, float defaultValue);
+	
+	public double getDouble(String property, double defaultValue);
+	
+	public boolean readTo(Object instance);
+	
+	public boolean saveFrom(Object instance);
+	
 	/**
 	 * Return the name of all keys within the data-store
 	 * 
 	 * @return a {@link List} instance consisting of all property names within
 	 *         the store
 	 */
-	public List<String> getAllKeys();
+	public Collection<String> getAllKeys();
 	
 	/**
 	 * Return the value associated with the property if found, or the provided

@@ -24,6 +24,7 @@ package com.sangupta.jerry.store;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -70,7 +71,7 @@ public class PropertiesUserLocalStore extends AbstractUserLocalStore {
 	}
 	
 	@Override
-	public List<String> getAllKeys() {
+	public Collection<String> getAllKeys() {
 		List<String> list = new ArrayList<String>();
 		
 		Set<Object> set = this.properties.keySet();
@@ -86,6 +87,11 @@ public class PropertiesUserLocalStore extends AbstractUserLocalStore {
 		this.properties.put(key, property);
 		save();
 	}
+	
+	@Override
+	protected void putNoSave(String key, String property) {
+		this.properties.put(key, property);
+	}
 
 	@Override
 	public void delete(String key) {
@@ -97,7 +103,8 @@ public class PropertiesUserLocalStore extends AbstractUserLocalStore {
 	 * Save the properties back to underlying storage
 	 * 
 	 */
-	private void save() {
+	@Override
+	protected void save() {
 		try {
 			this.properties.store(FileUtils.openOutputStream(this.propertiesFile, false), " Updating from Properties data-store");
 		} catch (IOException e) {
