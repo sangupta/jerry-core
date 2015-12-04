@@ -21,8 +21,10 @@
  
 package com.sangupta.jerry.util;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 
 /**
  * Utility methods around object reflection.
@@ -120,4 +122,98 @@ public class ReflectionUtils {
     	return executeGetter(object, getterMethodName);
     }
 
+    public static boolean isTransient(Field field) {
+    	if(field == null) {
+    		return false;
+    	}
+    	
+    	return Modifier.isTransient(field.getModifiers());
+    }
+    
+    public static void bindValue(Field field, Object instance, Object value) {
+    	if(field == null) {
+    		return;
+    	}
+    	
+    	if(instance == null) {
+    		return;
+    	}
+    	
+    	Class<?> type = field.getType();
+		
+		try {
+			if(type.equals(boolean.class)) {
+				if(value instanceof Boolean) {
+					field.setBoolean(instance, (Boolean) value);
+				} else {
+					field.setBoolean(instance, StringUtils.getBoolean(value.toString(), field.getBoolean(instance)));
+				}
+			}
+
+			if(type.equals(byte.class)) {
+				if(value instanceof Byte) {
+					field.setByte(instance, (Byte) value);
+				} else {
+					field.setByte(instance, StringUtils.getByteValue(value.toString(), field.getByte(instance)));
+				}
+			}
+			
+			if(type.equals(short.class)) {
+				if(value instanceof Short) {
+					field.setShort(instance, (Short) value);
+				} else {
+					field.setShort(instance, StringUtils.getShortValue(value.toString(), field.getShort(instance)));
+				}
+			}
+			
+			if(type.equals(char.class)) {
+				if(value instanceof Character) {
+					field.setChar(instance, (Character) value);
+				} else {
+					field.setChar(instance, StringUtils.getCharValue(value.toString(), field.getChar(instance)));
+				}
+			}
+			
+			if(type.equals(int.class)) {
+				if(value instanceof Integer) {
+					field.setInt(instance, (Integer) value);
+				} else {
+					field.setInt(instance, StringUtils.getIntValue(value.toString(), field.getInt(instance)));
+				}
+			}
+			
+			if(type.equals(long.class)) {
+				if(value instanceof Long) {
+					field.setLong(instance, (Long) value);
+				} else {
+					field.setLong(instance, StringUtils.getLongValue(value.toString(), field.getLong(instance)));
+				}
+			}
+			
+			if(type.equals(float.class)) {
+				if(value instanceof Float) {
+					field.setFloat(instance, (Float) value);
+				} else {
+					field.setFloat(instance, StringUtils.getFloatValue(value.toString(), field.getFloat(instance)));
+				}
+			}
+
+			if(type.equals(double.class)) {
+				if(value instanceof Double) {
+					field.setDouble(instance, (Double) value);
+				} else {
+					field.setDouble(instance, StringUtils.getDoubleValue(value.toString(), field.getDouble(instance)));
+				}
+			}
+
+			// just set the value
+			field.set(instance, value);
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 }
