@@ -15,6 +15,6 @@ public @interface PropertyName {
 	 */
 	String value();
 
-	String defaultValue();
+	String defaultValue() default "";
 	
 }
