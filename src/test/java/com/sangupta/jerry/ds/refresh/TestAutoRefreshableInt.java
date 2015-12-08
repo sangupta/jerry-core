@@ -41,7 +41,8 @@ public class TestAutoRefreshableInt {
 			@Override
 			public int refresh() {
 				Long x = System.currentTimeMillis();
-				return x.intValue();
+				int y = x.intValue();
+				return Math.abs(y);
 			}
 			
 		};

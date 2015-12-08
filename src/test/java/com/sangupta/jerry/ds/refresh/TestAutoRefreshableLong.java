@@ -40,8 +40,7 @@ public class TestAutoRefreshableLong {
 			
 			@Override
 			public long refresh() {
-				Long x = System.currentTimeMillis();
-				return x.intValue();
+				return System.currentTimeMillis();
 			}
 			
 		};
