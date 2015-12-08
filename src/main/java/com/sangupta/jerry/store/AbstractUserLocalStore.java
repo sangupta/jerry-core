@@ -121,6 +121,11 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 			// check if fields has the annotation of property name
 			PropertyName propertyName = field.getAnnotation(PropertyName.class);
 			
+			if(field.getName().equals("this$0")) {
+				// skip this field
+				continue;
+			}
+			
 			// get name to read from
 			String name;
 			if(propertyName != null) {
@@ -154,6 +159,9 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 		}
 		
 		for(Field field : fields) {
+			// set accessible
+			field.setAccessible(true);
+			
 			// check if fields has the annotation of property name
 			PropertyName propertyName = field.getAnnotation(PropertyName.class);
 			

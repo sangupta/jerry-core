@@ -61,5 +61,60 @@ public class TestPropertiesUserLocalStore {
 		Assert.assertNull(store.get("prop"));
 		Assert.assertEquals("value-default", store.get("prop", "value-default"));
 	}
+	
+	@Test
+	public void testStoreReadWrite() {
+		UserLocalStore store = new PropertiesUserLocalStore(".test", UUID.randomUUID().toString() + ".properties");
+		
+		MyValueObject mvo = new MyValueObject();
+		
+		mvo.bite = 36;
+		mvo.chr = 's';
+		mvo.shrt = 23;
+		mvo.nt = 56;
+		mvo.lng = 67;
+		mvo.flt = 35.4f;
+		mvo.dbl = 99.24d;
+		mvo.bln = true;
+		mvo.strng = "Hello World";
+		
+		store.saveFrom(mvo);
+		
+		MyValueObject read = new MyValueObject();
+		store.readTo(read);
+		
+		// compare both the objects
+		Assert.assertEquals(mvo.bite, read.bite);
+		Assert.assertEquals(mvo.chr, read.chr);
+		Assert.assertEquals(mvo.shrt, read.shrt);
+		Assert.assertEquals(mvo.nt, read.nt);
+		Assert.assertEquals(mvo.lng, read.lng);
+		Assert.assertEquals(mvo.flt, read.flt, 0f);
+		Assert.assertEquals(mvo.dbl, read.dbl, 0d);
+		Assert.assertEquals(mvo.bln, read.bln);
+		Assert.assertEquals(mvo.strng, read.strng);
+		
+	}
 
+	private class MyValueObject {
+		
+		private byte bite;
+		
+		private char chr;
+		
+		private short shrt;
+		
+		private int nt;
+		
+		private long lng;
+		
+		private float flt;
+		
+		private double dbl;
+		
+		private boolean bln;
+		
+		private String strng;
+		
+	}
 }
