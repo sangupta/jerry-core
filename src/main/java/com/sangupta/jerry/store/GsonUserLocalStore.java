@@ -14,7 +14,7 @@ public class GsonUserLocalStore extends AbstractUserLocalStore {
 	
 	protected final File propertiesFile;
 	
-	protected LinkedTreeMap<String, Object> properties;
+	protected final LinkedTreeMap<String, Object> properties = new LinkedTreeMap<String, Object>();
 
 	@SuppressWarnings("unchecked")
 	public GsonUserLocalStore(String folderName, String fileName) {
@@ -35,7 +35,10 @@ public class GsonUserLocalStore extends AbstractUserLocalStore {
 				}
 				
 				// read via gson
-				this.properties = GsonUtils.getGson().fromJson(contents, LinkedTreeMap.class);
+				LinkedTreeMap<String, Object> gsonProperties = GsonUtils.getGson().fromJson(contents, LinkedTreeMap.class);
+				if(AssertUtils.isNotEmpty(gsonProperties)) {
+					this.properties.putAll(gsonProperties);
+				}
 			} catch (IOException e) {
 				throw new RuntimeException("Unable to read from the data store", e);
 			}

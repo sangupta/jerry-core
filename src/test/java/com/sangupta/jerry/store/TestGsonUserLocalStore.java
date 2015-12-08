@@ -33,7 +33,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class TestPropertiesUserLocalStore {
+public class TestGsonUserLocalStore {
 	
 	@Test
 	public void testStore() {
@@ -45,7 +45,7 @@ public class TestPropertiesUserLocalStore {
 		try { store = new PropertiesUserLocalStore(".test", null); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 		try { store = new PropertiesUserLocalStore(".test", ""); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 		
-		store = new PropertiesUserLocalStore(".test", UUID.randomUUID().toString() + ".properties");
+		store = new GsonUserLocalStore(".test", UUID.randomUUID().toString() + ".json");
 		
 		Assert.assertNull(store.get("prop"));
 		Assert.assertEquals("value-default", store.get("prop", "value-default"));
@@ -64,7 +64,7 @@ public class TestPropertiesUserLocalStore {
 	
 	@Test
 	public void testStoreReadWrite() {
-		UserLocalStore store = new PropertiesUserLocalStore(".test", UUID.randomUUID().toString() + ".properties");
+		UserLocalStore store = new GsonUserLocalStore(".test", UUID.randomUUID().toString() + ".json");
 		
 		MyValueObject mvo = new MyValueObject();
 		
@@ -97,7 +97,7 @@ public class TestPropertiesUserLocalStore {
 	
 	@Test
 	public void testStoreReadWriteAnnotated() {
-		UserLocalStore store = new PropertiesUserLocalStore(".test", UUID.randomUUID().toString() + ".properties");
+		UserLocalStore store = new GsonUserLocalStore(".test", UUID.randomUUID().toString() + ".json");
 		
 		MyValueObjectAnnotated mvo = new MyValueObjectAnnotated();
 		

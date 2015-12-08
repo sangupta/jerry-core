@@ -162,6 +162,11 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 			// set accessible
 			field.setAccessible(true);
 			
+			if(field.getName().equals("this$0")) {
+				// skip this field
+				continue;
+			}
+			
 			// check if fields has the annotation of property name
 			PropertyName propertyName = field.getAnnotation(PropertyName.class);
 			
