@@ -142,12 +142,17 @@ public class ReflectionUtils {
     	Class<?> type = field.getType();
 		
 		try {
+			// set accessible so that we can work with private fields
+			field.setAccessible(true);
+			
 			if(type.equals(boolean.class)) {
 				if(value instanceof Boolean) {
 					field.setBoolean(instance, (Boolean) value);
 				} else {
 					field.setBoolean(instance, StringUtils.getBoolean(value.toString(), field.getBoolean(instance)));
 				}
+				
+				return;
 			}
 
 			if(type.equals(byte.class)) {
@@ -156,6 +161,8 @@ public class ReflectionUtils {
 				} else {
 					field.setByte(instance, StringUtils.getByteValue(value.toString(), field.getByte(instance)));
 				}
+				
+				return;
 			}
 			
 			if(type.equals(short.class)) {
@@ -164,6 +171,8 @@ public class ReflectionUtils {
 				} else {
 					field.setShort(instance, StringUtils.getShortValue(value.toString(), field.getShort(instance)));
 				}
+				
+				return;
 			}
 			
 			if(type.equals(char.class)) {
@@ -172,6 +181,8 @@ public class ReflectionUtils {
 				} else {
 					field.setChar(instance, StringUtils.getCharValue(value.toString(), field.getChar(instance)));
 				}
+				
+				return;
 			}
 			
 			if(type.equals(int.class)) {
@@ -180,6 +191,8 @@ public class ReflectionUtils {
 				} else {
 					field.setInt(instance, StringUtils.getIntValue(value.toString(), field.getInt(instance)));
 				}
+				
+				return;
 			}
 			
 			if(type.equals(long.class)) {
@@ -188,6 +201,8 @@ public class ReflectionUtils {
 				} else {
 					field.setLong(instance, StringUtils.getLongValue(value.toString(), field.getLong(instance)));
 				}
+				
+				return;
 			}
 			
 			if(type.equals(float.class)) {
@@ -196,6 +211,8 @@ public class ReflectionUtils {
 				} else {
 					field.setFloat(instance, StringUtils.getFloatValue(value.toString(), field.getFloat(instance)));
 				}
+				
+				return;
 			}
 
 			if(type.equals(double.class)) {
@@ -204,6 +221,8 @@ public class ReflectionUtils {
 				} else {
 					field.setDouble(instance, StringUtils.getDoubleValue(value.toString(), field.getDouble(instance)));
 				}
+				
+				return;
 			}
 
 			// just set the value
