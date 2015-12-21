@@ -197,11 +197,13 @@ public class StringUtils {
 	public static boolean getBoolean(String boolString, boolean defaultValue) {
 		if (AssertUtils.isNotEmpty(boolString)) {
 	        boolString = boolString.toLowerCase();
-	        if ("yes".equals(boolString) || "true".equals(boolString)) {
+	        if ("yes".equals(boolString) || "true".equals(boolString) || "on".equals(boolString)) {
 	            return true;
 	        }
 	        
-	        return false;
+	        if ("no".equals(boolString) || "false".equals(boolString) || "off".equals(boolString)) {
+	        	return false;
+	        }
 	    }
 		
 	    return defaultValue; 
