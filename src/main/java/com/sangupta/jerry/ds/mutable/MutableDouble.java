@@ -47,7 +47,7 @@ public class MutableDouble {
 	 * 
 	 * @param value the value to set initially
 	 */
-	public MutableDouble(float value) {
+	public MutableDouble(double value) {
 		this.value = value;
 	}
 	

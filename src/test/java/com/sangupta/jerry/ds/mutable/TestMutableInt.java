@@ -34,19 +34,22 @@ public class TestMutableInt {
 	
 	@Test
 	public void testMutableInt() {
-		MutableInt mi = new MutableInt();
-		Assert.assertEquals(0, mi.get());
-		mi.set(50);
-		Assert.assertEquals(50, mi.get());
+		MutableInt mutableInt = new MutableInt();
+		Assert.assertEquals(0, mutableInt.get());
+		mutableInt.set(50);
+		Assert.assertEquals(50, mutableInt.get());
 		
-		mi.setIfMax(100);
-		Assert.assertEquals(100, mi.get());
-		mi.setIfMax(75);
-		Assert.assertEquals(100, mi.get());
+		mutableInt.setIfMax(100);
+		Assert.assertEquals(100, mutableInt.get());
+		mutableInt.setIfMax(75);
+		Assert.assertEquals(100, mutableInt.get());
 		
-		mi.setIfMin(50);
-		Assert.assertEquals(50, mi.get());
-		mi.setIfMin(75);
-		Assert.assertEquals(50, mi.get());
+		mutableInt.setIfMin(50);
+		Assert.assertEquals(50, mutableInt.get());
+		mutableInt.setIfMin(75);
+		Assert.assertEquals(50, mutableInt.get());
+		
+		mutableInt = new MutableInt(16);
+		Assert.assertEquals(16, mutableInt.get());
 	}
 }

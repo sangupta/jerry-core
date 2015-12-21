@@ -34,19 +34,23 @@ public class TestMutableFloat {
 	
 	@Test
 	public void testMutableInt() {
-		MutableFloat mf = new MutableFloat();
-		Assert.assertEquals(0, mf.get(), 0f);
-		mf.set(50);
-		Assert.assertEquals(50, mf.get(), 0f);
+		MutableFloat mutableFloat = new MutableFloat();
+		Assert.assertEquals(0, mutableFloat.get(), 0f);
+		mutableFloat.set(50);
+		Assert.assertEquals(50, mutableFloat.get(), 0f);
 		
-		mf.setIfMax(100);
-		Assert.assertEquals(100, mf.get(), 0f);
-		mf.setIfMax(75);
-		Assert.assertEquals(100, mf.get(), 0f);
+		mutableFloat.setIfMax(100);
+		Assert.assertEquals(100, mutableFloat.get(), 0f);
+		mutableFloat.setIfMax(75);
+		Assert.assertEquals(100, mutableFloat.get(), 0f);
 		
-		mf.setIfMin(50);
-		Assert.assertEquals(50, mf.get(), 0f);
-		mf.setIfMin(75);
-		Assert.assertEquals(50, mf.get(), 0f);
+		mutableFloat.setIfMin(50);
+		Assert.assertEquals(50, mutableFloat.get(), 0f);
+		mutableFloat.setIfMin(75);
+		Assert.assertEquals(50, mutableFloat.get(), 0f);
+		
+		mutableFloat = new MutableFloat(33f);
+		Assert.assertEquals(33, mutableFloat.get(), 0f);
+		
 	}
 }

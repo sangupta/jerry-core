@@ -10,6 +10,7 @@
 * Added `ObjectUtils` to convert and test object instances
 * Added a lot of unit-tests for increasing code coverage
 * Fixed bug in `StringUtils.getBoolean(str, boolean)` method where default value was not returned correctly
+* Fixed bug in `MutableDouble` in constructor - changed from `float` param to `double` param
 * Updated dependencies
 
 **2.3.0**

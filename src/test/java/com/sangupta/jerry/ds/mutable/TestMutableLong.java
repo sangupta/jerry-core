@@ -34,20 +34,23 @@ public class TestMutableLong {
 	
 	@Test
 	public void testMutableLong() {
-		MutableLong ml = new MutableLong();
+		MutableLong mutableLong = new MutableLong();
 		
-		Assert.assertEquals(0, ml.get());
-		ml.set(50);
-		Assert.assertEquals(50, ml.get());
+		Assert.assertEquals(0, mutableLong.get());
+		mutableLong.set(50);
+		Assert.assertEquals(50, mutableLong.get());
 		
-		ml.setIfMax(100);
-		Assert.assertEquals(100, ml.get());
-		ml.setIfMax(75);
-		Assert.assertEquals(100, ml.get());
+		mutableLong.setIfMax(100);
+		Assert.assertEquals(100, mutableLong.get());
+		mutableLong.setIfMax(75);
+		Assert.assertEquals(100, mutableLong.get());
 		
-		ml.setIfMin(50);
-		Assert.assertEquals(50, ml.get());
-		ml.setIfMin(75);
-		Assert.assertEquals(50, ml.get());
+		mutableLong.setIfMin(50);
+		Assert.assertEquals(50, mutableLong.get());
+		mutableLong.setIfMin(75);
+		Assert.assertEquals(50, mutableLong.get());
+		
+		mutableLong = new MutableLong(16l);
+		Assert.assertEquals(16l, mutableLong.get());
 	}
 }
