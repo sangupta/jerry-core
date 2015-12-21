@@ -150,7 +150,7 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 			}
 			
 			// set this value back to the instance
-			ReflectionUtils.bindValue(field, instance, value);
+			ReflectionUtils.bindValueQuiet(field, instance, value);
 		}
 		
 		return true;

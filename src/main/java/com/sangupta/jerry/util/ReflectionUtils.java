@@ -148,6 +148,29 @@ public class ReflectionUtils {
     	return Modifier.isTransient(field.getModifiers());
     }
     
+    /**
+	 * Bind the value as a {@link Boolean} to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindBoolean(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -164,6 +187,29 @@ public class ReflectionUtils {
 		}
     }
     
+    /**
+	 * Bind the value as a {@link Byte} to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindByte(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -180,6 +226,29 @@ public class ReflectionUtils {
 		}
     }
     
+    /**
+	 * Bind the value as a {@link Short} to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindShort(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -196,6 +265,29 @@ public class ReflectionUtils {
 		}
     }
     
+    /**
+	 * Bind the value as a {@link Integer} to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindInteger(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -212,6 +304,29 @@ public class ReflectionUtils {
 		}
     }
     
+    /**
+	 * Bind the value as a {@link Long} to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindLong(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -228,6 +343,29 @@ public class ReflectionUtils {
 		}
     }
     
+    /**
+	 * Bind the value as a {@link Character} to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindChar(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -244,6 +382,29 @@ public class ReflectionUtils {
 		}
     }
     
+    /**
+	 * Bind the value as a {@link Float} to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindFloat(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -260,6 +421,29 @@ public class ReflectionUtils {
 		}
     }
     
+    /**
+	 * Bind the value as a {@link Double} to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindDouble(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -276,7 +460,57 @@ public class ReflectionUtils {
 		}
     }
     
-    public static void bindValue(Field field, Object instance, Object value) {
+    /**
+	 * Bind the value to the given field on the given object instance by detecting the
+	 * correct field type, and converting the value to proper type if not directly in
+	 * the format. Any {@link IllegalArgumentException} or {@link IllegalAccessException}
+	 * is eaten up and logged.
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 */
+    public static void bindValueQuiet(Field field, Object instance, Object value) {
+    	try {
+    		bindValue(field, instance, value);
+		} catch (IllegalArgumentException e) {
+			LOGGER.warn("Cannot set field " + field + "to value", e);
+		} catch (IllegalAccessException e) {
+			LOGGER.warn("Cannot set field " + field + "to value", e);
+		}
+    }
+    
+    /**
+	 * Bind the value to the given field on the given object instance by detecting the
+	 * correct field type, and converting the value to proper type if not directly in
+	 * the format.
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
+    public static void bindValue(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
     	}
@@ -287,94 +521,111 @@ public class ReflectionUtils {
     	
     	Class<?> type = field.getType();
 		
-		try {
-			// set accessible so that we can work with private fields
-			field.setAccessible(true);
-			
-			if(type.equals(boolean.class)) {
-				bindBoolean(field, instance, value);
-				return;
-			}
-
-			if(type.equals(byte.class)) {
-				bindByte(field, instance, value);
-				return;
-			}
-			
-			if(type.equals(short.class)) {
-				bindShort(field, instance, value);
-				return;
-			}
-			
-			if(type.equals(char.class)) {
-				bindChar(field, instance, value);
-				return;
-			}
-			
-			if(type.equals(int.class)) {
-				bindInteger(field, instance, value);
-				return;
-			}
-			
-			if(type.equals(long.class)) {
-				bindLong(field, instance, value);
-				return;
-			}
-			
-			if(type.equals(float.class)) {
-				bindFloat(field, instance, value);
-				return;
-			}
-
-			if(type.equals(double.class)) {
-				bindDouble(field, instance, value);
-				return;
-			}
-			
-			// check if this is an array and the value is of type String
-			if(type.equals(byte[].class)) {
-				bindByteArray(field, instance, value);
-				return;
-			}
-			if(type.equals(char[].class)) {
-				bindCharArray(field, instance, value);
-				return;
-			}
-			if(type.equals(short[].class)) {
-				bindShortArray(field, instance, value);
-				return;
-			}
-			if(type.equals(int[].class)) {
-				bindIntArray(field, instance, value);
-				return;
-			}
-			if(type.equals(long[].class)) {
-				bindLongArray(field, instance, value);
-				return;
-			}
-			if(type.equals(float[].class)) {
-				bindFloatArray(field, instance, value);
-				return;
-			}
-			if(type.equals(double[].class)) {
-				bindDoubleArray(field, instance, value);
-				return;
-			}
-			if(type.equals(boolean[].class)) {
-				bindBooleanArray(field, instance, value);
-				return;
-			}
-			
-
-			// just set the value
-			field.set(instance, value);
-		} catch (IllegalArgumentException e) {
-			LOGGER.warn("Cannot set field " + field + "to value", e);
-		} catch (IllegalAccessException e) {
-			LOGGER.warn("Cannot set field " + field + "to value", e);
+		// set accessible so that we can work with private fields
+		field.setAccessible(true);
+		
+		if(type.equals(boolean.class)) {
+			bindBoolean(field, instance, value);
+			return;
 		}
+
+		if(type.equals(byte.class)) {
+			bindByte(field, instance, value);
+			return;
+		}
+		
+		if(type.equals(short.class)) {
+			bindShort(field, instance, value);
+			return;
+		}
+		
+		if(type.equals(char.class)) {
+			bindChar(field, instance, value);
+			return;
+		}
+		
+		if(type.equals(int.class)) {
+			bindInteger(field, instance, value);
+			return;
+		}
+		
+		if(type.equals(long.class)) {
+			bindLong(field, instance, value);
+			return;
+		}
+		
+		if(type.equals(float.class)) {
+			bindFloat(field, instance, value);
+			return;
+		}
+
+		if(type.equals(double.class)) {
+			bindDouble(field, instance, value);
+			return;
+		}
+		
+		// check if this is an array and the value is of type String
+		if(type.equals(byte[].class)) {
+			bindByteArray(field, instance, value);
+			return;
+		}
+		if(type.equals(char[].class)) {
+			bindCharArray(field, instance, value);
+			return;
+		}
+		if(type.equals(short[].class)) {
+			bindShortArray(field, instance, value);
+			return;
+		}
+		if(type.equals(int[].class)) {
+			bindIntArray(field, instance, value);
+			return;
+		}
+		if(type.equals(long[].class)) {
+			bindLongArray(field, instance, value);
+			return;
+		}
+		if(type.equals(float[].class)) {
+			bindFloatArray(field, instance, value);
+			return;
+		}
+		if(type.equals(double[].class)) {
+			bindDoubleArray(field, instance, value);
+			return;
+		}
+		if(type.equals(boolean[].class)) {
+			bindBooleanArray(field, instance, value);
+			return;
+		}
+		
+
+		// just set the value
+		field.set(instance, value);
     }
     
+    /**
+	 * Bind the value as a <code>byte[]</code> to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */    
     public static void bindByteArray(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -394,6 +645,29 @@ public class ReflectionUtils {
 		}
 	}
     
+    /**
+	 * Bind the value as a <code>char[]</code> to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindCharArray(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -413,6 +687,29 @@ public class ReflectionUtils {
 		}
 	}
     
+    /**
+	 * Bind the value as a <code>short[]</code> to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindShortArray(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -432,6 +729,29 @@ public class ReflectionUtils {
 		}
 	}
     
+    /**
+	 * Bind the value as a <code>int[]</code> to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindIntArray(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -451,6 +771,29 @@ public class ReflectionUtils {
 		}
 	}
 
+    /**
+	 * Bind the value as a <code>long[]</code> to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
     public static void bindLongArray(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -470,6 +813,29 @@ public class ReflectionUtils {
 		}
 	}
 	
+    /**
+	 * Bind the value as a <code>float[]</code> to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
 	public static void bindFloatArray(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -489,6 +855,29 @@ public class ReflectionUtils {
 		}
 	}
 	
+	/**
+	 * Bind the value as a <code>double[]</code> to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
 	public static void bindDoubleArray(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
@@ -508,6 +897,29 @@ public class ReflectionUtils {
 		}
 	}
 	
+	/**
+	 * Bind the value as a <code>boolean[]</code> to the given field on the given
+	 * object instance
+	 * 
+	 * @param field
+	 *            the {@link Field} to bind to
+	 * 
+	 * @param instance
+	 *            the Object instance to bind to
+	 * 
+	 * @param value
+	 *            the value to be bound
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the specified object is not an instance of the class or
+	 *             interface declaring the underlying field (or a subclass or
+	 *             implementor thereof), or if an unwrapping conversion fails.
+	 *             
+	 * @throws IllegalAccessException
+	 *             if this {@link Field} object is enforcing Java language
+	 *             access control and the underlying field is either
+	 *             inaccessible or final.
+	 */
 	public static void bindBooleanArray(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
     	if(field == null) {
     		return;
