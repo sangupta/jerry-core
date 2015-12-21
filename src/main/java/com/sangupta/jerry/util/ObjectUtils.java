@@ -9,43 +9,92 @@ package com.sangupta.jerry.util;
 public class ObjectUtils {
 
 	/**
-	 * Check if the object represents a primitive type of: byte, char, short,
-	 * int, long, float, double or boolean.
+	 * Check if the object represents a primitive type of: <code>byte</code>,
+	 * <code>char</code>, <code>short</code>, <code>int</code>,
+	 * <code>long</code>, <code>float</code>, <code>double</code> or
+	 * <code>boolean</code>.
 	 * 
-	 * @param obj
+	 * @param instance
 	 *            returns <code>true</code> if the object is primitive type,
 	 *            <code>false</code> otherwise. <code>null</code> values return
 	 *            <code>false</code>
 	 * 
-	 * @return <code>true</code> if object is primitive
+	 * @return <code>true</code> if object is primitive, <code>false</code>
+	 *         otherwise or if object is null
 	 */
-	public static boolean isPrimitive(Object obj) {
-		if(obj == null) {
+	public static boolean isPrimitive(Object instance) {
+		if(instance == null) {
 			return false;
 		}
 		
-		if(obj instanceof Integer) {
+		if(instance instanceof Integer) {
 			return true;
 		}
-		if(obj instanceof Byte) {
+		if(instance instanceof Byte) {
 			return true;
 		}
-		if(obj instanceof Short) {
+		if(instance instanceof Short) {
 			return true;
 		}
-		if(obj instanceof Character) {
+		if(instance instanceof Character) {
 			return true;
 		}
-		if(obj instanceof Long) {
+		if(instance instanceof Long) {
 			return true;
 		}
-		if(obj instanceof Float) {
+		if(instance instanceof Float) {
 			return true;
 		}
-		if(obj instanceof Double) {
+		if(instance instanceof Double) {
 			return true;
 		}
-		if(obj instanceof Boolean) {
+		if(instance instanceof Boolean) {
+			return true;
+		}
+		
+		return false;
+	}
+
+	/**
+	 * Check if given object array represents an array of primitives, i.e. in
+	 * one of: <code>int[]</code>, <code>byte[]</code>, <code>short[]</code>,
+	 * <code>char[]</code>, <code>long[]</code>, <code>float[]</code>,
+	 * <code>double[]</code>, <code>boolean[]</code>
+	 * 
+	 * @param instance
+	 *            the object to be test
+	 * 
+	 * @return <code>true</code> if the object is a primitive aray,
+	 *         <code>false</code> otherwise or if the object is
+	 *         <code>null</code>
+	 */
+	public static boolean isPrimitiveArray(Object instance) {
+		if(instance == null) {
+			return false;
+		}
+		
+		if(instance instanceof int[]) {
+			return true;
+		}
+		if(instance instanceof byte[]) {
+			return true;
+		}
+		if(instance instanceof short[]) {
+			return true;
+		}
+		if(instance instanceof char[]) {
+			return true;
+		}
+		if(instance instanceof long[]) {
+			return true;
+		}
+		if(instance instanceof float[]) {
+			return true;
+		}
+		if(instance instanceof double[]) {
+			return true;
+		}
+		if(instance instanceof boolean[]) {
 			return true;
 		}
 		
@@ -53,88 +102,70 @@ public class ObjectUtils {
 	}
 	
 	/**
-	 * Check if given object array represents an array of primitives.
+	 * Convert the array into a {@link String} instance values separated by a
+	 * COMMA.
 	 * 
-	 */
-	public static boolean isPrimitiveArray(Object obj) {
-		if(obj == null) {
-			return false;
-		}
-		
-		if(obj instanceof int[]) {
-			return true;
-		}
-		if(obj instanceof byte[]) {
-			return true;
-		}
-		if(obj instanceof short[]) {
-			return true;
-		}
-		if(obj instanceof char[]) {
-			return true;
-		}
-		if(obj instanceof long[]) {
-			return true;
-		}
-		if(obj instanceof float[]) {
-			return true;
-		}
-		if(obj instanceof double[]) {
-			return true;
-		}
-		if(obj instanceof boolean[]) {
-			return true;
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * Convert the array into a {@link String} instance values separated by COMMA
+	 * @param instance
+	 *            the primitive array instance that needs to be stringified
 	 * 
-	 * @param array
-	 * @return
+	 * @return the {@link String} representation, or <code>null</code>
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the supplied instance is not a primitive array
 	 */
-	public static String stringifyPrimitiveArray(Object array) {
-		if(array == null) {
+	public static String stringifyPrimitiveArray(Object instance) {
+		if(instance == null) {
 			return null;
 		}
 		
-		if(array instanceof int[]) {
-			return StringUtils.stringifyArray((int[]) array);
+		if(instance instanceof int[]) {
+			return StringUtils.stringifyArray((int[]) instance);
 		}
 		
-		if(array instanceof short[]) {
-			return StringUtils.stringifyArray((short[]) array);
+		if(instance instanceof short[]) {
+			return StringUtils.stringifyArray((short[]) instance);
 		}
 		
-		if(array instanceof byte[]) {
-			return StringUtils.stringifyArray((byte[]) array);
+		if(instance instanceof byte[]) {
+			return StringUtils.stringifyArray((byte[]) instance);
 		}
 		
-		if(array instanceof char[]) {
-			return StringUtils.stringifyArray((char[]) array);
+		if(instance instanceof char[]) {
+			return StringUtils.stringifyArray((char[]) instance);
 		}
 		
-		if(array instanceof long[]) {
-			return StringUtils.stringifyArray((long[]) array);
+		if(instance instanceof long[]) {
+			return StringUtils.stringifyArray((long[]) instance);
 		}
 		
-		if(array instanceof float[]) {
-			return StringUtils.stringifyArray((float[]) array);
+		if(instance instanceof float[]) {
+			return StringUtils.stringifyArray((float[]) instance);
 		}
 		
-		if(array instanceof double[]) {
-			return StringUtils.stringifyArray((double[]) array);
+		if(instance instanceof double[]) {
+			return StringUtils.stringifyArray((double[]) instance);
 		}
 		
-		if(array instanceof boolean[]) {
-			return StringUtils.stringifyArray((boolean[]) array);
+		if(instance instanceof boolean[]) {
+			return StringUtils.stringifyArray((boolean[]) instance);
 		}
 		
 		throw new IllegalArgumentException("Object is not a primitive array");
 	}
 
+	/**
+	 * Check if given object array represents an array of boxed-primitives, i.e.
+	 * in one of: <code>Integer[]</code>, <code>Byte[]</code>,
+	 * <code>Short[]</code>, <code>Char[]</code>, <code>Long[]</code>,
+	 * <code>Float[]</code>, <code>Double[]</code>, <code>Boolean[]</code>
+	 * 
+	 * @param instance
+	 *            the object to be test
+	 * 
+	 * @return <code>true</code> if the object is a boxed-primitive aray,
+	 *         <code>false</code> otherwise or if the object is
+	 *         <code>null</code>
+	 */
 	public static boolean isBoxedPrimitiveArray(Object obj) {
 		if(obj == null) {
 			return false;
@@ -167,4 +198,5 @@ public class ObjectUtils {
 		
 		return false;
 	}
+	
 }
