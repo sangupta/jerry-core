@@ -3,9 +3,13 @@
 **Current Development Snapshot**
 
 * Added `Gson` based `UserLocalStore` for saving application data in JSON format
-* Added `readTo` and `saveFrom` methods to `UserLocalStore` to work with object instances
+* Added `readTo` and `writeFrom` methods to `UserLocalStore` to work with object instances
 * Added `bindValue` method to `ReflectionUtils`
+* Added methods to `ReflectionUtils` for working with primitive arrays
+* Added methods to `StringUtils` for converting to/from primitive arrays
+* Added `ObjectUtils` to convert and test object instances
 * Added a lot of unit-tests for increasing code coverage
+* Fixed bug in `StringUtils.getBoolean(str, boolean)` method where default value was not returned correctly
 * Updated dependencies
 
 **2.3.0**
