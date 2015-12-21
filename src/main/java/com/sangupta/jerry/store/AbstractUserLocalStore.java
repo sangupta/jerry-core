@@ -49,7 +49,15 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 	 * create any pending folders if needed.
 	 * 
 	 * @param folderName
-	 *            the name of the folder to create data-store in
+	 *            the name of the folder to create data-store in. the value can
+	 *            be <code>null</code> which signifies that we need to use the
+	 *            user's home directory. If the value is <code>not-null</code>
+	 *            but an empty string, an {@link IllegalArgumentException} is
+	 *            thrown
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the folderName is empty. A <code>null</code> value is
+	 *             valid and does NOT throw an {@link Exception}
 	 */
 	public AbstractUserLocalStore(String folderName) {
 		if(folderName != null && AssertUtils.isEmpty(folderName)) {
@@ -135,7 +143,7 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 			}
 			
 			// read the value from underlying store
-			Object value = this.get(name);
+			Object value = this.getValueObject(name);
 			if(value == null) {
 				// there is nothing for us to do
 				continue;
@@ -148,7 +156,7 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 		return true;
 	}
 	
-	public boolean saveFrom(Object instance) {
+	public boolean writeFrom(Object instance) {
 		if(instance == null) {
 			return false;
 		}
@@ -162,6 +170,12 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 			// set accessible
 			field.setAccessible(true);
 			
+			// skip if field is transient
+			if(ReflectionUtils.isTransient(field)) {
+				continue;
+			}
+			
+			// skip the this variable
 			if(field.getName().equals("this$0")) {
 				// skip this field
 				continue;
@@ -176,11 +190,6 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 				name = propertyName.value();
 			} else {
 				name = field.getName();
-				
-				// skip if field is transient
-				if(ReflectionUtils.isTransient(field)) {
-					continue;
-				}
 			}
 			
 			// read the fields value
@@ -194,19 +203,36 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 			}
 			
 			// save the value
-			if(value != null) {
-				this.putNoSave(name, value.toString());
-			} else {
-				this.putNoSave(name, null);
-			}
+			this.putNoSave(name, value);
 		}
 		
 		this.save();
 		return true;
 	}
 
+	/**
+	 * Persist the implementation to disk, if not already done so.
+	 * 
+	 */
 	protected abstract void save();
 	
-	protected abstract void putNoSave(String key, String property);
+	/**
+	 * Add the property to the underlying store, and do not immediately
+	 * persist, as more calls of this method are expected. The store
+	 * will be persisted with an explicit call to {@link #save()} method.
+	 * 
+	 * @param property the name of the property
+	 * 
+	 * @param value the value of the property to be set
+	 */
+	protected abstract void putNoSave(String property, Object value);
+
+	/**
+	 * Return the value of the property as an object.
+	 * 
+	 * @param property
+	 * @return
+	 */
+	protected abstract Object getValueObject(String property);
 	
 }

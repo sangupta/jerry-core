@@ -72,6 +72,11 @@ public class StringUtils {
 	public static final String SYSTEM_NEW_LINE = System.getProperty("line.separator");
 	
 	/**
+	 * Comma as a separator character
+	 */
+	public static final String COMMA_SEPARATOR_CHAR = ",";
+	
+	/**
 	 * Function to give a HEX representation of the byte array in small-case.
 	 * 
 	 * @param bytes
@@ -841,4 +846,508 @@ public class StringUtils {
 		byte[] bytes = ByteArrayUtils.getRandomBytes(length);
 		return new String(bytes);
 	}
+	
+	/**
+	 * Stringify the array by joining elements taking comma as a separator.
+	 *
+	 * @param array
+	 *            the array to be stringified
+	 * 
+	 * @return the {@link String} representation or <code>null</code>
+	 */
+	public static String stringifyArray(Object[] array) {
+		if(AssertUtils.isEmpty(array)) {
+			return null;
+		}
+		
+		// compute space requirement
+		int size = 0;
+		if(array instanceof String[]) {
+			String[] strArray = (String[]) array;
+			
+			for(String str : strArray) {
+				if(str != null) {
+					size += str.length();
+				}
+			}
+			
+			// add additional space for separators
+			size = size + (2 * array.length);
+		}
+		
+		final StringBuilder builder;
+		if(size > 0) {
+			builder = new StringBuilder(size);
+		} else {
+			builder = new StringBuilder();
+		}
+		
+		boolean first = true;
+		for(int index = 0; index < array.length; index++) {
+			Object object = array[index];
+			
+			if(!first) {
+				builder.append(COMMA_SEPARATOR_CHAR);
+			}
+			
+			if(object == null) {
+				continue;
+			}
+			
+			builder.append(object.toString());
+			
+			first = false;
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Stringify an integer-array.
+	 * 
+	 * @param array
+	 *            the <code>int[]</code> array to be stringified
+	 * 
+	 * @return the {@link String} representation or <code>null</code>
+	 */
+	public static String stringifyArray(int[] array) {
+		if(AssertUtils.isEmpty(array)) {
+			return null;
+		}
+		
+		StringBuilder builder = new StringBuilder(11 * array.length);
+		
+		boolean first = true;
+		for(int integer : array) {
+			
+			if(!first) {
+				builder.append(COMMA_SEPARATOR_CHAR);
+			}
+			
+			builder.append(String.valueOf(integer));
+			
+			// set first to false
+			first = false;
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Stringify a short-array.
+	 * 
+	 * @param array
+	 *            the <code>short[]</code array to be stringified
+	 * 
+	 * @return the {@link String} representation or <code>null</code>
+	 */
+	public static String stringifyArray(short[] array) {
+		if(AssertUtils.isEmpty(array)) {
+			return null;
+		}
+		
+		StringBuilder builder = new StringBuilder(7 * array.length);
+		
+		boolean first = true;
+		for(short value : array) {
+			
+			if(!first) {
+				builder.append(COMMA_SEPARATOR_CHAR);
+			}
+			
+			builder.append(String.valueOf(value));
+			
+			// set first to false
+			first = false;
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Stringify a long-array.
+	 * 
+	 * @param array
+	 *            the <code>long[]</code array to be stringified
+	 * 
+	 * @return the {@link String} representation or <code>null</code>
+	 */
+	public static String stringifyArray(long[] array) {
+		if(AssertUtils.isEmpty(array)) {
+			return null;
+		}
+		
+		StringBuilder builder = new StringBuilder(15 * array.length);
+		
+		boolean first = true;
+		for(long value : array) {
+			
+			if(!first) {
+				builder.append(COMMA_SEPARATOR_CHAR);
+			}
+			
+			builder.append(String.valueOf(value));
+			
+			// set first to false
+			first = false;
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Stringify a char-array.
+	 * 
+	 * @param array
+	 *            the <code>char[]</code array to be stringified
+	 * 
+	 * @return the {@link String} representation or <code>null</code>
+	 */
+	public static String stringifyArray(char[] array) {
+		if(AssertUtils.isEmpty(array)) {
+			return null;
+		}
+		
+		StringBuilder builder = new StringBuilder(2 * array.length);
+		
+		boolean first = true;
+		for(char value : array) {
+			
+			if(!first) {
+				builder.append(COMMA_SEPARATOR_CHAR);
+			}
+			
+			builder.append(String.valueOf(value));
+			
+			// set first to false
+			first = false;
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Stringify a float-array.
+	 * 
+	 * @param array
+	 *            the <code>float[]</code array to be stringified
+	 * 
+	 * @return the {@link String} representation or <code>null</code>
+	 */
+	public static String stringifyArray(float[] array) {
+		if(AssertUtils.isEmpty(array)) {
+			return null;
+		}
+		
+		StringBuilder builder = new StringBuilder(15 * array.length);
+		
+		boolean first = true;
+		for(float value : array) {
+			
+			if(!first) {
+				builder.append(COMMA_SEPARATOR_CHAR);
+			}
+			
+			builder.append(String.valueOf(value));
+			
+			// set first to false
+			first = false;
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Stringify a double-array.
+	 * 
+	 * @param array
+	 *            the <code>double[]</code array to be stringified
+	 * 
+	 * @return the {@link String} representation or <code>null</code>
+	 */
+	public static String stringifyArray(double[] array) {
+		if(AssertUtils.isEmpty(array)) {
+			return null;
+		}
+		
+		StringBuilder builder = new StringBuilder(15 * array.length);
+		
+		boolean first = true;
+		for(double value : array) {
+			
+			if(!first) {
+				builder.append(COMMA_SEPARATOR_CHAR);
+			}
+			
+			builder.append(String.valueOf(value));
+			
+			// set first to false
+			first = false;
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Stringify a byte-array.
+	 * 
+	 * @param array
+	 *            the <code>byte[]</code array to be stringified
+	 * 
+	 * @return the {@link String} representation or <code>null</code>
+	 */
+	public static String stringifyArray(byte[] array) {
+		if(AssertUtils.isEmpty(array)) {
+			return null;
+		}
+		
+		StringBuilder builder = new StringBuilder(5 * array.length);
+		
+		boolean first = true;
+		for(byte value : array) {
+			
+			if(!first) {
+				builder.append(COMMA_SEPARATOR_CHAR);
+			}
+			
+			builder.append(String.valueOf(value));
+			
+			// set first to false
+			first = false;
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Stringify a boolean-array.
+	 * 
+	 * @param array
+	 *            the <code>boolean[]</code array to be stringified
+	 * 
+	 * @return the {@link String} representation or <code>null</code>
+	 */
+	public static String stringifyArray(boolean[] array) {
+		if(AssertUtils.isEmpty(array)) {
+			return null;
+		}
+		
+		StringBuilder builder = new StringBuilder(5 * array.length);
+		
+		boolean first = true;
+		for(boolean value : array) {
+			
+			if(!first) {
+				builder.append(COMMA_SEPARATOR_CHAR);
+			}
+			
+			builder.append(String.valueOf(value));
+			
+			// set first to false
+			first = false;
+		}
+		
+		return builder.toString();
+	}
+	
+	/**
+	 * Construct back a byte-array from its stringified representation.
+	 * 
+	 * @param array
+	 *            the {@link String} representation
+	 * 
+	 * @return the <code>byte[]</code> thus constructed, or <code>null</code>
+	 * 
+	 * @throws NumberFormatException
+	 *             if any of the value cannot be parsed
+	 */
+	public static byte[] deStringifyByteArray(String value) {
+		if(AssertUtils.isEmpty(value)) {
+			return null;
+		}
+		
+		String[] tokens = value.split(COMMA_SEPARATOR_CHAR);
+		byte[] array = new byte[tokens.length];
+		for(int index = 0; index < tokens.length; index++) {
+			array[index] = Byte.parseByte(tokens[index]);
+		}
+		
+		return array;
+	}
+	
+	/**
+	 * Construct back a char-array from its stringified representation.
+	 * 
+	 * @param array
+	 *            the {@link String} representation
+	 * 
+	 * @return the <code>char[]</code> thus constructed, or <code>null</code>
+	 * 
+	 * @throws NumberFormatException
+	 *             if any of the value cannot be parsed
+	 */
+	public static char[] deStringifyCharArray(String value) {
+		if(AssertUtils.isEmpty(value)) {
+			return null;
+		}
+		
+		String[] tokens = value.split(COMMA_SEPARATOR_CHAR);
+		char[] array = new char[tokens.length];
+		for(int index = 0; index < tokens.length; index++) {
+			array[index] = tokens[index].charAt(0);
+		}
+		
+		return array;
+	}
+	
+	/**
+	 * Construct back a short-array from its stringified representation.
+	 * 
+	 * @param array
+	 *            the {@link String} representation
+	 * 
+	 * @return the <code>short[]</code> thus constructed, or <code>null</code>
+	 * 
+	 * @throws NumberFormatException
+	 *             if any of the value cannot be parsed
+	 */
+	public static short[] deStringifyShortArray(String value) {
+		if(AssertUtils.isEmpty(value)) {
+			return null;
+		}
+		
+		String[] tokens = value.split(COMMA_SEPARATOR_CHAR);
+		short[] array = new short[tokens.length];
+		for(int index = 0; index < tokens.length; index++) {
+			array[index] = Short.valueOf(tokens[index]);
+		}
+		
+		return array;
+	}
+	
+	/**
+	 * Construct back a boolean-array from its stringified representation.
+	 * 
+	 * @param array
+	 *            the {@link String} representation
+	 * 
+	 * @return the <code>boolean[]</code> thus constructed, or <code>null</code>
+	 * 
+	 * @throws NumberFormatException
+	 *             if any of the value cannot be parsed
+	 */
+	public static boolean[] deStringifyBooleanArray(String value) {
+		if(AssertUtils.isEmpty(value)) {
+			return null;
+		}
+		
+		String[] tokens = value.split(COMMA_SEPARATOR_CHAR);
+		boolean[] array = new boolean[tokens.length];
+		for(int index = 0; index < tokens.length; index++) {
+			array[index] = getBoolean(tokens[index]);
+		}
+		
+		return array;
+	}
+
+	/**
+	 * Construct back a int-array from its stringified representation.
+	 * 
+	 * @param array
+	 *            the {@link String} representation
+	 * 
+	 * @return the <code>int[]</code> thus constructed, or <code>null</code>
+	 * 
+	 * @throws NumberFormatException
+	 *             if any of the value cannot be parsed
+	 */
+	public static int[] deStringifyIntArray(String value) {
+		if(AssertUtils.isEmpty(value)) {
+			return null;
+		}
+		
+		String[] tokens = value.split(COMMA_SEPARATOR_CHAR);
+		int[] array = new int[tokens.length];
+		for(int index = 0; index < tokens.length; index++) {
+			array[index] = Integer.parseInt(tokens[index]);
+		}
+		
+		return array;
+	}
+
+	/**
+	 * Construct back a long-array from its stringified representation.
+	 * 
+	 * @param array
+	 *            the {@link String} representation
+	 * 
+	 * @return the <code>long[]</code> thus constructed, or <code>null</code>
+	 * 
+	 * @throws NumberFormatException
+	 *             if any of the value cannot be parsed
+	 */
+	public static long[] deStringifyLongArray(String value) {
+		if(AssertUtils.isEmpty(value)) {
+			return null;
+		}
+		
+		String[] tokens = value.split(COMMA_SEPARATOR_CHAR);
+		long[] array = new long[tokens.length];
+		for(int index = 0; index < tokens.length; index++) {
+			array[index] = Long.valueOf(tokens[index]);
+		}
+		
+		return array;
+	}
+	
+	/**
+	 * Construct back a float-array from its stringified representation.
+	 * 
+	 * @param array
+	 *            the {@link String} representation
+	 * 
+	 * @return the <code>float[]</code> thus constructed, or <code>null</code>
+	 * 
+	 * @throws NumberFormatException
+	 *             if any of the value cannot be parsed
+	 */
+	public static float[] deStringifyFloatArray(String value) {
+		if(AssertUtils.isEmpty(value)) {
+			return null;
+		}
+		
+		String[] tokens = value.split(COMMA_SEPARATOR_CHAR);
+		float[] array = new float[tokens.length];
+		for(int index = 0; index < tokens.length; index++) {
+			array[index] = Float.valueOf(tokens[index]);
+		}
+		
+		return array;
+	}
+	
+	/**
+	 * Construct back a double-array from its stringified representation.
+	 * 
+	 * @param array
+	 *            the {@link String} representation
+	 * 
+	 * @return the <code>double[]</code> thus constructed, or <code>null</code>
+	 * 
+	 * @throws NumberFormatException
+	 *             if any of the value cannot be parsed
+	 */
+	public static double[] deStringifyDoubleArray(String value) {
+		if(AssertUtils.isEmpty(value)) {
+			return null;
+		}
+		
+		String[] tokens = value.split(COMMA_SEPARATOR_CHAR);
+		double[] array = new double[tokens.length];
+		for(int index = 0; index < tokens.length; index++) {
+			array[index] = Double.valueOf(tokens[index]);
+		}
+		
+		return array;
+	}
+	
 }

@@ -270,5 +270,41 @@ public class PropertiesUtils {
 		String value = properties.getProperty(key);
 		return StringUtils.getDoubleValue(value, defaultValue);
 	}
-	
+
+	/**
+	 * Converts the {@link Object} value into a string representation taking care
+	 * of the primitives, primitive arrays, boxed-primitive arrays, string arrays
+	 * and more.
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public static String getPropertyAsString(Object value) {
+		if(value == null) {
+			return null;
+		}
+		
+		if(ObjectUtils.isPrimitive(value)) {
+			return value.toString();
+		} 
+		
+		if(value instanceof String) {
+			return (String) value;
+		} 
+		
+		if(ObjectUtils.isPrimitiveArray(value)) {
+			return ObjectUtils.stringifyPrimitiveArray(value);
+		}
+		
+		if(ObjectUtils.isBoxedPrimitiveArray(value)) {
+			return StringUtils.stringifyArray((Object[]) value);
+		}
+		
+		if(value instanceof String[]) {
+			// convert string array to string
+			return StringUtils.stringifyArray((String[]) value);
+		}
+		
+		return value.toString();
+	}
 }

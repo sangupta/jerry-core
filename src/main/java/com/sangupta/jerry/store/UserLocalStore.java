@@ -44,6 +44,15 @@ public interface UserLocalStore {
 	 */
 	public String get(String property);
 	
+	/**
+	 * Get the boolean value for the given property name. Return the default
+	 * value if the property does not exists, or cannot be converted into a 
+	 * boolean.
+	 * 
+	 * @param property
+	 * @param defaultValue
+	 * @return
+	 */
 	public boolean getBoolean(String property, boolean defaultValue);
 	
 	public int getInt(String property, int defaultValue);
@@ -54,9 +63,33 @@ public interface UserLocalStore {
 	
 	public double getDouble(String property, double defaultValue);
 	
+	/**
+	 * Read all the properties from the underlying {@link UserLocalStore} into
+	 * the given instance.
+	 * 
+	 * If the instance is <code>null</code>, no error is thrown
+	 * 
+	 * @param instance
+	 *            the instance to read values into
+	 * 
+	 * @return <code>true</code> if values were read, <code>false</code>
+	 *         otherwise
+	 */
 	public boolean readTo(Object instance);
 	
-	public boolean saveFrom(Object instance);
+	/**
+	 * Write all the non-static non-transient properties from the given instance
+	 * variable to the underlying {@link UserLocalStore}.
+	 * 
+	 * If the instance is <code>null</code>, no error is thrown
+	 * 
+	 * @param instance
+	 *            the instance to write value from
+	 * 
+	 * @return <code>true</code> if values were written, <code>false</code>
+	 *         otherwise
+	 */
+	public boolean writeFrom(Object instance);
 	
 	/**
 	 * Return the name of all keys within the data-store
@@ -89,7 +122,7 @@ public interface UserLocalStore {
 	 * @param property
 	 *            the value of the property
 	 */
-	public void put(String key, String property);
+	public void put(String key, Object property);
 	
 	/**
 	 * Delete the value associated with the key in the data-store.

@@ -10,6 +10,13 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.sangupta.jerry.util.AssertUtils;
 import com.sangupta.jerry.util.GsonUtils;
 
+/**
+ * An implementation of the {@link UserLocalStore} that uses Google
+ * GSON library for persisting data as JSON on disk.
+ * 
+ * @author sangupta
+ *
+ */
 public class GsonUserLocalStore extends AbstractUserLocalStore {
 	
 	protected final File propertiesFile;
@@ -44,7 +51,7 @@ public class GsonUserLocalStore extends AbstractUserLocalStore {
 			}
 		}
 	}
-
+	
 	@Override
 	public String get(String property) {
 		Object object = this.properties.get(property);
@@ -61,14 +68,19 @@ public class GsonUserLocalStore extends AbstractUserLocalStore {
 	}
 
 	@Override
-	public void put(String key, String property) {
+	public void put(String key, Object property) {
 		this.properties.put(key, property);
 		save();
 	}
 	
 	@Override
-	protected void putNoSave(String key, String property) {
+	protected void putNoSave(String key, Object property) {
 		this.properties.put(key, property);
+	}
+	
+	@Override
+	protected Object getValueObject(String property) {
+		return this.properties.get(property);
 	}
 
 	@Override

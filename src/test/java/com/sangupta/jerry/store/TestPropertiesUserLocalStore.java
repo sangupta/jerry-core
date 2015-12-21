@@ -24,7 +24,6 @@ package com.sangupta.jerry.store;
 import java.util.UUID;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
 /**
@@ -78,7 +77,16 @@ public class TestPropertiesUserLocalStore {
 		mvo.bln = true;
 		mvo.strng = "Hello World";
 		
-		store.saveFrom(mvo);
+		mvo.byteArray = new byte[] { 110, 111, 112, 113 };
+		mvo.charArray = new char[] { 'a', 'b', 'c', 'd' };
+		mvo.shortArray = new short[] { 210, 211, 212, 213 };
+		mvo.intArray = new int[] { 10, 11, 12, 13 };
+		mvo.longArray = new long[] { 410, 411, 412, 413 };
+		mvo.floatArray = new float[] { 10.2f, 11.2f, 12.2f, 13.2f };
+		mvo.doubleArray = new double[] { 110.2d, 111.2d, 112.2d, 113.2d };
+		mvo.booleanArray = new boolean[] { true, false, true, false };
+		
+		store.writeFrom(mvo);
 		
 		MyValueObject read = new MyValueObject();
 		store.readTo(read);
@@ -93,6 +101,15 @@ public class TestPropertiesUserLocalStore {
 		Assert.assertEquals(mvo.dbl, read.dbl, 0d);
 		Assert.assertEquals(mvo.bln, read.bln);
 		Assert.assertEquals(mvo.strng, read.strng);
+		
+		Assert.assertArrayEquals(mvo.intArray, read.intArray);
+		Assert.assertArrayEquals(mvo.byteArray, read.byteArray);
+		Assert.assertArrayEquals(mvo.charArray, read.charArray);
+		Assert.assertArrayEquals(mvo.shortArray, read.shortArray);
+		Assert.assertArrayEquals(mvo.longArray, read.longArray);
+		Assert.assertArrayEquals(mvo.floatArray, read.floatArray, 0f);
+		Assert.assertArrayEquals(mvo.doubleArray, read.doubleArray, 0d);
+		Assert.assertArrayEquals(mvo.booleanArray, read.booleanArray);
 	}
 	
 	@Test
@@ -111,7 +128,16 @@ public class TestPropertiesUserLocalStore {
 		mvo.bln = true;
 		mvo.strng = "Hello World";
 		
-		store.saveFrom(mvo);
+		mvo.byteArray = new byte[] { 110, 111, 112, 113 };
+		mvo.charArray = new char[] { 'a', 'b', 'c', 'd' };
+		mvo.shortArray = new short[] { 210, 211, 212, 213 };
+		mvo.intArray = new int[] { 10, 11, 12, 13 };
+		mvo.longArray = new long[] { 410, 411, 412, 413 };
+		mvo.floatArray = new float[] { 10.2f, 11.2f, 12.2f, 13.2f };
+		mvo.doubleArray = new double[] { 110.2d, 111.2d, 112.2d, 113.2d };
+		mvo.booleanArray = new boolean[] { true, false, true, false };
+		
+		store.writeFrom(mvo);
 		
 		MyValueObjectAnnotated read = new MyValueObjectAnnotated();
 		store.readTo(read);
@@ -126,6 +152,15 @@ public class TestPropertiesUserLocalStore {
 		Assert.assertEquals(mvo.dbl, read.dbl, 0d);
 		Assert.assertEquals(mvo.bln, read.bln);
 		Assert.assertEquals(mvo.strng, read.strng);
+		
+		Assert.assertArrayEquals(mvo.intArray, read.intArray);
+		Assert.assertArrayEquals(mvo.byteArray, read.byteArray);
+		Assert.assertArrayEquals(mvo.charArray, read.charArray);
+		Assert.assertArrayEquals(mvo.shortArray, read.shortArray);
+		Assert.assertArrayEquals(mvo.longArray, read.longArray);
+		Assert.assertArrayEquals(mvo.floatArray, read.floatArray, 0f);
+		Assert.assertArrayEquals(mvo.doubleArray, read.doubleArray, 0d);
+		Assert.assertArrayEquals(mvo.booleanArray, read.booleanArray);
 	}
 
 	private class MyValueObject {
@@ -147,6 +182,22 @@ public class TestPropertiesUserLocalStore {
 		private boolean bln;
 		
 		private String strng;
+		
+		private int[] intArray;
+		
+		private char[] charArray;
+		
+		private byte[] byteArray;
+		
+		private short[] shortArray;
+		
+		private long[] longArray;
+		
+		private float[] floatArray;
+		
+		private double[] doubleArray;
+		
+		private boolean[] booleanArray;
 		
 	}
 	
@@ -179,5 +230,28 @@ public class TestPropertiesUserLocalStore {
 		@PropertyName("value9")
 		private String strng;
 		
+		@PropertyName("int-array")
+		private int[] intArray;
+		
+		@PropertyName("char-array")
+		private char[] charArray;
+		
+		@PropertyName("byte-array")
+		private byte[] byteArray;
+		
+		@PropertyName("short-array")
+		private short[] shortArray;
+		
+		@PropertyName("long-array")
+		private long[] longArray;
+		
+		@PropertyName("float-array")
+		private float[] floatArray;
+		
+		@PropertyName("double-array")
+		private double[] doubleArray;
+		
+		@PropertyName("boolean-array")
+		private boolean[] booleanArray;
 	}
 }

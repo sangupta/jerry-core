@@ -2,6 +2,12 @@
 
 **Current Development Snapshot**
 
+* Added `Gson` based `UserLocalStore` for saving application data in JSON format
+* Added `readTo` and `saveFrom` methods to `UserLocalStore` to work with object instances
+* Added `bindValue` method to `ReflectionUtils`
+* Added a lot of unit-tests for increasing code coverage
+* Updated dependencies
+
 **2.3.0**
 
 * `ConsoleTable` now supports pagination

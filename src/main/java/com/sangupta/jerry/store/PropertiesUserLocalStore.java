@@ -32,6 +32,7 @@ import java.util.Set;
 import org.apache.commons.io.FileUtils;
 
 import com.sangupta.jerry.util.AssertUtils;
+import com.sangupta.jerry.util.PropertiesUtils;
 
 /**
  * A {@link Properties} based {@link UserLocalStore} that makes use of
@@ -83,14 +84,19 @@ public class PropertiesUserLocalStore extends AbstractUserLocalStore {
 	}
 
 	@Override
-	public void put(String key, String property) {
-		this.properties.put(key, property);
+	public void put(String property, Object value) {
+		this.properties.setProperty(property, PropertiesUtils.getPropertyAsString(value));
 		save();
 	}
 	
 	@Override
-	protected void putNoSave(String key, String property) {
-		this.properties.put(key, property);
+	protected void putNoSave(String property, Object value) {
+		this.properties.setProperty(property, PropertiesUtils.getPropertyAsString(value));
+	}
+	
+	@Override
+	protected Object getValueObject(String property) {
+		return this.get(property);
 	}
 
 	@Override
