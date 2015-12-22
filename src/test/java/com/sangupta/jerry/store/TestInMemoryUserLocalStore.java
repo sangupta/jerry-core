@@ -21,31 +21,22 @@
  
 package com.sangupta.jerry.store;
 
-import java.util.UUID;
-
 import org.junit.Assert;
-
 import org.junit.Test;
 
 /**
- * Unit tests for {@link GsonUserLocalStore}.
+ * Unit tests for {@link InMemoryUserLocalStore}.
  * 
  * @author sangupta
  *
  */
-public class TestGsonUserLocalStore {
+public class TestInMemoryUserLocalStore {
 	
 	@Test
 	public void testStore() {
 		UserLocalStore store;
 		
-		try { store = new GsonUserLocalStore(null, null); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
-		try { store = new GsonUserLocalStore("", null); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
-		
-		try { store = new GsonUserLocalStore(".test", null); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
-		try { store = new GsonUserLocalStore(".test", ""); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
-		
-		store = new GsonUserLocalStore(".test", UUID.randomUUID().toString() + ".json");
+		store = new InMemoryUserLocalStore();
 		
 		Assert.assertNull(store.get("prop"));
 		Assert.assertEquals("value-default", store.get("prop", "value-default"));
@@ -64,7 +55,7 @@ public class TestGsonUserLocalStore {
 	
 	@Test
 	public void testStoreReadWrite() {
-		UserLocalStore store = new GsonUserLocalStore(".test", UUID.randomUUID().toString() + ".json");
+		UserLocalStore store = new InMemoryUserLocalStore();
 		
 		MyValueObject mvo = new MyValueObject();
 		
@@ -115,7 +106,7 @@ public class TestGsonUserLocalStore {
 	
 	@Test
 	public void testStoreReadWriteAnnotated() {
-		UserLocalStore store = new GsonUserLocalStore(".test", UUID.randomUUID().toString() + ".json");
+		UserLocalStore store = new InMemoryUserLocalStore();
 		
 		MyValueObjectAnnotated mvo = new MyValueObjectAnnotated();
 		

@@ -34,11 +34,11 @@ import com.sangupta.jerry.util.AssertUtils;
  * @author sangupta
  *
  */
-public class InMemoryLocalStore extends AbstractUserLocalStore {
+public class InMemoryUserLocalStore extends AbstractUserLocalStore {
 	
 	private final Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 
-	public InMemoryLocalStore() {
+	public InMemoryUserLocalStore() {
 		super(null);
 	}
 
