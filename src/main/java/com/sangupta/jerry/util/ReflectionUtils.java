@@ -55,9 +55,47 @@ public class ReflectionUtils {
 	 * @return the getter method name for the attribute
 	 * 
 	 */
-    public static String getGetterMethod(String attribute) {
+    public static String getGetterMethodName(String attribute) {
+    	if(AssertUtils.isEmpty(attribute)) {
+    		return null;
+    	}
+    	
         String methodName = "get" + Character.toUpperCase(attribute.charAt(0)) + attribute.substring(1);
         return methodName;
+    }
+    
+    /**
+	 * Return the getter method for the given attribute name on the given object
+	 * instance.
+	 * 
+	 * @param attribute
+	 *            the name of the attribute for which the getter method is being
+	 *            looked for
+	 * 
+	 * @return the {@link Method} instance or <code>null</code>
+	 */
+    public static Method getGetterMethod(Object instance, String attribute) {
+    	if(instance == null) {
+    		return null;
+    	}
+    	
+    	if(AssertUtils.isEmpty(attribute)) {
+    		return null;
+    	}
+    	
+    	Method[] methods = instance.getClass().getMethods();
+    	if(AssertUtils.isEmpty(methods)) {
+    		return null;
+    	}
+    	
+    	String getterMethodName = getGetterMethodName(attribute);
+    	for(Method method : methods) {
+    		if(method.getName().equals(getterMethodName)) {
+    			return method;
+    		}
+    	}
+    	
+    	return null;
     }
 
     /**
@@ -126,7 +164,7 @@ public class ReflectionUtils {
 	 * 
 	 */
     public static Object executeGetAttribute(Object object, String attributeName) throws IllegalArgumentException, IllegalAccessException, InvocationTargetException {
-    	String getterMethodName = getGetterMethod(attributeName);
+    	String getterMethodName = getGetterMethodName(attributeName);
 
     	return executeGetter(object, getterMethodName);
     }

@@ -8,6 +8,13 @@ import org.junit.Test;
 public class TestReflectionUtils {
 	
 	@Test
+	public void testGetGetterMethod() {
+		Assert.assertEquals((String) null, ReflectionUtils.getGetterMethodName(null));
+		Assert.assertEquals((String) null, ReflectionUtils.getGetterMethodName(""));
+		Assert.assertEquals("getName", ReflectionUtils.getGetterMethodName("name"));
+	}
+	
+	@Test
 	public void testConvertToMapNoTransient() {
 		// test without transient variables
 		MyValueObject mvo = new MyValueObject();
