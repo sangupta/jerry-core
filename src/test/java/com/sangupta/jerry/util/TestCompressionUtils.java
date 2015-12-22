@@ -6,6 +6,8 @@ import java.io.UnsupportedEncodingException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.sangupta.jerry.constants.OperatingSystem;
+
 /**
  * Unit tests for {@link CompressionUtils}
  * 
@@ -21,6 +23,10 @@ public class TestCompressionUtils {
 		if(JDKUtils.isJDK7()) {
 			// for some reason this test fails on JDK 7
 			// will look at it later
+			return;
+		}
+		
+		if(OSUtils.OS == OperatingSystem.Windows) {
 			return;
 		}
 		

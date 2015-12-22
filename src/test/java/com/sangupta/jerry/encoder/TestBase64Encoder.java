@@ -24,7 +24,9 @@ package com.sangupta.jerry.encoder;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.sangupta.jerry.constants.OperatingSystem;
 import com.sangupta.jerry.util.JDKUtils;
+import com.sangupta.jerry.util.OSUtils;
 import com.sangupta.jerry.util.StringUtils;
 
 /**
@@ -40,6 +42,10 @@ public class TestBase64Encoder {
 	@Test
 	public void testEncodeDecode() {
 		if(JDKUtils.isJDK7()) {
+			return;
+		}
+		
+		if(OSUtils.OS == OperatingSystem.Windows) {
 			return;
 		}
 		
@@ -66,6 +72,10 @@ public class TestBase64Encoder {
 			return;
 		}
 		
+		if(OSUtils.OS == OperatingSystem.Windows) {
+			return;
+		}
+		
 		for(int index = 0; index < MAX_RUNS; index++) {
 			String random = StringUtils.getRandomString(1000);
 			byte[] bytes = random.getBytes(StringUtils.DEFAULT_CHARSET);
@@ -86,6 +96,10 @@ public class TestBase64Encoder {
 	@Test
 	public void testEncodeDecodeString() {
 		if(JDKUtils.isJDK7()) {
+			return;
+		}
+		
+		if(OSUtils.OS == OperatingSystem.Windows) {
 			return;
 		}
 		
