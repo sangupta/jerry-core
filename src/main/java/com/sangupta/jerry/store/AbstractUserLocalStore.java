@@ -99,6 +99,18 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 		return StringUtils.getBoolean(this.get(property), defaultValue);
 	}
 	
+	public short getShort(String property, short defaultValue) {
+		return StringUtils.getShortValue(this.get(property), defaultValue);
+	}
+	
+	public char getChar(String property, char defaultValue) {
+		return StringUtils.getCharValue(this.get(property), defaultValue);
+	}
+	
+	public byte getByte(String property, byte defaultValue) {
+		return StringUtils.getByteValue(this.get(property), defaultValue);
+	}
+	
 	public int getInt(String property, int defaultValue) {
 		return StringUtils.getIntValue(this.get(property), defaultValue);
 	}

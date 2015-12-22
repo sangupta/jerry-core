@@ -55,6 +55,12 @@ public interface UserLocalStore {
 	 */
 	public boolean getBoolean(String property, boolean defaultValue);
 	
+	public byte getByte(String property, byte defaultValue);
+	
+	public char getChar(String property, char defaultValue);
+	
+	public short getShort(String property, short defaultValue);
+	
 	public int getInt(String property, int defaultValue);
 	
 	public long getLong(String property, long defaultValue);
