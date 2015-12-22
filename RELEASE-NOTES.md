@@ -9,6 +9,10 @@
 * Added methods to `StringUtils` for converting to/from primitive arrays
 * Added `ObjectUtils` to convert and test object instances
 * Added a lot of unit-tests for increasing code coverage
+* Updated `OSUtils` for detection of many different operating systems
+* Added `InMemoryUserLocalStore` using JVM memory as an implementation for `UserLocalStore`
+* Added many convenience methods to `PropertiesUtils`
+* Added method `getGetterMethod` to `ReflectionUtils` to get the `Method` instance back
 * Fixed bug in `StringUtils.getBoolean(str, boolean)` method where default value was not returned correctly
 * Fixed bug in `MutableDouble` in constructor - changed from `float` param to `double` param
 * Updated dependencies
