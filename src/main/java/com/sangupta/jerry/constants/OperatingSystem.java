@@ -37,13 +37,13 @@ public enum OperatingSystem {
 	
 	OS_400,
 	
+	OS_390,
+	
 	OS_2,
 	
 	Irix,
 	
 	Windows,
-	
-	Mac,
 	
 	MacOSX,
 	
