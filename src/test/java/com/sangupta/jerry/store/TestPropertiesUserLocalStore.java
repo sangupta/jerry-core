@@ -21,6 +21,7 @@
  
 package com.sangupta.jerry.store;
 
+import java.util.Collection;
 import java.util.UUID;
 
 import org.junit.Assert;
@@ -44,7 +45,8 @@ public class TestPropertiesUserLocalStore {
 		try { store = new PropertiesUserLocalStore(".test", null); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 		try { store = new PropertiesUserLocalStore(".test", ""); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 		
-		store = new PropertiesUserLocalStore(".test", UUID.randomUUID().toString() + ".properties");
+		String fileName = UUID.randomUUID().toString() + ".properties";
+		store = new PropertiesUserLocalStore(".test", fileName);
 		
 		Assert.assertNull(store.get("prop"));
 		Assert.assertEquals("value-default", store.get("prop", "value-default"));
@@ -59,6 +61,19 @@ public class TestPropertiesUserLocalStore {
 		store.delete("prop");
 		Assert.assertNull(store.get("prop"));
 		Assert.assertEquals("value-default", store.get("prop", "value-default"));
+		
+		// test all keys
+		Collection<String> keys = store.getAllKeys();
+		Assert.assertEquals(0, keys.size());
+		
+		store.put("prop", "value2");
+		keys = store.getAllKeys();
+		Assert.assertEquals(1, keys.size());
+		
+		// reopen the store and see all values are available
+		store = new PropertiesUserLocalStore(".test", fileName);
+		keys = store.getAllKeys();
+		Assert.assertEquals(1, keys.size());
 	}
 	
 	@Test
