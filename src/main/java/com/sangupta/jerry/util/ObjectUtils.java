@@ -187,33 +187,33 @@ public class ObjectUtils {
 	 *         <code>false</code> otherwise or if the object is
 	 *         <code>null</code>
 	 */
-	public static boolean isBoxedPrimitiveArray(Object obj) {
-		if(obj == null) {
+	public static boolean isBoxedPrimitiveArray(Object instance) {
+		if(instance == null) {
 			return false;
 		}
 		
-		if(obj instanceof Integer[]) {
+		if(instance instanceof Integer[]) {
 			return true;
 		}
-		if(obj instanceof Byte[]) {
+		if(instance instanceof Byte[]) {
 			return true;
 		}
-		if(obj instanceof Short[]) {
+		if(instance instanceof Short[]) {
 			return true;
 		}
-		if(obj instanceof Character[]) {
+		if(instance instanceof Character[]) {
 			return true;
 		}
-		if(obj instanceof Long[]) {
+		if(instance instanceof Long[]) {
 			return true;
 		}
-		if(obj instanceof Float[]) {
+		if(instance instanceof Float[]) {
 			return true;
 		}
-		if(obj instanceof Double[]) {
+		if(instance instanceof Double[]) {
 			return true;
 		}
-		if(obj instanceof Boolean[]) {
+		if(instance instanceof Boolean[]) {
 			return true;
 		}
 		

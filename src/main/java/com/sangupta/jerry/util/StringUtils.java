@@ -937,7 +937,7 @@ public class StringUtils {
 	 * Stringify a short-array.
 	 * 
 	 * @param array
-	 *            the <code>short[]</code array to be stringified
+	 *            the <code>short[]</code> array to be stringified
 	 * 
 	 * @return the {@link String} representation or <code>null</code>
 	 */
@@ -968,7 +968,7 @@ public class StringUtils {
 	 * Stringify a long-array.
 	 * 
 	 * @param array
-	 *            the <code>long[]</code array to be stringified
+	 *            the <code>long[]</code> array to be stringified
 	 * 
 	 * @return the {@link String} representation or <code>null</code>
 	 */
@@ -999,7 +999,7 @@ public class StringUtils {
 	 * Stringify a char-array.
 	 * 
 	 * @param array
-	 *            the <code>char[]</code array to be stringified
+	 *            the <code>char[]</code> array to be stringified
 	 * 
 	 * @return the {@link String} representation or <code>null</code>
 	 */
@@ -1030,7 +1030,7 @@ public class StringUtils {
 	 * Stringify a float-array.
 	 * 
 	 * @param array
-	 *            the <code>float[]</code array to be stringified
+	 *            the <code>float[]</code> array to be stringified
 	 * 
 	 * @return the {@link String} representation or <code>null</code>
 	 */
@@ -1061,7 +1061,7 @@ public class StringUtils {
 	 * Stringify a double-array.
 	 * 
 	 * @param array
-	 *            the <code>double[]</code array to be stringified
+	 *            the <code>double[]</code> array to be stringified
 	 * 
 	 * @return the {@link String} representation or <code>null</code>
 	 */
@@ -1092,7 +1092,7 @@ public class StringUtils {
 	 * Stringify a byte-array.
 	 * 
 	 * @param array
-	 *            the <code>byte[]</code array to be stringified
+	 *            the <code>byte[]</code> array to be stringified
 	 * 
 	 * @return the {@link String} representation or <code>null</code>
 	 */
@@ -1123,7 +1123,7 @@ public class StringUtils {
 	 * Stringify a boolean-array.
 	 * 
 	 * @param array
-	 *            the <code>boolean[]</code array to be stringified
+	 *            the <code>boolean[]</code> array to be stringified
 	 * 
 	 * @return the {@link String} representation or <code>null</code>
 	 */
@@ -1153,7 +1153,7 @@ public class StringUtils {
 	/**
 	 * Construct back a byte-array from its stringified representation.
 	 * 
-	 * @param array
+	 * @param value
 	 *            the {@link String} representation
 	 * 
 	 * @return the <code>byte[]</code> thus constructed, or <code>null</code>
@@ -1178,7 +1178,7 @@ public class StringUtils {
 	/**
 	 * Construct back a char-array from its stringified representation.
 	 * 
-	 * @param array
+	 * @param value
 	 *            the {@link String} representation
 	 * 
 	 * @return the <code>char[]</code> thus constructed, or <code>null</code>
@@ -1203,7 +1203,7 @@ public class StringUtils {
 	/**
 	 * Construct back a short-array from its stringified representation.
 	 * 
-	 * @param array
+	 * @param value
 	 *            the {@link String} representation
 	 * 
 	 * @return the <code>short[]</code> thus constructed, or <code>null</code>
@@ -1228,7 +1228,7 @@ public class StringUtils {
 	/**
 	 * Construct back a boolean-array from its stringified representation.
 	 * 
-	 * @param array
+	 * @param value
 	 *            the {@link String} representation
 	 * 
 	 * @return the <code>boolean[]</code> thus constructed, or <code>null</code>
@@ -1253,7 +1253,7 @@ public class StringUtils {
 	/**
 	 * Construct back a int-array from its stringified representation.
 	 * 
-	 * @param array
+	 * @param value
 	 *            the {@link String} representation
 	 * 
 	 * @return the <code>int[]</code> thus constructed, or <code>null</code>
@@ -1278,7 +1278,7 @@ public class StringUtils {
 	/**
 	 * Construct back a long-array from its stringified representation.
 	 * 
-	 * @param array
+	 * @param value
 	 *            the {@link String} representation
 	 * 
 	 * @return the <code>long[]</code> thus constructed, or <code>null</code>
@@ -1303,7 +1303,7 @@ public class StringUtils {
 	/**
 	 * Construct back a float-array from its stringified representation.
 	 * 
-	 * @param array
+	 * @param value
 	 *            the {@link String} representation
 	 * 
 	 * @return the <code>float[]</code> thus constructed, or <code>null</code>
@@ -1328,7 +1328,7 @@ public class StringUtils {
 	/**
 	 * Construct back a double-array from its stringified representation.
 	 * 
-	 * @param array
+	 * @param value
 	 *            the {@link String} representation
 	 * 
 	 * @return the <code>double[]</code> thus constructed, or <code>null</code>

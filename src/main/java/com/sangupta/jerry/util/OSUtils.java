@@ -31,7 +31,10 @@ public class OSUtils {
 	 * Detect the operating system based on the given OS name.
 	 * 
 	 * @param osName
-	 * @return
+	 *            the string representing the OS name
+	 * 
+	 * @return the deciphered {@link OperatingSystem} enum, or <code>null</code>
+	 *         if name is <code>null</code> or <code>empty</code>
 	 */
 	public static OperatingSystem detectOperatingSystem(String osName) {
 		if(AssertUtils.isEmpty(osName)) {

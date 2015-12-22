@@ -272,12 +272,15 @@ public class PropertiesUtils {
 	}
 
 	/**
-	 * Converts the {@link Object} value into a string representation taking care
-	 * of the primitives, primitive arrays, boxed-primitive arrays, string arrays
-	 * and more.
+	 * Converts the {@link Object} value into a string representation taking
+	 * care of the primitives, primitive arrays, boxed-primitive arrays, string
+	 * arrays and more.
 	 * 
 	 * @param value
-	 * @return
+	 *            the {@link Object} instance that needs to be converted to
+	 *            {@link String} representation
+	 * 
+	 * @return the {@link String} representation
 	 */
 	public static String getPropertyAsString(Object value) {
 		if(value == null) {

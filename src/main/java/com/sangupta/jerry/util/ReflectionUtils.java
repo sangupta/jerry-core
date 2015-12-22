@@ -68,6 +68,9 @@ public class ReflectionUtils {
 	 * Return the getter method for the given attribute name on the given object
 	 * instance.
 	 * 
+	 * @param instance
+	 * 			  the {@link Object} instance for which the method is required
+	 * 
 	 * @param attribute
 	 *            the name of the attribute for which the getter method is being
 	 *            looked for

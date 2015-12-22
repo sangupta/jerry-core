@@ -229,13 +229,15 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 	protected abstract void save();
 	
 	/**
-	 * Add the property to the underlying store, and do not immediately
-	 * persist, as more calls of this method are expected. The store
-	 * will be persisted with an explicit call to {@link #save()} method.
+	 * Add the property to the underlying store, and do not immediately persist,
+	 * as more calls of this method are expected. The store will be persisted
+	 * with an explicit call to {@link #save()} method.
 	 * 
-	 * @param property the name of the property
+	 * @param property
+	 *            the name of the property
 	 * 
-	 * @param value the value of the property to be set
+	 * @param value
+	 *            the value of the property to be set
 	 */
 	protected abstract void putNoSave(String property, Object value);
 
@@ -243,7 +245,9 @@ public abstract class AbstractUserLocalStore implements UserLocalStore {
 	 * Return the value of the property as an object.
 	 * 
 	 * @param property
-	 * @return
+	 *            the property name that is being looked for
+	 * 
+	 * @return the value of the property as an {@link Object}
 	 */
 	protected abstract Object getValueObject(String property);
 	

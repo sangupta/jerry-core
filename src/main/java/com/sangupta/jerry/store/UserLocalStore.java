@@ -46,27 +46,130 @@ public interface UserLocalStore {
 	
 	/**
 	 * Get the boolean value for the given property name. Return the default
-	 * value if the property does not exists, or cannot be converted into a 
+	 * value if the property does not exists, or cannot be converted into a
 	 * boolean.
 	 * 
 	 * @param property
+	 *            the name of the property
+	 * 
 	 * @param defaultValue
-	 * @return
+	 *            the default value if the property is not found, or cannot be
+	 *            converted to {@link Boolean}
+	 * 
+	 * @return the boolean value
 	 */
 	public boolean getBoolean(String property, boolean defaultValue);
 	
+	/**
+	 * Get the byte value for the given property name. Return the default
+	 * value if the property does not exists, or cannot be converted into a
+	 * boolean.
+	 * 
+	 * @param property
+	 *            the name of the property
+	 * 
+	 * @param defaultValue
+	 *            the default value if the property is not found, or cannot be
+	 *            converted to {@link Byte}
+	 * 
+	 * @return the byte value
+	 */
 	public byte getByte(String property, byte defaultValue);
 	
+	/**
+	 * Get the char value for the given property name. Return the default
+	 * value if the property does not exists, or cannot be converted into a
+	 * boolean.
+	 * 
+	 * @param property
+	 *            the name of the property
+	 * 
+	 * @param defaultValue
+	 *            the default value if the property is not found, or cannot be
+	 *            converted to {@link Character}
+	 * 
+	 * @return the char value
+	 */
 	public char getChar(String property, char defaultValue);
 	
+	/**
+	 * Get the short value for the given property name. Return the default
+	 * value if the property does not exists, or cannot be converted into a
+	 * boolean.
+	 * 
+	 * @param property
+	 *            the name of the property
+	 * 
+	 * @param defaultValue
+	 *            the default value if the property is not found, or cannot be
+	 *            converted to {@link Short}
+	 * 
+	 * @return the short value
+	 */
 	public short getShort(String property, short defaultValue);
 	
+	/**
+	 * Get the int value for the given property name. Return the default
+	 * value if the property does not exists, or cannot be converted into a
+	 * boolean.
+	 * 
+	 * @param property
+	 *            the name of the property
+	 * 
+	 * @param defaultValue
+	 *            the default value if the property is not found, or cannot be
+	 *            converted to {@link Integer}
+	 * 
+	 * @return the int value
+	 */
 	public int getInt(String property, int defaultValue);
 	
+	/**
+	 * Get the long value for the given property name. Return the default
+	 * value if the property does not exists, or cannot be converted into a
+	 * boolean.
+	 * 
+	 * @param property
+	 *            the name of the property
+	 * 
+	 * @param defaultValue
+	 *            the default value if the property is not found, or cannot be
+	 *            converted to {@link Long}
+	 * 
+	 * @return the long value
+	 */
 	public long getLong(String property, long defaultValue);
 	
+	/**
+	 * Get the float value for the given property name. Return the default
+	 * value if the property does not exists, or cannot be converted into a
+	 * boolean.
+	 * 
+	 * @param property
+	 *            the name of the property
+	 * 
+	 * @param defaultValue
+	 *            the default value if the property is not found, or cannot be
+	 *            converted to {@link Float}
+	 * 
+	 * @return the float value
+	 */
 	public float getFloat(String property, float defaultValue);
 	
+	/**
+	 * Get the double value for the given property name. Return the default
+	 * value if the property does not exists, or cannot be converted into a
+	 * boolean.
+	 * 
+	 * @param property
+	 *            the name of the property
+	 * 
+	 * @param defaultValue
+	 *            the default value if the property is not found, or cannot be
+	 *            converted to {@link Double}
+	 * 
+	 * @return the double value
+	 */
 	public double getDouble(String property, double defaultValue);
 	
 	/**
