@@ -2,6 +2,8 @@
 
 **Current Development Snapshot**
 
+**2.4.0**
+
 * Added `Gson` based `UserLocalStore` for saving application data in JSON format
 * Added `readTo` and `writeFrom` methods to `UserLocalStore` to work with object instances
 * Added `bindValue` method to `ReflectionUtils`
