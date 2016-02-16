@@ -2,6 +2,9 @@
 
 **Current Development Snapshot**
 
+* Allow counter names to be read from `IntegerCounter` and `LongCounter`
+
+
 **2.4.0**
 
 * Added `Gson` based `UserLocalStore` for saving application data in JSON format

@@ -21,6 +21,7 @@
  
 package com.sangupta.jerry.ds.counter;
 
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -39,6 +40,20 @@ public class LongCounter {
 	 * 
 	 */
 	private final ConcurrentMap<String, long[]> counterMap = new ConcurrentHashMap<String, long[]>();
+	
+	/**
+	 * Return the names of the counters present in this {@link IntegerCounter}.
+	 * 
+	 * @return the names of the counters if available, <code>null</code>
+	 *         otherwise
+	 */
+	public Set<String> getCounterNames() {
+		if(this.counterMap.isEmpty()) {
+			return null;
+		}
+		
+		return this.counterMap.keySet();
+	}
 
 	/**
 	 * Get or create a new counter. The default value of the new counter will be
