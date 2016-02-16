@@ -26,7 +26,10 @@ package com.sangupta.jerry.exceptions;
  * intended at the point of execution has not yet been implemented. This
  * exception is meant only to be used during development and testing. Any
  * reporting of this error in the production system, indicates a feature
- * that has been skipped implementation.
+ * that has been implementation, and MUST be implemented at the earliest.
+ * 
+ * This helps during distributed development to know as to which component
+ * needs integration for moving ahead in testing phase.
  * 
  * @author sangupta
  *
