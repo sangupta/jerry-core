@@ -397,5 +397,21 @@ public class TestStringUtils {
 			Assert.assertTrue(true);
 		}
 	}
-	
+
+	@Test
+	public void testWildcardMatch() {
+		Assert.assertTrue(StringUtils.wildcardMatch("abc.wav", "*"));
+		Assert.assertTrue(StringUtils.wildcardMatch("abc.wav", "*.w?v"));
+		Assert.assertTrue(StringUtils.wildcardMatch("abc.wav", "*b?.wav"));
+		Assert.assertTrue(StringUtils.wildcardMatch("abc.wav", "*.wav"));
+		Assert.assertTrue(StringUtils.wildcardMatch("abc.wav", "*abc.wav"));
+		Assert.assertTrue(StringUtils.wildcardMatch("abc.wav", "???.wav"));
+		Assert.assertTrue(StringUtils.wildcardMatch("abc.wav", "???.???"));
+		Assert.assertTrue(StringUtils.wildcardMatch("abc.wav", "???.???"));
+		
+		Assert.assertFalse(StringUtils.wildcardMatch("abc.wav", "*.html"));
+		Assert.assertFalse(StringUtils.wildcardMatch("abc.wav", "?.wav"));
+		Assert.assertFalse(StringUtils.wildcardMatch("abc.wav", "??.wav"));
+		Assert.assertFalse(StringUtils.wildcardMatch("abc.wav", "abc.wi?"));
+	}
 }
