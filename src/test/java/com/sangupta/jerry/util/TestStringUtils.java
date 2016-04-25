@@ -413,5 +413,7 @@ public class TestStringUtils {
 		Assert.assertFalse(StringUtils.wildcardMatch("abc.wav", "?.wav"));
 		Assert.assertFalse(StringUtils.wildcardMatch("abc.wav", "??.wav"));
 		Assert.assertFalse(StringUtils.wildcardMatch("abc.wav", "abc.wi?"));
+		
+		Assert.assertTrue(StringUtils.wildcardMatch("http://sangupta.com/tech/page10/index.html", "*tech/page*"));
 	}
 }
