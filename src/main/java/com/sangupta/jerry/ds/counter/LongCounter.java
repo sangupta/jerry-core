@@ -21,6 +21,8 @@
  
 package com.sangupta.jerry.ds.counter;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -54,6 +56,24 @@ public class LongCounter {
 		
 		return this.counterMap.keySet();
 	}
+	
+	/**
+     * Returns the current state of this instance as a {@link Map}. The map is a
+     * snapshot in time, and the values may change without being reflected in
+     * the returned instance.
+     * 
+     * @return a {@link Map} instance containing all the keys in the counter,
+     *         and their respective values. Never returns a <code>null</code>.
+     */
+    public Map<String, Long> asMap() {
+        Map<String, Long> map = new HashMap<String, Long>();
+        
+        for(String key : counterMap.keySet()) {
+            map.put(key, this.get(key));
+        }
+        
+        return map;
+    }
 
 	/**
 	 * Get or create a new counter. The default value of the new counter will be

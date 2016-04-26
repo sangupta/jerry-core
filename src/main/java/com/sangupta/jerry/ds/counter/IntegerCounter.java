@@ -21,6 +21,8 @@
  
 package com.sangupta.jerry.ds.counter;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -40,6 +42,24 @@ public class IntegerCounter {
 	 * 
 	 */
 	private final ConcurrentMap<String, int[]> counterMap = new ConcurrentHashMap<String, int[]>();
+	
+	/**
+     * Returns the current state of this instance as a {@link Map}. The map is a
+     * snapshot in time, and the values may change without being reflected in
+     * the returned instance.
+     * 
+     * @return a {@link Map} instance containing all the keys in the counter,
+     *         and their respective values. Never returns a <code>null</code>.
+     */
+	public Map<String, Integer> asMap() {
+	    Map<String, Integer> map = new HashMap<String, Integer>();
+	    
+	    for(String key : counterMap.keySet()) {
+	        map.put(key, this.get(key));
+	    }
+	    
+	    return map;
+	}
 	
 	/**
 	 * Return the names of the counters present in this {@link IntegerCounter}.
