@@ -349,5 +349,16 @@ public class FileBackedBitArray implements BitArray {
 		// not found
 		return -1;
 	}
-	
+
+	@Override
+	public int getNextSetBit(int fromIndex) {
+	    // TODO: optimize this method
+	    for(int index = fromIndex; index < this.maxElements; index++) {
+	        if(this.getBit(index)) {
+	            return index;
+	        }
+	    }
+	    
+	    return -1;
+	}
 }

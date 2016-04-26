@@ -163,4 +163,9 @@ public class JavaBitSetArray implements BitArray {
 		return -1;
 	}
 
+	@Override
+	public int getNextSetBit(int fromIndex) {
+	    return this.bitSet.nextSetBit(fromIndex);
+	}
+	
 }

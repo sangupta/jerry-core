@@ -131,5 +131,15 @@ public interface BitArray extends Closeable {
 	 * @return the index that is set, or <code>-1</code> if none is set
 	 */
 	public int getLowestBitSet();
-	
+
+	/**
+     * Get the next bit that is set on or after the given start index.
+     * 
+     * @param fromIndex
+     *            the index to start searching for.
+     * 
+     * @return the index of the bit that is set-next or <code>-1</code> if none
+     *         is set
+     */
+	public int getNextSetBit(int fromIndex);
 }

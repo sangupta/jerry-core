@@ -61,7 +61,7 @@ public class FastBitArray implements BitArray {
 	 * @param bits the number of bits this instance can hold 
 	 */
 	public FastBitArray(long bits) {
-		this(new long[checkedCast(divide(bits, 64, RoundingMode.CEILING))]);
+		this(new long[checkedCast(divide(bits, Long.SIZE, RoundingMode.CEILING))]);
 	}
 
 	/**
@@ -380,7 +380,7 @@ public class FastBitArray implements BitArray {
 			if(value != 0) {
 				// this is the highest set bit
 				if(index > 0) {
-					return (index * 64) + BitUtils.getHighestSetBitIndex(value);
+					return (index * Long.SIZE) + BitUtils.getHighestSetBitIndex(value);
 				}
 				
 				return BitUtils.getHighestSetBitIndex(value);
@@ -399,7 +399,7 @@ public class FastBitArray implements BitArray {
 			if(value != 0) {
 				// this is the highest set bit
 				if(index > 0) {
-					return (index * 64) + BitUtils.getLowestSetBitIndex(value);
+					return (index * Long.SIZE) + BitUtils.getLowestSetBitIndex(value);
 				}
 				
 				return BitUtils.getLowestSetBitIndex(value);
@@ -410,4 +410,33 @@ public class FastBitArray implements BitArray {
 		return -1;
 	}
 
+	@Override
+	public int getNextSetBit(int fromIndex) {
+	    // check the current long-value
+	    int current = fromIndex / Long.SIZE;
+	    int bit = BitUtils.getHighestSetBitIndex(this.data[current]);
+	    int index = (current * Long.SIZE) + bit;
+	    
+	    if(index < current) {
+	        // the value lies in long values ahead in array
+	        for(int loop = current + 1; loop < this.data.length; loop++) {
+	            long value = this.data[loop];
+	            if(value != 0) {
+	                return BitUtils.getLowestSetBitIndex(value);
+	            }
+	        }
+	        
+	        // no more data
+	        return -1;
+	    }
+	    
+	    // the bit must be higher within this long value
+	    for(int loop = fromIndex + 1; loop < fromIndex + Long.SIZE; loop++) {
+	        if(this.getBit(loop)) {
+	            return loop;
+	        }
+	    }
+	    
+	    return -1;
+	}
 }
