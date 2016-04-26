@@ -1,5 +1,7 @@
 package com.sangupta.jerry.util;
 
+import com.sangupta.jerry.constants.SystemPropertyNames;
+
 /**
  * Utility functions around the JDK
  * 
@@ -14,7 +16,7 @@ public class JDKUtils {
 	 * @return <code>true</code> if version is 1.7, <code>false</code> otherwise
 	 */
 	public static boolean isJDK7() {
-		String version = System.getProperty("java.version");
+		String version = System.getProperty(SystemPropertyNames.JAVA_VERSION);
 		if(version.startsWith("1.7")) {
 			return true;
 		}
@@ -22,6 +24,34 @@ public class JDKUtils {
 		return false;
 	}
 	
+	/**
+     * Check if JDK version is 1.8 or not
+     * 
+     * @return <code>true</code> if version is 1.8, <code>false</code> otherwise
+     */
+    public static boolean isJDK8() {
+        String version = System.getProperty(SystemPropertyNames.JAVA_VERSION);
+        if(version.startsWith("1.8")) {
+            return true;
+        }
+        
+        return false;
+    }
+	
+    /**
+     * Check if JDK version is 1.9 or not
+     * 
+     * @return <code>true</code> if version is 1.9, <code>false</code> otherwise
+     */
+    public static boolean isJDK9() {
+        String version = System.getProperty(SystemPropertyNames.JAVA_VERSION);
+        if(version.startsWith("1.9")) {
+            return true;
+        }
+        
+        return false;
+    }
+    
 	/**
 	 * Check if we are running under OracleJDK
 	 * 
