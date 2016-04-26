@@ -44,6 +44,15 @@ public class IntegerCounter {
 	private final ConcurrentMap<String, int[]> counterMap = new ConcurrentHashMap<String, int[]>();
 	
 	/**
+     * Clear all the keys from this counter. The counter will be empty after
+     * this call returns.
+     * 
+     */
+	public void clear() {
+	    this.counterMap.clear();
+	}
+	
+	/**
      * Returns the current state of this instance as a {@link Map}. The map is a
      * snapshot in time, and the values may change without being reflected in
      * the returned instance.

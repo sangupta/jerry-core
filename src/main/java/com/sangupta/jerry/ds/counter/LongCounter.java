@@ -44,6 +44,15 @@ public class LongCounter {
 	private final ConcurrentMap<String, long[]> counterMap = new ConcurrentHashMap<String, long[]>();
 	
 	/**
+     * Clear all the keys from this counter. The counter will be empty after
+     * this call returns.
+     * 
+     */
+    public void clear() {
+        this.counterMap.clear();
+    }
+	
+	/**
 	 * Return the names of the counters present in this {@link IntegerCounter}.
 	 * 
 	 * @return the names of the counters if available, <code>null</code>
