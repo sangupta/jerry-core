@@ -3,7 +3,13 @@
 **Current Development Snapshot**
 
 * Allow counter names to be read from `IntegerCounter` and `LongCounter`
-
+* Added `StringUtils.wildcardMatch()` method
+* Added `jitpack.yml` for allowing `jerry-core` via https://jitpack.io
+* Added `isJDK8()` and `isJDK9()` methods to `JDKUtils`
+* Added `asMap()` and `clear` methods to `IntegerCounter` and `LongCounter`
+* Added `getNextSetBit()` method to `BitArray` and implementations
+* Added `AdvancedStringReader` and corresponding unit-tests
+* Updated JavaDocs
 
 **2.4.0**
 
