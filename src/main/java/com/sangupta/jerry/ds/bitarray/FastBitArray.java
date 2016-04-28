@@ -2,23 +2,23 @@
  *
  * jerry - Common Java Functionality
  * Copyright (c) 2012-2016, Sandeep Gupta
- * 
+ *
  * http://sangupta.com/projects/jerry-core
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * 		http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
- 
+
 
 package com.sangupta.jerry.ds.bitarray;
 
@@ -38,7 +38,7 @@ import net.jcip.annotations.NotThreadSafe;
 /**
  * A fast bit-set implementation that allows direct access to data
  * property so that it can be easily serialized.
- * 
+ *
  * @author sangupta
  * @since 1.7
  */
@@ -49,7 +49,7 @@ public class FastBitArray implements BitArray {
 	 * The data-set
 	 */
 	final long[] data;
-	
+
 	/**
 	 * The current bit count
 	 */
@@ -58,8 +58,8 @@ public class FastBitArray implements BitArray {
 	/**
 	 * Construct an instance of the {@link FastBitArray} that can hold
 	 * the given number of bits
-	 * 
-	 * @param bits the number of bits this instance can hold 
+	 *
+	 * @param bits the number of bits this instance can hold
 	 */
 	public FastBitArray(long bits) {
 		this(new long[checkedCast(divide(bits, Long.SIZE, RoundingMode.CEILING))]);
@@ -67,7 +67,7 @@ public class FastBitArray implements BitArray {
 
 	/**
 	 * Construct an implementation with the given long[] array
-	 * 
+	 *
 	 * @param data
 	 *            the long[] array from which to construct the bit array
 	 */
@@ -75,38 +75,38 @@ public class FastBitArray implements BitArray {
 		if(data == null || data.length == 0) {
 			throw new IllegalArgumentException("Data is either null or zero-length");
 		}
-		
+
 		this.data = data;
 		int bitCount = 0;
 		for (long value : data) {
 			bitCount += Long.bitCount(value);
 		}
-		
+
 		this.bitCount = bitCount;
 	}
 
 	/**
 	 * Number of bits
-	 * 
+	 *
 	 * @return total number of bits allocated
 	 */
 	public int bitSize() {
 		return data.length * Long.SIZE;
 	}
-	
+
 	/**
 	 * Number of bytes
-	 * 
+	 *
 	 * @return total number of bytes being used
-	 * 
+	 *
 	 */
 	public int numBytes() {
 		return this.bitSize() >>> 3;
 	}
-	
+
 	/**
 	 * Number of set bits (1s)
-	 * 
+	 *
 	 * @return the number of set bits
 	 */
 	public int bitCount() {
@@ -115,7 +115,7 @@ public class FastBitArray implements BitArray {
 
 	/**
 	 * Copy the bitset.
-	 * 
+	 *
 	 * @return a new {@link FastBitArray} that is exactly in the same state as
 	 *         this
 	 */
@@ -125,20 +125,20 @@ public class FastBitArray implements BitArray {
 
 	/**
 	 * Combines the two BitArrays using bitwise OR.
-	 * 
+	 *
 	 * @param array
 	 */
 	void putAll(FastBitArray array) {
 		if(array == null) {
 			throw new IllegalArgumentException("Array to be combined with cannot be null");
 		}
-		
+
 		if(this.data.length != array.data.length) {
 			throw new IllegalArgumentException("Array to be combined with must be of equal length");
 		}
-		
+
 		bitCount = 0;
-		
+
 		for (int i = 0; i < data.length; i++) {
 			data[i] |= array.data[i];
 			bitCount += Long.bitCount(data[i]);
@@ -151,7 +151,7 @@ public class FastBitArray implements BitArray {
 			FastBitArray bitArray = (FastBitArray) o;
 			return Arrays.equals(data, bitArray.data);
 		}
-		
+
 		return false;
 	}
 
@@ -177,7 +177,7 @@ public class FastBitArray implements BitArray {
 			bitCount++;
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -191,7 +191,7 @@ public class FastBitArray implements BitArray {
 		if (!this.getBit(index)) {
 			return;
 		}
-		
+
 		data[index >> 6] &= ~(1L << index);
 	}
 
@@ -205,20 +205,20 @@ public class FastBitArray implements BitArray {
 		if(array == null) {
 			throw new IllegalArgumentException("Array to be combined with cannot be null");
 		}
-		
+
 		if(this.numBytes() != array.numBytes()) {
 			throw new IllegalArgumentException("Array to be combined with must be of equal length");
 		}
-		
+
 		if(array instanceof FastBitArray) {
 			FastBitArray fastArray = (FastBitArray) array;
 			for (int i = 0; i < data.length; i++) {
 				data[i] |= fastArray.data[i];
 			}
-			
+
 			return;
 		}
-		
+
 		// work on the byte-array
 		byte[] bytes = array.toByteArray();
 		for(int index = 0; index < this.data.length; index++) {
@@ -231,48 +231,48 @@ public class FastBitArray implements BitArray {
 		if(array == null) {
 			throw new IllegalArgumentException("Array to be combined with cannot be null");
 		}
-		
+
 		if(this.numBytes() != array.numBytes()) {
 			throw new IllegalArgumentException("Array to be combined with must be of equal length");
 		}
-		
+
 		if(array instanceof FastBitArray) {
 			FastBitArray fastArray = (FastBitArray) array;
 			for (int i = 0; i < data.length; i++) {
 				data[i] &= fastArray.data[i];
 			}
-			
+
 			return;
 		}
-		
+
 		// work on the byte-array
 		byte[] bytes = array.toByteArray();
 		for(int index = 0; index < this.data.length; index++) {
 			this.data[index] &= ByteArrayUtils.readLong(bytes, index << 3);
 		}
 	}
-	
+
 	@Override
 	public byte[] toByteArray() {
 		byte[] bytes = new byte[this.numBytes()];
-		
+
 		// now for each long - put the bytes in the right order
 		for(int index = 0; index < this.data.length; index++) {
 			ByteArrayUtils.writeLong(bytes, this.data[index], index << 3);
 		}
-		
+
 		return bytes;
 	}
-	
+
 	/**
 	 * Returns the {@code int} value that is equal to {@code value}, if
 	 * possible.
-	 * 
+	 *
 	 * @param value
 	 *            any value in the range of the {@code int} type
-	 * 
+	 *
 	 * @return the {@code int} value that equals {@code value}
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             if {@code value} is greater than {@link Integer#MAX_VALUE} or
 	 *             less than {@link Integer#MIN_VALUE}
@@ -285,34 +285,34 @@ public class FastBitArray implements BitArray {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Returns the result of dividing {@code p} by {@code q}, rounding using the
 	 * specified {@code RoundingMode}.
-	 * 
-	 * 
+	 *
+	 *
 	 * @param numerator
 	 *            the value to be divided
-	 * 
+	 *
 	 * @param denominator
 	 *            the value with which to divide
-	 * 
+	 *
 	 * @param mode
 	 *            the {@link RoundingMode} to use
-	 * 
+	 *
 	 * @return the division result thus rounded
-	 * 
+	 *
 	 * @throws ArithmeticException
 	 *             if {@code q == 0}, or if {@code mode == UNNECESSARY} and
 	 *             {@code a} is not an integer multiple of {@code b}
-	 * 
+	 *
 	 */
 	@SuppressWarnings("fallthrough")
 	public static long divide(long numerator, long denominator, RoundingMode mode) {
 		if(mode == null) {
 			throw new IllegalArgumentException("Rounding mode cannot be null");
 		}
-		
+
 		long div = numerator / denominator; // throws if q == 0
 		long rem = numerator - denominator * div; // equals p % q
 
@@ -324,7 +324,7 @@ public class FastBitArray implements BitArray {
 		 * Normal Java division rounds towards 0, consistently with
 		 * RoundingMode.DOWN. We just have to deal with the cases where rounding
 		 * towards 0 is wrong, which typically depends on the sign of p / q.
-		 * 
+		 *
 		 * signum is 1 if p and q are both nonnegative or both negative, and -1
 		 * otherwise.
 		 */
@@ -383,11 +383,11 @@ public class FastBitArray implements BitArray {
 				if(index > 0) {
 					return (index * Long.SIZE) + BitUtils.getHighestSetBitIndex(value);
 				}
-				
+
 				return BitUtils.getHighestSetBitIndex(value);
 			}
 		}
-		
+
 		// not found
 		return -1;
 	}
@@ -402,11 +402,11 @@ public class FastBitArray implements BitArray {
 				if(index > 0) {
 					return (index * Long.SIZE) + BitUtils.getLowestSetBitIndex(value);
 				}
-				
+
 				return BitUtils.getLowestSetBitIndex(value);
 			}
 		}
-		
+
 		// not found
 		return -1;
 	}
@@ -417,7 +417,7 @@ public class FastBitArray implements BitArray {
 	    int current = fromIndex / Long.SIZE;
 	    int bit = BitUtils.getHighestSetBitIndex(this.data[current]);
 	    int index = (current * Long.SIZE) + bit;
-	    
+
 	    if(index < current) {
 	        // the value lies in long values ahead in array
 	        for(int loop = current + 1; loop < this.data.length; loop++) {
@@ -426,18 +426,18 @@ public class FastBitArray implements BitArray {
 	                return BitUtils.getLowestSetBitIndex(value);
 	            }
 	        }
-	        
+
 	        // no more data
 	        return -1;
 	    }
-	    
+
 	    // the bit must be higher within this long value
 	    for(int loop = fromIndex + 1; loop < fromIndex + Long.SIZE; loop++) {
 	        if(this.getBit(loop)) {
 	            return loop;
 	        }
 	    }
-	    
+
 	    return -1;
 	}
 }

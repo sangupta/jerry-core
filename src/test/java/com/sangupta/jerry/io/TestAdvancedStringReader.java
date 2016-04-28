@@ -2,23 +2,23 @@
  *
  * jerry - Common Java Functionality
  * Copyright (c) 2012-2016, Sandeep Gupta
- * 
+ *
  * http://sangupta.com/projects/jerry-core
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * 		http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
- 
+
 
 package com.sangupta.jerry.io;
 
@@ -29,18 +29,18 @@ import com.sangupta.jerry.util.StringUtils;
 
 /**
  * Unit-tests for {@link AdvancedStringReader}.
- * 
+ *
  * @author sangupta
  *
  */
 public class TestAdvancedStringReader {
-    
+
     @Test
     public void testNullString() {
         AdvancedStringReader reader = new AdvancedStringReader(null);
         Assert.assertFalse(reader.hasNext());
         Assert.assertNull(reader.readRemaining());
-        
+
         reader = new AdvancedStringReader(null);
         Assert.assertFalse(reader.hasNext());
         Assert.assertNull(reader.readTillNext('x'));
@@ -49,13 +49,13 @@ public class TestAdvancedStringReader {
         Assert.assertNull(reader.readTillNext('h', 5));
         Assert.assertNull(reader.readTillNext("yz", 5));
     }
-    
+
     @Test
     public void testEmptyString() {
         AdvancedStringReader reader = new AdvancedStringReader(StringUtils.EMPTY_STRING);
         Assert.assertFalse(reader.hasNext());
         Assert.assertNull(reader.readRemaining());
-        
+
         reader = new AdvancedStringReader(StringUtils.EMPTY_STRING);
         Assert.assertFalse(reader.hasNext());
         Assert.assertNull(reader.readTillNext('x'));
@@ -64,7 +64,7 @@ public class TestAdvancedStringReader {
         Assert.assertNull(reader.readTillNext('h', 5));
         Assert.assertNull(reader.readTillNext("yz", 5));
     }
-    
+
     @Test
     public void testReset() {
         AdvancedStringReader reader = new AdvancedStringReader("hello world");
@@ -85,13 +85,13 @@ public class TestAdvancedStringReader {
         reader.readNext(3);
         Assert.assertEquals(0, reader.skipWhiteSpace());
     }
-    
+
     @Test
     public void testPeekNextNonWhitespace() {
         AdvancedStringReader reader = new AdvancedStringReader("hello world:      this is prefixed by spaces");
         Assert.assertEquals('h', reader.peekNextNonWhitespace());
     }
-    
+
     @Test
     public void testSkipNext() {
         AdvancedStringReader reader = new AdvancedStringReader("hello world");

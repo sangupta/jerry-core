@@ -2,23 +2,23 @@
  *
  * jerry - Common Java Functionality
  * Copyright (c) 2012-2016, Sandeep Gupta
- * 
+ *
  * http://sangupta.com/projects/jerry-core
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * 		http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
- 
+
 
 package com.sangupta.jerry.util;
 
@@ -26,7 +26,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class TestReadableUtils {
-	
+
 	@Test
 	public void testParseFileSize() {
 		Assert.assertEquals(0l, ReadableUtils.parseByteCount(""));
@@ -39,12 +39,12 @@ public class TestReadableUtils {
 		Assert.assertEquals(0l, ReadableUtils.parseByteCount("0gb"));
 		Assert.assertEquals(0l, ReadableUtils.parseByteCount("0t"));
 		Assert.assertEquals(0l, ReadableUtils.parseByteCount("0tb"));
-		
+
 		// some values
 		Assert.assertEquals(123l, ReadableUtils.parseByteCount("123"));
 		Assert.assertEquals(123l, ReadableUtils.parseByteCount("123b"));
 		Assert.assertEquals(123l, ReadableUtils.parseByteCount("123 b"));
-		
+
 		Assert.assertEquals(FileUtils.ONE_KB, ReadableUtils.parseByteCount("1k"));
 		Assert.assertEquals(FileUtils.ONE_KB, ReadableUtils.parseByteCount("1kb"));
 		Assert.assertEquals(FileUtils.ONE_KB, ReadableUtils.parseByteCount("1 k"));
@@ -64,7 +64,7 @@ public class TestReadableUtils {
 		Assert.assertEquals(FileUtils.ONE_TB, ReadableUtils.parseByteCount("1tb"));
 		Assert.assertEquals(FileUtils.ONE_TB, ReadableUtils.parseByteCount("1 t"));
 		Assert.assertEquals(FileUtils.ONE_TB, ReadableUtils.parseByteCount("1 tb"));
-		
+
 		// decimals
 		Assert.assertEquals(13l * FileUtils.ONE_MB, ReadableUtils.parseByteCount("13m"));
 		Assert.assertEquals(1200l * FileUtils.ONE_MB, ReadableUtils.parseByteCount("1200m"));
@@ -74,13 +74,13 @@ public class TestReadableUtils {
 	public void testGetReadableByteCount() {
 		Assert.assertEquals("123 B", ReadableUtils.getReadableByteCount(123l));
 		Assert.assertEquals("1 KB", ReadableUtils.getReadableByteCount(FileUtils.ONE_KB));
-		
+
 		Assert.assertEquals("1.5 KB", ReadableUtils.getReadableByteCount((long) (1.5 * FileUtils.ONE_KB)));
 		Assert.assertEquals("2 KB", ReadableUtils.getReadableByteCount(2 * FileUtils.ONE_KB));
-		
+
 		Assert.assertEquals("1 MB", ReadableUtils.getReadableByteCount(FileUtils.ONE_MB));
 		Assert.assertEquals("2.5 MB", ReadableUtils.getReadableByteCount((long) (2.5 * FileUtils.ONE_MB)));
-		
+
 		Assert.assertEquals("1 GB", ReadableUtils.getReadableByteCount(FileUtils.ONE_GB));
 		Assert.assertEquals("3.3 GB", ReadableUtils.getReadableByteCount((long) (3.3 * FileUtils.ONE_GB)));
 
@@ -93,7 +93,7 @@ public class TestReadableUtils {
 		Assert.assertEquals("1 EB", ReadableUtils.getReadableByteCount(FileUtils.ONE_TB * FileUtils.ONE_MB));
 		Assert.assertEquals("3.3 EB", ReadableUtils.getReadableByteCount((long) (3.3 * FileUtils.ONE_TB * FileUtils.ONE_MB)));
 	}
-	
+
 	@Test
 	public void testGetReadableTimeDuration() {
 		Assert.assertEquals("1 milli", ReadableUtils.getReadableTimeDuration(1l));

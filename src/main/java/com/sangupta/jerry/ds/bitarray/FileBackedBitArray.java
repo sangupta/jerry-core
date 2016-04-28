@@ -2,23 +2,23 @@
  *
  * jerry - Common Java Functionality
  * Copyright (c) 2012-2016, Sandeep Gupta
- * 
+ *
  * http://sangupta.com/projects/jerry-core
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * 		http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
- 
+
 
 package com.sangupta.jerry.ds.bitarray;
 
@@ -37,46 +37,46 @@ import net.jcip.annotations.NotThreadSafe;
  * array. This is useful for stateful bit-arrays which are expensive
  * to construct yet need a good overall performance. This class is
  * not thread-safe.
- * 
+ *
  * @author sangupta
  * @since 1.7
  */
 @NotThreadSafe
 public class FileBackedBitArray implements BitArray {
-	
+
 	/**
 	 * Underlying file that represents the state of the
 	 * {@link BitArray}.
-	 * 
+	 *
 	 */
 	protected final RandomAccessFile backingFile;
-	
+
 	/**
 	 * The maximum number of elements this file will store
 	 */
 	protected final int maxElements;
-	
+
 	/**
 	 * The number of bytes being used for this byte-array
-	 * 
+	 *
 	 */
 	protected final int numBytes;
-	
+
 	/**
 	 * Construct a {@link BitArray} that is backed by the given file. Ensure
 	 * that the file is a local file and not on a network share for performance
 	 * reasons.
-	 * 
+	 *
 	 * @param backingFile
 	 *            the file that needs to store the bit-array
-	 * 
+	 *
 	 * @param maxElements
 	 *            the number of maximum elements that this {@link BitArray}
 	 *            implementation will store
-	 * 
+	 *
 	 * @throws IOException
 	 *             if something fails while reading the file initially
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             if the {@link #backingFile} is <code>null</code>, is not a
 	 *             file, or the number of {@link #maxElements} are less than
@@ -86,22 +86,22 @@ public class FileBackedBitArray implements BitArray {
 		if(backingFile == null) {
 			throw new IllegalArgumentException("Backing file cannot be empty/null");
 		}
-		
+
 		if(!backingFile.isFile()) {
 			throw new IllegalArgumentException("Backing file does not represent a valid file");
 		}
-		
+
 		if(maxElements <= 0) {
 			throw new IllegalArgumentException("Max elements in array cannot be less than or equal to zero");
 		}
-		
+
 		// we open in "rwd" mode, to save one i/o operation
 		// than in "rws" mode
 		this.backingFile = new RandomAccessFile(backingFile, "rwd");
-		
+
 		this.numBytes = (maxElements >> 3) + 1;
 		extendFile(this.numBytes);
-		
+
 		// initialize the rest
 		this.maxElements = maxElements;
 	}
@@ -114,10 +114,10 @@ public class FileBackedBitArray implements BitArray {
 		if(index > maxElements) {
 			throw new IndexOutOfBoundsException("Index is greater than max elements permitted");
 		}
-		
+
 		int pos = index >> 3; // div 8
 		int bit = 1 << (index & 0x7);
-		
+
 		try {
 			this.backingFile.seek(pos);
 			byte bite = this.backingFile.readByte();
@@ -135,14 +135,14 @@ public class FileBackedBitArray implements BitArray {
 		if(index > maxElements) {
 			throw new IndexOutOfBoundsException("Index is greater than max elements permitted");
 		}
-		
+
 		int pos = index >> 3; // div 8
 		int bit = 1 << (index & 0x7);
 		try {
 			this.backingFile.seek(pos);
 			byte bite = this.backingFile.readByte();
 			bite = (byte) (bite | bit);
-			
+
 			this.backingFile.seek(pos);
 			this.backingFile.writeByte(bite);
 			return true;
@@ -158,7 +158,7 @@ public class FileBackedBitArray implements BitArray {
 	public void clear() {
 		byte[] bytes = new byte[this.numBytes];
 		Arrays.fill(bytes, (byte) 0);
-		
+
 		try {
 			this.backingFile.seek(0);
 			this.backingFile.write(bytes);
@@ -175,17 +175,17 @@ public class FileBackedBitArray implements BitArray {
 		if(index > maxElements) {
 			throw new IndexOutOfBoundsException("Index is greater than max elements permitted");
 		}
-		
+
 		int pos = index >> 3; // div 8
 		int bit = 1 << (index & 0x7);
 		bit = ~bit;
-		
+
 		try {
 			this.backingFile.seek(pos);
 			byte bite = this.backingFile.readByte();
 			bite = (byte) (bite & bit);
-			
-			
+
+
 			this.backingFile.seek(pos);
 			this.backingFile.writeByte(bite);
 		} catch(IOException e) {
@@ -201,7 +201,7 @@ public class FileBackedBitArray implements BitArray {
 		if(!this.getBit(index)) {
 			return this.setBit(index);
 		}
-		
+
 		return false;
 	}
 
@@ -213,11 +213,11 @@ public class FileBackedBitArray implements BitArray {
 		if(bitArray == null) {
 			throw new IllegalArgumentException("BitArray to be combined with cannot be null");
 		}
-		
+
 		if(this.numBytes != bitArray.numBytes()) {
 			throw new IllegalArgumentException("BitArray to be combined with must be of equal length");
 		}
-		
+
 		try {
 			this.backingFile.seek(0);
 			byte[] bytes = bitArray.toByteArray();
@@ -240,11 +240,11 @@ public class FileBackedBitArray implements BitArray {
 		if(bitArray == null) {
 			throw new IllegalArgumentException("BitArray to be combined with cannot be null");
 		}
-		
+
 		if(this.numBytes != bitArray.numBytes()) {
 			throw new IllegalArgumentException("BitArray to be combined with must be of equal length");
 		}
-		
+
 		try {
 			this.backingFile.seek(0);
 			byte[] bytes = bitArray.toByteArray();
@@ -266,13 +266,13 @@ public class FileBackedBitArray implements BitArray {
 	public int bitSize() {
 		return this.numBytes;
 	}
-	
+
 	/**
 	 * Extend the file to its new length filling extra bytes with zeroes.
-	 * 
+	 *
 	 * @param newLength
 	 *            the new length of the file that we need
-	 * 
+	 *
 	 * @throws IOException
 	 *             if something fails
 	 */
@@ -282,7 +282,7 @@ public class FileBackedBitArray implements BitArray {
 		if(delta <= 0) {
 			return;
 		}
-		
+
 		this.backingFile.setLength(newLength);
 		this.backingFile.seek(current);
 		byte[] bytes = new byte[delta];
@@ -294,16 +294,16 @@ public class FileBackedBitArray implements BitArray {
 	public void close() throws IOException {
 		this.backingFile.close();
 	}
-	
+
 	@Override
 	public int numBytes() {
 		return this.numBytes;
 	}
-	
+
 	@Override
 	public byte[] toByteArray() {
 		byte[] bytes = new byte[this.numBytes];
-		
+
 		try {
 			this.backingFile.seek(0);
 			this.backingFile.readFully(bytes);
@@ -323,11 +323,11 @@ public class FileBackedBitArray implements BitArray {
 				if(index > 0) {
 					return (index * 8) + BitUtils.getHighestSetBitIndex(bite);
 				}
-				
+
 				return BitUtils.getHighestSetBitIndex(bite);
 			}
 		}
-		
+
 		// not found
 		return -1;
 	}
@@ -342,11 +342,11 @@ public class FileBackedBitArray implements BitArray {
 				if(index > 0) {
 					return (index * 8) + BitUtils.getLowestSetBitIndex(bite);
 				}
-				
+
 				return BitUtils.getLowestSetBitIndex(bite);
 			}
 		}
-		
+
 		// not found
 		return -1;
 	}
@@ -359,7 +359,7 @@ public class FileBackedBitArray implements BitArray {
 	            return index;
 	        }
 	    }
-	    
+
 	    return -1;
 	}
 }

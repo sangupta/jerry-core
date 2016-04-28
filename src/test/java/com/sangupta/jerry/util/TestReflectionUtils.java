@@ -2,23 +2,23 @@
  *
  * jerry - Common Java Functionality
  * Copyright (c) 2012-2016, Sandeep Gupta
- * 
+ *
  * http://sangupta.com/projects/jerry-core
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * 		http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
- 
+
 
 package com.sangupta.jerry.util;
 
@@ -28,23 +28,23 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class TestReflectionUtils {
-	
+
 	@Test
 	public void testGetGetterMethod() {
 		Assert.assertEquals((String) null, ReflectionUtils.getGetterMethodName(null));
 		Assert.assertEquals((String) null, ReflectionUtils.getGetterMethodName(""));
 		Assert.assertEquals("getName", ReflectionUtils.getGetterMethodName("name"));
 	}
-	
+
 	@Test
 	public void testConvertToMapNoTransient() {
 		// test without transient variables
 		MyValueObject mvo = new MyValueObject();
 		Map<String, Object> map = ReflectionUtils.convertToMap(mvo, false);
-		
+
 		Assert.assertNotNull(map);
 		Assert.assertEquals(17, map.size());
-		
+
 		Assert.assertTrue(map.containsKey("bite"));
 		Assert.assertTrue(map.containsKey("chr"));
 		Assert.assertTrue(map.containsKey("shrt"));
@@ -62,7 +62,7 @@ public class TestReflectionUtils {
 		Assert.assertTrue(map.containsKey("floatArray"));
 		Assert.assertTrue(map.containsKey("doubleArray"));
 		Assert.assertTrue(map.containsKey("booleanArray"));
-		
+
 		Assert.assertEquals(mvo.bite, map.get("bite"));
 		Assert.assertEquals(mvo.chr, map.get("chr"));
 		Assert.assertEquals(mvo.shrt, map.get("shrt"));
@@ -87,10 +87,10 @@ public class TestReflectionUtils {
 		// test without transient variables
 		MyValueObject mvo = new MyValueObject();
 		Map<String, Object> map = ReflectionUtils.convertToMap(mvo, true);
-		
+
 		Assert.assertNotNull(map);
 		Assert.assertEquals(18, map.size());
-		
+
 		Assert.assertTrue(map.containsKey("bite"));
 		Assert.assertTrue(map.containsKey("chr"));
 		Assert.assertTrue(map.containsKey("shrt"));
@@ -109,7 +109,7 @@ public class TestReflectionUtils {
 		Assert.assertTrue(map.containsKey("doubleArray"));
 		Assert.assertTrue(map.containsKey("booleanArray"));
 		Assert.assertTrue(map.containsKey("notToBeSerialized"));
-		
+
 		Assert.assertEquals(mvo.bite, map.get("bite"));
 		Assert.assertEquals(mvo.chr, map.get("chr"));
 		Assert.assertEquals(mvo.shrt, map.get("shrt"));
@@ -129,44 +129,44 @@ public class TestReflectionUtils {
 		Assert.assertEquals(mvo.booleanArray, map.get("booleanArray"));
 		Assert.assertEquals(mvo.notToBeSerialized, map.get("notToBeSerialized"));
 	}
-	
+
 	private class MyValueObject {
-		
+
 		private byte bite = 10;
-		
+
 		private char chr = 'A';
-		
+
 		private short shrt = 11;
-		
+
 		private int nt = 12;
-		
+
 		private long lng = 13;
-		
+
 		private float flt = 14f;
-		
+
 		private double dbl = 15d;
-		
+
 		private boolean bln = true;
-		
+
 		private String strng = "Hello World!";
-		
+
 		private int[] intArray = new int[] { 11, 12, 13 };
-		
+
 		private char[] charArray = new char[] { 'a', 'b', 'c' };
-		
+
 		private byte[] byteArray = new byte[] { 110, 111, 112 };
-		
+
 		private short[] shortArray = new short[] { 211, 212, 213 };
-		
+
 		private long[] longArray = new long[] { 314, 415, 516 };
-		
+
 		private float[] floatArray = new float[] { 3f, 4f, 5f };
-		
+
 		private double[] doubleArray = new double[] { 6d, 7d, 8d };
-		
+
 		private boolean[] booleanArray = new boolean[] { true, false, true };
-		
+
 		private transient int notToBeSerialized = 66;
-		
+
 	}
 }

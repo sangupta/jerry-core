@@ -2,23 +2,23 @@
  *
  * jerry - Common Java Functionality
  * Copyright (c) 2012-2016, Sandeep Gupta
- * 
+ *
  * http://sangupta.com/projects/jerry-core
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * 		http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
- 
+
 
 package com.sangupta.jerry.ds.bitarray;
 
@@ -40,51 +40,51 @@ import net.jcip.annotations.NotThreadSafe;
  * file to persist all changes synchronously for the underlying bit
  * array. This is useful for stateful bit-arrays which are expensive
  * to construct yet need the best overall performance.
- * 
+ *
  * @author sangupta
  * @since 1.7
  */
 @NotThreadSafe
 public class MMapFileBackedBitArray implements BitArray {
-	
+
 	/**
 	 * Underlying file that represents the state of the
 	 * {@link BitArray}.
-	 * 
+	 *
 	 */
 	protected final RandomAccessFile backingFile;
-	
+
 	/**
 	 * The maximum number of elements this file will store
 	 */
 	protected final int maxElements;
-	
+
 	/**
 	 * The number of bytes being used for this byte-array
-	 * 
+	 *
 	 */
 	protected final int numBytes;
-	
+
 	/**
 	 * The memory-mapped byte-buffer
 	 */
 	protected final MappedByteBuffer buffer;
-	
+
 	/**
 	 * Construct a {@link BitArray} that is backed by the given file. Ensure
 	 * that the file is a local file and not on a network share for performance
 	 * reasons.
-	 * 
+	 *
 	 * @param backingFile
 	 *            the file that needs to store the bit-array
-	 * 
+	 *
 	 * @param maxElements
 	 *            the number of maximum elements that this {@link BitArray}
 	 *            implementation will store
-	 * 
+	 *
 	 * @throws IOException
 	 *             if something fails while reading the file initially
-	 * 
+	 *
 	 * @throws IllegalArgumentException
 	 *             if the {@link #backingFile} is <code>null</code>, is not a
 	 *             file, or the number of {@link #maxElements} are less than
@@ -94,22 +94,22 @@ public class MMapFileBackedBitArray implements BitArray {
 		if(backingFile == null) {
 			throw new IllegalArgumentException("Backing file cannot be empty/null");
 		}
-		
+
 		if(backingFile.exists() && !backingFile.isFile()) {
 			throw new IllegalArgumentException("Backing file does not represent a valid file");
 		}
-		
+
 		if(maxElements <= 0) {
 			throw new IllegalArgumentException("Max elements in array cannot be less than or equal to zero");
 		}
-		
+
 		// we open in "rwd" mode, to save one i/o operation
 		// than in "rws" mode
 		this.backingFile = new RandomAccessFile(backingFile, "rwd");
-		
+
 		this.numBytes = (maxElements >> 3) + 1;
 		extendFile(this.numBytes);
-		
+
 		// initialize the rest
 		this.maxElements = maxElements;
 		this.buffer = this.backingFile.getChannel().map(MapMode.READ_WRITE, 0, this.backingFile.length());
@@ -123,7 +123,7 @@ public class MMapFileBackedBitArray implements BitArray {
 		if(index > maxElements) {
 			throw new IndexOutOfBoundsException("Index is greater than max elements permitted");
 		}
-		
+
 		int pos = index >> 3; // div 8
 		int bit = 1 << (index & 0x7);
 		byte bite = this.buffer.get(pos);
@@ -138,7 +138,7 @@ public class MMapFileBackedBitArray implements BitArray {
 		if(index > maxElements) {
 			throw new IndexOutOfBoundsException("Index is greater than max elements permitted");
 		}
-		
+
 		int pos = index >> 3; // div 8
 		int bit = 1 << (index & 0x7);
 		byte bite = this.buffer.get(pos);
@@ -166,7 +166,7 @@ public class MMapFileBackedBitArray implements BitArray {
 		if(index > maxElements) {
 			throw new IndexOutOfBoundsException("Index is greater than max elements permitted");
 		}
-		
+
 		int pos = index >> 3; // div 8
 		int bit = 1 << (index & 0x7);
 		bit = ~bit;
@@ -183,7 +183,7 @@ public class MMapFileBackedBitArray implements BitArray {
 		if(!this.getBit(index)) {
 			return this.setBit(index);
 		}
-		
+
 		return false;
 	}
 
@@ -195,11 +195,11 @@ public class MMapFileBackedBitArray implements BitArray {
 		if(bitArray == null) {
 			throw new IllegalArgumentException("BitArray to OR with cannot be null");
 		}
-		
+
 		if(this.numBytes != bitArray.numBytes()) {
 			throw new IllegalArgumentException("BitArray to OR with is of different length");
 		}
-		
+
 		byte[] bytes = bitArray.toByteArray();
 		for(int index = 0; index < this.numBytes; index++) {
 			byte bite = this.buffer.get(index);
@@ -216,11 +216,11 @@ public class MMapFileBackedBitArray implements BitArray {
 		if(bitArray == null) {
 			throw new IllegalArgumentException("BitArray to OR with cannot be null");
 		}
-		
+
 		if(this.numBytes != bitArray.numBytes()) {
 			throw new IllegalArgumentException("BitArray to OR with is of different length");
 		}
-		
+
 		byte[] bytes = bitArray.toByteArray();
 		for(int index = 0; index < this.numBytes; index++) {
 			byte bite = this.buffer.get(index);
@@ -236,13 +236,13 @@ public class MMapFileBackedBitArray implements BitArray {
 	public int bitSize() {
 		return this.numBytes;
 	}
-	
+
 	/**
 	 * Extend this file to the given new length filling extra bytes with zeros.
-	 * 
+	 *
 	 * @param newLength
 	 *            the new length expected for this file
-	 * 
+	 *
 	 * @throws IOException
 	 *             if file operation fails
 	 */
@@ -252,7 +252,7 @@ public class MMapFileBackedBitArray implements BitArray {
 		if(delta <= 0) {
 			return;
 		}
-		
+
 		this.backingFile.setLength(newLength);
 		this.backingFile.seek(current);
 		byte[] bytes = new byte[delta];
@@ -265,11 +265,11 @@ public class MMapFileBackedBitArray implements BitArray {
 		this.closeDirectBuffer(this.buffer);
 		this.backingFile.close();
 	}
-	
+
 	/**
 	 * Method that helps unmap a memory-mapped file before being
 	 * garbage-collected.
-	 * 
+	 *
 	 * @param byteBuffer
 	 *            the {@link ByteBuffer} instance to close
 	 */
@@ -287,10 +287,10 @@ public class MMapFileBackedBitArray implements BitArray {
 	        Method clean = Class.forName("sun.misc.Cleaner").getMethod("clean");
 	        clean.setAccessible(true);
 	        clean.invoke(cleaner.invoke(byteBuffer));
-	    } catch(Exception ex) { 
-	    	
+	    } catch(Exception ex) {
+
 	    }
-	    
+
 	    byteBuffer = null;
 	}
 
@@ -298,18 +298,18 @@ public class MMapFileBackedBitArray implements BitArray {
 	public int numBytes() {
 		return this.numBytes;
 	}
-	
+
 	@Override
 	public byte[] toByteArray() {
 		if(this.buffer.hasArray()) {
 			return this.buffer.array();
 		}
-		
+
 		byte[] bytes = new byte[this.numBytes];
 		for(int index = 0; index < this.numBytes; index++) {
 			bytes[index]  = this.buffer.get(index);
 		}
-		
+
 		return bytes;
 	}
 
@@ -322,11 +322,11 @@ public class MMapFileBackedBitArray implements BitArray {
 				if(index > 0) {
 					return (index * 8) + BitUtils.getHighestSetBitIndex(bite);
 				}
-				
+
 				return BitUtils.getHighestSetBitIndex(bite);
 			}
 		}
-		
+
 		// not found
 		return -1;
 	}
@@ -340,11 +340,11 @@ public class MMapFileBackedBitArray implements BitArray {
 				if(index > 0) {
 					return (index * 8) + BitUtils.getLowestSetBitIndex(bite);
 				}
-				
+
 				return BitUtils.getLowestSetBitIndex(bite);
 			}
 		}
-		
+
 		// not found
 		return -1;
 	}
@@ -357,7 +357,7 @@ public class MMapFileBackedBitArray implements BitArray {
                 return index;
             }
         }
-        
+
         return -1;
     }
 }
