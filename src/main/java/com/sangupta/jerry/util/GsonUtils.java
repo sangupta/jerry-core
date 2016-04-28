@@ -52,15 +52,8 @@ import com.sangupta.jerry.ds.SimpleMultiMap;
  * @author sangupta
  * 
  */
-public class GsonUtils {
+public abstract class GsonUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public GsonUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * Our holder for multiple instances
 	 */

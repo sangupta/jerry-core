@@ -28,15 +28,8 @@ import java.util.Date;
  * @author sangupta
  *
  */
-public class DateUtils {
+public abstract class DateUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public DateUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * One second expressed as millis
 	 */

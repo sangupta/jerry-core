@@ -34,15 +34,8 @@ import javax.servlet.http.HttpServletResponse;
  * @author sangupta
  *
  */
-public class CookieUtils {
+public abstract class CookieUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public CookieUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * Create a new cookie. The cookie will expire at the end of browser
 	 * session.

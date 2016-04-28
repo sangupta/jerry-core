@@ -35,15 +35,8 @@ import org.slf4j.LoggerFactory;
  * @author sangupta
  *
  */
-public class StringUtils {
+public abstract class StringUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public StringUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * Logger instance
 	 */

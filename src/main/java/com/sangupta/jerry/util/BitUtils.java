@@ -28,15 +28,8 @@ package com.sangupta.jerry.util;
  * @author sangupta
  *
  */
-public class BitUtils {
+public abstract class BitUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public BitUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	private static final int LEAST_BIT = 0;
 
 	private static final int MAX_BIT_INT = 31;

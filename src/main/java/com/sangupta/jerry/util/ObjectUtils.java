@@ -28,15 +28,8 @@ package com.sangupta.jerry.util;
  * @author sangupta
  *
  */
-public class ObjectUtils {
+public abstract class ObjectUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public ObjectUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * Check if the object represents a primitive type of: <code>byte</code>,
 	 * <code>char</code>, <code>short</code>, <code>int</code>,

@@ -33,15 +33,8 @@ import java.io.File;
  * @author sangupta
  * @since 1.2.0
  */
-public class CheckUtils {
+public abstract class CheckUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public CheckUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * Check whether the file represented by the given absolute file path is a
 	 * valid file, and does exists on the disk.

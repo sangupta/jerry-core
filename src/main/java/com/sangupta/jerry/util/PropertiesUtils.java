@@ -33,15 +33,8 @@ import java.util.Set;
  * @author sangupta
  *
  */
-public class PropertiesUtils {
+public abstract class PropertiesUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public PropertiesUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * Convert a given {@link Properties} instance to a corresponding
 	 * {@link HashMap} instance. If the {@link Properties} instance is

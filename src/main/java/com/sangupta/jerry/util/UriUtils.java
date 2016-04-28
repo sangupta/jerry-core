@@ -44,15 +44,8 @@ import org.slf4j.LoggerFactory;
  * @author sangupta
  *
  */
-public class UriUtils {
+public abstract class UriUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public UriUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * My own logger instance
 	 */

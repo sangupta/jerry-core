@@ -34,15 +34,8 @@ import java.util.Properties;
  * @author sangupta
  * @since 1.0.0
  */
-public class AssertUtils {
+public abstract class AssertUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public AssertUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * Check if a given string is <code>null</code> or zero-length. Returns
 	 * <code>false</code> even if the string contains white spaces. Use

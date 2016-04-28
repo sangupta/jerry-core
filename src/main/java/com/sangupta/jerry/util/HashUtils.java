@@ -38,15 +38,8 @@ import com.sangupta.jerry.encoder.Base64Encoder;
  * @author sangupta
  * 
  */
-public class HashUtils {
+public abstract class HashUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public HashUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * Computes the MD5 hash of the given data.
 	 * 

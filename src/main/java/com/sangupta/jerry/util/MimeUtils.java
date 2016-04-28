@@ -32,15 +32,8 @@ import com.sangupta.jerry.constants.HttpMimeType;
  * @author sangupta
  *
  */
-public class MimeUtils implements HttpMimeType {
+public abstract class MimeUtils implements HttpMimeType {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public MimeUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * Mappings between extension and MIME type
 	 */

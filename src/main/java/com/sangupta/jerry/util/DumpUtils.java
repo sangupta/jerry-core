@@ -31,15 +31,8 @@ import java.lang.reflect.Method;
  * @author sangupta
  *
  */
-public class DumpUtils {
+public abstract class DumpUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public DumpUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * Returns the string representation of the given object by invoking the
 	 * <code>toString</code> method, if available, else returns a string

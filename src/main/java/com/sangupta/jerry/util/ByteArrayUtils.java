@@ -30,15 +30,8 @@ import java.security.SecureRandom;
  * @author sangupta
  *
  */
-public class ByteArrayUtils {
+public abstract class ByteArrayUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public ByteArrayUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * Read a long value from given byte-array at the given offset. The value is
 	 * assumed to be stored in BigEndian format.

@@ -31,15 +31,8 @@ import java.util.Set;
  * @author sangupta
  *
  */
-public class EnvironmentUtils {
+public abstract class EnvironmentUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public EnvironmentUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * Read an environment variable first from the java command line, and then
 	 * from the system variables. If none is found, return <code>null</code>

@@ -26,15 +26,8 @@ package com.sangupta.jerry.util;
  * @author sangupta
  *
  */
-public class EqualUtils {
+public abstract class EqualUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public EqualUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * Tests if two <code>byte</code> arrays are equal in content or not.
 	 * 

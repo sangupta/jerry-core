@@ -31,15 +31,8 @@ import javax.servlet.http.HttpServletRequest;
  * @author sangupta
  *
  */
-public class RequestUtils {
+public abstract class RequestUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public RequestUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * Extract the base URI and strip off the context path as well as any
 	 * JSESSIONID that is appended to the URI.

@@ -31,15 +31,8 @@ import java.util.Date;
  * @author sangupta
  *
  */
-public class TimeDurationUtils {
+public abstract class TimeDurationUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public TimeDurationUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * Compute the time duration of the given date from current time.
 	 * 

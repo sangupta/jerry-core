@@ -57,15 +57,8 @@ import com.sangupta.jerry.io.FileByteChunkConsumer;
  * @author sangupta
  *
  */
-public class FileUtils {
+public abstract class FileUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public FileUtils() {
-        // prevent instantiation for utility class
-    }
-
 	/**
 	 * One KB as number of bytes
 	 */

@@ -29,15 +29,8 @@ package com.sangupta.jerry.util;
  * 
  * @since 2.3
  */
-public class RangeUtils {
+public abstract class RangeUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public RangeUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * Check if a character is in the given range.
 	 * 

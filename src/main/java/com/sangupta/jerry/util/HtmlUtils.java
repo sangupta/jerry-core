@@ -41,15 +41,8 @@ import net.htmlparser.jericho.StartTag;
  * @author sangupta
  *
  */
-public class HtmlUtils {
+public abstract class HtmlUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public HtmlUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * Tidy the HTML source by reformatting the entire HTML. This is
 	 * particularly useful when the application needs to emit HTML.

@@ -31,15 +31,8 @@ import com.sangupta.jerry.constants.SystemPropertyNames;
  * @author sangupta
  *
  */
-public class OSUtils {
+public abstract class OSUtils {
     
-    /**
-     * Private as static methods do not need instantiation
-     */
-    public OSUtils() {
-        // prevent instantiation for utility class
-    }
-	
 	/**
 	 * Global enum depicting the current OS the JVM is running in.
 	 * 
