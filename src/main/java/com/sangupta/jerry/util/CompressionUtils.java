@@ -47,6 +47,13 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class CompressionUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public CompressionUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * The logger

@@ -32,6 +32,13 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 public class RequestUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public RequestUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Extract the base URI and strip off the context path as well as any

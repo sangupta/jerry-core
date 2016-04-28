@@ -36,6 +36,13 @@ import java.io.InputStreamReader;
  *
  */
 public class ConsoleUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public ConsoleUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	private static BufferedReader reader;
 	

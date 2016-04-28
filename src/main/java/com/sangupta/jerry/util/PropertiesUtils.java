@@ -34,6 +34,13 @@ import java.util.Set;
  *
  */
 public class PropertiesUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public PropertiesUtils() {
+        // prevent instantiation for utility class
+    }
 
 	/**
 	 * Convert a given {@link Properties} instance to a corresponding

@@ -44,6 +44,13 @@ import org.slf4j.LoggerFactory;
  *
  */
 public class ZipUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public ZipUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ZipUtils.class);
 

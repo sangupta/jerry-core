@@ -34,6 +34,13 @@ import java.io.File;
  * @since 1.2.0
  */
 public class CheckUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public CheckUtils() {
+        // prevent instantiation for utility class
+    }
 
 	/**
 	 * Check whether the file represented by the given absolute file path is a

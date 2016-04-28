@@ -29,6 +29,13 @@ package com.sangupta.jerry.util;
  *
  */
 public class BitUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public BitUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	private static final int LEAST_BIT = 0;
 

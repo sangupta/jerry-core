@@ -37,6 +37,13 @@ import com.sangupta.jerry.constants.HttpStatusCode;
  *
  */
 public class ResponseUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public ResponseUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Write the given response in UTF-8 encoding to the given

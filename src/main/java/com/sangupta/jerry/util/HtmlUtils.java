@@ -42,6 +42,13 @@ import net.htmlparser.jericho.StartTag;
  *
  */
 public class HtmlUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public HtmlUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Tidy the HTML source by reformatting the entire HTML. This is

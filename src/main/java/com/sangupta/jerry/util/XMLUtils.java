@@ -31,6 +31,13 @@ package com.sangupta.jerry.util;
  *
  */
 public class XMLUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public XMLUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Extract parameter value from XML content. The content is not XML parsed

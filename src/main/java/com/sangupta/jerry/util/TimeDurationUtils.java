@@ -32,6 +32,13 @@ import java.util.Date;
  *
  */
 public class TimeDurationUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public TimeDurationUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Compute the time duration of the given date from current time.

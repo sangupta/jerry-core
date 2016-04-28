@@ -40,6 +40,13 @@ import com.sangupta.jerry.encoder.Base64Encoder;
  *
  */
 public class CryptoUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public CryptoUtils() {
+        // prevent instantiation for utility class
+    }
 
 	/**
 	 * AES-256 encrypt the text.

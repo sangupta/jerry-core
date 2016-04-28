@@ -33,6 +33,13 @@ import java.util.List;
  * @since 2.2
  */
 public class ListUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public ListUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Create a new list of integer values.

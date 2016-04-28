@@ -31,6 +31,13 @@ import java.security.SecureRandom;
  *
  */
 public class ByteArrayUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public ByteArrayUtils() {
+        // prevent instantiation for utility class
+    }
 
 	/**
 	 * Read a long value from given byte-array at the given offset. The value is

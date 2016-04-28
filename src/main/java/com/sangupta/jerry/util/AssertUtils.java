@@ -35,6 +35,13 @@ import java.util.Properties;
  * @since 1.0.0
  */
 public class AssertUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public AssertUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Check if a given string is <code>null</code> or zero-length. Returns

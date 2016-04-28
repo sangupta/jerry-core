@@ -31,6 +31,13 @@ import com.sangupta.jerry.constants.SystemPropertyNames;
  *
  */
 public class JDKUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public JDKUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Check if JDK version is 1.7 or not

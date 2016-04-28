@@ -34,6 +34,13 @@ import org.jdom2.Element;
  *
  */
 public class DomUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public DomUtils() {
+        // prevent instantiation for utility class
+    }
 
 	/**
 	 * Returns the value of the attribute from the element.

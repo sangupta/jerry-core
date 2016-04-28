@@ -53,6 +53,13 @@ import org.slf4j.LoggerFactory;
  */
 public class ArchiveUtils {
 	
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public ArchiveUtils() {
+        // prevent instantiation for utility class
+    }
+    
 	/**
 	 * Logger
 	 */

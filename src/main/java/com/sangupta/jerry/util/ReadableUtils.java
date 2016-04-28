@@ -33,6 +33,13 @@ import java.util.Arrays;
  *
  */
 public class ReadableUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public ReadableUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Convert human readable file size to number of bytes. For example: 2k

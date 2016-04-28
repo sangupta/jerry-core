@@ -30,6 +30,13 @@ package com.sangupta.jerry.util;
  *
  */
 public class UrlCanonicalizer {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public UrlCanonicalizer() {
+        // prevent instantiation for utility class
+    }
 
 	/**
 	 * Canonicalize the given URL. If the URL is <code>null</code>, empty or contains

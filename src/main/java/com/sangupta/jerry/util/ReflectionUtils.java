@@ -41,6 +41,13 @@ import com.sangupta.jerry.store.PropertyName;
  *
  */
 public class ReflectionUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public ReflectionUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtils.class);
 	

@@ -35,6 +35,13 @@ import java.net.URI;
  *
  */
 public class DesktopUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public DesktopUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * Open the given URL in the system web browser.

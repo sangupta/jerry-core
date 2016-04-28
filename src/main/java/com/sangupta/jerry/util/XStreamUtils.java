@@ -35,6 +35,13 @@ import com.thoughtworks.xstream.XStream;
  *
  */
 public class XStreamUtils {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public XStreamUtils() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * The {@link XStream} object that keeps getting invoked and processed

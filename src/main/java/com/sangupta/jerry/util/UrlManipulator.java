@@ -37,6 +37,13 @@ import java.util.Map;
  *
  */
 public class UrlManipulator {
+    
+    /**
+     * Private as static methods do not need instantiation
+     */
+    public UrlManipulator() {
+        // prevent instantiation for utility class
+    }
 	
 	/**
 	 * The scheme for pure HTTP non-SSL
