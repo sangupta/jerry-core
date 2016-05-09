@@ -19,7 +19,6 @@
  *
  */
 
-
 package com.sangupta.jerry.ds;
 
 import java.util.ArrayList;
@@ -93,6 +92,23 @@ public class SimpleMultiMap<K, V> {
 	public List<V> getValues(K key) {
 		return this.map.get(key);
 	}
+	
+	/**
+	 * Return the number of values stored against the given key.
+	 * 
+	 * @param key
+	 *            the key to check for
+	 * 
+	 * @return the number of values stored, <code>zero</code> otherwise
+	 */
+	public int numValues(K key) {
+		List<V> values = this.getValues(key);
+		if(values == null) {
+			return 0;
+		}
+		
+		return values.size();
+	}
 
 	/**
 	 * Store the given value object against the key.
@@ -125,7 +141,7 @@ public class SimpleMultiMap<K, V> {
 
 		values.add(value);
 	}
-
+	
 	/**
 	 * Remove and return all values associated with the given key.
 	 *
