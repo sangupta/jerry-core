@@ -85,6 +85,26 @@ public class AdvancedStringReader {
 	public String readTillNext(char separator) {
 		return this.readTillNext(String.valueOf(separator), 1);
 	}
+	
+	public char peekAhead(int position) {
+	    int pos = this.current + position;
+	    if(pos > this.length) {
+	        return 0;
+	    }
+	    
+	    return this.str.charAt(pos);
+	}
+	
+	public String readTillPosition(int position) {
+        int pos = this.current + position;
+        if(pos > this.length) {
+            pos = this.length;
+        }
+	    
+        String result = this.str.substring(this.current, pos);
+        this.current = pos;
+        return result;
+	}
 
 	/**
      * Read the string from current position to the next nth occurrence of the
@@ -103,7 +123,17 @@ public class AdvancedStringReader {
 	    return this.readTillNext(String.valueOf(separator), occurence);
 	}
 
-	/**
+	public int peekIndex(char c) {
+	    for(int index = this.current; index < this.length; index++) {
+	        if(this.str.charAt(index) == c) {
+	            return index - this.current;
+	        }
+	    }
+	    
+	    return -1;
+	}
+
+    /**
 	 *
 	 * @param separator
 	 * @return
@@ -193,9 +223,56 @@ public class AdvancedStringReader {
 	    if(end > this.length) {
 	        end = this.length;
 	    }
+	    
 	    String result = this.str.substring(this.current, end);
 	    this.current = end;
 	    return result;
+	}
+	
+	public String readAfter(char character) {
+	    if(!this.hasNext()) {
+            return null;
+        }
+	    
+	    int index;
+	    for(index = this.current; index < this.length; index++) {
+	        if(this.str.charAt(index) == character) {
+	            break;
+	        }
+	    }
+	    
+	    index++;
+	    this.current = this.length;
+	    return this.str.substring(index);
+	}
+	
+	public String readFrom(char character) {
+	    if(!this.hasNext()) {
+            return null;
+        }
+        
+        int index;
+        for(index = this.current; index < this.length; index++) {
+            if(this.str.charAt(index) == character) {
+                break;
+            }
+        }
+        
+        this.current = this.length;
+        return this.str.substring(index);
+	}
+	
+	public String peekNext(int numCharacters) {
+	    if(!this.hasNext()) {
+            return null;
+        }
+
+        int end = this.current + numCharacters;
+        if(end > this.length) {
+            end = this.length;
+        }
+        
+        return this.str.substring(this.current, end);
 	}
 
 	/**
