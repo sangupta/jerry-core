@@ -19,7 +19,6 @@
  *
  */
 
-
 package com.sangupta.jerry.util;
 
 import java.nio.charset.Charset;
@@ -1380,4 +1379,43 @@ public abstract class StringUtils {
 
 		return j == pattern.length();
 	}
+	
+	public static int count(String string, char chr) {
+	    if(AssertUtils.isEmpty(string)) {
+	        return 0;
+	    }
+	    
+	    int count = 0;
+	    char[] array = string.toCharArray();
+	    for(char c : array) {
+	        if(c == chr) {
+	            count++;
+	        }
+	    }
+	    
+	    return count;
+	}
+
+    public static String removeAll(String str, String toRemove) {
+        if(AssertUtils.isEmpty(str)) {
+            return str;
+        }
+        
+        if(AssertUtils.isEmpty(toRemove)) {
+            return str;
+        }
+        
+        char[] array = str.toCharArray();
+        StringBuilder builder = new StringBuilder(array.length);
+        for(char c : array) {
+            if(toRemove.contains(String.valueOf(c))) {
+                continue;
+            }
+            
+            builder.append(c);
+        }
+        
+        return builder.toString();
+    }
+	
 }
