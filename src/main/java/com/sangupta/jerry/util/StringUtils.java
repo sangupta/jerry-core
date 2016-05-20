@@ -1380,6 +1380,17 @@ public abstract class StringUtils {
 		return j == pattern.length();
 	}
 	
+	/**
+     * Count the occurrences of the given character in the given string.
+     * 
+     * @param string
+     *            the string to look in for
+     * 
+     * @param chr
+     *            the character being looked
+     * 
+     * @return the number of occurrences
+     */
 	public static int count(String string, char chr) {
 	    if(AssertUtils.isEmpty(string)) {
 	        return 0;
@@ -1396,6 +1407,17 @@ public abstract class StringUtils {
 	    return count;
 	}
 
+	/**
+     * Remove all occurrences of a {@link String} from another {@link String}
+     * 
+     * @param str
+     *            the {@link String} to remove portions from
+     * 
+     * @param toRemove
+     *            the {@link String} to be removed
+     * 
+     * @return the final constructued {@link String}
+     */
     public static String removeAll(String str, String toRemove) {
         if(AssertUtils.isEmpty(str)) {
             return str;
