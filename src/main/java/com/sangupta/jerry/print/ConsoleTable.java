@@ -27,7 +27,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.compress.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 import com.sangupta.jerry.ds.mutable.MutableInt;
 import com.sangupta.jerry.util.AssertUtils;
