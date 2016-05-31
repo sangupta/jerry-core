@@ -86,17 +86,40 @@ public class AdvancedStringReader {
 		return this.readTillNext(String.valueOf(separator), 1);
 	}
 	
-	public char peekAhead(int position) {
-	    int pos = this.current + position;
+	/**
+	 * Read the character at the current position but do not move ahead.
+	 * 
+	 * @return
+	 */
+	public char peekAhead() {
+	    return this.peekAhead(0);
+	}
+	
+	/**
+     * Look ahead in the string a given number of characters.
+     * 
+     * @param ahead
+     *            the position from current to look ahead
+     * 
+     * @return the character at the position
+     */
+	public char peekAhead(int ahead) {
+	    int pos = this.current + ahead;
 	    if(pos > this.length) {
-	        return 0;
+	        return ((char) -1);
 	    }
 	    
 	    return this.str.charAt(pos);
 	}
 	
-	public String readTillPosition(int position) {
-        int pos = this.current + position;
+	/**
+	 * Read the string from current position to the given number of characters ahead.
+	 * 
+	 * @param ahead
+	 * @return
+	 */
+	public String readTillPosition(int ahead) {
+        int pos = this.current + ahead;
         if(pos > this.length) {
             pos = this.length;
         }
@@ -123,6 +146,13 @@ public class AdvancedStringReader {
 	    return this.readTillNext(String.valueOf(separator), occurence);
 	}
 
+	/**
+	 * Peek the next available position of the given character from the current position.
+	 * 
+	 * @param c the character to look ahead
+	 * 
+	 * @return the index if found, or <code>-1</code>
+	 */
 	public int peekIndex(char c) {
 	    for(int index = this.current; index < this.length; index++) {
 	        if(this.str.charAt(index) == c) {
@@ -214,6 +244,12 @@ public class AdvancedStringReader {
         return skipped;
     }
 
+	/**
+	 * Read string from current position to number of characters ahead.
+	 * 
+	 * @param numCharacters
+	 * @return
+	 */
 	public String readNext(int numCharacters) {
 	    if(!this.hasNext()) {
 	        return null;
