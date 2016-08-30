@@ -228,6 +228,28 @@ public abstract class ReflectionUtils {
 			field.setBoolean(instance, StringUtils.getBoolean(value.toString(), field.getBoolean(instance)));
 		}
     }
+    
+    public static void bindBooleanObject(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
+    	if(field == null) {
+    		return;
+    	}
+
+    	if(instance == null) {
+    		return;
+    	}
+    	
+    	if(value == null) {
+    		field.set(instance, null);
+    		return;
+    	}
+
+    	if(value instanceof Boolean) {
+			field.set(instance, (Boolean) value);
+		} else {
+			Boolean boolValue = Boolean.parseBoolean(value.toString());
+			field.set(instance, boolValue);
+		}
+    }
 
     /**
 	 * Bind the value as a {@link Byte} to the given field on the given
@@ -265,6 +287,28 @@ public abstract class ReflectionUtils {
 			field.setByte(instance, (Byte) value);
 		} else {
 			field.setByte(instance, StringUtils.getByteValue(value.toString(), field.getByte(instance)));
+		}
+    }
+    
+    public static void bindByteObject(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
+    	if(field == null) {
+    		return;
+    	}
+
+    	if(instance == null) {
+    		return;
+    	}
+    	
+    	if(value == null) {
+    		field.set(instance, null);
+    		return;
+    	}
+
+    	if(value instanceof Byte) {
+			field.set(instance, (Byte) value);
+		} else {
+			Byte byteValue = Byte.parseByte(value.toString());
+			field.set(instance, byteValue);
 		}
     }
 
@@ -306,6 +350,28 @@ public abstract class ReflectionUtils {
 			field.setShort(instance, StringUtils.getShortValue(value.toString(), field.getShort(instance)));
 		}
     }
+    
+    public static void bindShortObject(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
+    	if(field == null) {
+    		return;
+    	}
+
+    	if(instance == null) {
+    		return;
+    	}
+    	
+    	if(value == null) {
+    		field.set(instance, null);
+    		return;
+    	}
+
+    	if(value instanceof Short) {
+			field.set(instance, (Short) value);
+		} else {
+			Short shortValue = Short.parseShort(value.toString());
+			field.set(instance, shortValue);
+		}
+    }
 
     /**
 	 * Bind the value as a {@link Integer} to the given field on the given
@@ -343,6 +409,28 @@ public abstract class ReflectionUtils {
 			field.setInt(instance, (Integer) value);
 		} else {
 			field.setInt(instance, StringUtils.getIntValue(value.toString(), field.getInt(instance)));
+		}
+    }
+    
+    public static void bindIntegerObject(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
+    	if(field == null) {
+    		return;
+    	}
+
+    	if(instance == null) {
+    		return;
+    	}
+    	
+    	if(value == null) {
+    		field.set(instance, null);
+    		return;
+    	}
+
+    	if(value instanceof Integer) {
+			field.set(instance, (Integer) value);
+		} else {
+			Integer intValue = Integer.parseInt(value.toString());
+			field.set(instance, intValue);
 		}
     }
 
@@ -384,6 +472,28 @@ public abstract class ReflectionUtils {
 			field.setLong(instance, StringUtils.getLongValue(value.toString(), field.getLong(instance)));
 		}
     }
+    
+    public static void bindLongObject(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
+    	if(field == null) {
+    		return;
+    	}
+
+    	if(instance == null) {
+    		return;
+    	}
+    	
+    	if(value == null) {
+    		field.set(instance, null);
+    		return;
+    	}
+
+    	if(value instanceof Long) {
+			field.set(instance, (Long) value);
+		} else {
+			Long longValue = Long.parseLong(value.toString());
+			field.set(instance, longValue);
+		}
+    }
 
     /**
 	 * Bind the value as a {@link Character} to the given field on the given
@@ -421,6 +531,28 @@ public abstract class ReflectionUtils {
 			field.setChar(instance, (Character) value);
 		} else {
 			field.setChar(instance, StringUtils.getCharValue(value.toString(), field.getChar(instance)));
+		}
+    }
+    
+    public static void bindCharacterObject(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
+    	if(field == null) {
+    		return;
+    	}
+
+    	if(instance == null) {
+    		return;
+    	}
+    	
+    	if(value == null) {
+    		field.set(instance, null);
+    		return;
+    	}
+
+    	if(value instanceof Character) {
+			field.set(instance, (Character) value);
+		} else {
+			Character charValue = value.toString().toCharArray()[0];
+			field.set(instance, charValue);
 		}
     }
 
@@ -462,6 +594,28 @@ public abstract class ReflectionUtils {
 			field.setFloat(instance, StringUtils.getFloatValue(value.toString(), field.getFloat(instance)));
 		}
     }
+    
+    public static void bindFloatObject(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
+    	if(field == null) {
+    		return;
+    	}
+
+    	if(instance == null) {
+    		return;
+    	}
+    	
+    	if(value == null) {
+    		field.set(instance, null);
+    		return;
+    	}
+
+    	if(value instanceof Float) {
+			field.set(instance, (Float) value);
+		} else {
+			Float floatValue = Float.parseFloat(value.toString());
+			field.set(instance, floatValue);
+		}
+    }
 
     /**
 	 * Bind the value as a {@link Double} to the given field on the given
@@ -499,6 +653,28 @@ public abstract class ReflectionUtils {
 			field.setDouble(instance, (Double) value);
 		} else {
 			field.setDouble(instance, StringUtils.getDoubleValue(value.toString(), field.getDouble(instance)));
+		}
+    }
+    
+    public static void bindDoubleObject(Field field, Object instance, Object value) throws IllegalArgumentException, IllegalAccessException {
+    	if(field == null) {
+    		return;
+    	}
+
+    	if(instance == null) {
+    		return;
+    	}
+    	
+    	if(value == null) {
+    		field.set(instance, null);
+    		return;
+    	}
+
+    	if(value instanceof Double) {
+			field.set(instance, (Double) value);
+		} else {
+			Double doubleValue = Double.parseDouble(value.toString());
+			field.set(instance, doubleValue);
 		}
     }
 
@@ -570,9 +746,17 @@ public abstract class ReflectionUtils {
 			bindBoolean(field, instance, value);
 			return;
 		}
+		if(type.equals(Boolean.class)) {
+			bindBooleanObject(field, instance, value);
+			return;
+		}
 
 		if(type.equals(byte.class)) {
 			bindByte(field, instance, value);
+			return;
+		}
+		if(type.equals(Byte.class)) {
+			bindByteObject(field, instance, value);
 			return;
 		}
 
@@ -580,9 +764,17 @@ public abstract class ReflectionUtils {
 			bindShort(field, instance, value);
 			return;
 		}
+		if(type.equals(Short.class)) {
+			bindShortObject(field, instance, value);
+			return;
+		}
 
 		if(type.equals(char.class)) {
 			bindChar(field, instance, value);
+			return;
+		}
+		if(type.equals(Character.class)) {
+			bindCharacterObject(field, instance, value);
 			return;
 		}
 
@@ -590,9 +782,17 @@ public abstract class ReflectionUtils {
 			bindInteger(field, instance, value);
 			return;
 		}
+		if(type.equals(Integer.class)) {
+			bindIntegerObject(field, instance, value);
+			return;
+		}
 
 		if(type.equals(long.class)) {
 			bindLong(field, instance, value);
+			return;
+		}
+		if(type.equals(Long.class)) {
+			bindLongObject(field, instance, value);
 			return;
 		}
 
@@ -600,9 +800,17 @@ public abstract class ReflectionUtils {
 			bindFloat(field, instance, value);
 			return;
 		}
+		if(type.equals(Float.class)) {
+			bindFloatObject(field, instance, value);
+			return;
+		}
 
 		if(type.equals(double.class)) {
 			bindDouble(field, instance, value);
+			return;
+		}
+		if(type.equals(Double.class)) {
+			bindDoubleObject(field, instance, value);
 			return;
 		}
 
@@ -639,7 +847,6 @@ public abstract class ReflectionUtils {
 			bindBooleanArray(field, instance, value);
 			return;
 		}
-
 
 		// just set the value
 		field.set(instance, value);
