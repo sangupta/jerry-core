@@ -1440,4 +1440,30 @@ public abstract class StringUtils {
         return builder.toString();
     }
 	
+    public static String ltrim(String str) {
+    	if(AssertUtils.isEmpty(str)) {
+    		return "";
+    	}
+    	
+		int i = 0;
+		while (i < str.length() && Character.isWhitespace(str.charAt(i))) {
+			i++;
+		}
+		
+        return str.substring(i);
+    }
+    
+    public static String rtrim(String str) {
+    	if(AssertUtils.isEmpty(str)) {
+    		return "";
+    	}
+    	
+		int i = str.length() - 1;
+		while (i >= 0 && Character.isWhitespace(str.charAt(i))) {
+			i--;
+		}
+        
+        return str.substring(0,i+1);
+    }
+    
 }
