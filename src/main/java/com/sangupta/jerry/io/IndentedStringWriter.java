@@ -33,7 +33,7 @@ import com.sangupta.jerry.util.StringUtils;
  * writer can resize depending as we add more strings to it. 
  * 
  * @author sangupta
- *
+ * 
  */
 public class IndentedStringWriter {
 	
@@ -116,6 +116,23 @@ public class IndentedStringWriter {
 			
 			this.writeInternal(tokens[index]);
 		}
+	}
+	
+	/**
+	 * Write the given string values without breaking the strings unless there
+	 * is no other way.
+	 * 
+	 * @param strings
+	 */
+	public void writeNonBreaking(String... strings) {
+		StringBuilder builder = new StringBuilder();
+		for(String str : strings) {
+			if(str != null) {
+				builder.append(str);
+			}
+		}
+		
+		this.write(builder.toString());
 	}
 	
 	private void writeInternal(String str) {
