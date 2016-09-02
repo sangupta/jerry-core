@@ -1440,6 +1440,13 @@ public abstract class StringUtils {
         return builder.toString();
     }
 	
+    /**
+     * Remove white-spaces from the start of the given string. If given string is
+     * <code>null</code>, an empty {@link String} is returned.
+     * 
+     * @param str
+     * @return
+     */
     public static String ltrim(String str) {
     	if(AssertUtils.isEmpty(str)) {
     		return "";
@@ -1453,6 +1460,13 @@ public abstract class StringUtils {
         return str.substring(i);
     }
     
+    /**
+     * Remove white-spaces from the end of the given string. If given string is
+     * <code>null</code>, an empty {@link String} is returned.
+     * 
+     * @param str
+     * @return
+     */
     public static String rtrim(String str) {
     	if(AssertUtils.isEmpty(str)) {
     		return "";
