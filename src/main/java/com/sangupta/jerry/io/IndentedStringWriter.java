@@ -78,26 +78,63 @@ public class IndentedStringWriter {
 		return this.builder.length() > 0;
 	}
 	
+	/**
+	 * Set the indent level to the given value. If the value is less
+	 * than zero, an {@link IllegalArgumentException} is thrown.
+	 * 
+	 * @param indentLevel the level to be seto 
+	 */
 	public void setIndentLevel(int indentLevel) {
+		if(indentLevel < 0) {
+			throw new IllegalArgumentException("Indent level cannot be less than zero");
+		}
+		
 		this.indentLevel = indentLevel;
 		
 		if(this.builder.length() == 0) {
 			return;
 		}
 		
-		this.newLine();
+		if(this.currentPointer > 0) {
+			this.newLine();
+		}
 	}
 	
+	/**
+	 * Increment the indent by one.
+	 * 
+	 */
 	public void incrementIndent() {
 		this.indentLevel++;
-		this.newLine();
+		
+		if(this.currentPointer > 0) {
+			this.newLine();
+		}
 	}
 	
+	/**
+	 * Decrement the indent by one. If the indentation level is
+	 * already at zero, this method will not change anything.
+	 * 
+	 */
 	public void decrementIndent() {
+		if(this.indentLevel == 0) {
+			return;
+		}
+		
 		this.indentLevel--;
-		this.newLine();
+		
+		if(this.currentPointer > 0) {
+			this.newLine();
+		}
 	}
 	
+	/**
+	 * Write the given character to the underlying writer.
+	 * 
+	 * @param ch the character to be written.
+	 * 
+	 */
 	public void write(char ch) {
 		this.write(String.valueOf(ch));
 	}
@@ -213,10 +250,6 @@ public class IndentedStringWriter {
 	public void newLine() {
 		this.builder.append('\n');
 		this.currentPointer = 0;
-		
-		if(this.indentLevel == 0) {
-			return;
-		}
 	}
 	
 	private void addIndentation() {
