@@ -90,6 +90,10 @@ public class SimpleMultiMap<K, V> {
 	 * @return the list of all values, <code>null</code> otherwise
 	 */
 	public List<V> getValues(K key) {
+		if(key == null) {
+			return null;
+		}
+		
 		return this.map.get(key);
 	}
 	
