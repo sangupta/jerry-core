@@ -158,10 +158,20 @@ public class IndentedStringWriter {
 		int breakPoint = this.lineLength - this.currentPointer;
 		
 		// check if break point is not breaking a word
+		boolean breakPointUpdated = false;
 		for(int index = breakPoint; index > 0; index--) {
 			if(Character.isWhitespace(str.charAt(index))) {
 				breakPoint = index;
+				breakPointUpdated = true;
 				break;
+			}
+		}
+		
+		if(!breakPointUpdated) {
+			if(str.length() < (this.lineLength - this.indentLevel * this.tabLength)) {
+				this.newLine();
+				this.writeInternal(StringUtils.ltrim(str));
+				return;
 			}
 		}
 		
