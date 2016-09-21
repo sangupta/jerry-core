@@ -2,7 +2,13 @@
 
 **Current Development Snapshot**
 
+* Added `ResourceUtils` to read files from classpath including from packaged JARs
+* Added `StringArrayIterator` to iterate over a string array using `Iterator`
+* Added `IndentedStringWriter` that takes care of writing long indented text that breaks at a given line length
+* Added `count`, `removeAll`, `ltrim()` and `rtrim()` methods to `StringUtils`
+* Updated `ReflectionUtils` to bind values to object-wrappers for primitives
 * Allow counter names to be read from `IntegerCounter` and `LongCounter`
+* Added `SimpleMultiMap.numValues()`
 * Added `StringUtils.wildcardMatch()` method
 * Added `jitpack.yml` for allowing `jerry-core` via https://jitpack.io
 * Added `isJDK8()` and `isJDK9()` methods to `JDKUtils`
