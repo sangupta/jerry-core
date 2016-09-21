@@ -6,6 +6,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.file.DirectoryStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,7 +16,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
 import org.apache.commons.io.IOUtils;
 
@@ -151,7 +151,7 @@ public class ResourceUtils {
 		
 		List<Path> paths = new ArrayList<>();
 		
-		Stream<Path> stream = null;
+		DirectoryStream<Path> stream = null;
 		try {
 			// check if we need to mount the JAR file as a filesystem
 			if(uri.getScheme().equals("jar")) {
@@ -164,7 +164,7 @@ public class ResourceUtils {
 			Path filePath = Paths.get(uri);
 			
 			// convert to stream
-			stream = Files.list(filePath);
+			stream = Files.newDirectoryStream(filePath);
 			Iterator<Path> iterator = stream.iterator();
 			while(iterator.hasNext()) {
 				paths.add(iterator.next());
@@ -173,10 +173,6 @@ public class ResourceUtils {
 			return paths;
 		} catch(IOException e) {
 			return null;
-		} finally {
-			if(stream != null) {
-				stream.close();
-			}
 		}
 	}
 }
