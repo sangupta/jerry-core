@@ -49,9 +49,7 @@ public abstract class BatchJob<T> {
 	
 	private ServiceManager serviceManager;
 	
-	protected abstract int getShutdownWaitTime();
-	
-	protected abstract TimeUnit getShutdownWaitTimeUnit();
+	protected abstract long getShutdownWaitTimeMillis();
 	
 	protected abstract BatchJobItemExecutor<T> getJobPieceExecutor();
 	
@@ -157,7 +155,7 @@ public abstract class BatchJob<T> {
 		// wait for stipulated time to shutdown
 		try {
 			LOGGER.debug("Waiting for all thread to die out...");
-			this.serviceManager.awaitStopped(this.getShutdownWaitTime(), this.getShutdownWaitTimeUnit());
+			this.serviceManager.awaitStopped(this.getShutdownWaitTimeMillis(), TimeUnit.MILLISECONDS);
 		} catch (TimeoutException e) {
 			LOGGER.error("Unable to wait for stopping all threads", e);
 		}
