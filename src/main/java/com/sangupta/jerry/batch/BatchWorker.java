@@ -42,7 +42,7 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 
 	private final String threadName;
 	
-	private final String crawlerName;
+	private final String jobName;
 	
 	private volatile boolean workerPaused = false;
 	
@@ -56,7 +56,7 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 	 * @param threadName
 	 * @param yoJobPieceExecutor 
 	 */
-	public BatchWorker(String threadName, String crawlerName, BatchJobItemExecutor<T> executor) {
+	public BatchWorker(String threadName, String jobName, BatchJobItemExecutor<T> executor) {
 		if(AssertUtils.isEmpty(threadName)) {
 			throw new IllegalArgumentException("Thread name cannot be null/empty");
 		}
@@ -66,7 +66,7 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 		}
 		
 		this.threadName = threadName;
-		this.crawlerName = crawlerName;
+		this.jobName = jobName;
 		this.executor = executor;
 	}
 
@@ -82,7 +82,7 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 			pauseIfNeeded();
 
 			// read one message from queue
-			LOGGER.debug("Reading crawling url for crawler: {}", this.crawlerName);
+			LOGGER.debug("Fetching job item for batch-job: {}", this.jobName);
 			
 			// read the job from where-ever we are supposed to read from
 			T job;
@@ -104,7 +104,7 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 			}
 			
 			if(job == null) {
-				LOGGER.error("Job is read as null");
+				LOGGER.debug("Job is read as null");
 				
 				if(this.executor.getWaitTimeOnNullJobInMillis() > 0) {
 					try {
