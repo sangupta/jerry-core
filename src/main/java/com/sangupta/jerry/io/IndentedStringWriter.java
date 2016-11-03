@@ -223,13 +223,8 @@ public class IndentedStringWriter {
 			this.currentPointer = str.length();
 			return;
 		}
-		try {
-			this.write(StringUtils.ltrim(str.substring(breakPoint)));
-		} catch(StackOverflowError e) {
-			System.out.println("breakpoint: " + breakPoint);
-			System.out.println("string: " + str);
-			System.exit(0);
-		}
+		
+		this.write(StringUtils.ltrim(str.substring(breakPoint)));
 	}
 	
 	/**
