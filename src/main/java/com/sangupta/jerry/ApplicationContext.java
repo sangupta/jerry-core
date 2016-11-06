@@ -24,6 +24,9 @@ package com.sangupta.jerry;
 
 import java.util.UUID;
 
+import com.sangupta.jerry.util.AssertUtils;
+import com.sangupta.jerry.util.EnvironmentUtils;
+
 /**
  * Application context that holds some base values for every application.
  *
@@ -46,5 +49,64 @@ public class ApplicationContext {
 	 * Node ID that is unique at the time of application startup
 	 */
 	public static final String NODE_ID = UUID.randomUUID().toString();
+	
+	/**
+	 * The default application environment - can be changed from outside
+	 */
+	private static ApplicationEnvironment defaultApplicationEnvironment = null;
+	
+	public static void setDefaultApplicationEnvironment(ApplicationEnvironment environment) {
+		if(environment == null) {
+			throw new IllegalArgumentException("Environment cannot be null");
+		}
+		
+		defaultApplicationEnvironment = environment;
+	}
+	
+	private static String applicationEnvironmentProperty = null;
+	
+	public static void setApplicationEnvironmentProperty(String environment) {
+		if(AssertUtils.isEmpty(environment)) {
+			throw new IllegalArgumentException("Environment name cannot be empty/null");
+		}
+		
+		if(ApplicationContext.applicationEnvironmentProperty != null) {
+			throw new IllegalStateException("Application environment cannot be changed once it is set");
+		}
+		
+		ApplicationContext.applicationEnvironmentProperty = environment;
+	}
+	
+	private static ApplicationEnvironment applicationEnvironment = null;
+	
+	public static void setApplicationEnvironment(ApplicationEnvironment environment) {
+		if(environment == null) {
+			throw new IllegalArgumentException("Environment cannot be null");
+		}
+		
+		if(ApplicationContext.applicationEnvironment != null) {
+			throw new IllegalStateException("Application environment cannot be changed once it is set");
+		}
+		
+		ApplicationContext.applicationEnvironment = environment;
+	}
 
+	/**
+	 * Get the valid environment for the application using the command-line or system-wide property.
+	 * 
+	 * @return
+	 */
+	public static ApplicationEnvironment getValidEnvironment() {
+		if(ApplicationContext.applicationEnvironment != null) {
+			return ApplicationContext.applicationEnvironment;
+		}
+		
+		String environmentName = EnvironmentUtils.readProperty(ApplicationContext.applicationEnvironmentProperty, null);
+		if(environmentName == null) {
+			return defaultApplicationEnvironment;
+		}
+		
+		return ApplicationEnvironment.fromString(environmentName);
+	}
+	
 }
