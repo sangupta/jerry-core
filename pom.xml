@@ -145,6 +145,13 @@
 		    <scope>provided</scope>
 		</dependency>
 		
+		<!-- logback for logging -->
+		<dependency>
+		    <groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>1.1.3</version>
+		</dependency>
+		
 		<!-- For thread-safety annotations -->
 		<dependency>
 		    <groupId>net.jcip</groupId>
