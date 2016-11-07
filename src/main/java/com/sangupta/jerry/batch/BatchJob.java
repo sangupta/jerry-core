@@ -23,6 +23,7 @@ package com.sangupta.jerry.batch;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
@@ -43,20 +44,62 @@ import com.sangupta.jerry.util.AssertUtils;
  */
 public abstract class BatchJob<T> {
 	
+	/**
+	 * My private logger
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(BatchJob.class);
 	
+	/**
+	 * The job name
+	 */
 	protected final String jobName;
 	
+	/**
+	 * The internal {@link ServiceManager} that manages execution of all threads
+	 * 
+	 */
 	private ServiceManager serviceManager;
 	
+	/**
+	 * Return the job items over which we should work. Can return <code>null</code>
+	 * to signal there are no current job items.
+	 * 
+	 * @return
+	 */
+	protected abstract T getJobItem();
+	
+	/**
+	 * Time in milliseconds to wait during shutdown, before each service worker
+	 * thread will be killed to stop all services
+	 * 
+	 * @return
+	 */
 	protected abstract long getShutdownWaitTimeMillis();
 	
+	/**
+	 * Get the {@link BatchJobItemExecutor} - the executor that process one given
+	 * job item.
+	 * 
+	 * @return
+	 */
 	protected abstract BatchJobItemExecutor<T> getJobPieceExecutor();
 	
+	/**
+	 * Extension point to do something before worker threads are initialized.
+	 * Returning a <code>true</code> will continue further in the setup. Returning
+	 * a <code>false</code> will immediately halt creation of workers.
+	 * 
+	 * @return
+	 */
 	protected boolean beforeWorkersInitialize() {
 		return true;
 	}
 	
+	/**
+	 * Extension point to do something after worker threads have been initialized.
+	 * 
+	 * @return
+	 */
 	protected boolean afterWorkersInitialize() {
 		return true;
 	}
@@ -99,9 +142,19 @@ public abstract class BatchJob<T> {
 		
 		// create a new guava service manager to manage threads
 		List<Service> services = new ArrayList<>();
+		
+		final Callable<T> itemReader = new Callable<T>() {
+			
+			@Override
+			public T call() throws Exception {
+				return BatchJob.this.getJobItem();
+			}
+			
+		};
+		
 		for(int index = 0; index < numThreads; index++) {
 			// create a new worker
-			BatchWorker<T> worker = new BatchWorker<T>(this.jobName, "Job-Worker-" + this.jobName + "-" + index, this.getJobPieceExecutor());
+			BatchWorker<T> worker = new BatchWorker<T>(this.jobName, "Job-Worker-" + this.jobName + "-" + index, itemReader, this.getJobPieceExecutor());
 			
 			// add to list of workers
 			services.add(worker);
@@ -113,7 +166,7 @@ public abstract class BatchJob<T> {
 		// and start the server
 		this.serviceManager.startAsync();
 		
-		LOGGER.info("All worker threads have now started.\nRunning after workers initialize...");
+		LOGGER.info("All worker threads have now started.Running after workers initialize...");
 		
 		// do post initialization
 		afterWorkersInitialize();
@@ -123,7 +176,16 @@ public abstract class BatchJob<T> {
 	}
 	
 	/**
-	 * Shutdown this crawler instance
+	 * Signal all worker threads to stop.
+	 * 
+	 */
+	public void stopAsync() {
+		this.serviceManager.stopAsync();
+	}
+	
+	/**
+	 * Shutdown this crawler instance, invoking shutdown on all
+	 * worker threads.
 	 * 
 	 */
 	public void shutdown() {
@@ -159,6 +221,19 @@ public abstract class BatchJob<T> {
 		} catch (TimeoutException e) {
 			LOGGER.error("Unable to wait for stopping all threads", e);
 		}
+	}
+	
+	/**
+	 * Wait for all service threads to complete - either terminate naturally
+	 * or fail.
+	 * 
+	 */
+	public void waitForCompletion() {
+		if(this.serviceManager == null) {
+			return;
+		}
+		
+		this.serviceManager.awaitStopped();
 	}
 	
 	/**

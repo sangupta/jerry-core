@@ -21,6 +21,8 @@
 
 package com.sangupta.jerry.batch;
 
+import java.util.concurrent.Callable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,16 +40,41 @@ import com.sangupta.jerry.util.AssertUtils;
  */
 public class BatchWorker<T> extends AbstractExecutionThreadService  {
 	
+	/**
+	 * My logger instance
+	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(BatchJob.class);
 
+	/**
+	 * The thread name assigned to this worker
+	 */
 	private final String threadName;
 	
+	/**
+	 * The name of the job that this worker is working on
+	 */
 	private final String jobName;
 	
+	/**
+	 * If set to <code>true</code> indicates that the execution for this worker
+	 * has been paused.
+	 */
 	private volatile boolean workerPaused = false;
 	
+	/**
+	 * If set to <code>true</code> indicates that the execution for this worker
+	 * has been requested to be stopped immediately.
+	 */
 	private volatile boolean stopNow = false;
 	
+	/**
+	 * The item reader to be used to fetch one new job item from the batch
+	 */
+	private final Callable<T> itemReader;
+	
+	/**
+	 * The executor to use to process the item read from the batch
+	 */
 	private final BatchJobItemExecutor<T> executor;
 	
 	/**
@@ -56,7 +83,7 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 	 * @param threadName
 	 * @param yoJobPieceExecutor 
 	 */
-	public BatchWorker(String threadName, String jobName, BatchJobItemExecutor<T> executor) {
+	public BatchWorker(String threadName, String jobName, Callable<T> itemReader, BatchJobItemExecutor<T> executor) {
 		if(AssertUtils.isEmpty(threadName)) {
 			throw new IllegalArgumentException("Thread name cannot be null/empty");
 		}
@@ -64,9 +91,14 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 		if(executor == null) {
 			throw new IllegalArgumentException("Job piece executor cannot be null");
 		}
+
+		if(itemReader == null) {
+			throw new IllegalArgumentException("Itemreader cannot be null");
+		}
 		
 		this.threadName = threadName;
 		this.jobName = jobName;
+		this.itemReader = itemReader;
 		this.executor = executor;
 	}
 
@@ -87,7 +119,7 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 			// read the job from where-ever we are supposed to read from
 			T job;
 			try {
-				job = this.executor.getJobItem();
+				job = this.itemReader.call();
 			} catch(Exception e) {
 				LOGGER.error("Unable to read job", e);
 				
@@ -96,7 +128,8 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 						LOGGER.debug("Sleeping for stipulated time on job read error...");
 						Thread.sleep(this.executor.getWaitTimeOnJobReadErrorInMillis());
 					} catch (InterruptedException e1) {
-						e1.printStackTrace();
+						// make an exit immediately
+						return;
 					}
 				}
 				
@@ -106,12 +139,18 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 			if(job == null) {
 				LOGGER.debug("Job is read as null");
 				
+				if(this.executor.terminateExecutionOnNullJobItem()) {
+					LOGGER.debug("Flagged to stop worker on null job... ending worker.");
+					return;
+				}
+				
 				if(this.executor.getWaitTimeOnNullJobInMillis() > 0) {
 					try {
 						LOGGER.debug("Sleeping for stipulated time on null job...");
 						Thread.sleep(this.executor.getWaitTimeOnNullJobInMillis());
 					} catch (InterruptedException e1) {
-						e1.printStackTrace();
+						// make an exit immediately
+						return;
 					}
 				}
 				
@@ -163,12 +202,18 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 			try {
 				Thread.sleep(this.executor.pauseCheckInterval());
 			} catch (InterruptedException e) {
-				// eat up
+				// thread needs to shutdown
+				return;
 			}
 		} while(true);
 	}
 	
 	/**
+	 * Invoked to request halt of this workers. Calling this method sets
+	 * the {@link #stopNow} to <code>true</code> to signal the execution that execution
+	 * should immediately halt. Once the job item, if any, is being processed - the
+	 * execution will stop after the processing is complete.
+	 * 
 	 * @see com.google.common.util.concurrent.AbstractExecutionThreadService#triggerShutdown()
 	 */
 	@Override
@@ -178,10 +223,20 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 		this.stopNow = true;
 	}
 	
+	/**
+	 * Return the thread name associated with this worker.
+	 * 
+	 * @return
+	 */
 	public String getThreadName() {
 		return this.threadName;
 	}
-	
+
+	/**
+	 * Returns if the current worker is under the pause state or not.
+	 * 
+	 * @return
+	 */
 	public boolean isWorkerPaused() {
 		return this.workerPaused;
 	}
