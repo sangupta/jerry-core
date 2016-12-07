@@ -26,7 +26,8 @@ import java.util.Iterator;
 import net.jcip.annotations.NotThreadSafe;
 
 /**
- * An iterator that works over a <code>String[]</code> (String array).
+ * An iterator that works over a <code>String[]</code> (String array). The
+ * iterator is safe even if the backing array provided is <code>null</code>.
  * 
  * @author sangupta
  *
@@ -45,16 +46,13 @@ public class StringArrayIterator implements Iterator<String> {
     private int position = 0;
     
     /**
-     * Construct an iterator over the given backing array
-     * 
-     * @param items the backing array to use
-     * 
-     */
+	 * Construct an iterator over the given backing array.
+	 * 
+	 * @param items
+	 *            the backing array to use. The array can be <code>null</code>.
+	 * 
+	 */
     public StringArrayIterator(String[] items) {
-    	if(items == null) {
-    		throw new IllegalArgumentException("Backing string array cannot be null");
-    	}
-    	
         this.items = items;
     }
     
