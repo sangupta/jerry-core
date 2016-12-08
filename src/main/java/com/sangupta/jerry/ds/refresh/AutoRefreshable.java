@@ -22,6 +22,8 @@
 
 package com.sangupta.jerry.ds.refresh;
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * A value that will auto-refresh when certain time expires
  * using the <code>refresh</code> method provided.
@@ -52,6 +54,7 @@ package com.sangupta.jerry.ds.refresh;
  *
  * @since 2.3
  */
+@ThreadSafe
 public abstract class AutoRefreshable<T> {
 
 	/**
