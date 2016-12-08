@@ -63,8 +63,7 @@ public abstract class BitUtils {
 	 * @param bit
 	 *            the bit to set
 	 *
-	 * @return <code>true</code> if the bit was modified, <code>false</code>
-	 *         otherwise
+	 * @return the updated value after setting the bit
 	 */
 	public static int setBit(int value, int bit) {
 		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
@@ -82,8 +81,7 @@ public abstract class BitUtils {
 	 * @param bit
 	 *            the bit to clear
 	 *
-	 * @return <code>true</code> if bit was modified, <code>false</code>
-	 *         otherwise
+	 * @return the updated value after setting the bit
 	 */
 	public static int clearBit(int value, int bit) {
 		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
@@ -120,8 +118,7 @@ public abstract class BitUtils {
 	 * @param bit
 	 *            the bit to set
 	 *
-	 * @return <code>true</code> if bit was modified, <code>false</code>
-	 *         otherwise
+	 * @return the updated value after setting the bit
 	 */
 	public static long setBit(long value, int bit) {
 		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
@@ -139,8 +136,7 @@ public abstract class BitUtils {
 	 * @param bit
 	 *            the bit to clear
 	 *
-	 * @return <code>true</code> if bit was modified, <code>false</code>
-	 *         otherwise
+	 * @return the updated value after setting the bit
 	 */
 	public static long clearBit(long value, int bit) {
 		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
