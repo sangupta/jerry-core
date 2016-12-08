@@ -30,12 +30,15 @@ import java.util.concurrent.ConcurrentMap;
 
 import com.sangupta.jerry.util.AssertUtils;
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * An efficient way to count multiple named entities.
  *
  * @author sangupta
  * @since 1.1
  */
+@ThreadSafe
 public class IntegerCounter {
 
 	/**
