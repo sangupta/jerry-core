@@ -57,8 +57,11 @@ public class TestHashUtils {
 
 	@Test
 	public void testSHA224() {
-//		Assert.assertEquals("4575bb4ec129df6380cedde6d71217fe0536f8ffc4e18bca530a7a1b", CryptoUtil.getSHA224Hex(TEXT));
-//		Assert.assertEquals("4575bb4ec129df6380cedde6d71217fe0536f8ffc4e18bca530a7a1b", CryptoUtil.getSHA224Hex(BYTES));
+		Assert.assertEquals("4575bb4ec129df6380cedde6d71217fe0536f8ffc4e18bca530a7a1b", StringUtils.asHex(HashUtils.getSHA224(TEXT)));
+		Assert.assertEquals("4575bb4ec129df6380cedde6d71217fe0536f8ffc4e18bca530a7a1b", StringUtils.asHex(HashUtils.getSHA224(BYTES)));
+
+		Assert.assertEquals("4575bb4ec129df6380cedde6d71217fe0536f8ffc4e18bca530a7a1b", HashUtils.getSHA224Hex(TEXT));
+		Assert.assertEquals("4575bb4ec129df6380cedde6d71217fe0536f8ffc4e18bca530a7a1b", HashUtils.getSHA224Hex(BYTES));
 	}
 
 	@Test
@@ -88,4 +91,16 @@ public class TestHashUtils {
 		Assert.assertEquals("861844d6704e8573fec34d967e20bcfef3d424cf48be04e6dc08f2bd58c729743371015ead891cc3cf1c9d34b49264b510751b1ff9e537937bc46b5d6ff4ecc8", HashUtils.getSHA512Hex(BYTES));
 	}
 
+	@Test
+	public void testHMAC() {
+		Assert.assertEquals("nH3h4e6Jr4J4p/zIr/y4Xf32Juk=", HashUtils.getHMAC(TEXT, "sangupta"));
+		Assert.assertEquals("7F+3Vl+LjgJJcCKInup4kPn1fQc=", HashUtils.getHMAC(TEXT, "keyString"));
+	}
+	
+	@Test
+	public void testGetPBKDF2() {
+		Assert.assertEquals("92fb2ee7ffdb0e86e6ef9c44", HashUtils.getPBKDF2Hex("signable", "salt", 100, 100));
+		Assert.assertEquals("2b1255902c88eb0d8152b300", HashUtils.getPBKDF2Hex(TEXT, "salt", 100, 100));
+	}
+	
 }

@@ -455,13 +455,25 @@ public abstract class HashUtils {
 	 *            the key string or secret to use to generate the hash.
 	 *
 	 * @return the Base64 encoded string representing the hash
-	 *
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if <code>signable</code> or <code>keyString</code> is
+	 *             <code>null</code> or <code>empty</code>
+	 * 
 	 * @throws RuntimeException
 	 *             if the algorithm implementation is not found, or the key
 	 *             provided is invalid.
 	 *
 	 */
 	public static String getHMAC(String signable, String keyString) {
+		if(AssertUtils.isEmpty(signable)) {
+			throw new IllegalArgumentException("Signable cannot be null/empty");
+		
+		}
+		if(AssertUtils.isEmpty(keyString)) {
+			throw new IllegalArgumentException("KeyString cannot be null/empty");
+		}
+
 		SecretKeySpec key = new SecretKeySpec((keyString).getBytes(StringUtils.CHARSET_UTF8), "HmacSHA1");
 		Mac mac;
 		try {
@@ -492,8 +504,31 @@ public abstract class HashUtils {
 	 *            the entropy to use
 	 *
 	 * @return the byte-array representing the hash
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if <code>signable</code> or <code>salt</code> is
+	 *             <code>null</code> or <code>empty</code>, or if
+	 *             <code>numIterations</code> is less than <code>1</code> or if
+	 *             <code>entropy</code> is less than <code>1</code>
 	 */
 	public static byte[] getPBKDF2(String signable, String salt, int numIterations, int entropy) {
+		if(AssertUtils.isEmpty(signable)) {
+			throw new IllegalArgumentException("Signable cannot be null/empty");
+		
+		}
+		
+		if(AssertUtils.isEmpty(salt)) {
+			throw new IllegalArgumentException("Salt cannot be null/empty");
+		}
+		
+		if(numIterations < 1) {
+			throw new IllegalArgumentException("Number of iterations cannot be less than 1");
+		}
+		
+		if(entropy < 1) {
+			throw new IllegalArgumentException("Entropy cannot be less than 1");
+		}
+		
 		// generate the hash
 		try {
 			PBEKeySpec spec = new PBEKeySpec(signable.toCharArray(), salt.getBytes(), numIterations, entropy);
@@ -502,5 +537,38 @@ public abstract class HashUtils {
 		} catch (GeneralSecurityException e) {
 			throw new RuntimeException("General Security Exception", e);
 		}
+	}
+	
+	/**
+	 * Generate the PBKDF2-with-HMAC-SHA1 hash for the given signable string and return
+	 * the HEX representation for the same.
+	 *
+	 * @param signable
+	 *            the string to be hashed
+	 *
+	 * @param salt
+	 *            the salt to be used
+	 *
+	 * @param numIterations
+	 *            the number of iterations to run
+	 *
+	 * @param entropy
+	 *            the entropy to use
+	 *
+	 * @return the HEX representing the hash
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if <code>signable</code> or <code>salt</code> is
+	 *             <code>null</code> or <code>empty</code>, or if
+	 *             <code>numIterations</code> is less than <code>1</code> or if
+	 *             <code>entropy</code> is less than <code>1</code>
+	 */
+	public static String getPBKDF2Hex(String signable, String salt, int numIterations, int entropy) {
+		byte[] bytes = getPBKDF2(signable, salt, numIterations, entropy);
+		if(bytes == null) {
+			return null;
+		}
+		
+		return StringUtils.asHex(bytes);
 	}
 }
