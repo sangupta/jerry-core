@@ -42,9 +42,12 @@ public class JavaBitSetArray implements BitArray {
 	final BitSet bitSet;
 
 	final int size;
+	
+	final int maxIndex;
 
 	public JavaBitSetArray(int numBits) {
 		this.bitSet = new BitSet(numBits);
+		this.maxIndex = numBits;
 		this.size = this.bitSet.size();
 	}
 
@@ -55,22 +58,54 @@ public class JavaBitSetArray implements BitArray {
 
 	@Override
 	public boolean getBit(int index) {
+		if(index < 0) {
+			throw new IndexOutOfBoundsException("Index is out of range: " + index);
+		}
+		
+		if(index > this.maxIndex) {
+			throw new IndexOutOfBoundsException("Index is out of range: " + index);
+		}
+		
 		return this.bitSet.get(index);
 	}
 
 	@Override
 	public boolean setBit(int index) {
+		if(index < 0) {
+			throw new IndexOutOfBoundsException("Index is out of range: " + index);
+		}
+		
+		if(index > this.maxIndex) {
+			throw new IndexOutOfBoundsException("Index is out of range: " + index);
+		}
+		
 		this.bitSet.set(index);
 		return true;
 	}
 
 	@Override
 	public void clearBit(int index) {
+		if(index < 0) {
+			throw new IndexOutOfBoundsException("Index is out of range: " + index);
+		}
+		
+		if(index > this.maxIndex) {
+			throw new IndexOutOfBoundsException("Index is out of range: " + index);
+		}
+		
 		this.bitSet.clear(index);
 	}
 
 	@Override
 	public boolean setBitIfUnset(int index) {
+		if(index < 0) {
+			throw new IndexOutOfBoundsException("Index is out of range: " + index);
+		}
+		
+		if(index > this.maxIndex) {
+			throw new IndexOutOfBoundsException("Index is out of range: " + index);
+		}
+		
 		if(!this.bitSet.get(index)) {
 			return this.setBit(index);
 		}

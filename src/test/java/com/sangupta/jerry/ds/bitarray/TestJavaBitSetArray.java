@@ -22,73 +22,16 @@
 
 package com.sangupta.jerry.ds.bitarray;
 
-import java.util.Random;
+public class TestJavaBitSetArray extends TestAbstractBitArray {
 
-import org.junit.Assert;
-import org.junit.Test;
-
-public class TestJavaBitSetArray {
-
-	private static final int MAX_ELEMENTS = 1000 * 10;
-
-	@Test
-	public void testGetAndSet() throws Exception {
-		BitArray ba = new JavaBitSetArray(MAX_ELEMENTS);
-
-		Random random = new Random();
-		for(int index = 0; index < MAX_ELEMENTS; index++) {
-			int nextBit = random.nextInt(MAX_ELEMENTS);
-			boolean didSet = ba.setBit(nextBit);
-			if(didSet) {
-				boolean isSet = ba.getBit(nextBit);
-				Assert.assertTrue(isSet);
-				ba.clearBit(nextBit);
-				isSet = ba.getBit(nextBit);
-				Assert.assertFalse(isSet);
-			}
-		}
-
-		ba.close();
+	@Override
+	protected BitArray getNewBitArray() throws Exception {
+		return new JavaBitSetArray(MAX_ELEMENTS);
 	}
-
-	@Test
-	public void testGetHighestBitSet() throws Exception {
-		BitArray ba = new JavaBitSetArray(MAX_ELEMENTS);
-
-		Random random = new Random();
-		int currentMaxBit = -1;
-		for(int index = 0; index < MAX_ELEMENTS; index++) {
-			int nextBit = random.nextInt(MAX_ELEMENTS);
-			boolean didSet = ba.setBit(nextBit);
-			if(!didSet) {
-				continue;
-			}
-
-			currentMaxBit = Math.max(currentMaxBit, nextBit);
-			Assert.assertEquals(currentMaxBit, ba.getHighestBitSet());
-		}
-
-		ba.close();
-	}
-
-	@Test
-	public void testGetLowestBitSet() throws Exception {
-		BitArray ba = new JavaBitSetArray(MAX_ELEMENTS);
-
-		Random random = new Random();
-		int currentMinBit = Integer.MAX_VALUE;
-		for(int index = 0; index < MAX_ELEMENTS; index++) {
-			int nextBit = random.nextInt(MAX_ELEMENTS);
-			boolean didSet = ba.setBit(nextBit);
-			if(!didSet) {
-				continue;
-			}
-
-			currentMinBit = Math.min(currentMinBit, nextBit);
-			Assert.assertEquals(currentMinBit, ba.getLowestBitSet());
-		}
-
-		ba.close();
+	
+	@Override
+	protected int getMaxElements() {
+		return 1024 * 10; // JavaBitSet is too slow
 	}
 
 }
