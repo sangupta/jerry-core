@@ -23,6 +23,7 @@
 package com.sangupta.jerry.ds.counter;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,6 +56,15 @@ public class IntegerCounter {
 	public void clear() {
 	    this.counterMap.clear();
 	}
+	
+	/**
+	 * Return the number of counters stored in this instance.
+	 * 
+	 * @return the number of counters stored
+	 */
+	public int numCounters() {
+		return this.counterMap.size();
+	}
 
 	/**
      * Returns the current state of this instance as a {@link Map}. The map is a
@@ -66,6 +76,10 @@ public class IntegerCounter {
      */
 	public Map<String, Integer> asMap() {
 	    Map<String, Integer> map = new HashMap<String, Integer>();
+	    
+	    if(this.counterMap.isEmpty()) {
+	    	return map;
+	    }
 
 	    for(String key : counterMap.keySet()) {
 	        map.put(key, this.get(key));
@@ -77,12 +91,12 @@ public class IntegerCounter {
 	/**
 	 * Return the names of the counters present in this {@link IntegerCounter}.
 	 *
-	 * @return the names of the counters if available, <code>null</code>
+	 * @return the names of the counters if available, an empty {@link HashSet}
 	 *         otherwise
 	 */
-	public Set<String> getCounterNames() {
+	public Set<String> counterNames() {
 		if(this.counterMap.isEmpty()) {
-			return null;
+			return new HashSet<>();
 		}
 
 		return this.counterMap.keySet();

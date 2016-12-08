@@ -23,6 +23,7 @@
 package com.sangupta.jerry.ds.counter;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,6 +56,15 @@ public class LongCounter {
     public void clear() {
         this.counterMap.clear();
     }
+    
+    /**
+	 * Return the number of counters stored in this instance.
+	 * 
+	 * @return the number of counters stored
+	 */
+	public int numCounters() {
+		return this.counterMap.size();
+	}
 
 	/**
 	 * Return the names of the counters present in this {@link IntegerCounter}.
@@ -62,9 +72,9 @@ public class LongCounter {
 	 * @return the names of the counters if available, <code>null</code>
 	 *         otherwise
 	 */
-	public Set<String> getCounterNames() {
+	public Set<String> counterNames() {
 		if(this.counterMap.isEmpty()) {
-			return null;
+			return new HashSet<>();
 		}
 
 		return this.counterMap.keySet();

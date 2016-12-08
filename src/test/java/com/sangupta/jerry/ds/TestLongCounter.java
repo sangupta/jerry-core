@@ -22,7 +22,12 @@
 
 package com.sangupta.jerry.ds;
 
+import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -68,6 +73,42 @@ public class TestLongCounter {
 		counter.increment("txt");
 		counter.set("txt", 15);
 		Assert.assertEquals(15, counter.get("txt"));
+	}
+	
+	@Test
+	public void testMultipleCounters() {
+		Random random = new SecureRandom();
+		int iterations = random.nextInt(50) + 10;
+		LongCounter counter = new LongCounter();
+
+		Map<String, Long> values = new HashMap<>();
+		for(int index = 0; index < iterations; index++) {
+			String name = UUID.randomUUID().toString();
+			int value = random.nextInt(1000 * 1000) + 1000;
+			
+			values.put(name, (long) value);
+			counter.set(name, value);
+			
+			Assert.assertEquals(value, counter.get(name));
+			Assert.assertEquals(index + 1, counter.numCounters());
+			Assert.assertEquals(index + 1, counter.asMap().size());
+			Assert.assertEquals(index + 1, counter.counterNames().size());
+		}
+		
+		// check map
+		Set<String> counters = counter.counterNames();
+		for(String name : counters) {
+			Assert.assertTrue(values.containsKey(name));
+		}
+		Map<String, Long> map = counter.asMap();
+		for(String name : map.keySet()) {
+			Assert.assertEquals(values.get(name), map.get(name));
+		}
+		
+		counter.clear();
+		Assert.assertEquals(0, counter.numCounters());
+		Assert.assertEquals(0, counter.asMap().size());
+		Assert.assertEquals(0, counter.counterNames().size());
 	}
 
 	@Test
