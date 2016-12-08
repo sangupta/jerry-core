@@ -55,11 +55,25 @@ public abstract class ResponseUtils {
 	 *             if something fails while writing to
 	 *             {@link HttpServletResponse}.
 	 *
-	 * @throws NullPointerException
-	 *             if {@link HttpServletResponse} object is <code>null</code>
+	 * @throws IllegalArgumentException
+	 *             if {@link HttpServletResponse} object is <code>null</code>,
+	 *             or if <code>data</code> is <code>null</code>, or if
+	 *             <code>mimeType</code> is <code>null</code>
 	 *
 	 */
 	public static void sendResponse(HttpServletResponse response, String data, String mimeType) throws IOException {
+		if(response == null) {
+			throw new IllegalArgumentException("HttpServletResponse cannot be null");
+		}
+		
+		if(data == null) {
+			throw new IllegalArgumentException("data cannot be null");
+		}
+		
+		if(mimeType == null) {
+			throw new IllegalArgumentException("mimeType cannot be null");
+		}
+		
 		byte[] bytes = data.getBytes("UTF-8");
 		response.setContentType(mimeType + "; charset=UTF-8");
 		response.setStatus(HttpStatusCode.OK);
@@ -85,10 +99,24 @@ public abstract class ResponseUtils {
 	 *             if something fails while writing to
 	 *             {@link HttpServletResponse}.
 	 *
-	 * @throws NullPointerException
-	 *             if {@link HttpServletResponse} object is <code>null</code>
+	 * @throws IllegalArgumentException
+	 *             if {@link HttpServletResponse} object is <code>null</code>,
+	 *             or if <code>bytes</code> is <code>null</code>, or if
+	 *             <code>mimeType</code> is <code>null</code>
 	 */
 	public static void sendResponse(HttpServletResponse response, byte[] bytes, String mimeType) throws IOException {
+		if(response == null) {
+			throw new IllegalArgumentException("HttpServletResponse cannot be null");
+		}
+		
+		if(bytes == null) {
+			throw new IllegalArgumentException("bytes cannot be null");
+		}
+		
+		if(mimeType == null) {
+			throw new IllegalArgumentException("mimeType cannot be null");
+		}
+		
 		response.setContentType(mimeType + "; charset=UTF-8");
 		response.setStatus(HttpStatusCode.OK);
 		response.setContentLength(bytes.length);
@@ -118,12 +146,30 @@ public abstract class ResponseUtils {
 	 *             if something fails when writing to
 	 *             {@link HttpServletResponse} object
 	 *
-	 * @throws NullPointerException
+	 * @throws IllegalArgumentException
 	 *             if {@link HttpServletResponse} object is <code>null</code>,
-	 *             or if data is <code>null</code>
+	 *             or if <code>data</code> is <code>null</code>, or if
+	 *             <code>mimeType</code> is <code>null</code>, or if
+	 *             <code>fileName</code> is <code>null</code>
 	 *
 	 */
 	public static void pushForUserDownload(HttpServletResponse response, String data, String fileName, String mimeType) throws IOException {
+		if(response == null) {
+			throw new IllegalArgumentException("HttpServletResponse cannot be null");
+		}
+		
+		if(data == null) {
+			throw new IllegalArgumentException("data cannot be null");
+		}
+		
+		if(fileName == null) {
+			throw new IllegalArgumentException("fileName cannot be null");
+		}
+		
+		if(mimeType == null) {
+			throw new IllegalArgumentException("mimeType cannot be null");
+		}
+		
 		setOnlyDownload(response, fileName);
 
 		response.setContentType(mimeType + "; charset=UTF-8");
@@ -157,11 +203,25 @@ public abstract class ResponseUtils {
 	 *             if something fails when writing to
 	 *             {@link HttpServletResponse} object
 	 *
-	 * @throws NullPointerException
-	 *             if {@link HttpServletResponse} object is <code>null</code>
+	 * @throws IllegalArgumentException
+	 *             if {@link HttpServletResponse} object is <code>null</code>,
+	 *             or if <code>bytes</code> is <code>null</code>, or if
+	 *             <code>fileName</code> is <code>null</code>
 	 *
 	 */
 	public static void pushForUserDownload(HttpServletResponse response, byte[] bytes, String fileName) throws IOException {
+		if(response == null) {
+			throw new IllegalArgumentException("HttpServletResponse cannot be null");
+		}
+		
+		if(bytes == null) {
+			throw new IllegalArgumentException("data cannot be null");
+		}
+		
+		if(fileName == null) {
+			throw new IllegalArgumentException("fileName cannot be null");
+		}
+		
 		setOnlyDownload(response, fileName);
 
 		response.setContentType("application/octet-stream");
@@ -251,6 +311,9 @@ public abstract class ResponseUtils {
 	 *            the URL to be prefixed
 	 *
 	 * @return the constructed URL
+	 * 
+	 * @throws NullPointerException
+	 *             if <code>request</code> is <code>null</code>
 	 */
 	public static String getUrlWithContext(HttpServletRequest request, String url) {
 		return UriUtils.addWebPaths(request.getContextPath(), url);
