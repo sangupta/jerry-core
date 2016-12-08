@@ -25,7 +25,6 @@ package com.sangupta.jerry.ds;
 import java.util.Iterator;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
 public class TestSimpleTree {
@@ -64,35 +63,173 @@ public class TestSimpleTree {
 
 		Iterator<Tree<Integer>> iterator = tree.iterator();
 
-		Assert.assertEquals(1, (int) iterator.next().getData());
-		Assert.assertEquals(2, (int) iterator.next().getData());
-		Assert.assertEquals(6, (int) iterator.next().getData());
-		Assert.assertEquals(61, (int) iterator.next().getData());
-		Assert.assertEquals(62, (int) iterator.next().getData());
-		Assert.assertEquals(63, (int) iterator.next().getData());
-		Assert.assertEquals(7, (int) iterator.next().getData());
-		Assert.assertEquals(8, (int) iterator.next().getData());
-		Assert.assertEquals(9, (int) iterator.next().getData());
-		Assert.assertEquals(3, (int) iterator.next().getData());
-		Assert.assertEquals(10, (int) iterator.next().getData());
-		Assert.assertEquals(11, (int) iterator.next().getData());
-		Assert.assertEquals(12, (int) iterator.next().getData());
-		Assert.assertEquals(13, (int) iterator.next().getData());
-		Assert.assertEquals(4, (int) iterator.next().getData());
-		Assert.assertEquals(14, (int) iterator.next().getData());
-		Assert.assertEquals(15, (int) iterator.next().getData());
-		Assert.assertEquals(16, (int) iterator.next().getData());
-		Assert.assertEquals(17, (int) iterator.next().getData());
-		Assert.assertEquals(5, (int) iterator.next().getData());
-		Assert.assertEquals(18, (int) iterator.next().getData());
-		Assert.assertEquals(19, (int) iterator.next().getData());
-		Assert.assertEquals(20, (int) iterator.next().getData());
-		Assert.assertEquals(21, (int) iterator.next().getData());
-	}
-
-	public static void main(String[] args) {
-		TestSimpleTree tst = new TestSimpleTree();
-		tst.testIterator();
+		Tree<Integer> node = iterator.next();
+		Assert.assertTrue(node.isRoot());
+		Assert.assertFalse(node.isLeaf());
+		Assert.assertTrue(node.hasChildren());
+		Assert.assertEquals(1, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertFalse(node.isLeaf());
+		Assert.assertTrue(node.hasChildren());
+		Assert.assertEquals(2, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertFalse(node.isLeaf());
+		Assert.assertTrue(node.hasChildren());
+		Assert.assertEquals(6, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertFalse(node.isLeaf());
+		Assert.assertTrue(node.hasChildren());
+		Assert.assertEquals(61, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertFalse(node.isLeaf());
+		Assert.assertTrue(node.hasChildren());
+		Assert.assertEquals(62, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(63, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(7, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(8, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(9, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertFalse(node.isLeaf());
+		Assert.assertTrue(node.hasChildren());
+		Assert.assertEquals(3, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(10, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(11, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(12, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(13, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertFalse(node.isLeaf());
+		Assert.assertTrue(node.hasChildren());
+		Assert.assertEquals(4, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(14, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(15, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(16, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(17, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertFalse(node.isLeaf());
+		Assert.assertTrue(node.hasChildren());
+		Assert.assertEquals(5, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(18, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(19, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(20, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
+		
+		node = iterator.next();
+		Assert.assertFalse(node.isRoot());
+		Assert.assertTrue(node.isLeaf());
+		Assert.assertFalse(node.hasChildren());
+		Assert.assertEquals(21, (int) node.getData());
+		Assert.assertEquals(String.valueOf(node.getData()), node.toString());
 	}
 
 }
