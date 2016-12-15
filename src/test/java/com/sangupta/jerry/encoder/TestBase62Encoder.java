@@ -22,6 +22,8 @@
 
 package com.sangupta.jerry.encoder;
 
+import java.util.Random;
+
 import org.junit.Assert;
 
 import org.junit.Test;
@@ -34,17 +36,12 @@ import org.junit.Test;
  */
 public class TestBase62Encoder {
 
-	/**
-	 * Test encoding and decoding of first 100 million
-	 * numbers.
-	 *
-	 */
-	@Test
-	public void testEncodingDecoding() {
-		final long MAX = 100 * 1000 * 1000; // 100 million
-		for(long index = 0; index < MAX; index++) {
-			long num = 0 - index;
+	final long MAX = 1000l * 1000l;
 
+	@Test
+	public void testPositive() {
+		for(long index = 0; index < MAX; index++) {
+			long num = index;
 			String enc = Base62Encoder.encode(num);
 			long dec = Base62Encoder.decode(enc);
 
@@ -53,7 +50,39 @@ public class TestBase62Encoder {
 				break;
 			}
 		}
+	}
+	
+	@Test
+	public void testNegative() {
+		for(long index = 0; index < MAX; index++) {
+			long num = 0 - index;
+			String enc = Base62Encoder.encode(num);
+			long dec = Base62Encoder.decode(enc);
 
+			if(num != dec) {
+				Assert.fail();
+				break;
+			}
+		}
+	}
+	
+	@Test
+	public void testRandom() {
+		final Random random = new Random();
+		for(long index = 0; index < MAX; index++) {
+			long num = random.nextLong();
+			String enc = Base62Encoder.encode(num);
+			long dec = Base62Encoder.decode(enc);
+
+			if(num != dec) {
+				Assert.fail();
+				break;
+			}
+		}
+	}
+	
+	@Test
+	public void testMisc() {
 		try { Base62Encoder.decode(null); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 		try { Base62Encoder.decode(""); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 		try { Base62Encoder.decode("abc++abc"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
