@@ -19,14 +19,16 @@
  *
  */
 
-
 package com.sangupta.jerry.util;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -404,7 +406,7 @@ public abstract class ReflectionUtils {
     	if(instance == null) {
     		return;
     	}
-
+    	
     	if(value instanceof Integer) {
 			field.setInt(instance, (Integer) value);
 		} else {
@@ -1261,4 +1263,103 @@ public abstract class ReflectionUtils {
 
 		return map;
 	}
+	
+	/**
+	 * Obtain the value of the field defined by <code>name</code> on the given
+	 * object <code>instance</code> and cast the returned value to the given
+	 * <code>castTo</code> class
+	 * 
+	 * @param instance
+	 *            the object instance to obtain field value from
+	 * 
+	 * @param name
+	 *            the name of the attribute being requested
+	 * 
+	 * @param castTo
+	 *            the {@link Class} to which the returned value needs to be cast
+	 * 
+	 * @return the field value, or <code>null</code> if the object instance is
+	 *         <code>null</code> or field name is <code>null/empty</code> or if
+	 *         the field does not exist on the object.
+	 * 
+	 * @throws RuntimeException
+	 *             if {@link IllegalArgumentException} or
+	 *             {@link IllegalAccessException} is thrown during reflection
+	 */
+	public static <T> T getFieldForName(Object instance, String name, Class<T> castTo) {
+		if(instance == null) {
+			return null;
+		}
+		
+		if(AssertUtils.isEmpty(name)) {
+			return null;
+		}
+		
+		Class<?> clazz = instance.getClass();
+		List<Field> fields = getAllFields(clazz);
+		if(fields.isEmpty()) {
+			return null;
+		}
+		
+		for(Field field : fields) {
+			if(field.getName().equals(name)) {
+				try {
+					field.setAccessible(true);
+					Object object = field.get(instance);
+					if(object == null) {
+						return null;
+					}
+					
+					return castTo.cast(object);
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					throw new RuntimeException(e);
+				}
+			}
+		}
+		
+		return null;
+	}
+
+	/**
+	 * Get a list of all {@link Field}s that are defined by the given
+	 * {@link Class} and all its parent classes, including all private fields
+	 * 
+	 * @param clazz
+	 *            the {@link Class} to obtain fields from
+	 * 
+	 * @return the {@link List} of all {@link Field}s. If the supplied class is
+	 *         <code>null</code>, an empty {@link List} is returned
+	 */
+	public static List<Field> getAllFields(Class<?> clazz) {
+        List<Field> fields = new ArrayList<>();
+        populateAllFields(clazz, fields);
+        return fields;
+    }
+    
+	/**
+	 * Populate the list of all {@link Field}s that are defined by the given
+	 * {@link Class} and all its parent classes, including all private fields,
+	 * in the given {@link List} instance.
+	 * 
+	 * @param clazz
+	 *            the {@link Class} to obtain fields from
+	 * @param fields
+	 *            the {@link List} to populate fields into
+	 */
+    public static void populateAllFields(Class<?> clazz, List<Field> fields) {
+        if(clazz == null) {
+            return;
+        }
+        
+        Field[] array = clazz.getDeclaredFields();
+        if(array != null && array.length > 0) {
+            fields.addAll(Arrays.asList(array));
+        }
+        
+        if(clazz.getSuperclass() == null) {
+            return;
+        }
+        
+        populateAllFields(clazz.getSuperclass(), fields);
+    }
 }
