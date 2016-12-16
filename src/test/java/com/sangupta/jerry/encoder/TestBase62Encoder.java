@@ -25,7 +25,6 @@ package com.sangupta.jerry.encoder;
 import java.util.Random;
 
 import org.junit.Assert;
-
 import org.junit.Test;
 
 /**
@@ -46,7 +45,7 @@ public class TestBase62Encoder {
 			long dec = Base62Encoder.decode(enc);
 
 			if(num != dec) {
-				Assert.fail();
+				Assert.fail("Expected: " + num + ", Actual: " + dec);
 				break;
 			}
 		}
@@ -60,7 +59,7 @@ public class TestBase62Encoder {
 			long dec = Base62Encoder.decode(enc);
 
 			if(num != dec) {
-				Assert.fail();
+				Assert.fail("Expected: " + num + ", Actual: " + dec);
 				break;
 			}
 		}
@@ -71,11 +70,16 @@ public class TestBase62Encoder {
 		final Random random = new Random();
 		for(long index = 0; index < MAX; index++) {
 			long num = random.nextLong();
+			boolean negative = ((random.nextInt() & 1) == 1);
+			if(negative) {
+				num = 0 - num;
+			}
+			
 			String enc = Base62Encoder.encode(num);
 			long dec = Base62Encoder.decode(enc);
 
 			if(num != dec) {
-				Assert.fail();
+				Assert.fail("Expected: " + num + ", Actual: " + dec);
 				break;
 			}
 		}

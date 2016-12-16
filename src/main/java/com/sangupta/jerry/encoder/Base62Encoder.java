@@ -57,9 +57,10 @@ public class Base62Encoder {
 	public static String encode(long number) {
 		StringBuilder builder = new StringBuilder(10);
 
+		boolean isNegative = false;
 		if(number < 0) {
-			builder.append(elements[0]);
-			number = 0 - number;
+			isNegative = true;
+			number = 0 - number; // convert to positive
 		}
 
 		int remainder;
@@ -68,7 +69,13 @@ public class Base62Encoder {
 			builder.append(elements[remainder]);
 			number = number / 62;
 		} while(number > 0);
-
+		
+		builder.reverse();
+		
+		if(isNegative) {
+			builder.insert(0, elements[0]);
+		}
+		
 		return builder.toString();
 	}
 
@@ -86,17 +93,7 @@ public class Base62Encoder {
 		StringBuilder builder = new StringBuilder(numbers.length * 10);
 
 		for(long number : numbers) {
-			if(number < 0) {
-				builder.append(elements[0]);
-				number = 0 - number;
-			}
-
-			int remainder;
-			do {
-				remainder = (int) (number % 62l);
-				builder.append(elements[remainder]);
-				number = number / 62;
-			} while(number > 0);
+			builder.append(encode(number));
 		}
 
 		return builder.toString();
@@ -120,15 +117,16 @@ public class Base62Encoder {
 		}
 
 		char[] array = string.toCharArray();
+		
 		long num = 0;
-		int index = array.length - 1;
+		int size = array.length;
 		boolean negative = false;
-		for( ; index >= 0; index--) {
+		for(int index = 0; index < size; index++) {
 			char c = array[index];
 
 			if(index == 0 && c == elements[0]) {
 				negative = true;
-				break;
+				continue;
 			}
 
 			num = num * 62;
