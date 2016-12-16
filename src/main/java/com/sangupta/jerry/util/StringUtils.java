@@ -85,11 +85,20 @@ public abstract class StringUtils {
 	 * @return the HEX coded string representing the byte array
 	 */
 	public static String asHex(byte bytes[]) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < bytes.length; ++i) {
-			sb.append(Integer.toHexString((bytes[i] & 0xFF) | 0x100).substring(1, 3));
+		if(bytes == null) {
+			return null;
 		}
-		return sb.toString();
+		
+		if(bytes.length == 0) {
+			return StringUtils.EMPTY_STRING;
+		}
+		
+		StringBuilder builder = new StringBuilder();
+		for (int i = 0; i < bytes.length; ++i) {
+			builder.append(Integer.toHexString((bytes[i] & 0xFF) | 0x100).substring(1, 3));
+		}
+		
+		return builder.toString();
 	}
 
 	/**
