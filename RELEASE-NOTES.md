@@ -1,7 +1,8 @@
 ## Release Notes
 
-**Current Development Snapshot**
+**Current Development (3.0.0-SNAPSHOT)**
 
+* Fixed critical bug in `Base62Encoder` where values conflicting codes were being generated
 * Added `ResourceUtils` to read files from classpath including from packaged JARs
 * Added `StringArrayIterator` to iterate over a string array using `Iterator`
 * Added `IndentedStringWriter` that takes care of writing long indented text that breaks at a given line length
