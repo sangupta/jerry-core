@@ -60,7 +60,7 @@ public abstract class AutoRefreshable<T> {
 	/**
 	 * The value being cached
 	 */
-	protected T value;
+	protected volatile T value;
 
 	/**
 	 * The time for which the value must be cached

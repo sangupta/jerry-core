@@ -40,9 +40,9 @@ public class TestAutoRefreshable {
 		} catch (InterruptedException e) {
 		}
 
-		// wait 700 more millis
+		// wait 1000 more millis
 		try {
-			Thread.sleep(700);
+			Thread.sleep(1000);
 			Assert.assertNotEquals(value, ar.get().longValue());
 		} catch (InterruptedException e) {
 		}
