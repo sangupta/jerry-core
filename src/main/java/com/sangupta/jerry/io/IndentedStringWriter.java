@@ -143,8 +143,13 @@ public class IndentedStringWriter {
 	 * Write the given string fragment to current line.
 	 * 
 	 * @param str
+	 *            the string to be written
 	 */
 	public void write(String str) {
+		if(AssertUtils.isEmpty(str)) {
+			return;
+		}
+		
 		String[] tokens = str.split("\n");
 		for(int index = 0; index < tokens.length; index++) {
 			if(index > 1) {
@@ -160,6 +165,8 @@ public class IndentedStringWriter {
 	 * is no other way.
 	 * 
 	 * @param strings
+	 *            the {@link String} values to be written
+	 * 
 	 */
 	public void writeNonBreaking(String... strings) {
 		StringBuilder builder = new StringBuilder();
@@ -228,10 +235,11 @@ public class IndentedStringWriter {
 	}
 	
 	/**
-	 * Write the given string fragment to current line and start a new line
-	 * at the end.
+	 * Write the given string fragment to current line and start a new line at
+	 * the end.
 	 * 
 	 * @param str
+	 *            the {@link String} to be written followed by a new line
 	 */
 	public void writeLine(String str) {
 		this.write(str);
@@ -263,7 +271,9 @@ public class IndentedStringWriter {
 	}
 	
 	/**
-	 * Return the current string representation.
+	 * Return the current {@link String} representation.
+	 * 
+	 * @return the {@link String} value thus far written to this writer
 	 * 
 	 */
 	public String getString() {

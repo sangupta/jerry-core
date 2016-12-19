@@ -89,20 +89,20 @@ public class AdvancedStringReader {
 	/**
 	 * Read the character at the current position but do not move ahead.
 	 * 
-	 * @return
+	 * @return the next available character
 	 */
 	public char peekAhead() {
 	    return this.peekAhead(0);
 	}
 	
 	/**
-     * Look ahead in the string a given number of characters.
-     * 
-     * @param ahead
-     *            the position from current to look ahead
-     * 
-     * @return the character at the position
-     */
+	 * Look ahead in the string a given number of characters.
+	 * 
+	 * @param ahead
+	 *            the position from current to look ahead
+	 * 
+	 * @return the character at the position
+	 */
 	public char peekAhead(int ahead) {
 	    int pos = this.current + ahead;
 	    if(pos > this.length) {
@@ -113,10 +113,13 @@ public class AdvancedStringReader {
 	}
 	
 	/**
-	 * Read the string from current position to the given number of characters ahead.
+	 * Read the string from current position to the given number of characters
+	 * ahead.
 	 * 
 	 * @param ahead
-	 * @return
+	 *            the number of position to read ahead
+	 * 
+	 * @return the {@link String} representation of the characters thus read
 	 */
 	public String readTillPosition(int ahead) {
         int pos = this.current + ahead;
@@ -130,26 +133,28 @@ public class AdvancedStringReader {
 	}
 
 	/**
-     * Read the string from current position to the next nth occurrence of the
-     * given character.
-     *
-     * @param separator
-     *            the character till which we are going to read
-     *
-     * @param occurence
-     *            the times the character will be included before we stop
-     *            further reading
-     *
-     * @return the sub-string thus extracted
-     */
+	 * Read the string from current position to the next nth occurrence of the
+	 * given character.
+	 *
+	 * @param separator
+	 *            the character till which we are going to read
+	 *
+	 * @param occurence
+	 *            the times the character will be included before we stop
+	 *            further reading
+	 *
+	 * @return the sub-string thus extracted
+	 */
 	public String readTillNext(char separator, int occurence) {
 	    return this.readTillNext(String.valueOf(separator), occurence);
 	}
 
 	/**
-	 * Peek the next available position of the given character from the current position.
+	 * Peek the next available position of the given character from the current
+	 * position.
 	 * 
-	 * @param c the character to look ahead
+	 * @param c
+	 *            the character to look ahead
 	 * 
 	 * @return the index if found, or <code>-1</code>
 	 */
@@ -164,19 +169,30 @@ public class AdvancedStringReader {
 	}
 
     /**
-	 *
+	 * Read ahead till we encounter the given separator or there are no more
+	 * tokens in the queue.
+	 * 
 	 * @param separator
-	 * @return
+	 *            the separator being looked at
+	 * 
+	 * @return the {@link String} thus read
 	 */
 	public String readTillNext(String separator) {
 	    return this.readTillNext(separator, 1);
 	}
 
 	/**
-	 *
+	 * Read ahead till the next given occurrence of the given separator or if
+	 * there are no more tokens in the queue.
+	 * 
 	 * @param separator
+	 *            the separator being looked at
+	 * 
 	 * @param occurence
-	 * @return
+	 *            the occurrence to find
+	 * 
+	 * @return the {@link String} thus read
+	 * 
 	 */
 	public String readTillNext(String separator, int occurence) {
 		if(!this.hasNext()) {
@@ -208,11 +224,11 @@ public class AdvancedStringReader {
 	}
 
 	/**
-     * Read the entire remaining string in this reader.
-     *
-     * @return the remaining sub-string, <code>null</code> if there are no more
-     *         tokens to be read
-     */
+	 * Read the entire remaining string in this reader.
+	 *
+	 * @return the remaining sub-string, <code>null</code> if there are no more
+	 *         tokens to be read
+	 */
 	public String readRemaining() {
 		if(!this.hasNext()) {
 			return null;
@@ -222,13 +238,13 @@ public class AdvancedStringReader {
 	}
 
 	/**
-     * Skip reading next N characters
-     *
-     * @param numCharacters
-     *            the number of characters to skip reading.
-     *
-     * @return the number of characters actually skipped.
-     */
+	 * Skip reading next N characters
+	 *
+	 * @param numCharacters
+	 *            the number of characters to skip reading.
+	 *
+	 * @return the number of characters actually skipped.
+	 */
 	public int skipNext(int numCharacters) {
 	    if(!this.hasNext()) {
             return 0;
@@ -248,7 +264,9 @@ public class AdvancedStringReader {
 	 * Read string from current position to number of characters ahead.
 	 * 
 	 * @param numCharacters
-	 * @return
+	 *            the number of characters to read
+	 * 
+	 * @return the {@link String} thus read
 	 */
 	public String readNext(int numCharacters) {
 	    if(!this.hasNext()) {
