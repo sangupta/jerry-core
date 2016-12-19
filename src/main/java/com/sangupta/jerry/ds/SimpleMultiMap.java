@@ -28,6 +28,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * A very simple implementation of a Multi-Map for use that does not implement
  * the {@link Map} interface. It is useful for situations where a very
@@ -43,6 +45,7 @@ import java.util.concurrent.ConcurrentMap;
  * @author sangupta
  *
  */
+@ThreadSafe
 public class SimpleMultiMap<K, V> {
 
 	/**
@@ -98,6 +101,27 @@ public class SimpleMultiMap<K, V> {
 	}
 	
 	/**
+	 * Return the very first element from all the values stored against the key
+	 * 
+	 * @param key
+	 *            the key being looked for
+	 * 
+	 * @return the very first value, <code>null</code> otherwise
+	 */
+	public V getOne(K key) {
+		List<V> values = this.getValues(key);
+		if(values == null) {
+			return null;
+		}
+		
+		if(values.isEmpty()) {
+			return null;
+		}
+		
+		return values.get(0);
+	}
+	
+	/**
 	 * Return the number of values stored against the given key.
 	 * 
 	 * @param key
@@ -146,6 +170,10 @@ public class SimpleMultiMap<K, V> {
 		values.add(value);
 	}
 	
+	public void forceReplace(K key, V value) {
+		
+	}
+	
 	/**
 	 * Remove and return all values associated with the given key.
 	 *
@@ -182,7 +210,20 @@ public class SimpleMultiMap<K, V> {
 
 	@Override
 	public boolean equals(Object obj) {
-		return this.map.equals(obj);
+		if(obj == null) {
+			return false;
+		}
+		
+		if(this == obj) {
+			return true;
+		}
+		
+		if(!(map instanceof SimpleMultiMap)) {
+			return false;
+		}
+		
+		SimpleMultiMap<?, ?> map = (SimpleMultiMap<?, ?>) obj;
+		return this.map.equals(map.map);
 	}
 
 }
