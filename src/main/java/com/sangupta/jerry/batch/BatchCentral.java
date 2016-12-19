@@ -57,6 +57,10 @@ public class BatchCentral {
 	 * Remove the given batch job from the central.
 	 * 
 	 * @param job
+	 *            the job to be removed
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the job to be removed is <code>null</code>
 	 */
 	public static void removeJob(BatchJob<?> job) {
 		if(job == null) {

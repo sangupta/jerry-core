@@ -41,6 +41,7 @@ import com.sangupta.jerry.util.AssertUtils;
  * 
  * @author sangupta
  *
+ * @since 3.0.0
  */
 public abstract class BatchJob<T> {
 	
@@ -61,10 +62,10 @@ public abstract class BatchJob<T> {
 	private ServiceManager serviceManager;
 	
 	/**
-	 * Return the job items over which we should work. Can return <code>null</code>
-	 * to signal there are no current job items.
+	 * Return the job items over which we should work. Can return
+	 * <code>null</code> to signal there are no current job items.
 	 * 
-	 * @return
+	 * @return the job item
 	 */
 	protected abstract T getJobItem();
 	
@@ -77,28 +78,33 @@ public abstract class BatchJob<T> {
 	protected abstract long getShutdownWaitTimeMillis();
 	
 	/**
-	 * Get the {@link BatchJobItemExecutor} - the executor that process one given
-	 * job item.
+	 * Get the {@link BatchJobItemExecutor} - the executor that process one
+	 * given job item.
 	 * 
-	 * @return
+	 * @return the associated {@link BatchJobItemExecutor}
 	 */
 	protected abstract BatchJobItemExecutor<T> getJobPieceExecutor();
 	
 	/**
 	 * Extension point to do something before worker threads are initialized.
-	 * Returning a <code>true</code> will continue further in the setup. Returning
-	 * a <code>false</code> will immediately halt creation of workers.
+	 * Returning a <code>true</code> will continue further in the setup.
+	 * Returning a <code>false</code> will immediately halt creation of workers.
 	 * 
-	 * @return
+	 * @return <code>true</code> to proceed ahead, <code>false</code> to stop
+	 *         initialization
 	 */
 	protected boolean beforeWorkersInitialize() {
 		return true;
 	}
 	
 	/**
-	 * Extension point to do something after worker threads have been initialized.
+	 * Extension point to do something after worker threads have been
+	 * initialized. Returning a <code>true</code> will continue further in the
+	 * setup. Returning a <code>false</code> will immediately halt working
+	 * further.
 	 * 
-	 * @return
+	 * @return <code>true</code> if workers should start processing,
+	 *         <code>false</code> to stop immediately
 	 */
 	protected boolean afterWorkersInitialize() {
 		return true;
@@ -121,9 +127,16 @@ public abstract class BatchJob<T> {
 	}
 	
 	/**
-	 * Start this crawler asynchronously.
+	 * Start this batch job asynchronously.
 	 * 
-	 * @return
+	 * @param numThreads
+	 *            the number of threads to use for processing the job
+	 * 
+	 * @return <code>true</code> if batch job was started, <code>false</code>
+	 *         otherwise
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the number of threads is less than or equal to zero
 	 */
 	public boolean startJobAsync(int numThreads) {
 		if(numThreads <= 0) {
@@ -239,7 +252,7 @@ public abstract class BatchJob<T> {
 	/**
 	 * Return the name of this crawler.
 	 * 
-	 * @return
+	 * @return the name of the job
 	 */
 	public String getJobName() {
 		return this.jobName;

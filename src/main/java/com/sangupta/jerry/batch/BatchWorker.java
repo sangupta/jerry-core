@@ -30,13 +30,16 @@ import com.google.common.util.concurrent.AbstractExecutionThreadService;
 import com.sangupta.jerry.util.AssertUtils;
 
 /**
- * The worker thread that works over a single batch job. Multiple
- * worker threads race to utilize and work over the amount of work
- * backed by a queue.
+ * The worker thread that works over a single batch job. Multiple worker threads
+ * race to utilize and work over the amount of work backed by a queue.
  * 
  * @author sangupta
+ * 
+ * @since 3.0.0
  *
  * @param <T>
+ *            the {@link Class} type of the job item that this worker will
+ *            handle
  */
 public class BatchWorker<T> extends AbstractExecutionThreadService  {
 	
@@ -81,7 +84,20 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 	 * Create a unique worker with the thread name.
 	 * 
 	 * @param threadName
-	 * @param yoJobPieceExecutor 
+	 *            the name of the thread to use
+	 * 
+	 * @param jobName
+	 *            the name of the job that this worker is part of
+	 * 
+	 * @param itemReader
+	 *            the item reader that reads an item to work on
+	 * 
+	 * @param executor
+	 *            the executor to use for working on the job item
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if threadName or jobName are <code>null/empty</code>, or if
+	 *             itemReader or executor are <code>null</code>
 	 */
 	public BatchWorker(String threadName, String jobName, Callable<T> itemReader, BatchJobItemExecutor<T> executor) {
 		if(AssertUtils.isEmpty(threadName)) {
@@ -178,6 +194,7 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 	}
 	
 	/**
+	 * Pause the worker if need be.
 	 * 
 	 */
 	protected void pauseIfNeeded() {
@@ -226,7 +243,7 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 	/**
 	 * Return the thread name associated with this worker.
 	 * 
-	 * @return
+	 * @return the name of the thread
 	 */
 	public String getThreadName() {
 		return this.threadName;
@@ -235,7 +252,8 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 	/**
 	 * Returns if the current worker is under the pause state or not.
 	 * 
-	 * @return
+	 * @return <code>true</code> if worker is paused, <code>false</code> if
+	 *         working
 	 */
 	public boolean isWorkerPaused() {
 		return this.workerPaused;

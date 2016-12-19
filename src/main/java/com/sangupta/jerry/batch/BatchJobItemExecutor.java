@@ -22,12 +22,15 @@
 package com.sangupta.jerry.batch;
 
 /**
- * The executor that actually performs something useful on the job item
- * that has been provided to the job queue.
+ * The executor that actually performs something useful on the job item that has
+ * been provided to the job queue.
  * 
  * @author sangupta
+ * 
+ * @since 3.0.0
  *
  * @param <T>
+ *            the {@link Class} type of the item that represents a job-order
  */
 public interface BatchJobItemExecutor<T> {
 

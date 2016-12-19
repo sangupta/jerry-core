@@ -52,8 +52,17 @@ public enum ApplicationEnvironment {
 	private String[] alias;
 	
 	/**
+	 * Convert the {@link String} environment name to
+	 * {@link ApplicationEnvironment} instance without considering case.
+	 * 
 	 * @param environmentName
-	 * @return
+	 *            {@link String} representation of the environment name.
+	 * 
+	 * @return the {@link ApplicationEnvironment} instance, or <code>null</code>
+	 *         if name is <code>null/empty</code>
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if the name does not match a valid list of environments.
 	 */
 	public static ApplicationEnvironment fromString(String environmentName) {
 		if(AssertUtils.isEmpty(environmentName)) {
