@@ -1267,7 +1267,10 @@ public abstract class ReflectionUtils {
 	/**
 	 * Obtain the value of the field defined by <code>name</code> on the given
 	 * object <code>instance</code> and cast the returned value to the given
-	 * <code>castTo</code> class
+	 * <code>castTo</code> class.
+	 * 
+	 * @param <T>
+	 *            the {@link Class} type of the expected field value
 	 * 
 	 * @param instance
 	 *            the object instance to obtain field value from

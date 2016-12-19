@@ -1450,12 +1450,14 @@ public abstract class StringUtils {
     }
 	
     /**
-     * Remove white-spaces from the start of the given string. If given string is
-     * <code>null</code>, an empty {@link String} is returned.
-     * 
-     * @param str
-     * @return
-     */
+	 * Remove white-spaces from the start of the given string. If given string
+	 * is <code>null</code>, an empty {@link String} is returned.
+	 * 
+	 * @param str
+	 *            the string to be cleaned up
+	 * 
+	 * @return the cleaned {@link String}
+	 */
     public static String ltrim(String str) {
     	if(AssertUtils.isEmpty(str)) {
     		return "";
@@ -1474,7 +1476,9 @@ public abstract class StringUtils {
      * <code>null</code>, an empty {@link String} is returned.
      * 
      * @param str
-     * @return
+	 *            the string to be cleaned up
+	 * 
+	 * @return the cleaned {@link String}
      */
     public static String rtrim(String str) {
     	if(AssertUtils.isEmpty(str)) {

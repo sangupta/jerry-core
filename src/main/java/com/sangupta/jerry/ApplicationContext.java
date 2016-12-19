@@ -92,9 +92,11 @@ public class ApplicationContext {
 	}
 
 	/**
-	 * Get the valid environment for the application using the command-line or system-wide property.
+	 * Get the valid environment for the application using the command-line or
+	 * system-wide property.
 	 * 
-	 * @return
+	 * @return the {@link ApplicationEnvironment} deciphered from
+	 *         System-property, java-property or set via code
 	 */
 	public static ApplicationEnvironment getValidEnvironment() {
 		if(ApplicationContext.applicationEnvironment != null) {

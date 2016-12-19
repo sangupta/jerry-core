@@ -73,7 +73,7 @@ public abstract class BatchJob<T> {
 	 * Time in milliseconds to wait during shutdown, before each service worker
 	 * thread will be killed to stop all services
 	 * 
-	 * @return
+	 * @return the time in milliseconds
 	 */
 	protected abstract long getShutdownWaitTimeMillis();
 	
@@ -113,6 +113,11 @@ public abstract class BatchJob<T> {
 	/**
 	 * Constructor
 	 * 
+	 * @param jobName
+	 *            the name of the job to use
+	 * 
+	 * @throws IllegalArgumentException
+	 *             if jobName is <code>null/empty</code>
 	 */
 	public BatchJob(String jobName) {
 		if(AssertUtils.isEmpty(jobName)) {
