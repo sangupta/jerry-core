@@ -122,6 +122,27 @@ public class SimpleMultiMap<K, V> {
 	}
 	
 	/**
+	 * Replace the value present at the key with the new value. At the end of
+	 * the operation, only given value exists against the key and all previous
+	 * values have been removed.
+	 * 
+	 * @param key
+	 *            the key to replace values for
+	 * 
+	 * @param value
+	 *            the value to put against the key
+	 * 
+	 * @return the {@link List} of previous values stored against the key, or
+	 *         <code>null</code> if the key was not present
+	 */
+	public List<V> replace(K key, V value) {
+		List<V> values = new ArrayList<V>();
+		values.add(value);
+
+		return this.map.put(key, values);
+	}
+	
+	/**
 	 * Return the number of values stored against the given key.
 	 * 
 	 * @param key
@@ -168,10 +189,6 @@ public class SimpleMultiMap<K, V> {
 		}
 
 		values.add(value);
-	}
-	
-	public void forceReplace(K key, V value) {
-		
 	}
 	
 	/**
