@@ -112,9 +112,9 @@ License
 	
 ```
 jerry - Common Java Functionality
-Copyright (c) 2012-2015, Sandeep Gupta
+Copyright (c) 2012-2016, Sandeep Gupta
 
-http://sangupta.com/projects/jerry-core
+https://sangupta.com/projects/jerry-core
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
