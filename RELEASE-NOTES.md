@@ -1,6 +1,6 @@
 ## Release Notes
 
-**Current Development (3.0.0-SNAPSHOT)**
+**3.0.0 (21 Dec 2016)**
 
 * Fixed critical bug in `Base62Encoder` where values conflicting codes were being generated
 * Added `ResourceUtils` to read files from classpath including from packaged JARs
@@ -18,7 +18,7 @@
 * Added `AdvancedStringReader` and corresponding unit-tests
 * Updated JavaDocs
 
-**2.4.0**
+**2.4.0 (22 Dec 2015)**
 
 * Added `Gson` based `UserLocalStore` for saving application data in JSON format
 * Added `readTo` and `writeFrom` methods to `UserLocalStore` to work with object instances
@@ -35,7 +35,7 @@
 * Fixed bug in `MutableDouble` in constructor - changed from `float` param to `double` param
 * Updated dependencies
 
-**2.3.0**
+**2.3.0 (01 Oct 2015)**
 
 * `ConsoleTable` now supports pagination
 * Added a `ConsoleTablePaginationBreakHandler` to interrupt pagination at breaks
@@ -43,12 +43,12 @@
 * Added `BoundedInt` and `BoundedLong` to allow for working with values within bounds
 * Added unit-tests for `AutoRefreshable*` and `Bounded*` classes
 
-**2.2.2**
+**2.2.2 (09 Sep 2015)**
 
 * Fixed bug in `UriUtils.addWebPaths(String... )` to take care of null checks
 * Updated `ConsoleTable` to properly display the table - some formatting before the header and at row-end was missing
 
-**2.2.1**
+**2.2.1 (24 Aug 2015)**
 
 * Modified `TestBase64Encoder` and `TestCompressionUtils` to use method from `StringUtils` class
 * Updated `CryptoUtils` to make `encrypt`/`decrypt` methods `static`
@@ -63,14 +63,14 @@
 * Added unit tests for `jersey` and `jersey2` packages
 * Added unit tests for many utility classes
 
-**2.2.0**
+**2.2.0 (18 Aug 2015)**
 
 * Added `ListUtils` with `listOf` methods to construct `ArrayList` of arrays
 * Added `getLowestSetBitIndex` and `getHighestSetBitIndex` methods to `BitUtils`
 * Added `getHighestBitSet` and `getLowestBitSet` methods to `BitArray` and its implementations
 * Added test-cases to `BitUtils` and `BitArray` implementations
 
-**2.1.0**
+**2.1.0 (28 Jul 2015)**
 
 * Udpated `BitArray` and its various implementation for many bug-fixes and enhancements
 * Added JCIP thread-safety annotations to `BitArray` and its implementations
@@ -78,7 +78,7 @@
 * Renamed `GsonJsonProvider` to `GsonJsonJerseyProvider` for better clarity
 * Added `Gson` based `JAX-RS` handler for use with RestEasy
 
-**2.0.0**
+**2.0.0 (06 Jul 2015)**
 
 * Moved `MutableInt`, `MutableLong`, `MutableFloat` and `MutableDouble` to a sub-package
 * Moved `IntegerCounter` and `LongCounter` to a sub-package
@@ -100,7 +100,7 @@
 * Updated copyright headers
 
 
-**1.6.1**
+**1.6.1 (16 Mar 2015)**
 
 * Fixed bug in `CheckUtils.directoryExists` where its existence as a `File` was being tested
 
