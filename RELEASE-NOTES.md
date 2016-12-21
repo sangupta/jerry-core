@@ -104,7 +104,7 @@
 
 * Fixed bug in `CheckUtils.directoryExists` where its existence as a `File` was being tested
 
-**1.6.0**
+**1.6.0 (09 Mar 2015)**
 
 * Renamed `SystemProperty` to `SystemPropertyNames` to indicate that this just contains names
 * Added method to `FileUtils` to list files using wild-cards in a given path
@@ -118,7 +118,7 @@
 * Added `EnvironmentUtils.dumpAllProperties()` to dump all system properties and evironment variables into a string for easier debugging
 * Added `areEmpty()` and `areNotEmpty()` in `AssertUtils`
 
-**1.5.0**
+**1.5.0 (28 Dec 2014)**
 
 * Updated `GsonUtils` to allow for registeration of custom type adapters, and clear previously generated `Gson`s and/or custom adapters
 * Added `SimpleMultiMap` to store multiple values against a given key in a `HashMap`
@@ -127,7 +127,7 @@
 * Added functionality to dump `ConsoleTable` into `CSV`, `JSON` and `XML` formats
 
 
-**1.4.0**
+**1.4.0 (03 Dec 2014)**
 
 * Fixed a critical bug in `UriUtils.extractHost` - when the URL starts with `//` the method was throwing an NPE - which is now fixed and it returns the correct hostname
 * Added `StringUtils.repeat` to create a `String` of repeatable characters
@@ -136,7 +136,7 @@
 * Added `ConsoleTable` class to output display to `System.out` or `Console` implementations in a proper tabular format. Can be used to output data to plain text files - three implementations are available, `full-width`, `width-curtail` and `multi-line`
 * Updated `UserLocalStore` to fetch a list of all keys stored within the store
 
-**1.3.0**
+**1.3.0 (28 Oct 2014)**
 
 * Updated `UserLocalStore` to allow files to be created in user's home directory
 * Added method to `StringUtils` to merge an array using a given delimiter
@@ -145,7 +145,7 @@
 * Updated `IntegerCounter` and `LongCounter` to reset its value, or create a new one with a given initial value
 * Upgraded `Maven` dependencies to latest
 
-**1.2.1**
+**1.2.1 (07 Oct 2014)**
 
 * Added unit test cases for `UserLocalStore`, `Base62Encoder`
 * Added method in `HashUtils` to hash using `PBKDF2-HMAC-SHA1`
@@ -153,7 +153,7 @@
 * Added `EnvironmentUtils` to read a given property first by reading Java property, and then using System properties
 * Updated `GsonUtils` to serialize time as `long` epoch values to preserve milli-seconds
 
-**1.2.0**
+**1.2.0 (02 Jul 2014)**
 
 * Added `UserLocalStore` and corresponding implementations to maintain a user-specific data store
 * Added constants interface for popular system properties in `SystemProperty`
@@ -161,7 +161,7 @@
 * Added `CheckUtils` for checking assertions and throwing appropriate exceptions when they are not met
 * Added code coverage using `cobertura` maven plugin
 
-**1.1.0**
+**1.1.0 (02 Apr 2014)**
 
 * Added `IntegerCounter` to keep track of multiple named counters with max integer capacity
 * Added `LongCounter` to keep track of multiple named counters with max long capacity
@@ -171,6 +171,6 @@
 * Fixed bug in `UrlManipulator` when URL path is not present
 * Updated javadocs
 
-**1.0.0**
+**1.0.0 (20 Feb 2014)**
 
 * Initial release
