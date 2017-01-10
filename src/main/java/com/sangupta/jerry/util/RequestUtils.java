@@ -43,6 +43,10 @@ public abstract class RequestUtils {
 	 * @return the extracted URI path
 	 */
 	public static String extractUri(ServletRequest request) {
+		if(request == null) {
+			return null;
+		}
+		
 		if(!(request instanceof HttpServletRequest)) {
 			throw new IllegalArgumentException("Request is not of HttpServletRequest type");
 		}
@@ -61,6 +65,10 @@ public abstract class RequestUtils {
 	 *
 	 */
 	public static String extractUri(HttpServletRequest request) {
+		if(request == null) {
+			return null;
+		}
+		
 		// extract the URL
 		String url = request.getRequestURI();
 		if(url.startsWith(request.getContextPath())) {
@@ -92,6 +100,10 @@ public abstract class RequestUtils {
 	 * @return the fragment with request context prefixed
 	 */
 	public static String getPath(HttpServletRequest request, String pathFragment) {
+		if(request == null) {
+			return null;
+		}
+		
 		return UriUtils.addWebPaths(request.getContextPath(), pathFragment);
 	}
 
