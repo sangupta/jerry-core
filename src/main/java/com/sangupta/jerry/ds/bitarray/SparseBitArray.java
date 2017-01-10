@@ -1,5 +1,5 @@
 /**
- *
+ * 
  * jerry - Common Java Functionality
  * Copyright (c) 2012-2017, Sandeep Gupta
  *
@@ -342,9 +342,9 @@ public class SparseBitArray implements BitArray {
 				continue;
 			}
 			
-			for(int element = this.elementsNeededPerBucket - 1; element >= 0; element--) {
+			for(int element = subArray.length - 1; element >= 0; element--) {
 				long value = subArray[element];
-				if(value > 0) {
+				if(value != 0) {
 					// we found an element
 					int index = BitUtils.getHighestSetBitIndex(value);
 					return (bucket * this.elementsNeededPerBucket * BITS_PER_ELEMENT) + (element * BITS_PER_ELEMENT) + index;
@@ -365,7 +365,7 @@ public class SparseBitArray implements BitArray {
 			
 			for(int element = 0; element < this.elementsNeededPerBucket; element++) {
 				long value = subArray[element];
-				if(value > 0) {
+				if(value != 0) {
 					// we found an element
 					int index = BitUtils.getLowestSetBitIndex(value);
 					return (bucket * this.elementsNeededPerBucket * BITS_PER_ELEMENT) + (element * BITS_PER_ELEMENT) + index;
