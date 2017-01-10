@@ -30,7 +30,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public class StringArrayIteratorTest {
+public class TestStringArrayIterator {
 
 	@Test
 	public void test() {
