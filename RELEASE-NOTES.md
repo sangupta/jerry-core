@@ -1,6 +1,6 @@
 ## Release Notes
 
-**Current Development (3.0.0-SNAPSHOT)**
+**3.0.0 (21 Dec 2016)**
 
 * Fixed critical bug in `Base62Encoder` where values conflicting codes were being generated
 * Added `ResourceUtils` to read files from classpath including from packaged JARs
@@ -18,7 +18,7 @@
 * Added `AdvancedStringReader` and corresponding unit-tests
 * Updated JavaDocs
 
-**2.4.0**
+**2.4.0 (22 Dec 2015)**
 
 * Added `Gson` based `UserLocalStore` for saving application data in JSON format
 * Added `readTo` and `writeFrom` methods to `UserLocalStore` to work with object instances
@@ -35,7 +35,7 @@
 * Fixed bug in `MutableDouble` in constructor - changed from `float` param to `double` param
 * Updated dependencies
 
-**2.3.0**
+**2.3.0 (01 Oct 2015)**
 
 * `ConsoleTable` now supports pagination
 * Added a `ConsoleTablePaginationBreakHandler` to interrupt pagination at breaks
@@ -43,12 +43,12 @@
 * Added `BoundedInt` and `BoundedLong` to allow for working with values within bounds
 * Added unit-tests for `AutoRefreshable*` and `Bounded*` classes
 
-**2.2.2**
+**2.2.2 (09 Sep 2015)**
 
 * Fixed bug in `UriUtils.addWebPaths(String... )` to take care of null checks
 * Updated `ConsoleTable` to properly display the table - some formatting before the header and at row-end was missing
 
-**2.2.1**
+**2.2.1 (24 Aug 2015)**
 
 * Modified `TestBase64Encoder` and `TestCompressionUtils` to use method from `StringUtils` class
 * Updated `CryptoUtils` to make `encrypt`/`decrypt` methods `static`
@@ -63,14 +63,14 @@
 * Added unit tests for `jersey` and `jersey2` packages
 * Added unit tests for many utility classes
 
-**2.2.0**
+**2.2.0 (18 Aug 2015)**
 
 * Added `ListUtils` with `listOf` methods to construct `ArrayList` of arrays
 * Added `getLowestSetBitIndex` and `getHighestSetBitIndex` methods to `BitUtils`
 * Added `getHighestBitSet` and `getLowestBitSet` methods to `BitArray` and its implementations
 * Added test-cases to `BitUtils` and `BitArray` implementations
 
-**2.1.0**
+**2.1.0 (28 Jul 2015)**
 
 * Udpated `BitArray` and its various implementation for many bug-fixes and enhancements
 * Added JCIP thread-safety annotations to `BitArray` and its implementations
@@ -78,7 +78,7 @@
 * Renamed `GsonJsonProvider` to `GsonJsonJerseyProvider` for better clarity
 * Added `Gson` based `JAX-RS` handler for use with RestEasy
 
-**2.0.0**
+**2.0.0 (06 Jul 2015)**
 
 * Moved `MutableInt`, `MutableLong`, `MutableFloat` and `MutableDouble` to a sub-package
 * Moved `IntegerCounter` and `LongCounter` to a sub-package
@@ -100,11 +100,11 @@
 * Updated copyright headers
 
 
-**1.6.1**
+**1.6.1 (16 Mar 2015)**
 
 * Fixed bug in `CheckUtils.directoryExists` where its existence as a `File` was being tested
 
-**1.6.0**
+**1.6.0 (09 Mar 2015)**
 
 * Renamed `SystemProperty` to `SystemPropertyNames` to indicate that this just contains names
 * Added method to `FileUtils` to list files using wild-cards in a given path
@@ -118,7 +118,7 @@
 * Added `EnvironmentUtils.dumpAllProperties()` to dump all system properties and evironment variables into a string for easier debugging
 * Added `areEmpty()` and `areNotEmpty()` in `AssertUtils`
 
-**1.5.0**
+**1.5.0 (28 Dec 2014)**
 
 * Updated `GsonUtils` to allow for registeration of custom type adapters, and clear previously generated `Gson`s and/or custom adapters
 * Added `SimpleMultiMap` to store multiple values against a given key in a `HashMap`
@@ -127,7 +127,7 @@
 * Added functionality to dump `ConsoleTable` into `CSV`, `JSON` and `XML` formats
 
 
-**1.4.0**
+**1.4.0 (03 Dec 2014)**
 
 * Fixed a critical bug in `UriUtils.extractHost` - when the URL starts with `//` the method was throwing an NPE - which is now fixed and it returns the correct hostname
 * Added `StringUtils.repeat` to create a `String` of repeatable characters
@@ -136,7 +136,7 @@
 * Added `ConsoleTable` class to output display to `System.out` or `Console` implementations in a proper tabular format. Can be used to output data to plain text files - three implementations are available, `full-width`, `width-curtail` and `multi-line`
 * Updated `UserLocalStore` to fetch a list of all keys stored within the store
 
-**1.3.0**
+**1.3.0 (28 Oct 2014)**
 
 * Updated `UserLocalStore` to allow files to be created in user's home directory
 * Added method to `StringUtils` to merge an array using a given delimiter
@@ -145,7 +145,7 @@
 * Updated `IntegerCounter` and `LongCounter` to reset its value, or create a new one with a given initial value
 * Upgraded `Maven` dependencies to latest
 
-**1.2.1**
+**1.2.1 (07 Oct 2014)**
 
 * Added unit test cases for `UserLocalStore`, `Base62Encoder`
 * Added method in `HashUtils` to hash using `PBKDF2-HMAC-SHA1`
@@ -153,7 +153,7 @@
 * Added `EnvironmentUtils` to read a given property first by reading Java property, and then using System properties
 * Updated `GsonUtils` to serialize time as `long` epoch values to preserve milli-seconds
 
-**1.2.0**
+**1.2.0 (02 Jul 2014)**
 
 * Added `UserLocalStore` and corresponding implementations to maintain a user-specific data store
 * Added constants interface for popular system properties in `SystemProperty`
@@ -161,7 +161,7 @@
 * Added `CheckUtils` for checking assertions and throwing appropriate exceptions when they are not met
 * Added code coverage using `cobertura` maven plugin
 
-**1.1.0**
+**1.1.0 (02 Apr 2014)**
 
 * Added `IntegerCounter` to keep track of multiple named counters with max integer capacity
 * Added `LongCounter` to keep track of multiple named counters with max long capacity
@@ -171,6 +171,6 @@
 * Fixed bug in `UrlManipulator` when URL path is not present
 * Updated javadocs
 
-**1.0.0**
+**1.0.0 (20 Feb 2014)**
 
 * Initial release
