@@ -7,5 +7,23 @@ jdk:
   - oraclejdk7
   - oraclejdk8
 
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "gczBzJkIgn21D7vsF/h7MtuzSoOP6tJhM9siAoFheygG8ZSRc7GQUlwuI3f24ym5K1P6hz2IS8hDbuwVVZpSQKUN1B+rcXlkFeAOljK6ZBxVh6UdvwQnBRIZXyJQomBIWjidnxGj+dOpjX3RgaSL/Q2okHAE3h5G3vEqRzayplw="
+
+before_install:
+      - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "sangupta/jerry-core"
+      description: "Common Java methods for core functionality"
+    notification_email: sandy.pec@gmail.com
+    build_command:   "mvn clean package"
+    branch_pattern: master
+    
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
