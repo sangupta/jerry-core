@@ -342,7 +342,12 @@ public abstract class FileUtils {
 
 		// check if this is an absolute path or not
 		String prefix = FilenameUtils.getPrefix(filePathWithWildCards);
-		final boolean isAbsolute = !prefix.isEmpty();
+		final boolean isAbsolute;
+		if(AssertUtils.isNotEmpty(prefix)) {
+			isAbsolute = true;
+		} else {
+			isAbsolute = false;
+		}
 
 		// change the base dir if absolute directory
 		if(isAbsolute) {

@@ -222,7 +222,12 @@ public abstract class CompressionUtils {
 	 *
 	 */
 	public static String uncompressToString(byte[] inputBytes) {
-		return new String(uncompress(inputBytes), StringUtils.DEFAULT_CHARSET);
+		byte[] uncompressed = uncompress(inputBytes);
+		if(AssertUtils.isEmpty(uncompressed)) {
+			return null;
+		}
+		
+		return new String(uncompressed, StringUtils.DEFAULT_CHARSET);
 	}
 
 	/**
@@ -239,7 +244,12 @@ public abstract class CompressionUtils {
 	 *
 	 */
 	public static String uncompressToString(byte[] inputBytes, Charset charset) {
-		return new String(uncompress(inputBytes), charset);
+		byte[] uncompressed = uncompress(inputBytes);
+		if(AssertUtils.isEmpty(uncompressed)) {
+			return null;
+		}
+		
+		return new String(uncompressed, charset);
 	}
 
 	/**
@@ -254,7 +264,12 @@ public abstract class CompressionUtils {
 	 *         encoding
 	 */
 	public static String uncompressToString(byte[] inputBytes, int uncompressedSize) {
-		return new String(uncompress(inputBytes, uncompressedSize));
+		byte[] uncompressed = uncompress(inputBytes, uncompressedSize);
+		if(AssertUtils.isEmpty(uncompressed)) {
+			return null;
+		}
+		
+		return new String(uncompressed);
 	}
 
 	/**
@@ -269,8 +284,8 @@ public abstract class CompressionUtils {
 	 *             if something fails
 	 */
 	public static byte[] gzipByteArray(byte[] bytes) throws IOException {
-		if(bytes == null) {
-			throw new IllegalArgumentException("byte-array cannot be null");
+		if(AssertUtils.isEmpty(bytes)) {
+			throw new IllegalArgumentException("byte-array cannot be null or empty");
 		}
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream(bytes.length);
