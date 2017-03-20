@@ -617,13 +617,13 @@ public final class UrlManipulator {
 	 * the key value pairs from this segment of the url.
 	 *
 	 * @param url
-	 *            the url from which query paramters need to be extracted
+	 *            the url from which query parameters need to be extracted
 	 *
 	 * @param start
 	 *            the starting index for query parameters
 	 *
 	 * @param end
-	 *            the ending index for query paramets
+	 *            the ending index for query parameters
 	 *
 	 */
 	private void extractQueryParams(String url, int start, int end) {
@@ -632,6 +632,16 @@ public final class UrlManipulator {
 		String[] tokens = segment.split("&");
 		for(String token : tokens) {
 			String[] pair = token.split("=");
+			
+			if(pair.length == 1) {
+				// this is just a parameter with the param name
+				// the value can be assumed to be empty
+				this.queryParams.put(token, StringUtils.EMPTY_STRING);
+				return;
+			}
+			
+			// in this case the query params have multiple '=' signs
+			// some problem in parsing these values
 			if(pair.length != 2) {
 				throw new IllegalArgumentException("Query parameter is not a valid pair: " + token);
 			}
