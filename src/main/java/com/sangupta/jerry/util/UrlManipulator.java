@@ -19,7 +19,6 @@
  *
  */
 
-
 package com.sangupta.jerry.util;
 
 import java.util.ArrayList;
@@ -629,7 +628,7 @@ public final class UrlManipulator {
 	private void extractQueryParams(String url, int start, int end) {
 		String segment = url.substring(start, end);
 
-		String[] tokens = segment.split("&");
+		String[] tokens = StringUtils.split(segment, "&?");
 		for(String token : tokens) {
 			String[] pair = token.split("=");
 			
@@ -668,6 +667,15 @@ public final class UrlManipulator {
 		}
 	}
 
+	/**
+	 * Check if a given character is a digit or not.
+	 * 
+	 * @param c
+	 *            the character to test
+	 * 
+	 * @return <code>true</code> if it represents a digit, <code>false</code>
+	 *         otherwise
+	 */
 	private static boolean isDigit(char c) {
 		if(('0' <= c ) && (c <= '9')) {
 			return true;
