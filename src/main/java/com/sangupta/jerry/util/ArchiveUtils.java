@@ -84,6 +84,7 @@ public abstract class ArchiveUtils {
 
 	    InputStream fileInputStream = null;
 	    TarArchiveInputStream tarInputStream = null;
+        OutputStream outputFileStream = null;
 
 	    try {
 			fileInputStream = new FileInputStream(tarFile);
@@ -110,7 +111,7 @@ public abstract class ArchiveUtils {
 		        // write the plain file
 	        	LOGGER.debug("Creating output file {}", outputFile.getAbsolutePath());
 
-	            final OutputStream outputFileStream = new FileOutputStream(outputFile);
+				outputFileStream = new FileOutputStream(outputFile);
 	            IOUtils.copy(tarInputStream, outputFileStream);
 	            outputFileStream.close();
 
@@ -118,6 +119,7 @@ public abstract class ArchiveUtils {
 		        untaredFiles.add(outputFile);
 		    }
 	    } finally {
+	    	org.apache.commons.io.IOUtils.closeQuietly(outputFileStream);
 		    org.apache.commons.io.IOUtils.closeQuietly(tarInputStream);
 		    org.apache.commons.io.IOUtils.closeQuietly(fileInputStream);
 	    }

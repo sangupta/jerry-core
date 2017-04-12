@@ -24,12 +24,14 @@ package com.sangupta.jerry.store;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.io.FileUtils;
 
 import com.sangupta.jerry.util.AssertUtils;
@@ -59,10 +61,14 @@ public class PropertiesUserLocalStore extends AbstractUserLocalStore {
 		this.properties = new Properties();
 
 		if(this.propertiesFile.exists() && this.propertiesFile.isFile()) {
+			InputStream stream = null;
 			try {
-				this.properties.load(FileUtils.openInputStream(this.propertiesFile));
+				stream = FileUtils.openInputStream(this.propertiesFile);
+				this.properties.load(stream);
 			} catch (IOException e) {
 				throw new RuntimeException("Unable to read from the data store", e);
+			} finally {
+				org.apache.commons.io.IOUtils.closeQuietly(stream);
 			}
 		}
 	}
