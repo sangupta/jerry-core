@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.sangupta.jerry.util.AssertUtils;
+import com.sangupta.jerry.util.StringUtils;
 
 /**
  * A row of data inside the {@link ConsoleTable}.
@@ -63,7 +64,11 @@ public class ConsoleTableRow {
 			if(object instanceof String) {
 				this.columns.add(((String) object));
 			} else {
-				this.columns.add(object.toString());
+				if(object != null) {
+					this.columns.add(object.toString());
+				} else {
+					this.columns.add(StringUtils.EMPTY_STRING);
+				}
 			}
 		}
 	}
