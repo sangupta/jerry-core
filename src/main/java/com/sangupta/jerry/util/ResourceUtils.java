@@ -109,7 +109,11 @@ public class ResourceUtils {
 		}
 		
 		InputStream stream = ResourceUtils.class.getResource(path).openStream();
-		return IOUtils.toByteArray(stream);
+		try {
+			return IOUtils.toByteArray(stream);
+		} finally {
+			IOUtils.closeQuietly(stream);
+		}
 	}
 	
 	public static byte[] getResource(Path path) throws IOException {
@@ -118,7 +122,11 @@ public class ResourceUtils {
 		}
 		
 		InputStream stream = Files.newInputStream(path);
-		return IOUtils.toByteArray(stream);
+		try {
+			return IOUtils.toByteArray(stream);
+		} finally {
+			IOUtils.closeQuietly(stream);
+		}
 	}
 	
 	/**
@@ -154,7 +162,7 @@ public class ResourceUtils {
 		DirectoryStream<Path> stream = null;
 		try {
 			// check if we need to mount the JAR file as a filesystem
-			if(uri.getScheme().equals("jar")) {
+			if("jar".equals(uri.getScheme())) {
 				Map<String, String> env = new HashMap<>();
 		        env.put("create", "true");
 		        FileSystems.newFileSystem(uri, env);
