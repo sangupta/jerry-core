@@ -172,7 +172,7 @@ public abstract class BatchJob<T> {
 		
 		for(int index = 0; index < numThreads; index++) {
 			// create a new worker
-			BatchWorker<T> worker = new BatchWorker<T>(this.jobName, "Job-Worker-" + this.jobName + "-" + index, itemReader, this.getJobPieceExecutor());
+			BatchWorker<T> worker = new BatchWorker<T>("Job-Worker-" + this.jobName + "-" + index, this.jobName, itemReader, this.getJobPieceExecutor());
 			
 			// add to list of workers
 			services.add(worker);

@@ -120,6 +120,10 @@ public class BatchWorker<T> extends AbstractExecutionThreadService  {
 
 	@Override
 	protected void run() throws Exception {
+		// setup the thread name to the right context
+		Thread.currentThread().setName(this.threadName);
+		
+		// start running
 		while(this.isRunning()) {
 			// check if we need to stop right away
 			if(this.stopNow) {
