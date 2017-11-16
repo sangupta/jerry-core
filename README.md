@@ -1,5 +1,5 @@
-jerry-core
-==========
+# jerry-core
+
 
 [![Build Status](https://travis-ci.org/sangupta/jerry-core.svg?branch=master)](https://travis-ci.org/sangupta/jerry-core)
 [![Coverity Status](https://img.shields.io/coverity/scan/11900.svg)](https://scan.coverity.com/projects/sangupta-jerry-core)
@@ -26,12 +26,12 @@ The library is tested on the following JDK versions:
 * Oracle JDK 7
 * Open JDK 7
 
-**Change Log**
+## Change Log
 
 [Release Notes](https://github.com/sangupta/jerry-core/blob/master/RELEASE-NOTES.md) are available here.
 
-Features
---------
+## Features
+
 
 * Base62 encoder to create short urls
 * Base64 encoder
@@ -57,8 +57,7 @@ Features
 * **XStreamUtils** - provides singleton XStream instances
 * **ZipUtils** - zip entire folder, extract given file from ZIP etc
 
-Downloads
----------
+## Downloads
 
 The latest released library can be downloaded from Maven Central using:
 
@@ -91,8 +90,7 @@ Then add the dependency as,
 </dependency>
 ```
 
-Versioning
-----------
+## Versioning
 
 For transparency and insight into our release cycle, and for striving to maintain backward compatibility, 
 `jerry-core` will be maintained under the Semantic Versioning guidelines as much as possible.
@@ -109,12 +107,11 @@ And constructed with the following guidelines:
 
 For more information on SemVer, please visit http://semver.org/.
 
-License
--------
+## License
 	
 ```
 jerry - Common Java Functionality
-Copyright (c) 2012-2016, Sandeep Gupta
+Copyright (c) 2012-2017, Sandeep Gupta
 
 https://sangupta.com/projects/jerry-core
 
