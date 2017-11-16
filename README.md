@@ -21,6 +21,7 @@ out into the `jerry-core` project.
 
 The library is tested on the following JDK versions:
 
+* Oracle JDK 9
 * Oracle JDK 8
 * Oracle JDK 7
 * Open JDK 7
