@@ -1,5 +1,18 @@
 ## Release Notes
 
+**Current Snapshot**
+
+* Fixed `SparseBitArray` for missing functionality
+* Fixed query parameter parsing failure in case of no value in `UrlManipulator`
+* Fixed thread name in `BatchJob` and `BatchWorker`
+* Fixed NPE in `ConsoleTableRow(Object[])` instance
+* Fixed token splitting in `StringUtils`
+* Fixed resource leaks in `PropertiesUserLocalStore`, `ArchiveUtils` and `ResourceUtils`
+* Upgraded `XStream` to use version `1.4.10`
+* Upgraded dependency versions as mentioned in [PR #7](https://github.com/sangupta/jerry-core/pull/7)
+* Added `OracleJDK9` to travis unit testing build matrix
+* Added more unit tests
+
 **3.0.0 (21 Dec 2016)**
 
 * Fixed critical bug in `Base62Encoder` where values conflicting codes were being generated
