@@ -111,7 +111,7 @@ For more information on SemVer, please visit http://semver.org/.
 	
 ```
 jerry - Common Java Functionality
-Copyright (c) 2012-2017, Sandeep Gupta
+Copyright (c) 2012-2019, Sandeep Gupta
 
 https://sangupta.com/projects/jerry-core
 
