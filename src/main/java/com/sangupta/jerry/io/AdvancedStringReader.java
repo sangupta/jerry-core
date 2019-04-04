@@ -19,7 +19,6 @@
  *
  */
 
-
 package com.sangupta.jerry.io;
 
 /**
@@ -30,20 +29,25 @@ package com.sangupta.jerry.io;
  */
 public class AdvancedStringReader {
 
-    /**
-     * The string that we are working on. Can be <code>null</code>.
-     */
-	private final String str;
+	/**
+	 * The original string we are working on. Can be <code>null</code>.
+	 */
+	private final String original;
 
 	/**
-     * The length of the string we are working on. If the {@link #str} is
-     * <code>null</code>, the value will be <code>-1</code>.
-     */
+	 * A character array that we are working on
+	 */
+	private final char[] chars;
+
+	/**
+	 * The length of the string we are working on. If the {@link #str} is
+	 * <code>null</code>, the value will be <code>-1</code>.
+	 */
 	private final int length;
 
 	/**
-     * The pointer in the string from where next read will happen
-     */
+	 * The pointer in the string from where next read will happen
+	 */
 	private int current = 0;
 
 	/**
@@ -53,172 +57,184 @@ public class AdvancedStringReader {
 	 *
 	 */
 	public AdvancedStringReader(String str) {
-	    if(str == null) {
-	        this.str = null;
-	        this.length = -1;
-	        return;
-	    }
+		if (str == null) {
+			this.original = null;
+			this.chars = null;
+			this.length = -1;
+			return;
+		}
 
-		this.str = str;
-		this.length = str.length();
+		this.original = str;
+		this.chars = str.toCharArray();
+		this.length = this.chars.length;
 	}
 
 	/**
-     * Check if the reader has more tokens that you can read.
-     *
-     * @return <code>true</code> if there are more characters that can be read,
-     *         <code>false</code> otherwise
-     */
+	 * Check if the reader has more tokens that you can read.
+	 *
+	 * @return <code>true</code> if there are more characters that can be read,
+	 *         <code>false</code> otherwise
+	 */
 	public boolean hasNext() {
 		return this.current < this.length;
 	}
 
-	/**
-     * Read the string from current position to the next occurrence of the given
-     * character.
-     *
-     * @param separator
-     *            the character till which we are going to read
-     *
-     * @return the sub-string thus extracted
-     */
-	public String readTillNext(char separator) {
-		return this.readTillNext(String.valueOf(separator), 1);
-	}
-	
 	/**
 	 * Read the character at the current position but do not move ahead.
 	 * 
 	 * @return the next available character
 	 */
 	public char peekAhead() {
-	    return this.peekAhead(0);
+		return this.chars[this.current];
 	}
-	
+
 	/**
 	 * Look ahead in the string a given number of characters.
 	 * 
-	 * @param ahead
-	 *            the position from current to look ahead
+	 * @param ahead the position from current to look ahead
 	 * 
 	 * @return the character at the position
 	 */
 	public char peekAhead(int ahead) {
-	    int pos = this.current + ahead;
-	    if(pos > this.length) {
-	        return ((char) -1);
-	    }
-	    
-	    return this.str.charAt(pos);
-	}
-	
-	/**
-	 * Read the string from current position to the given number of characters
-	 * ahead.
-	 * 
-	 * @param ahead
-	 *            the number of position to read ahead
-	 * 
-	 * @return the {@link String} representation of the characters thus read
-	 */
-	public String readTillPosition(int ahead) {
-        int pos = this.current + ahead;
-        if(pos > this.length) {
-            pos = this.length;
-        }
-	    
-        String result = this.str.substring(this.current, pos);
-        this.current = pos;
-        return result;
+		int pos = this.current + ahead;
+		if (pos > this.length) {
+			return ((char) -1);
+		}
+
+		return this.chars[pos];
 	}
 
 	/**
-	 * Read the string from current position to the next nth occurrence of the
-	 * given character.
-	 *
-	 * @param separator
-	 *            the character till which we are going to read
-	 *
-	 * @param occurence
-	 *            the times the character will be included before we stop
-	 *            further reading
-	 *
-	 * @return the sub-string thus extracted
+	 * Peek into the next given number of characters.
+	 * 
+	 * @param numCharacters number of characters to peek into
+	 * 
+	 * @return the read string, or <code>null</code> if no more characters are
+	 *         available
 	 */
-	public String readTillNext(char separator, int occurence) {
-	    return this.readTillNext(String.valueOf(separator), occurence);
+	public String peekString(int numCharacters) {
+		if (!this.hasNext()) {
+			return null;
+		}
+
+		int end = this.current + numCharacters;
+		if (end > this.length) {
+			end = this.length;
+		}
+
+		return this.substring(this.current, end);
 	}
 
 	/**
 	 * Peek the next available position of the given character from the current
 	 * position.
 	 * 
-	 * @param c
-	 *            the character to look ahead
+	 * @param c the character to look ahead
 	 * 
 	 * @return the index if found, or <code>-1</code>
 	 */
-	public int peekIndex(char c) {
-	    for(int index = this.current; index < this.length; index++) {
-	        if(this.str.charAt(index) == c) {
-	            return index - this.current;
-	        }
-	    }
-	    
-	    return -1;
-	}
+	public int peekCharIndex(char c) {
+		for (int index = this.current; index < this.length; index++) {
+			if (this.chars[index] == c) {
+				return index - this.current;
+			}
+		}
 
-    /**
-	 * Read ahead till we encounter the given separator or there are no more
-	 * tokens in the queue.
-	 * 
-	 * @param separator
-	 *            the separator being looked at
-	 * 
-	 * @return the {@link String} thus read
-	 */
-	public String readTillNext(String separator) {
-	    return this.readTillNext(separator, 1);
+		return -1;
 	}
 
 	/**
-	 * Read ahead till the next given occurrence of the given separator or if
-	 * there are no more tokens in the queue.
+	 * Peek the first non-white-space character available. The {@link #current}
+	 * pointer is not moved ahead.
+	 *
+	 * @return the first non-white-space character available to read next.
+	 */
+	public char peekNextNonWhitespace() {
+		for (int index = this.current; index < this.length; index++) {
+			if (!Character.isWhitespace(this.chars[index])) {
+				return this.chars[index];
+			}
+		}
+
+		return ((char) -1);
+	}
+
+	/**
+	 * Read the string from current position to the next occurrence of the given
+	 * character. The given character is excluded in returned string.
+	 *
+	 * @param separator the character till which we are going to read
+	 *
+	 * @return the sub-string thus extracted
+	 */
+	public String readBefore(char separator) {
+		return this.readBefore(String.valueOf(separator), 1);
+	}
+
+	/**
+	 * Read the string from current position to the next nth occurrence of the given
+	 * character. The given character is excluded in returned string.
+	 *
+	 * @param separator the character till which we are going to read
+	 *
+	 * @param occurence the times the character will be included before we stop
+	 *                  further reading
+	 *
+	 * @return the sub-string thus extracted
+	 */
+	public String readBefore(char separator, int occurence) {
+		return this.readBefore(String.valueOf(separator), occurence);
+	}
+
+	/**
+	 * Read ahead till we encounter the given separator or there are no more tokens
+	 * in the queue. The given character is excluded in returned string.
 	 * 
-	 * @param separator
-	 *            the separator being looked at
+	 * @param separator the separator being looked at
 	 * 
-	 * @param occurence
-	 *            the occurrence to find
+	 * @return the {@link String} thus read
+	 */
+	public String readBefore(String separator) {
+		return this.readBefore(separator, 1);
+	}
+
+	/**
+	 * Read ahead till the next given occurrence of the given separator or if there
+	 * are no more tokens in the queue. The given character is excluded in returned
+	 * string.
+	 * 
+	 * @param separator the separator being looked at
+	 * 
+	 * @param occurence the occurrence to find
 	 * 
 	 * @return the {@link String} thus read
 	 * 
 	 */
-	public String readTillNext(String separator, int occurence) {
-		if(!this.hasNext()) {
+	public String readBefore(String separator, int occurence) {
+		if (!this.hasNext()) {
 			return null;
 		}
 
 		int numFound = 0;
-        int index = -1;
-        int searchFrom = this.current;
+		int index = -1;
+		int searchFrom = this.current;
 		do {
-            index = this.str.indexOf(separator, searchFrom);
-    		if(index < 0) {
-    			int start = this.current;
-    			this.current = str.length();
-    			return this.str.substring(start);
-    		}
+			index = this.original.indexOf(separator, searchFrom);
+			if (index < 0) {
+				int start = this.current;
+				this.current = this.length;
+				return this.substring(start);
+			}
 
-    		numFound++;
-    		if(numFound == occurence) {
-    		    break;
-    		}
+			numFound++;
+			if (numFound == occurence) {
+				break;
+			}
 
-    		searchFrom = index + 1;
-		} while(true);
+			searchFrom = index + 1;
+		} while (true);
 
-		String extracted = this.str.substring(this.current, index);
+		String extracted = this.substring(this.current, index);
 		this.current = index + separator.length();
 		return extracted;
 	}
@@ -230,167 +246,146 @@ public class AdvancedStringReader {
 	 *         tokens to be read
 	 */
 	public String readRemaining() {
-		if(!this.hasNext()) {
+		if (!this.hasNext()) {
 			return null;
 		}
 
-		return this.str.substring(this.current);
+		return this.substring(this.current);
 	}
-
-	/**
-	 * Skip reading next N characters
-	 *
-	 * @param numCharacters
-	 *            the number of characters to skip reading.
-	 *
-	 * @return the number of characters actually skipped.
-	 */
-	public int skipNext(int numCharacters) {
-	    if(!this.hasNext()) {
-            return 0;
-        }
-
-        int end = this.current + numCharacters;
-        if (end > this.length) {
-            end = this.length;
-        }
-
-        int skipped = end - this.current;
-        this.current = end;
-        return skipped;
-    }
 
 	/**
 	 * Read string from current position to number of characters ahead.
 	 * 
-	 * @param numCharacters
-	 *            the number of characters to read
+	 * @param numCharacters the number of characters to read
 	 * 
 	 * @return the {@link String} thus read
 	 */
 	public String readNext(int numCharacters) {
-	    if(!this.hasNext()) {
-	        return null;
-	    }
-
-	    int end = this.current + numCharacters;
-	    if(end > this.length) {
-	        end = this.length;
-	    }
-	    
-	    String result = this.str.substring(this.current, end);
-	    this.current = end;
-	    return result;
-	}
-	
-	public String readAfter(char character) {
-	    if(!this.hasNext()) {
-            return null;
-        }
-	    
-	    int index;
-	    for(index = this.current; index < this.length; index++) {
-	        if(this.str.charAt(index) == character) {
-	            break;
-	        }
-	    }
-	    
-	    index++;
-	    this.current = this.length;
-	    return this.str.substring(index);
-	}
-	
-	public String readFrom(char character) {
-	    if(!this.hasNext()) {
-            return null;
-        }
-        
-        int index;
-        for(index = this.current; index < this.length; index++) {
-            if(this.str.charAt(index) == character) {
-                break;
-            }
-        }
-        
-        this.current = this.length;
-        return this.str.substring(index);
-	}
-	
-	public String peekNext(int numCharacters) {
-	    if(!this.hasNext()) {
-            return null;
-        }
-
-        int end = this.current + numCharacters;
-        if(end > this.length) {
-            end = this.length;
-        }
-        
-        return this.str.substring(this.current, end);
-	}
-
-	/**
-     * Read the string between the first occurrence of starting character, and
-     * the next subsequent occurrence of the closing character. If the starting
-     * character cannot be found, will return <code>null</code>. If the starting
-     * character is found, but closing character cannot be found, will return
-     * the entire string after and including the starting character.
-     *
-     * @param starting
-     *            the character to start reading from
-     *
-     * @param closing
-     *            the character to stop reading at
-     *
-     * @return the sub-string thus extracted, or <code>null</code> if there are
-     *         no more characters remaining.
-     */
-	public String readBetween(char starting, char closing) {
-		if(!this.hasNext()) {
+		if (!this.hasNext()) {
 			return null;
 		}
 
-		if(starting == closing) {
-		    // this is a special case
-		    // find the two indexes
-		    int start = this.str.indexOf(starting, this.current);
-		    if(start == -1) {
-		        return null;
-		    }
+		int end = this.current + numCharacters;
+		if (end > this.length) {
+			end = this.length;
+		}
 
-		    start++;
+		String result = this.substring(this.current, end);
+		this.current = end;
+		return result;
+	}
 
-		    int end = this.str.indexOf(closing, start + 1);
-		    if(end == -1) {
-		        end = this.length;
-		    }
+	/**
+	 * Read after skipping to the next occurrence of the given character. The
+	 * character is excluded from read string.
+	 * 
+	 * @param character the character to skip to
+	 * 
+	 * @return the read string, or <code>null</code> if no more characters are
+	 *         available
+	 */
+	public String readAfter(char character) {
+		if (!this.hasNext()) {
+			return null;
+		}
 
-		    this.current = end + 1;
-		    return this.str.substring(start, end);
+		int index;
+		for (index = this.current; index < this.length; index++) {
+			if (this.chars[index] == character) {
+				break;
+			}
+		}
+
+		index++;
+		this.current = this.length;
+		return this.substring(index);
+	}
+
+	/**
+	 * Read starting with the next occurrence of the given character. The character
+	 * is included in read string.
+	 * 
+	 * @param character the character to start reading from
+	 * 
+	 * @return the read string, or <code>null</code> if no more characters are
+	 *         available
+	 */
+	public String readFrom(char character) {
+		if (!this.hasNext()) {
+			return null;
+		}
+
+		int index;
+		for (index = this.current; index < this.length; index++) {
+			if (this.chars[index] == character) {
+				break;
+			}
+		}
+
+		this.current = this.length;
+		return this.substring(index);
+	}
+
+	/**
+	 * Read the string between the first occurrence of starting character, and the
+	 * next subsequent occurrence of the closing character. If the starting
+	 * character cannot be found, will return <code>null</code>. If the starting
+	 * character is found, but closing character cannot be found, will return the
+	 * entire string after and including the starting character.
+	 *
+	 * @param starting the character to start reading from
+	 *
+	 * @param closing  the character to stop reading at
+	 *
+	 * @return the sub-string thus extracted, or <code>null</code> if there are no
+	 *         more characters remaining.
+	 */
+	public String readBetween(char starting, char closing) {
+		if (!this.hasNext()) {
+			return null;
+		}
+
+		if (starting == closing) {
+			// this is a special case
+			// find the two indexes
+			int start = this.indexOf(starting, this.current);
+			if (start == -1) {
+				return null;
+			}
+
+			start++;
+
+			int end = this.indexOf(closing, start + 1);
+			if (end == -1) {
+				end = this.length;
+			}
+
+			this.current = end + 1;
+			return this.substring(start, end);
 		}
 
 		int count = 0;
 		int start = -1;
 		boolean found = false;
-		for(int index = this.current; index < this.length; index++) {
-			char c = this.str.charAt(index);
-			if(c == starting) {
-                if(!found) {
-                    start = index;
-                }
+		for (int index = this.current; index < this.length; index++) {
+			char c = this.chars[index];
+			if (c == starting) {
+				if (!found) {
+					start = index;
+				}
 
 				count++;
 				found = true;
 				continue;
 			}
 
-			if(c == closing) {
+			if (c == closing) {
 				count--;
 				found = true;
 
-				if(found && count == 0) {
+				if (found && count == 0) {
 					this.current = index + 1;
-					return this.str.substring(start + 1, index);
+					return this.substring(start + 1, index);
 				}
 			}
 		}
@@ -399,50 +394,42 @@ public class AdvancedStringReader {
 	}
 
 	/**
-     * Peek the first non-white-space character available. The {@link #current}
-     * pointer is not moved ahead.
-     *
-     * @return the first non-white-space character available to read next.
-     */
-	public char peekNextNonWhitespace() {
-		int start = this.current;
-		do {
-			if(start >= this.length) {
-				return 0;
-			}
+	 * Skip the given number of characters
+	 * 
+	 * @param numCharacters
+	 * @return
+	 */
+	public int skip(int numCharacters) {
+		int end = this.current + numCharacters;
+		if (end > this.length) {
+			end = this.length;
+		}
 
-			char c = this.str.charAt(start);
-			if(Character.isWhitespace(c)) {
-				start++;
-				continue;
-			}
-
-			return c;
-		} while(true);
+		int returnValue = end - this.current;
+		this.current = end;
+		return returnValue;
 	}
 
 	/**
-     * Skip all whitespace characters that follow the {@link #current} reading
-     * position.
-     *
-     * @return the number of characters skipped
-     */
+	 * Skip all whitespace characters that follow the {@link #current} reading
+	 * position.
+	 *
+	 * @return the number of characters skipped
+	 */
 	public int skipWhiteSpace() {
-	    int count = 0;
-	    do {
-	        if(this.current >= this.length) {
-                return count;
-            }
+		for (int index = this.current; index < this.length; index++) {
+			if (!Character.isWhitespace(this.chars[index])) {
+				// we found one
+				int returnValue = index - this.current;
+				this.current = index;
 
-	        char c = this.str.charAt(this.current);
-            if(Character.isWhitespace(c)) {
-                this.current++;
-                count++;
-                continue;
-            }
+				return returnValue;
+			}
+		}
 
-            return count;
-	    } while(true);
+		int returnValue = this.length - this.current;
+		this.current = this.length;
+		return returnValue;
 	}
 
 	/**
@@ -450,7 +437,29 @@ public class AdvancedStringReader {
 	 * {@link #current} pointer back to zero.
 	 */
 	public void reset() {
-	    this.current = 0;
+		this.current = 0;
+	}
+
+	private String substring(int begin) {
+		return new String(this.chars, begin, this.length - begin);
+	}
+
+	private String substring(int begin, int end) {
+		if (end < 0) {
+			return this.substring(begin);
+		}
+
+		return new String(this.chars, begin, end - begin);
+	}
+
+	private int indexOf(char lookup, int location) {
+		for (int index = location; index < this.length; index++) {
+			if (this.chars[index] == lookup) {
+				return index;
+			}
+		}
+
+		return -1;
 	}
 
 }

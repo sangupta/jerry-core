@@ -43,11 +43,11 @@ public class TestAdvancedStringReader {
 
         reader = new AdvancedStringReader(null);
         Assert.assertFalse(reader.hasNext());
-        Assert.assertNull(reader.readTillNext('x'));
-        Assert.assertNull(reader.readTillNext("yz"));
+        Assert.assertNull(reader.readBefore('x'));
+        Assert.assertNull(reader.readBefore("yz"));
         Assert.assertNull(reader.readBetween('a', 'z'));
-        Assert.assertNull(reader.readTillNext('h', 5));
-        Assert.assertNull(reader.readTillNext("yz", 5));
+        Assert.assertNull(reader.readBefore('h', 5));
+        Assert.assertNull(reader.readBefore("yz", 5));
     }
 
     @Test
@@ -58,11 +58,11 @@ public class TestAdvancedStringReader {
 
         reader = new AdvancedStringReader(StringUtils.EMPTY_STRING);
         Assert.assertFalse(reader.hasNext());
-        Assert.assertNull(reader.readTillNext('x'));
-        Assert.assertNull(reader.readTillNext("yz"));
+        Assert.assertNull(reader.readBefore('x'));
+        Assert.assertNull(reader.readBefore("yz"));
         Assert.assertNull(reader.readBetween('a', 'z'));
-        Assert.assertNull(reader.readTillNext('h', 5));
-        Assert.assertNull(reader.readTillNext("yz", 5));
+        Assert.assertNull(reader.readBefore('h', 5));
+        Assert.assertNull(reader.readBefore("yz", 5));
     }
 
     @Test
@@ -78,7 +78,7 @@ public class TestAdvancedStringReader {
     @Test
     public void testSkipWhiteSpace() {
         AdvancedStringReader reader = new AdvancedStringReader("hello world:      this is prefixed by spaces");
-        reader.readTillNext(':');
+        Assert.assertEquals("hello world", reader.readBefore(':'));
         Assert.assertEquals(6, reader.skipWhiteSpace());
         reader.readNext(4);
         Assert.assertEquals(1, reader.skipWhiteSpace());
@@ -103,11 +103,11 @@ public class TestAdvancedStringReader {
     @Test
     public void testSkipNext() {
         AdvancedStringReader reader = new AdvancedStringReader("hello world");
-        Assert.assertEquals(5, reader.skipNext(5));
+        Assert.assertEquals(5, reader.skip(5));
         reader.skipWhiteSpace();
-        Assert.assertEquals(3, reader.skipNext(3));
-        Assert.assertEquals(2, reader.skipNext(3));
-        Assert.assertEquals(0, reader.skipNext(3));
+        Assert.assertEquals(3, reader.skip(3));
+        Assert.assertEquals(2, reader.skip(3));
+        Assert.assertEquals(0, reader.skip(3));
     }
     
     @Test
@@ -119,7 +119,7 @@ public class TestAdvancedStringReader {
         Assert.assertEquals("orld, its my world", reader.readAfter('w'));
         
         reader = new AdvancedStringReader("hello world, its my world");
-        Assert.assertEquals("hello world", reader.readTillNext(','));
+        Assert.assertEquals("hello world", reader.readBefore(','));
         Assert.assertEquals("y world", reader.readAfter('m'));
     }
     
@@ -132,42 +132,42 @@ public class TestAdvancedStringReader {
         Assert.assertEquals("world, its my world", reader.readFrom('w'));
         
         reader = new AdvancedStringReader("hello world, its my world");
-        Assert.assertEquals("hello world", reader.readTillNext(','));
+        Assert.assertEquals("hello world", reader.readBefore(','));
         Assert.assertEquals("my world", reader.readFrom('m'));
     }
     
     @Test
     public void testReadTillPosition() {
     	AdvancedStringReader reader = new AdvancedStringReader("hello world");
-    	Assert.assertEquals("hell", reader.readTillPosition(4));
-    	Assert.assertEquals("o", reader.readTillPosition(1));
+    	Assert.assertEquals("hell", reader.readNext(4));
+    	Assert.assertEquals("o", reader.readNext(1));
     }
     
     @Test
     public void testPeekIndex() {
     	AdvancedStringReader reader = new AdvancedStringReader("hello world");
-    	Assert.assertEquals(2, reader.peekIndex('l'));
-    	Assert.assertEquals(6, reader.peekIndex('w'));
+    	Assert.assertEquals(2, reader.peekCharIndex('l'));
+    	Assert.assertEquals(6, reader.peekCharIndex('w'));
     }
     
     @Test
     public void testReadTillNext() {
     	AdvancedStringReader reader = new AdvancedStringReader("hello world. this is a world, just another world.");
-    	Assert.assertEquals("hello ", reader.readTillNext("world"));
-    	Assert.assertEquals(". this is a world, just another ", reader.readTillNext("world", 2));
+    	Assert.assertEquals("hello ", reader.readBefore("world"));
+    	Assert.assertEquals(". this is a world, just another ", reader.readBefore("world", 2));
     	
     	reader = new AdvancedStringReader("hello world. this is a world, just another world.");
-    	Assert.assertEquals("hello world. this is a ", reader.readTillNext("world", 2));
+    	Assert.assertEquals("hello world. this is a ", reader.readBefore("world", 2));
     	
     	reader = new AdvancedStringReader("hello world. this is a world, just another world.");
-    	Assert.assertEquals("hello ", reader.readTillNext("world"));
-    	Assert.assertEquals(". this is a world, just another world.", reader.readTillNext("sangupta", 4));
+    	Assert.assertEquals("hello ", reader.readBefore("world"));
+    	Assert.assertEquals(". this is a world, just another world.", reader.readBefore("sangupta", 4));
     }
     
     @Test
     public void testRemaining() {
     	AdvancedStringReader reader = new AdvancedStringReader("hello world. this is a world, just another world.");
-    	Assert.assertEquals("hello world. this is a world, just another ", reader.readTillNext("world", 3));
+    	Assert.assertEquals("hello world. this is a world, just another ", reader.readBefore("world", 3));
     	Assert.assertEquals(".", reader.readRemaining());
     }
     
@@ -175,11 +175,20 @@ public class TestAdvancedStringReader {
     public void testPeekNext() {
     	AdvancedStringReader reader = new AdvancedStringReader("hello world. this is a world, just another world.");
     	
-    	Assert.assertEquals("h", reader.peekNext(1));
-    	Assert.assertEquals("hell", reader.peekNext(4));
-    	Assert.assertEquals("hello world. this is a world, just another ", reader.readTillNext("world", 3));
-    	Assert.assertEquals(".", reader.peekNext(1));
-    	Assert.assertEquals(".", reader.peekNext(2));
+    	Assert.assertEquals("h", reader.peekString(1));
+    	Assert.assertEquals("hell", reader.peekString(4));
+    	Assert.assertEquals("hello world. this is a world, just another ", reader.readBefore("world", 3));
+    	Assert.assertEquals(".", reader.peekString(1));
+    	Assert.assertEquals(".", reader.peekString(2));
     	Assert.assertEquals(".", reader.readRemaining());
+    }
+    
+    @Test
+    public void testSkip() {
+    	AdvancedStringReader reader = new AdvancedStringReader("hello world");
+    	reader.skip(4);
+    	Assert.assertEquals('o', reader.peekAhead());
+    	reader.skip(3);
+    	Assert.assertEquals('o', reader.peekAhead());
     }
 }
