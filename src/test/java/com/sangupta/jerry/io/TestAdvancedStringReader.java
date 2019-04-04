@@ -191,4 +191,33 @@ public class TestAdvancedStringReader {
     	reader.skip(3);
     	Assert.assertEquals('o', reader.peekAhead());
     }
+    
+    @Test
+    public void testReadBetweenCharacters() {
+    	AdvancedStringReader reader = new AdvancedStringReader("hello world");
+    	Assert.assertEquals(" w", reader.readBetween('o', 'o')); // both exist
+    	reader.reset();
+    	Assert.assertEquals("ello world", reader.readBetween('h', 'x')); // end does not exist
+    	reader.reset();
+    	Assert.assertNull(reader.readBetween('x', 'o')); // starting does not exist
+    	reader.reset();
+    	Assert.assertEquals("", reader.readBetween('l', 'l'));
+    	Assert.assertEquals(" w", reader.readBetween('o', 'o'));
+    	Assert.assertEquals("", reader.readBetween('l', 'd'));
+    }
+    
+    @Test
+    public void testReadBetweenString() {
+    	AdvancedStringReader reader = new AdvancedStringReader("hello world. this is a world, just another world.");
+    	Assert.assertEquals(". this is a ", reader.readBetween("world", "world")); // both exist
+    	reader.reset();
+    	Assert.assertEquals(" another world.", reader.readBetween("just", "many")); // end does not exist
+    	reader.reset();
+    	Assert.assertNull(reader.readBetween("many", "world")); // starting does not exist
+    	reader.reset();
+    	Assert.assertEquals("", reader.readBetween('l', 'l'));
+    	Assert.assertEquals(" w", reader.readBetween('o', 'o'));
+    	Assert.assertEquals("", reader.readBetween('l', 'd'));
+    	Assert.assertEquals("this", reader.readBetween(" ", " "));
+    }
 }

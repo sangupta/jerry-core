@@ -219,7 +219,7 @@ public class AdvancedStringReader {
 		int index = -1;
 		int searchFrom = this.current;
 		do {
-			index = this.original.indexOf(separator, searchFrom);
+			index = this.indexOf(separator, searchFrom);
 			if (index < 0) {
 				int start = this.current;
 				this.current = this.length;
@@ -331,7 +331,7 @@ public class AdvancedStringReader {
 	 * next subsequent occurrence of the closing character. If the starting
 	 * character cannot be found, will return <code>null</code>. If the starting
 	 * character is found, but closing character cannot be found, will return the
-	 * entire string after and including the starting character.
+	 * entire string after. The starting character is never included.
 	 *
 	 * @param starting the character to start reading from
 	 *
@@ -341,56 +341,47 @@ public class AdvancedStringReader {
 	 *         more characters remaining.
 	 */
 	public String readBetween(char starting, char closing) {
+//		if (!this.hasNext()) {
+//			return null;
+//		}
+//		
+//		int start = this.indexOf(starting, this.current);
+//		if(start < 0) {
+//			return null;
+//		}
+//		
+//		start++;
+//		int end = this.indexOf(closing, start);
+//		if(end < 0) {
+//			end = this.length;
+//		}
+//		
+//		String returnValue = this.substring(start, end);
+//		this.current = end;
+//		return returnValue;
+		
+		return this.readBetween(String.valueOf(starting), String.valueOf(closing));
+	}
+	
+	public String readBetween(String starting, String closing) {
 		if (!this.hasNext()) {
 			return null;
 		}
-
-		if (starting == closing) {
-			// this is a special case
-			// find the two indexes
-			int start = this.indexOf(starting, this.current);
-			if (start == -1) {
-				return null;
-			}
-
-			start++;
-
-			int end = this.indexOf(closing, start + 1);
-			if (end == -1) {
-				end = this.length;
-			}
-
-			this.current = end + 1;
-			return this.substring(start, end);
+		
+		int start = this.indexOf(starting, this.current);
+		if(start < 0) {
+			return null;
 		}
-
-		int count = 0;
-		int start = -1;
-		boolean found = false;
-		for (int index = this.current; index < this.length; index++) {
-			char c = this.chars[index];
-			if (c == starting) {
-				if (!found) {
-					start = index;
-				}
-
-				count++;
-				found = true;
-				continue;
-			}
-
-			if (c == closing) {
-				count--;
-				found = true;
-
-				if (found && count == 0) {
-					this.current = index + 1;
-					return this.substring(start + 1, index);
-				}
-			}
+		
+		start = start + starting.length();
+		int end = this.indexOf(closing, start);
+		if(end < 0) {
+			end = this.length;
 		}
-
-		return null;
+		
+		String returnValue = this.substring(start, end);
+		this.current = end;
+		return returnValue;
 	}
 
 	/**
@@ -460,6 +451,10 @@ public class AdvancedStringReader {
 		}
 
 		return -1;
+	}
+	
+	private int indexOf(String lookup, int location) {
+		return this.original.indexOf(lookup, location);
 	}
 
 }
