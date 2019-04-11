@@ -1,6 +1,11 @@
 ## Release Notes
 
-**Current Snapshot**
+**3.1.0 (Development)**
+
+* ENHANCE: newer methods to `GsonUtils` class
+* IMPROVE: removing warnings and better align to newer code style
+
+**3.0.1 (20 Feb 2019)**
 
 * Fixed `SparseBitArray` for missing functionality
 * Fixed query parameter parsing failure in case of no value in `UrlManipulator`

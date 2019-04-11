@@ -1,9 +1,9 @@
 /**
- * 
- * jerry - Common Java Functionality
- * Copyright (c) 2012-2017, Sandeep Gupta
  *
- * http://sangupta.com/projects/jerry-core
+ * jerry - Common Java Functionality
+ * Copyright (c) 2012-present, Sandeep Gupta
+ *
+ * https://sangupta.com/projects/jerry-core
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

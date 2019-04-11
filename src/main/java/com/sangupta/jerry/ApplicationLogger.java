@@ -1,7 +1,7 @@
 /**
  *
  * jerry - Common Java Functionality
- * Copyright (c) 2012-2017, Sandeep Gupta
+ * Copyright (c) 2012-present, Sandeep Gupta
  *
  * http://sangupta.com/projects/jerry-core
  *
