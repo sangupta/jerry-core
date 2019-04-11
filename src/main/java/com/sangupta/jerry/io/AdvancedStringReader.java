@@ -443,16 +443,6 @@ public class AdvancedStringReader {
 		return new String(this.chars, begin, end - begin);
 	}
 
-	private int indexOf(char lookup, int location) {
-		for (int index = location; index < this.length; index++) {
-			if (this.chars[index] == lookup) {
-				return index;
-			}
-		}
-
-		return -1;
-	}
-	
 	private int indexOf(String lookup, int location) {
 		return this.original.indexOf(lookup, location);
 	}
