@@ -28,10 +28,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-import org.apache.commons.io.IOUtils;
-
 import com.sangupta.jerry.consume.GenericConsumer;
 import com.sangupta.jerry.util.CheckUtils;
+import com.sangupta.jerry.util.IOUtils;
 
 /**
  * A simple file reader that read a given file chunk by chunk and
@@ -97,8 +96,7 @@ public class FileByteChunkConsumer {
 		} catch(IOException e) {
 			this.consumer.onException(e);
 		} finally {
-			IOUtils.closeQuietly(stream);
-			IOUtils.closeQuietly(fis);
+			IOUtils.closeQuietly(stream, fis);
 		}
 	}
 

@@ -31,10 +31,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
-import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.io.FileUtils;
 
 import com.sangupta.jerry.util.AssertUtils;
+import com.sangupta.jerry.util.IOUtils;
 import com.sangupta.jerry.util.PropertiesUtils;
 
 /**
@@ -68,7 +68,7 @@ public class PropertiesUserLocalStore extends AbstractUserLocalStore {
 			} catch (IOException e) {
 				throw new RuntimeException("Unable to read from the data store", e);
 			} finally {
-				org.apache.commons.io.IOUtils.closeQuietly(stream);
+				IOUtils.closeQuietly(stream);
 			}
 		}
 	}

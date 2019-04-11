@@ -27,7 +27,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.apache.commons.io.IOUtils;
+import com.sangupta.jerry.util.IOUtils;
 
 /**
  * Utility class that provides convenience methods for working
@@ -65,8 +65,7 @@ public class UnsafeMemoryUtils {
 		} catch(IOException e) {
 			throw new IOException("Unable to write bytes to disk", e);
 		} finally {
-			IOUtils.closeQuietly(boss);
-			IOUtils.closeQuietly(stream);
+			IOUtils.closeQuietly(boss, stream);
 		}
 	}
 }

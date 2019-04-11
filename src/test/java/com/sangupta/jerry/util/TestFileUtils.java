@@ -24,6 +24,7 @@ package com.sangupta.jerry.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.UUID;
 
@@ -319,7 +320,7 @@ public class TestFileUtils {
 
 	protected void createFile(File file, String data) {
 		try {
-			org.apache.commons.io.FileUtils.write(file, data);
+			org.apache.commons.io.FileUtils.write(file, data, Charset.defaultCharset());
 		} catch (IOException e) {
 			Assert.assertFalse("File creation for test data failed", false);
 		}

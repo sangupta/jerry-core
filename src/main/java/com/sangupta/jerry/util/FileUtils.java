@@ -19,7 +19,6 @@
  *
  */
 
-
 package com.sangupta.jerry.util;
 
 import java.io.BufferedInputStream;
@@ -38,7 +37,6 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOCase;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.AndFileFilter;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.commons.io.filefilter.FalseFileFilter;

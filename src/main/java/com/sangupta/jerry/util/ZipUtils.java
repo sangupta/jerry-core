@@ -33,7 +33,6 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -108,8 +107,7 @@ public abstract class ZipUtils {
 				}
 			}
 		} finally {
-			IOUtils.closeQuietly(stream);
-			IOUtils.closeQuietly(outStream);
+			IOUtils.closeQuietly(stream, outStream);
 		}
 
 		return tempFile;

@@ -118,7 +118,7 @@ public class GsonUserLocalStore extends AbstractUserLocalStore {
 	@Override
 	protected void save() {
 		try {
-			FileUtils.writeStringToFile(this.propertiesFile, GsonUtils.getGson().toJson(this.properties));
+			GsonUtils.toFile(this.properties, this.propertiesFile);
 		} catch (IOException e) {
 			throw new RuntimeException("Unable to write to the data store", e);
 		}

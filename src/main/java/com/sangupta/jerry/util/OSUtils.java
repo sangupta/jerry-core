@@ -19,7 +19,6 @@
  *
  */
 
-
 package com.sangupta.jerry.util;
 
 import com.sangupta.jerry.constants.OperatingSystem;

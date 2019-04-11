@@ -27,10 +27,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
-
 import com.sangupta.jerry.ds.mutable.MutableInt;
 import com.sangupta.jerry.util.AssertUtils;
+import com.sangupta.jerry.util.IOUtils;
 import com.sangupta.jerry.util.StringUtils;
 
 /**
@@ -177,8 +176,7 @@ public class ConsoleTable {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PrintStream stream = new PrintStream(baos);
 		this.write(stream);
-		IOUtils.closeQuietly(stream);
-		IOUtils.closeQuietly(baos);
+		IOUtils.closeQuietly(stream, baos);
 
 		return baos.toString();
 	}

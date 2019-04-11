@@ -112,7 +112,7 @@ public class ResourceUtils {
 		try {
 			return IOUtils.toByteArray(stream);
 		} finally {
-			IOUtils.closeQuietly(stream);
+			com.sangupta.jerry.util.IOUtils.closeQuietly(stream);
 		}
 	}
 	
@@ -125,7 +125,7 @@ public class ResourceUtils {
 		try {
 			return IOUtils.toByteArray(stream);
 		} finally {
-			IOUtils.closeQuietly(stream);
+			com.sangupta.jerry.util.IOUtils.closeQuietly(stream);
 		}
 	}
 	
