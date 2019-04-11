@@ -19,15 +19,19 @@
  *
  */
 
-
 package com.sangupta.jerry.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Type;
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import org.apache.commons.io.FileUtils;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -39,6 +43,7 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
+import com.google.gson.JsonSyntaxException;
 import com.sangupta.jerry.ds.SimpleMultiMap;
 
 /**
@@ -77,12 +82,13 @@ public abstract class GsonUtils {
 	};
 
 	/**
-	 * The date deserializer from long
+	 * The date deserializer from <code>long<code>
 	 */
 	private static final JsonDeserializer<Date> dateDeserializer = new JsonDeserializer<Date>() {
 
 		@Override
-		public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+		public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+				throws JsonParseException {
 			return json == null ? null : new Date(json.getAsLong());
 		}
 
@@ -99,12 +105,11 @@ public abstract class GsonUtils {
 	}
 
 	/**
-	 * Method to fetch the singleton object with the specified naming policy. If
-	 * one does not exist, it is created.
+	 * Method to fetch the singleton object with the specified naming policy. If one
+	 * does not exist, it is created.
 	 *
-	 * @param fieldNamingPolicy
-	 *            the field naming policy for which the {@link Gson} instance is
-	 *            required
+	 * @param fieldNamingPolicy the field naming policy for which the {@link Gson}
+	 *                          instance is required
 	 *
 	 * @return the {@link Gson} object for the given field naming policy
 	 *
@@ -115,10 +120,8 @@ public abstract class GsonUtils {
 		}
 
 		// create a new version
-		GsonBuilder gsonBuilder= new GsonBuilder()
-						.setFieldNamingPolicy(fieldNamingPolicy)
-						.registerTypeAdapter(Date.class, dateSerializer)
-						.registerTypeAdapter(Date.class, dateDeserializer);
+		GsonBuilder gsonBuilder = new GsonBuilder().setFieldNamingPolicy(fieldNamingPolicy)
+				.registerTypeAdapter(Date.class, dateSerializer).registerTypeAdapter(Date.class, dateDeserializer);
 
 		registerMoreTypeAdapters(gsonBuilder);
 
@@ -134,11 +137,9 @@ public abstract class GsonUtils {
 	/**
 	 * Register a new custom type adapter.
 	 *
-	 * @param type
-	 *            the type for which the adapter is to be added
+	 * @param type    the type for which the adapter is to be added
 	 *
-	 * @param adapter
-	 *            the adapter itself
+	 * @param adapter the adapter itself
 	 */
 	public static void addCustomTypeAdapter(Type type, Object adapter) {
 		customAdapters.put(type, adapter);
@@ -151,14 +152,128 @@ public abstract class GsonUtils {
 	public static void clearAllGsons() {
 		gsons.clear();
 	}
+	
+	/**
+	 * 
+	 * @param json
+	 * @param classOfT
+	 * @return
+	 * @throws JsonSyntaxException
+	 * @since 3.1.0
+	 */
+	public <T> T fromJson(String json, Class<T> classOfT) throws JsonSyntaxException {
+		return getGson().fromJson(json, classOfT);
+	}
 
 	/**
-	 * Remove the {@link Gson} instance against the given
-	 * {@link FieldNamingPolicy} so that it is regenerated again.
+	 * 
+	 * @param json
+	 * @param typeOfT
+	 * @return
+	 * @throws JsonSyntaxException
+	 * @since 3.1.0
+	 */
+	public <T> T fromJson(String json, Type typeOfT) throws JsonSyntaxException {
+		return getGson().fromJson(json, typeOfT);
+	}
+
+	/**
+	 * 
+	 * @param source
+	 * @return
+	 * @since 3.1.0
+	 */
+	public static String toJson(Object source) {
+		return getGson().toJson(source);
+	}
+
+	/**
+	 * 
+	 * @param jsonElement
+	 * @return
+	 * @since 3.1.0
+	 */
+	public static String toJson(JsonElement jsonElement) {
+		return getGson().toJson(jsonElement);
+	}
+
+	/**
+	 * 
+	 * @param source
+	 * @param file
+	 * @throws IOException
+	 * @since 3.1.0
+	 */
+	public static void toFile(Object source, File file) throws IOException {
+		FileUtils.writeStringToFile(file, toJson(source), Charset.defaultCharset());
+	}
+
+	/**
+	 * 
+	 * @param source
+	 * @param file
+	 * @param encoding
+	 * @throws IOException
+	 * @since 3.1.0
+	 */
+	public static void toFile(Object source, File file, Charset encoding) throws IOException {
+		FileUtils.writeStringToFile(file, toJson(source), encoding);
+	}
+
+	/**
+	 * 
+	 * @param jsonElement
+	 * @param file
+	 * @throws IOException
+	 * @since 3.1.0
+	 */
+	public static void toFile(JsonElement jsonElement, File file) throws IOException {
+		FileUtils.writeStringToFile(file, toJson(jsonElement), Charset.defaultCharset());
+	}
+	
+	/**
+	 * 
+	 * @param classOfT
+	 * @param file
+	 * @return
+	 * @throws IOException
+	 * @since 3.1.0
+	 */
+	public static <T> T fromFile(Class<T> classOfT, File file) throws IOException {
+		return GsonUtils.fromFile(classOfT, file, Charset.defaultCharset());
+	}
+	
+	/**
+	 * 
+	 * @param classOfT
+	 * @param file
+	 * @param encoding
+	 * @return
+	 * @throws IOException
+	 * @since 3.1.0
+	 */
+	public static <T> T fromFile(Class<T> classOfT, File file, Charset encoding) throws IOException {
+		return getGson().fromJson(FileUtils.readFileToString(file, encoding), classOfT);
+	}
+
+	/**
+	 * 
+	 * @param jsonElement
+	 * @param file
+	 * @param encoding
+	 * @throws IOException
+	 * @since 3.1.0
+	 */
+	public static void toFile(JsonElement jsonElement, File file, Charset encoding) throws IOException {
+		FileUtils.writeStringToFile(file, toJson(jsonElement), encoding);
+	}
+
+	/**
+	 * Remove the {@link Gson} instance against the given {@link FieldNamingPolicy}
+	 * so that it is regenerated again.
 	 *
-	 * @param policy
-	 *            the {@link FieldNamingPolicy} for which to remove previosuly
-	 *            created {@link Gson} instance is to be removed
+	 * @param policy the {@link FieldNamingPolicy} for which to remove previosuly
+	 *               created {@link Gson} instance is to be removed
 	 */
 	public static void clearGson(FieldNamingPolicy policy) {
 		gsons.remove(policy);
@@ -167,8 +282,7 @@ public abstract class GsonUtils {
 	/**
 	 * Remove all custom type adapters for the given type
 	 *
-	 * @param type
-	 *            the type for which adapters are to be removed
+	 * @param type the type for which adapters are to be removed
 	 */
 	public static void removeTypeAdapters(Type type) {
 		customAdapters.remove(type);
@@ -180,15 +294,15 @@ public abstract class GsonUtils {
 	 * @param gsonBuilder
 	 */
 	private static void registerMoreTypeAdapters(GsonBuilder gsonBuilder) {
-		if(customAdapters == null || customAdapters.isEmpty()) {
+		if (customAdapters == null || customAdapters.isEmpty()) {
 			return;
 		}
 
 		Set<Type> keySet = customAdapters.keySet();
-		for(Type key : keySet) {
+		for (Type key : keySet) {
 			List<Object> values = customAdapters.getValues(key);
-			if(values != null) {
-				for(Object value : values) {
+			if (values != null) {
+				for (Object value : values) {
 					gsonBuilder.registerTypeAdapter(key, value);
 				}
 			}
