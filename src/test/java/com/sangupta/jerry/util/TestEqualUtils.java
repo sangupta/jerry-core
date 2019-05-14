@@ -226,5 +226,59 @@ public class TestEqualUtils {
 		array2 = new double[2];
 		assertFalse(EqualUtils.equals(array1, array2));
 	}
+	
+	@Test
+	public void testEqualsBooleanArray() {
+		assertFalse(EqualUtils.equals((boolean[]) null, null));
+		assertFalse(EqualUtils.equals(new boolean[2], null));
+		assertFalse(EqualUtils.equals(null, new boolean[2]));
+
+		boolean[] array1 = null;
+		boolean[] array2 = array1;
+		assertFalse(EqualUtils.equals(array1, array2));
+
+		array1 = new boolean[1];
+		array2 = array1;
+
+		assertTrue(EqualUtils.equals(array1, array2));
+
+		array1[0] = true;
+		array2 = new boolean[1];
+		array2[0] = true;
+		assertTrue(EqualUtils.equals(array1, array2));
+
+		array2[0] = false;
+		assertFalse(EqualUtils.equals(array1, array2));
+
+		array2 = new boolean[2];
+		assertFalse(EqualUtils.equals(array1, array2));
+	}
+	
+	@Test
+	public void testEqualsStringArray() {
+		assertFalse(EqualUtils.equals((String[]) null, null));
+		assertFalse(EqualUtils.equals(new String[2], null));
+		assertFalse(EqualUtils.equals(null, new String[2]));
+
+		String[] array1 = null;
+		String[] array2 = array1;
+		assertFalse(EqualUtils.equals(array1, array2));
+
+		array1 = new String[1];
+		array2 = array1;
+
+		assertTrue(EqualUtils.equals(array1, array2));
+
+		array1[0] = "hello";
+		array2 = new String[1];
+		array2[0] = "hello";
+		assertTrue(EqualUtils.equals(array1, array2));
+
+		array2[0] = "world";
+		assertFalse(EqualUtils.equals(array1, array2));
+
+		array2 = new String[2];
+		assertFalse(EqualUtils.equals(array1, array2));
+	}
 
 }

@@ -269,21 +269,73 @@ public abstract class EqualUtils {
 
 		return true;
 	}
-
+	
 	/**
-	 * Test if two byte arrays are not equal in all respects.
+	 * Tests if two <code>boolean</code> arrays are equal in content or not.
 	 *
-	 * @param bytes1
-	 *            the first byte array
+	 * @param array1
+	 *            the first array
 	 *
-	 * @param bytes2
-	 *            the second byte array
+	 * @param array2
+	 *            the second array
 	 *
-	 * @return <code>true</code> if arrays are not equal, <code>false</code>
-	 *         otherwise
+	 * @return <code>true</code> if arrays are equal in object or content,
+	 *         <code>false</code> otherwise
 	 */
-	public static boolean notEquals(byte[] bytes1, byte[] bytes2) {
-		return !equals(bytes1, bytes2);
+	public static boolean equals(boolean[] array1, boolean[] array2) {
+		if(array1 == null || array2 == null) {
+			return false;
+		}
+
+		if(array1 == array2) {
+			return true;
+		}
+
+		if(array1.length != array2.length) {
+			return false;
+		}
+
+		for(int index = 0; index < array1.length; index++) {
+			if(array1[index] != array2[index]) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	/**
+	 * Tests if two <code>String</code> arrays are equal in content or not.
+	 *
+	 * @param array1
+	 *            the first array
+	 *
+	 * @param array2
+	 *            the second array
+	 *
+	 * @return <code>true</code> if arrays are equal in object or content,
+	 *         <code>false</code> otherwise
+	 */
+	public static boolean equals(String[] array1, String[] array2) {
+		if(array1 == null || array2 == null) {
+			return false;
+		}
+
+		if(array1 == array2) {
+			return true;
+		}
+
+		if(array1.length != array2.length) {
+			return false;
+		}
+
+		for(int index = 0; index < array1.length; index++) {
+			if(array1[index] != array2[index]) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }
