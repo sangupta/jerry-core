@@ -135,5 +135,24 @@ public class TestByteArrayUtils {
 			Assert.assertEquals(0, ByteArrayUtils.cardinality(new byte[] { }));
 		}
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testRandomBytesZeroLength() {
+		ByteArrayUtils.getRandomBytes(0);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void testRandomBytesNegativeLength() {
+		ByteArrayUtils.getRandomBytes(-10);
+	}
+	
+	@Test
+	public void testFillRandom() {
+		Assert.assertFalse(ByteArrayUtils.fillRandomBytes(null));
+		Assert.assertFalse(ByteArrayUtils.fillRandomBytes(new byte[] {}));
+		
+		byte[] bytes = new byte[100];
+		Assert.assertTrue(ByteArrayUtils.fillRandomBytes(bytes));
+	}
 
 }
