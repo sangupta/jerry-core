@@ -49,5 +49,27 @@ public class TestGsonUtils {
 		Assert.assertTrue(gson != GsonUtils.getGson(FieldNamingPolicy.UPPER_CAMEL_CASE));
 		Assert.assertTrue(gson != GsonUtils.getGson(FieldNamingPolicy.UPPER_CAMEL_CASE_WITH_SPACES));
 	}
+	
+	@Test
+	public void testStaticMethods() {
+		DummyUser user = new DummyUser();
+		
+		user.name = "hello world";
+		user.age = 2019;
+		
+		String json = GsonUtils.toJson(user);
+		Assert.assertNotNull(json);
+		DummyUser user2 = GsonUtils.fromJson(json, DummyUser.class);
+		
+		Assert.assertEquals(user.name, user2.name);
+		Assert.assertEquals(user.age, user2.age);
+		
+	}
 
+	
+	public static class DummyUser {
+		private String name;
+		private int age;
+	}
+	
 }
