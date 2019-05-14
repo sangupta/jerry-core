@@ -1,9 +1,9 @@
 # jerry-core
 
-[![Travis](https://img.shields.io/travis/sangupta/jerry-core.svg)]()
-[![Coveralls](https://img.shields.io/coveralls/sangupta/jerry-core.svg)]()
-[![license](https://img.shields.io/github/license/sangupta/jerry-core.svg)]()
-[![Maven Central](https://img.shields.io/maven-central/v/com.sangupta/jerry-core.svg)]()
+[![Travis](https://img.shields.io/travis/sangupta/jerry-core.svg)](https://travis-ci.org/sangupta/jerry-core)
+[![Coveralls](https://img.shields.io/coveralls/sangupta/jerry-core.svg)](https://coveralls.io/github/sangupta/jerry-core)
+[![license](https://img.shields.io/github/license/sangupta/jerry-core.svg)](https://choosealicense.com/licenses/apache-2.0/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.sangupta/jerry-core.svg)](https://search.maven.org/search?q=g:com.sangupta%20AND%20a:jerry-core&core=gav)
 
 Common Java functionality for core functionality.
 
