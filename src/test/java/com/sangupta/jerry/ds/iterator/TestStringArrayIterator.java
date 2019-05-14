@@ -48,12 +48,20 @@ public class TestStringArrayIterator {
 		Assert.assertNotNull(iterator);
 		Assert.assertTrue(iterator.hasNext());
 		Assert.assertEquals("hello", iterator.peek());
+		Assert.assertEquals(0, iterator.getPosition());
+		
 		Assert.assertEquals("hello", iterator.peek());
+		Assert.assertEquals(0, iterator.getPosition());
+		
 		Assert.assertEquals("hello", iterator.peek());
 		Assert.assertTrue(iterator.hasNext());
+		Assert.assertEquals(0, iterator.getPosition());
+		
+		
 		Assert.assertEquals("hello", iterator.next());
 		Assert.assertFalse(iterator.hasNext());
 		Assert.assertNull(iterator.peek());
+		Assert.assertEquals(1, iterator.getPosition());
 		
 		iterator = new StringArrayIterator(new String[] { "hello", "world" });
 		Assert.assertNotNull(iterator);
