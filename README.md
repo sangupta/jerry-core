@@ -2,7 +2,6 @@
 
 [![Travis](https://img.shields.io/travis/sangupta/jerry-core.svg)]()
 [![Coveralls](https://img.shields.io/coveralls/sangupta/jerry-core.svg)]()
-[![Coverity Status](https://img.shields.io/coverity/scan/11900.svg)](https://scan.coverity.com/projects/sangupta-jerry-core)
 [![license](https://img.shields.io/github/license/sangupta/jerry-core.svg)]()
 [![Maven Central](https://img.shields.io/maven-central/v/com.sangupta/jerry-core.svg)]()
 

@@ -10,20 +10,5 @@ jdk:
   - openjdk10
   - openjdk11
 
-env:
-  global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
-   - secure: "gczBzJkIgn21D7vsF/h7MtuzSoOP6tJhM9siAoFheygG8ZSRc7GQUlwuI3f24ym5K1P6hz2IS8hDbuwVVZpSQKUN1B+rcXlkFeAOljK6ZBxVh6UdvwQnBRIZXyJQomBIWjidnxGj+dOpjX3RgaSL/Q2okHAE3h5G3vEqRzayplw="
-
-addons:
-  coverity_scan:
-    project:
-      name: "sangupta/jerry-core"
-      description: "Common Java methods for core functionality"
-    notification_email: sandy.pec@gmail.com
-    build_command:   "mvn clean package"
-    branch_pattern: master
-    
 after_success:
   - mvn clean cobertura:cobertura coveralls:report
