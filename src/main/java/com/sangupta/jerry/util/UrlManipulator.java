@@ -36,7 +36,7 @@ import java.util.Map;
  *
  */
 public final class UrlManipulator {
-
+	
 	/**
 	 * The scheme for pure HTTP non-SSL
 	 */

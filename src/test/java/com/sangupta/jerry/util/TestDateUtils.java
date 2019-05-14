@@ -35,6 +35,11 @@ import org.junit.Test;
  */
 public class TestDateUtils {
 
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new DateUtils() { };
+	}
+	
 	@Test
 	public void testGetDate() {
 		Assert.assertNull(DateUtils.getDate(null));

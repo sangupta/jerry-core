@@ -35,6 +35,11 @@ import com.google.gson.Gson;
  *
  */
 public class TestGsonUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new GsonUtils() { };
+	}
 
 	@Test
 	public void test() {

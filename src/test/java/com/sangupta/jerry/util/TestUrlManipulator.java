@@ -32,7 +32,7 @@ import org.junit.Test;
  *
  */
 public class TestUrlManipulator {
-
+	
 	@Test
 	public void testDecomposition() {
 		final String url ="http://www.some-random-domain.com:80/abc.html?param1=value1&param2=value2#fragmentme";

@@ -32,6 +32,10 @@ import java.util.Set;
  *
  */
 public abstract class EnvironmentUtils {
+	
+	protected EnvironmentUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Read an environment variable first from the java command line, and then

@@ -28,6 +28,10 @@ package com.sangupta.jerry.util;
  *
  */
 public abstract class ObjectUtils {
+	
+	protected ObjectUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Check if the object represents a primitive type of: <code>byte</code>,

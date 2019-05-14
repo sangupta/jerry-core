@@ -7,6 +7,10 @@ import static java.math.RoundingMode.HALF_UP;
 import java.math.RoundingMode;
 
 public class NumberUtils {
+	
+	protected NumberUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Returns the {@code int} value that is equal to {@code value}, if

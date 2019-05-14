@@ -39,6 +39,11 @@ import com.sangupta.jerry.constants.OperatingSystem;
 public class TestCompressionUtils {
 
 	private static final int MAX_RUNS = 1000 * 10;
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new CompressionUtils() { };
+	}
 
 	@Test
 	public void testCompressDecompress() throws UnsupportedEncodingException {

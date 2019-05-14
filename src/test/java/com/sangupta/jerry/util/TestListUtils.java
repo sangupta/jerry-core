@@ -34,6 +34,11 @@ import org.junit.Test;
  *
  */
 public class TestListUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new ListUtils() { };
+	}
 
 	@Test
 	public void testListOfInteger() {

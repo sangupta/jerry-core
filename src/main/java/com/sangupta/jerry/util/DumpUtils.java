@@ -32,6 +32,10 @@ import java.lang.reflect.Method;
  *
  */
 public abstract class DumpUtils {
+	
+	protected DumpUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Returns the string representation of the given object by invoking the

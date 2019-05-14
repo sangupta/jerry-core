@@ -34,6 +34,11 @@ import org.junit.Test;
 import com.sangupta.jerry.constants.SystemPropertyNames;
 
 public class TestFileUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new FileUtils() { };
+	}
 
 	@Test
 	public void testUserHome() {

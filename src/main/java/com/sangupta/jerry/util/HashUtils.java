@@ -39,6 +39,10 @@ import com.sangupta.jerry.encoder.Base64Encoder;
  *
  */
 public abstract class HashUtils {
+	
+	protected HashUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Computes the MD5 hash of the given data.

@@ -31,6 +31,10 @@ import com.sangupta.jerry.constants.SystemPropertyNames;
  *
  */
 public abstract class OSUtils {
+	
+	protected OSUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Global enum depicting the current OS the JVM is running in.

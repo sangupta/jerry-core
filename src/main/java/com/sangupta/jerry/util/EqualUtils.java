@@ -27,6 +27,10 @@ package com.sangupta.jerry.util;
  *
  */
 public abstract class EqualUtils {
+	
+	protected EqualUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Tests if two <code>byte</code> arrays are equal in content or not.

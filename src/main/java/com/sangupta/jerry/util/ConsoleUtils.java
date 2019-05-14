@@ -36,6 +36,10 @@ import java.io.InputStreamReader;
  *
  */
 public abstract class ConsoleUtils {
+	
+	protected ConsoleUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	private static BufferedReader reader;
 

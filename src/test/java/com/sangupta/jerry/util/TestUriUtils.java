@@ -36,6 +36,11 @@ import org.junit.Test;
  *
  */
 public class TestUriUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new UriUtils() { };
+	}
 
 	@Test
 	public void testEncodeURIComponent() {

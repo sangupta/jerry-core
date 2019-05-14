@@ -32,6 +32,11 @@ import static org.junit.Assert.*;
  * @added 13 July 2012
  */
 public class TestEqualUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new EqualUtils() { };
+	}
 
 	@Test
 	public void testEqualsByteArray() {

@@ -38,6 +38,11 @@ import static org.junit.Assert.*;
  * @added 13 July 2012
  */
 public class TestAssertUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new AssertUtils() { };
+	}
 
 	@Test
 	public void testIsEmptyString() {

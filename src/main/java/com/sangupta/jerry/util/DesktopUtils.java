@@ -35,6 +35,10 @@ import java.net.URI;
  *
  */
 public abstract class DesktopUtils {
+	
+	protected DesktopUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Open the given URL in the system web browser.

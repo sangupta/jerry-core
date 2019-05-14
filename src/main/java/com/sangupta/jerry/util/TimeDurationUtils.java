@@ -32,6 +32,10 @@ import java.util.Date;
  *
  */
 public abstract class TimeDurationUtils {
+	
+	protected TimeDurationUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Compute the time duration of the given date from current time.

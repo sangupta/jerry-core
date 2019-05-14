@@ -42,6 +42,10 @@ import net.htmlparser.jericho.StartTag;
  *
  */
 public abstract class HtmlUtils {
+	
+	protected HtmlUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Tidy the HTML source by reformatting the entire HTML. This is

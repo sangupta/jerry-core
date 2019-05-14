@@ -36,6 +36,11 @@ import org.junit.Test;
  *
  */
 public class TestPropertiesUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new PropertiesUtils() { };
+	}
 
 	@Test
 	public void testAsMap() {

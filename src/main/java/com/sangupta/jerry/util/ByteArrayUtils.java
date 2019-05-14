@@ -31,6 +31,10 @@ import java.security.SecureRandom;
  *
  */
 public abstract class ByteArrayUtils {
+	
+	protected ByteArrayUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Read a long value from given byte-array at the given offset. The value is

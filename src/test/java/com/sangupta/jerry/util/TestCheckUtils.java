@@ -35,6 +35,11 @@ import org.junit.Test;
  *
  */
 public class TestCheckUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new CheckUtils() { };
+	}
 
 	@Test
 	public void testCheckFileExists() throws IOException {

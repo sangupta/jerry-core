@@ -37,6 +37,11 @@ import org.junit.Assert;
  *
  */
 public class TestStringUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new StringUtils() { };
+	}
 
 	@Test
 	public void testSubstringAfter() {

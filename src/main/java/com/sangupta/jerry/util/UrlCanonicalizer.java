@@ -31,6 +31,10 @@ package com.sangupta.jerry.util;
  */
 public abstract class UrlCanonicalizer {
 
+	protected UrlCanonicalizer() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
+	
 	/**
 	 * Canonicalize the given URL. If the URL is <code>null</code>, empty or contains
 	 * only white-spaces, a <code>null</code> is returned back to indicate that this is

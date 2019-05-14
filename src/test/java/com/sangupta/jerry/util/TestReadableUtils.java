@@ -26,6 +26,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class TestReadableUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new ReadableUtils() { };
+	}
 
 	@Test
 	public void testParseFileSize() {

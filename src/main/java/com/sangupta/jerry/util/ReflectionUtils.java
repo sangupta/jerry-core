@@ -43,6 +43,10 @@ import com.sangupta.jerry.store.PropertyName;
  *
  */
 public abstract class ReflectionUtils {
+	
+	protected ReflectionUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ReflectionUtils.class);
 

@@ -31,6 +31,11 @@ import org.junit.Test;
  *
  */
 public class TestUrlCanonicalizer {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new UrlCanonicalizer() { };
+	}
 
 	@Test
 	public void testCanonicalization() {

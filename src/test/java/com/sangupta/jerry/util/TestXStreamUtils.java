@@ -34,6 +34,11 @@ import com.thoughtworks.xstream.XStream;
  *
  */
 public class TestXStreamUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new XStreamUtils() { };
+	}
 
 	@Test
 	public void test() {

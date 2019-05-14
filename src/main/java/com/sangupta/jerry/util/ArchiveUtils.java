@@ -50,6 +50,10 @@ import org.slf4j.LoggerFactory;
  *
  */
 public abstract class ArchiveUtils {
+	
+	protected ArchiveUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Logger

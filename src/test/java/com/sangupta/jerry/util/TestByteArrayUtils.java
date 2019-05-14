@@ -32,6 +32,11 @@ import org.junit.Test;
  *
  */
 public class TestByteArrayUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new ByteArrayUtils() { };
+	}
 
 	@Test
 	public void testExceptions() {

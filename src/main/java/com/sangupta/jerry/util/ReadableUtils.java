@@ -33,6 +33,10 @@ import java.util.Arrays;
  *
  */
 public abstract class ReadableUtils {
+	
+	protected ReadableUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Convert human readable file size to number of bytes. For example: 2k

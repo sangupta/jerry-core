@@ -34,6 +34,10 @@ import java.util.Properties;
  * @since 1.0.0
  */
 public abstract class AssertUtils {
+	
+	protected AssertUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Check if a given string is <code>null</code> or zero-length. Returns

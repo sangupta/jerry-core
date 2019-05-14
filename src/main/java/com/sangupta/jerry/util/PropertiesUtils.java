@@ -34,6 +34,10 @@ import java.util.Set;
  *
  */
 public abstract class PropertiesUtils {
+	
+	protected PropertiesUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Convert a given {@link Properties} instance to a corresponding

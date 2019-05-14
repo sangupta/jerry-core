@@ -45,6 +45,10 @@ import org.slf4j.LoggerFactory;
  *
  */
 public abstract class UriUtils {
+	
+	protected UriUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * My own logger instance

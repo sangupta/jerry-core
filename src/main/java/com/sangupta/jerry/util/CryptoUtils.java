@@ -40,6 +40,10 @@ import com.sangupta.jerry.encoder.Base64Encoder;
  *
  */
 public abstract class CryptoUtils {
+	
+	protected CryptoUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * AES-256 encrypt the text.

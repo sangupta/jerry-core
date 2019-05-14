@@ -27,6 +27,10 @@ import org.apache.commons.io.IOUtils;
  */
 public class ResourceUtils {
 	
+	protected ResourceUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
+	
 	/**
 	 * Read the file at given {@link Path} as a {@link String} in default
 	 * encoding.

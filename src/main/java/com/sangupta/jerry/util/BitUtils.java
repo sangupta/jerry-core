@@ -29,6 +29,10 @@ package com.sangupta.jerry.util;
  *
  */
 public abstract class BitUtils {
+	
+	protected BitUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	private static final int LEAST_BIT = 0;
 

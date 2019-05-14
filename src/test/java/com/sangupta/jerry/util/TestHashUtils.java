@@ -36,6 +36,11 @@ public class TestHashUtils {
 	private static final String TEXT = "Hello World!";
 
 	private static final byte[] BYTES = TEXT.getBytes();
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new HashUtils() { };
+	}
 
 	@Test
 	public void testMD5() {

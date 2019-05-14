@@ -36,6 +36,10 @@ import org.slf4j.LoggerFactory;
  *
  */
 public abstract class StringUtils {
+	
+	protected StringUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Logger instance

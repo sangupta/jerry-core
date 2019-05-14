@@ -32,6 +32,10 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 public abstract class RequestUtils {
+	
+	protected RequestUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Extract the base URI and strip off the context path as well as any

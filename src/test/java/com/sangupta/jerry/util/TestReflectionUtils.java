@@ -28,6 +28,11 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class TestReflectionUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new ReflectionUtils() { };
+	}
 
 	@Test
 	public void testGetGetterMethod() {

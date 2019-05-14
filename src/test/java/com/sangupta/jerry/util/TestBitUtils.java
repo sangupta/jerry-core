@@ -33,6 +33,11 @@ import org.junit.Test;
  *
  */
 public class TestBitUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new BitUtils() { };
+	}
 
 	@Test
 	public void testBitSetInt() {

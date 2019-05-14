@@ -34,6 +34,10 @@ import org.jdom2.Element;
  *
  */
 public abstract class DomUtils {
+	
+	protected DomUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Returns the value of the attribute from the element.

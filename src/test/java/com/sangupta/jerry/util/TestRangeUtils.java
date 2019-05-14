@@ -32,6 +32,11 @@ import org.junit.Test;
  *
  */
 public class TestRangeUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new RangeUtils() { };
+	}
 
 	@Test
 	public void testInt() {

@@ -31,6 +31,10 @@ package com.sangupta.jerry.util;
  *
  */
 public abstract class XMLUtils {
+	
+	protected XMLUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Extract parameter value from XML content. The content is not XML parsed

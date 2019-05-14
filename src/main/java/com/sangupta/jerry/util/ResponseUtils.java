@@ -37,6 +37,10 @@ import com.sangupta.jerry.constants.HttpStatusCode;
  *
  */
 public abstract class ResponseUtils {
+	
+	protected ResponseUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Write the given response in UTF-8 encoding to the given

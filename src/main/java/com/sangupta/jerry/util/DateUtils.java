@@ -29,6 +29,10 @@ import java.util.Date;
  *
  */
 public abstract class DateUtils {
+	
+	protected DateUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * One second expressed as millis

@@ -47,6 +47,10 @@ import org.slf4j.LoggerFactory;
  *
  */
 public abstract class CompressionUtils {
+	
+	protected CompressionUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * The logger

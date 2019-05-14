@@ -32,6 +32,11 @@ import org.junit.Test;
  *
  */
 public class TestTimeDurationUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new TimeDurationUtils() { };
+	}
 
 	@Test
 	public void testAgo() {

@@ -31,6 +31,10 @@ import com.sangupta.jerry.constants.SystemPropertyNames;
  *
  */
 public abstract class JDKUtils {
+	
+	protected JDKUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Check if JDK version is 1.7 or not

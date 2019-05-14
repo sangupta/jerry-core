@@ -34,6 +34,11 @@ import org.junit.Test;
  *
  */
 public class TestCookieUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new CookieUtils() { };
+	}
 
 	@Test
 	public void testCreate() {

@@ -35,6 +35,10 @@ import com.thoughtworks.xstream.XStream;
  *
  */
 public abstract class XStreamUtils {
+	
+	protected XStreamUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * The {@link XStream} object that keeps getting invoked and processed

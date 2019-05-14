@@ -33,6 +33,10 @@ import com.sangupta.jerry.constants.HttpMimeType;
  *
  */
 public abstract class MimeUtils implements HttpMimeType {
+	
+	protected MimeUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Mappings between extension and MIME type

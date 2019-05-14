@@ -35,6 +35,11 @@ import com.sangupta.am.servlet.AmHttpServletRequest;
  *
  */
 public class TestRequestUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new RequestUtils() { };
+	}
 
 	@Test
 	public void testExtractUriServletRequest() {

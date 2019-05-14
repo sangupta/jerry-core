@@ -27,6 +27,11 @@ import org.junit.Test;
 
 public class TestObjectUtils {
 
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new ObjectUtils() { };
+	}
+	
 	@Test
 	public void testIsPrimitive() {
 		Assert.assertFalse(ObjectUtils.isPrimitive(null));

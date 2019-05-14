@@ -27,7 +27,12 @@ import org.junit.Test;
 
 import com.sangupta.jerry.constants.OperatingSystem;
 
-public class TestOperatingSystem {
+public class TestOSUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new OSUtils() { };
+	}
 
 	@Test
 	public void testOS() {

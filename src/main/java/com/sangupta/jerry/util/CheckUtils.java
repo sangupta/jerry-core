@@ -34,6 +34,10 @@ import java.io.File;
  * @since 1.2.0
  */
 public abstract class CheckUtils {
+	
+	protected CheckUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Check whether the file represented by the given absolute file path is a

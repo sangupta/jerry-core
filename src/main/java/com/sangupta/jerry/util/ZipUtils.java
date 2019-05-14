@@ -43,6 +43,10 @@ import org.slf4j.LoggerFactory;
  *
  */
 public abstract class ZipUtils {
+	
+	protected ZipUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ZipUtils.class);
 

@@ -9,6 +9,10 @@ import java.io.IOException;
  * @since 3.1.0
  */
 public abstract class IOUtils {
+	
+	protected IOUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	public static void closeQuietly(Closeable... closeables) {
 		if (AssertUtils.isEmpty(closeables)) {

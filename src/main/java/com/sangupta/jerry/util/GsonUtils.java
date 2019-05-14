@@ -60,6 +60,10 @@ import com.sangupta.jerry.ds.SimpleMultiMap;
  * @since 1.0.0
  */
 public abstract class GsonUtils {
+	
+	protected GsonUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Our holder for multiple instances

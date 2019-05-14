@@ -34,6 +34,11 @@ import com.sangupta.jerry.constants.HttpMimeType;
  *
  */
 public class TestMimeUtils {
+	
+	@Test(expected = InstantiationException.class)
+	public void testConstructor() throws InstantiationException {
+		new MimeUtils() { };
+	}
 
 	@Test
 	public void testGetMimeTypeForExtension() {

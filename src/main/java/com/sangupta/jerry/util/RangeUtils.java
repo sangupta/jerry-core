@@ -30,6 +30,10 @@ package com.sangupta.jerry.util;
  * @since 2.3
  */
 public abstract class RangeUtils {
+	
+	protected RangeUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Check if a character is in the given range.

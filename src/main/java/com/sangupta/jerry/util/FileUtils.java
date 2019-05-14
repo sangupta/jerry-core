@@ -56,6 +56,10 @@ import com.sangupta.jerry.io.FileByteChunkConsumer;
  *
  */
 public abstract class FileUtils {
+	
+	protected FileUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * One KB as number of bytes

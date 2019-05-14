@@ -33,6 +33,10 @@ import java.util.List;
  * @since 2.2
  */
 public abstract class ListUtils {
+	
+	protected ListUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Create a new list of integer values.

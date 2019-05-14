@@ -35,6 +35,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 public abstract class CookieUtils {
+	
+	protected CookieUtils() throws InstantiationException {
+		throw new InstantiationException("Instances of this class are forbidden");
+	}
 
 	/**
 	 * Create a new cookie. The cookie will expire at the end of browser
