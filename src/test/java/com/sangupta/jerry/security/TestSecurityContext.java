@@ -52,7 +52,7 @@ public class TestSecurityContext {
 		SecurityContext.setupAnonymousUserAccount(anonymous);
 		Assert.assertEquals(anonymous, SecurityContext.getPrincipal());
 		Assert.assertTrue(SecurityContext.isAnonymousUser());
-		SecurityContext.setContext(anonymous);
+		SecurityContext.setPrincipal(anonymous);
 		Assert.assertTrue(SecurityContext.isAnonymousUser());
 
 		final Principal user = new Principal() {
@@ -63,7 +63,7 @@ public class TestSecurityContext {
 			}
 
 		};
-		SecurityContext.setContext(user);
+		SecurityContext.setPrincipal(user);
 		Assert.assertEquals(user, SecurityContext.getPrincipal());
 
 		Assert.assertFalse(SecurityContext.isAnonymousUser());
