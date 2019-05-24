@@ -23,9 +23,11 @@ package com.sangupta.jerry.security;
 
 import java.security.Principal;
 
+import com.sangupta.jerry.util.AssertUtils;
+
 /**
- * A simple context that holds the currently valid {@link Principal}
- * for proper authentication and authorization.
+ * A simple context that holds the currently valid {@link Principal} for proper
+ * authentication and authorization.
  *
  * @author sangupta
  *
@@ -35,7 +37,12 @@ public class SecurityContext {
 	/**
 	 * Thread local instance to store the principal per thread
 	 */
-	private static ThreadLocal<Principal> holder = new ThreadLocal<Principal>();
+	private static final ThreadLocal<Principal> PRINCIPAL_HOLDER = new ThreadLocal<Principal>();
+
+	/**
+	 * Thread local instance to store the tenant per thread
+	 */
+	private static final ThreadLocal<String> TENANT_HOLDER = new ThreadLocal<String>();
 
 	/**
 	 * The anonymous user account
@@ -43,25 +50,33 @@ public class SecurityContext {
 	private static Principal ANONYMOUS_USER_PRINCIPAL = null;
 
 	/**
-	 * Method that sets up the anonymous user account. If no user is assigned to
-	 * the request, the anonymous user account will be returned.
+	 * Method that sets up the anonymous user account. If no user is assigned to the
+	 * request, the anonymous user account will be returned.
 	 *
-	 * @param principal
-	 *            the {@link Principal} instance to use for anonymous users
+	 * @param principal the {@link Principal} instance to use for anonymous users
 	 */
 	public static void setupAnonymousUserAccount(Principal principal) {
 		ANONYMOUS_USER_PRINCIPAL = principal;
 	}
 
 	/**
-	 * Setup a principal in this context
+	 * Setup a principal in this context.
 	 *
-	 * @param principal
-	 *            the {@link Principal} instance of use for the currently
-	 *            signed-in user
+	 * @param principal the {@link Principal} instance of use for the currently
+	 *                  signed-in user
 	 */
-	public static void setContext(Principal principal) {
-		holder.set(principal);
+	public static void setPrincipal(Principal principal) {
+		PRINCIPAL_HOLDER.set(principal);
+	}
+
+	/**
+	 * Setup a tenant in this context.
+	 * 
+	 * @param tenant the {@link String} based id for the tenant for which this
+	 *               request is flowing.
+	 */
+	public static void setTenant(String tenant) {
+		TENANT_HOLDER.set(tenant);
 	}
 
 	/**
@@ -71,8 +86,8 @@ public class SecurityContext {
 	 *
 	 */
 	public static Principal getPrincipal() {
-		Principal principal = holder.get();
-		if(principal != null) {
+		Principal principal = PRINCIPAL_HOLDER.get();
+		if (principal != null) {
 			return principal;
 		}
 
@@ -83,29 +98,66 @@ public class SecurityContext {
 	 * Check if the current user is anonymous or not.
 	 *
 	 * @return <code>true</code> if no principal is set, or if the currently set
-	 *         principal is the anonymous identified principal;
-	 *         <code>false</code> otherwise
+	 *         principal is the anonymous identified principal; <code>false</code>
+	 *         otherwise
 	 */
 	public static boolean isAnonymousUser() {
-		Principal principal = holder.get();
-		if(principal == null) {
+		Principal principal = PRINCIPAL_HOLDER.get();
+		if (principal == null) {
 			return true;
 		}
 
 		// the following == check is intentional for we want to compare
 		// object instances here, and not object values
-		if(principal == ANONYMOUS_USER_PRINCIPAL) {
+		if (principal == ANONYMOUS_USER_PRINCIPAL) {
 			return true;
 		}
 
 		return false;
 	}
+	
+	/**
+	 * Check if the tenant ID provided is the same as the tenant
+	 * in the {@link SecurityContext}.
+	 * 
+	 * @param tenant
+	 * @return
+	 */
+	public static boolean isSameTenant(String tenant) {
+		String current = TENANT_HOLDER.get();
+		if(AssertUtils.isEmpty(current)) {
+			if(AssertUtils.isEmpty(tenant)) { 
+				return true;
+			}
+			
+			return false;
+		}
+		
+		return current.equals(tenant);
+	}
 
 	/**
-	 * Clear the security context of set principal
+	 * Clear the security context of set principal value.
 	 *
 	 */
 	public static void clearPrincipal() {
-		holder.remove();
+		PRINCIPAL_HOLDER.remove();
+	}
+
+	/**
+	 * Clear the security context of the set tenant value.
+	 * 
+	 */
+	public static void clearTenant() {
+		TENANT_HOLDER.remove();
+	}
+
+	/**
+	 * Clear the security context of the set principal and tenant values.
+	 * 
+	 */
+	public static void clear() {
+		PRINCIPAL_HOLDER.remove();
+		TENANT_HOLDER.remove();
 	}
 }
