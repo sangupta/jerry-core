@@ -19,23 +19,23 @@
  *
  */
 
-package com.sangupta.jerry.ds.refresh;
+package com.sangupta.jerry.refresh;
 
 /**
- * A value that will auto-refresh when certain time expires
- * using the <code>refresh</code> method provided.
+ * A value that will auto-refresh when certain time expires using the
+ * <code>refresh</code> method provided.
  *
- * The expiration is checked only at access time, when a call
- * to <code>get()</code> method is made.
+ * The expiration is checked only at access time, when a call to
+ * <code>get()</code> method is made.
  *
  * Usage is simple as:
  *
  * <pre>
  * // 60 seconds
- * AutoRefreshableInt config = new AutoRefreshableInt(60000);
+ * AutoRefreshableLong config = new AutoRefreshableLong(60000);
  *
  * // calls the refresh method to fetch the value, say at 10:00:00
- * int value = config.get();
+ * long value = config.get();
  *
  * // any call before 10:01:00 will return the same value
  * value = config.get();
@@ -49,12 +49,12 @@ package com.sangupta.jerry.ds.refresh;
  *
  * @since 2.3
  */
-public abstract class AutoRefreshableInt {
+public abstract class AutoRefreshableLong {
 
 	/**
 	 * The value being cached
 	 */
-	protected int value;
+	protected long value;
 
 	/**
 	 * The time for which the value must be cached
@@ -72,8 +72,8 @@ public abstract class AutoRefreshableInt {
 	 * @param cacheMillis
 	 *            the milliseconds for which to cache the value
 	 */
-	public AutoRefreshableInt(long cacheMillis) {
-		if(cacheMillis <= 0) {
+	public AutoRefreshableLong(long cacheMillis) {
+		if (cacheMillis <= 0) {
 			throw new IllegalArgumentException("Cache time in millis should be greater than zero");
 		}
 
@@ -85,9 +85,9 @@ public abstract class AutoRefreshableInt {
 	 *
 	 * @return the value that is stored internally
 	 */
-	public int get() {
+	public long get() {
 		long delta = System.currentTimeMillis() - this.lastRefreshed;
-		if(delta > this.cacheMillis) {
+		if (delta > this.cacheMillis) {
 			this.value = refresh();
 			this.lastRefreshed = System.currentTimeMillis();
 		}
@@ -102,6 +102,6 @@ public abstract class AutoRefreshableInt {
 	 *
 	 * @return the newer refreshed value
 	 */
-	public abstract int refresh();
+	public abstract long refresh();
 
 }

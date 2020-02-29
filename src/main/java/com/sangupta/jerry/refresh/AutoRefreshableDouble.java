@@ -19,9 +19,7 @@
  *
  */
 
-package com.sangupta.jerry.ds.refresh;
-
-import net.jcip.annotations.ThreadSafe;
+package com.sangupta.jerry.refresh;
 
 /**
  * A value that will auto-refresh when certain time expires
@@ -34,10 +32,10 @@ import net.jcip.annotations.ThreadSafe;
  *
  * <pre>
  * // 60 seconds
- * AutoRefreshable&lt;String&gt; config = new AutoRefreshable&lt;&gt;(60000);
+ * AutoRefreshableDouble config = new AutoRefreshableDouble(60000);
  *
  * // calls the refresh method to fetch the value, say at 10:00:00
- * String value = config.get();
+ * double value = config.get();
  *
  * // any call before 10:01:00 will return the same value
  * value = config.get();
@@ -49,17 +47,14 @@ import net.jcip.annotations.ThreadSafe;
  *
  * @author sangupta
  *
- * @param <T> the type of value that is to be contained within
- *
  * @since 2.3
  */
-@ThreadSafe
-public abstract class AutoRefreshable<T> {
+public abstract class AutoRefreshableDouble {
 
 	/**
 	 * The value being cached
 	 */
-	protected volatile T value;
+	protected double value;
 
 	/**
 	 * The time for which the value must be cached
@@ -77,7 +72,7 @@ public abstract class AutoRefreshable<T> {
 	 * @param cacheMillis
 	 *            the milliseconds for which to cache the value
 	 */
-	public AutoRefreshable(long cacheMillis) {
+	public AutoRefreshableDouble(long cacheMillis) {
 		if(cacheMillis <= 0) {
 			throw new IllegalArgumentException("Cache time in millis should be greater than zero");
 		}
@@ -90,7 +85,7 @@ public abstract class AutoRefreshable<T> {
 	 *
 	 * @return the value that is stored internally
 	 */
-	public T get() {
+	public double get() {
 		long delta = System.currentTimeMillis() - this.lastRefreshed;
 		if(delta > this.cacheMillis) {
 			this.value = refresh();
@@ -107,6 +102,6 @@ public abstract class AutoRefreshable<T> {
 	 *
 	 * @return the newer refreshed value
 	 */
-	public abstract T refresh();
+	public abstract double refresh();
 
 }

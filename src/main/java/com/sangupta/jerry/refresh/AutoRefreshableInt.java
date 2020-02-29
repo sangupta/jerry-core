@@ -19,7 +19,7 @@
  *
  */
 
-package com.sangupta.jerry.ds.refresh;
+package com.sangupta.jerry.refresh;
 
 /**
  * A value that will auto-refresh when certain time expires
@@ -32,10 +32,10 @@ package com.sangupta.jerry.ds.refresh;
  *
  * <pre>
  * // 60 seconds
- * AutoRefreshableFloat config = new AutoRefreshableFloat(60000);
+ * AutoRefreshableInt config = new AutoRefreshableInt(60000);
  *
  * // calls the refresh method to fetch the value, say at 10:00:00
- * float value = config.get();
+ * int value = config.get();
  *
  * // any call before 10:01:00 will return the same value
  * value = config.get();
@@ -49,12 +49,12 @@ package com.sangupta.jerry.ds.refresh;
  *
  * @since 2.3
  */
-public abstract class AutoRefreshableFloat {
+public abstract class AutoRefreshableInt {
 
 	/**
 	 * The value being cached
 	 */
-	protected float value;
+	protected int value;
 
 	/**
 	 * The time for which the value must be cached
@@ -72,7 +72,7 @@ public abstract class AutoRefreshableFloat {
 	 * @param cacheMillis
 	 *            the milliseconds for which to cache the value
 	 */
-	public AutoRefreshableFloat(long cacheMillis) {
+	public AutoRefreshableInt(long cacheMillis) {
 		if(cacheMillis <= 0) {
 			throw new IllegalArgumentException("Cache time in millis should be greater than zero");
 		}
@@ -85,7 +85,7 @@ public abstract class AutoRefreshableFloat {
 	 *
 	 * @return the value that is stored internally
 	 */
-	public float get() {
+	public int get() {
 		long delta = System.currentTimeMillis() - this.lastRefreshed;
 		if(delta > this.cacheMillis) {
 			this.value = refresh();
@@ -102,6 +102,6 @@ public abstract class AutoRefreshableFloat {
 	 *
 	 * @return the newer refreshed value
 	 */
-	public abstract float refresh();
+	public abstract int refresh();
 
 }

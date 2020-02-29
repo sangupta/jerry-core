@@ -1,4 +1,4 @@
-package com.sangupta.jerry.ds.refresh;
+package com.sangupta.jerry.refresh;
 
 import org.junit.Assert;
 import org.junit.Test;

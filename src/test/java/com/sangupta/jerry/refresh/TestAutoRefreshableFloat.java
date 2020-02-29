@@ -20,7 +20,7 @@
  */
 
 
-package com.sangupta.jerry.ds.refresh;
+package com.sangupta.jerry.refresh;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,31 +28,31 @@ import org.junit.Test;
 import com.sangupta.jerry.util.DateUtils;
 
 /**
- * Unit tests for {@link AutoRefreshableDouble} class
+ * Unit tests for {@link AutoRefreshableFloat} class
  *
  * @author sangupta
  *
  */
-public class TestAutoRefreshableDouble {
+public class TestAutoRefreshableFloat {
 
 	@Test
 	public void test() {
-		AutoRefreshableDouble i = new AutoRefreshableDouble(DateUtils.ONE_SECOND) {
+		AutoRefreshableFloat i = new AutoRefreshableFloat(DateUtils.ONE_SECOND) {
 
-			private double value = 20d;
+			private float value = 20f;
 
 			@Override
-			public double refresh() {
-				this.value = this.value * 2d;
+			public float refresh() {
+				this.value = this.value * 2f;
 				return this.value;
 			}
 
 		};
 
 		// start testing
-		double value = i.get();
+		float value = i.get();
 		Assert.assertTrue(value > 0);
-		Assert.assertEquals(value, i.get(), 0d);
+		Assert.assertEquals(value, i.get(), 0f);
 
 		try {
 			Thread.sleep(DateUtils.ONE_SECOND * 2l);
@@ -65,10 +65,10 @@ public class TestAutoRefreshableDouble {
 
 		// test exception
 		try {
-			i = new AutoRefreshableDouble(0l) {
+			i = new AutoRefreshableFloat(0l) {
 
 				@Override
-				public double refresh() {
+				public float refresh() {
 					return 0;
 				}
 			};
@@ -79,10 +79,10 @@ public class TestAutoRefreshableDouble {
 		}
 
 		try {
-			i = new AutoRefreshableDouble(-15l) {
+			i = new AutoRefreshableFloat(-15l) {
 
 				@Override
-				public double refresh() {
+				public float refresh() {
 					return 0;
 				}
 			};

@@ -20,7 +20,7 @@
  */
 
 
-package com.sangupta.jerry.ds.refresh;
+package com.sangupta.jerry.refresh;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -28,28 +28,31 @@ import org.junit.Test;
 import com.sangupta.jerry.util.DateUtils;
 
 /**
- * Unit tests for {@link AutoRefreshableLong} class
+ * Unit tests for {@link AutoRefreshableDouble} class
  *
  * @author sangupta
  *
  */
-public class TestAutoRefreshableLong {
+public class TestAutoRefreshableDouble {
 
 	@Test
 	public void test() {
-		AutoRefreshableLong i = new AutoRefreshableLong(DateUtils.ONE_SECOND) {
+		AutoRefreshableDouble i = new AutoRefreshableDouble(DateUtils.ONE_SECOND) {
+
+			private double value = 20d;
 
 			@Override
-			public long refresh() {
-				return System.currentTimeMillis();
+			public double refresh() {
+				this.value = this.value * 2d;
+				return this.value;
 			}
 
 		};
 
 		// start testing
-		long value = i.get();
+		double value = i.get();
 		Assert.assertTrue(value > 0);
-		Assert.assertEquals(value, i.get());
+		Assert.assertEquals(value, i.get(), 0d);
 
 		try {
 			Thread.sleep(DateUtils.ONE_SECOND * 2l);
@@ -62,10 +65,10 @@ public class TestAutoRefreshableLong {
 
 		// test exception
 		try {
-			i = new AutoRefreshableLong(0l) {
+			i = new AutoRefreshableDouble(0l) {
 
 				@Override
-				public long refresh() {
+				public double refresh() {
 					return 0;
 				}
 			};
@@ -76,10 +79,10 @@ public class TestAutoRefreshableLong {
 		}
 
 		try {
-			i = new AutoRefreshableLong(-15l) {
+			i = new AutoRefreshableDouble(-15l) {
 
 				@Override
-				public long refresh() {
+				public double refresh() {
 					return 0;
 				}
 			};
