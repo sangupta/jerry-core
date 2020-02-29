@@ -39,7 +39,7 @@ import net.jcip.annotations.ThreadSafe;
  * @since 1.1
  */
 @ThreadSafe
-public class IntegerCounter {
+public class IntCounter {
 
 	/**
 	 * Holds all counters for us.
@@ -88,7 +88,7 @@ public class IntegerCounter {
 	}
 
 	/**
-	 * Return the names of the counters present in this {@link IntegerCounter}.
+	 * Return the names of the counters present in this {@link IntCounter}.
 	 *
 	 * @return the names of the counters if available, an empty {@link HashSet}
 	 *         otherwise

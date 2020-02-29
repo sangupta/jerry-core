@@ -66,7 +66,7 @@ public class LongCounter {
 	}
 
 	/**
-	 * Return the names of the counters present in this {@link IntegerCounter}.
+	 * Return the names of the counters present in this {@link LongCounter}.
 	 *
 	 * @return the names of the counters if available, <code>null</code>
 	 *         otherwise

@@ -41,7 +41,7 @@ import com.sangupta.jerry.ds.counter.IntegerCounter;
  * @author sangupta
  *
  */
-public class TestIntegerCounter {
+public class TestIntCounter {
 
 	@Test
 	public void testIntegerCounter() {
