@@ -26,7 +26,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.sangupta.jerry.ds.mutable.MutableInt;
+import com.sangupta.jerry.lang.MutableInt;
 import com.sangupta.jerry.util.AssertUtils;
 import com.sangupta.jerry.util.IOUtils;
 import com.sangupta.jerry.util.StringUtils;
