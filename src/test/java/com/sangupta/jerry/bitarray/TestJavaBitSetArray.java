@@ -20,16 +20,18 @@
  */
 
 
-package com.sangupta.jerry.ds.bitarray;
+package com.sangupta.jerry.bitarray;
 
-import java.io.File;
-
-public class TestMMapFileBackedBitArray extends TestAbstractBitArray {
+public class TestJavaBitSetArray extends TestAbstractBitArray {
 
 	@Override
 	protected BitArray getNewBitArray() throws Exception {
-		File file = File.createTempFile("test-ba-", ".bin");
-		file.deleteOnExit();
-		return new MMapFileBackedBitArray(file, MAX_ELEMENTS);
+		return new JavaBitSetArray(MAX_ELEMENTS);
 	}
+	
+	@Override
+	protected int getMaxElements() {
+		return 1024 * 10; // JavaBitSet is too slow
+	}
+
 }

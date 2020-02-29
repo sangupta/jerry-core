@@ -20,18 +20,13 @@
  */
 
 
-package com.sangupta.jerry.ds.bitarray;
+package com.sangupta.jerry.bitarray;
 
-public class TestJavaBitSetArray extends TestAbstractBitArray {
+public class TestFastBitArray extends TestAbstractBitArray {
 
 	@Override
-	protected BitArray getNewBitArray() throws Exception {
-		return new JavaBitSetArray(MAX_ELEMENTS);
-	}
-	
-	@Override
-	protected int getMaxElements() {
-		return 1024 * 10; // JavaBitSet is too slow
+	protected BitArray getNewBitArray() {
+		return new FastBitArray(MAX_ELEMENTS);
 	}
 
 }

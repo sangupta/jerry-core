@@ -19,7 +19,7 @@
  *
  */
 
-package com.sangupta.jerry.ds.bitarray;
+package com.sangupta.jerry.bitarray;
 
 import java.io.Closeable;
 

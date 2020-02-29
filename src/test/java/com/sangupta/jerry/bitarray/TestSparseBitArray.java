@@ -1,5 +1,5 @@
 /**
- *
+ * 
  * jerry - Common Java Functionality
  * Copyright (c) 2012-present, Sandeep Gupta
  *
@@ -19,14 +19,25 @@
  *
  */
 
+package com.sangupta.jerry.bitarray;
 
-package com.sangupta.jerry.ds.bitarray;
+import com.sangupta.jerry.bitarray.SparseBitArray;
 
-public class TestFastBitArray extends TestAbstractBitArray {
+/**
+ * Unit tests for {@link SparseBitArray}.
+ * 
+ * @author sangupta
+ *
+ */
+public class TestSparseBitArray extends TestAbstractBitArray {
 
+	private final int BUCKET_SIZE = 1024;
+	
+	private final int NUM_BUCKETS = MAX_ELEMENTS / BUCKET_SIZE;
+	
 	@Override
-	protected BitArray getNewBitArray() {
-		return new FastBitArray(MAX_ELEMENTS);
+	protected BitArray getNewBitArray() throws Exception {
+		return new SparseBitArray(NUM_BUCKETS, BUCKET_SIZE);
 	}
-
+	
 }
