@@ -19,12 +19,12 @@
  *
  */
 
-package com.sangupta.jerry.bounded;
+package com.sangupta.jerry.lang;
 
 import net.jcip.annotations.NotThreadSafe;
 
 /**
- * A long value that is bounded between the given minimum and maximum
+ * An integer value that is bounded between the given minimum and maximum
  * values. The value when updated will always be in bounds. If a value
  * less than minimum is being set, the value will update to minimum. If a
  * value greater than maximum is being set, the value will update to maximum.
@@ -35,36 +35,36 @@ import net.jcip.annotations.NotThreadSafe;
  * @since 2.3
  */
 @NotThreadSafe
-public class BoundedLong {
+public class BoundedInt {
 
 	/**
-	 * The minimum value that this {@link BoundedLong} can go down to
+	 * The minimum value that this {@link BoundedInt} can go down to
 	 */
-	protected final long minimum;
+	protected final int minimum;
 
 	/**
-	 * The maximum value that this {@link BoundedLong} can go up to
+	 * The maximum value that this {@link BoundedInt} can go up to
 	 */
-	protected final long maximum;
+	protected final int maximum;
 
 	/**
-	 * The current value of this {@link BoundedLong}
+	 * The current value of this {@link BoundedInt}
 	 */
-	protected long current;
+	protected int current;
 
 	/**
 	 * Create a new instance for the given minimum and maximum values
 	 *
 	 * @param minValue
-	 *            the minimum value that this {@link BoundedLong} can go up to
+	 *            the minimum value that this {@link BoundedInt} can go up to
 	 *
 	 * @param maxValue
-	 *            the maximum value that this {@link BoundedLong} can go up to
+	 *            the maximum value that this {@link BoundedInt} can go up to
 	 *
 	 * @throws IllegalArgumentException
 	 *             if maxValue is less than or equal to minValue
 	 */
-	private BoundedLong(long minValue, long maxValue) {
+	private BoundedInt(int minValue, int maxValue) {
 		if(maxValue <= minValue) {
 			throw new IllegalArgumentException("Maximum value cannot be less than or equal to minimum value");
 		}
@@ -74,22 +74,22 @@ public class BoundedLong {
 	}
 
 	/**
-	 * Create a new {@link BoundedLong} with the given current value in the given
+	 * Create a new {@link BoundedInt} with the given current value in the given
 	 * range.
 	 *
 	 * @param current
 	 *            the current value to set to
 	 *
 	 * @param minValue
-	 *            the minimum value that this {@link BoundedLong} can go up to
+	 *            the minimum value that this {@link BoundedInt} can go up to
 	 *
 	 * @param maxValue
-	 *            the maximum value that this {@link BoundedLong} can go up to
+	 *            the maximum value that this {@link BoundedInt} can go up to
 	 *
 	 * @throws IllegalArgumentException
 	 *             if maxValue is less than or equal to minValue
 	 */
-	public BoundedLong(long current, long minValue, long maxValue) {
+	public BoundedInt(int current, int minValue, int maxValue) {
 		this(minValue, maxValue);
 		this.set(current);
 	}
@@ -102,9 +102,9 @@ public class BoundedLong {
 	 * @param newValue
 	 *            the value to be set
 	 *
-	 * @return the value that this {@link BoundedLong} is now set to
+	 * @return the value that this {@link BoundedInt} is now set to
 	 */
-	public long set(long newValue) {
+	public int set(int newValue) {
 		if(newValue < this.minimum) {
 			this.current = this.minimum;
 			return this.current;
@@ -121,14 +121,14 @@ public class BoundedLong {
 
 	/**
 	 * Update the current value to the given new value, only if the new value is
-	 * in the range of this {@link BoundedLong}.
+	 * in the range of this {@link BoundedInt}.
 	 *
 	 * @param newValue
 	 *            the value to be set
 	 *
-	 * @return the value that this {@link BoundedLong} is now set to
+	 * @return the value that this {@link BoundedInt} is now set to
 	 */
-	public long checkAndSet(long newValue) {
+	public int checkAndSet(int newValue) {
 		if(newValue < this.minimum) {
 			return this.current;
 		}
@@ -142,11 +142,11 @@ public class BoundedLong {
 	}
 
 	/**
-	 * Return the current value of this {@link BoundedLong}.
+	 * Return the current value of this {@link BoundedInt}.
 	 *
 	 * @return the current value
 	 */
-	public long get() {
+	public int get() {
 		return this.current;
 	}
 
@@ -154,9 +154,9 @@ public class BoundedLong {
 	 * Increment the current value by <code>ONE</code> and return the new
 	 * current value.
 	 *
-	 * @return the value that this {@link BoundedLong} is now set to
+	 * @return the value that this {@link BoundedInt} is now set to
 	 */
-	public long increment() {
+	public int increment() {
 		return this.set(this.current + 1);
 	}
 
@@ -164,9 +164,9 @@ public class BoundedLong {
 	 * Decrement the current value by <code>ONE</code> and return the new
 	 * current value.
 	 *
-	 * @return the value that this {@link BoundedLong} is now set to
+	 * @return the value that this {@link BoundedInt} is now set to
 	 */
-	public long decrement() {
+	public int decrement() {
 		return this.set(this.current - 1);
 	}
 
@@ -176,9 +176,9 @@ public class BoundedLong {
 	 * @param additive
 	 *            the number to be added to current number
 	 *
-	 * @return the value that this {@link BoundedLong} is now set to
+	 * @return the value that this {@link BoundedInt} is now set to
 	 */
-	public long add(int additive) {
+	public int add(int additive) {
 		return this.set(this.current + additive);
 	}
 
@@ -188,9 +188,9 @@ public class BoundedLong {
 	 * @param subtractive
 	 *            the number to be subtracted from current number
 	 *
-	 * @return the value that this {@link BoundedLong} is now set to
+	 * @return the value that this {@link BoundedInt} is now set to
 	 */
-	public long subtract(int subtractive) {
+	public int subtract(int subtractive) {
 		return this.set(this.current - subtractive);
 	}
 
@@ -200,9 +200,9 @@ public class BoundedLong {
 	 * @param multiplier
 	 *            the number by which to multiple the current number
 	 *
-	 * @return the value that this {@link BoundedLong} is now set to
+	 * @return the value that this {@link BoundedInt} is now set to
 	 */
-	public long multiply(int multiplier) {
+	public int multiply(int multiplier) {
 		return this.set(this.current * multiplier);
 	}
 
@@ -212,9 +212,9 @@ public class BoundedLong {
 	 * @param divisor
 	 *            the number by which to divide the current number
 	 *
-	 * @return the value that this {@link BoundedLong} is now set to
+	 * @return the value that this {@link BoundedInt} is now set to
 	 */
-	public long divide(int divisor) {
+	public int divide(int divisor) {
 		return this.set(this.current / divisor);
 	}
 
