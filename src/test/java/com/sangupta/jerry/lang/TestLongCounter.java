@@ -19,8 +19,7 @@
  *
  */
 
-
-package com.sangupta.jerry.ds;
+package com.sangupta.jerry.lang;
 
 import java.security.SecureRandom;
 import java.util.HashMap;
