@@ -19,35 +19,35 @@
  *
  */
 
-package com.sangupta.jerry.ds.mutable;
+package com.sangupta.jerry.lang;
 
 import java.util.Collections;
 
 /**
- * A simple wrapper over a float to be used in {@link Collections}
+ * A simple wrapper over an integer to be used in {@link Collections}
  * where the value can be changed as and when needed.
  *
  * @author sangupta
  *
  */
-public class MutableFloat {
+public class MutableInt {
 
-	private float value;
+	private int value;
 
 	/**
-	 * Create a mutable <code>float</code> with initial value of <code>0</code>.
+	 * Create a mutable integer with initial value of <code>0</code>.
 	 *
 	 */
-	public MutableFloat() {
+	public MutableInt() {
 
 	}
 
 	/**
-	 * Create a mutable float with the given initial value
+	 * Create a mutable integer with the given initial value
 	 *
 	 * @param value the value to set initially
 	 */
-	public MutableFloat(float value) {
+	public MutableInt(int value) {
 		this.value = value;
 	}
 
@@ -56,17 +56,17 @@ public class MutableFloat {
 	 *
 	 * @return the current value
 	 */
-	public float get() {
+	public int get() {
 		return this.value;
 	}
 
 	/**
-	 * Set the current value of this mutable float to the given value
+	 * Set the current value of this mutable integer to the given value
 	 *
 	 * @param value
 	 *            the value to set
 	 */
-	public void set(float value) {
+	public void set(int value) {
 		this.value = value;
 	}
 
@@ -76,7 +76,7 @@ public class MutableFloat {
 	 * @param value
 	 *            the value to set
 	 */
-	public void setIfMax(float value) {
+	public void setIfMax(int value) {
 		if(this.value < value) {
 			this.value = value;
 		}
@@ -88,7 +88,7 @@ public class MutableFloat {
 	 * @param value
 	 *            the value to set
 	 */
-	public void setIfMin(float value) {
+	public void setIfMin(int value) {
 		if(this.value > value) {
 			this.value = value;
 		}

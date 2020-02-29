@@ -20,38 +20,37 @@
  */
 
 
-package com.sangupta.jerry.ds.mutable;
+package com.sangupta.jerry.lang;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Unit tests for {@link MutableFloat} class
+ * Unit tests for {@link MutableDouble} class
  *
  * @author sangupta
  *
  */
-public class TestMutableFloat {
+public class TestMutableDouble {
 
 	@Test
 	public void testMutableInt() {
-		MutableFloat mutableFloat = new MutableFloat();
-		Assert.assertEquals(0, mutableFloat.get(), 0f);
-		mutableFloat.set(50);
-		Assert.assertEquals(50, mutableFloat.get(), 0f);
+		MutableDouble mutableDouble = new MutableDouble();
+		Assert.assertEquals(0, mutableDouble.get(), 0d);
+		mutableDouble.set(50);
+		Assert.assertEquals(50, mutableDouble.get(), 0d);
 
-		mutableFloat.setIfMax(100);
-		Assert.assertEquals(100, mutableFloat.get(), 0f);
-		mutableFloat.setIfMax(75);
-		Assert.assertEquals(100, mutableFloat.get(), 0f);
+		mutableDouble.setIfMax(100);
+		Assert.assertEquals(100, mutableDouble.get(), 0d);
+		mutableDouble.setIfMax(75);
+		Assert.assertEquals(100, mutableDouble.get(), 0d);
 
-		mutableFloat.setIfMin(50);
-		Assert.assertEquals(50, mutableFloat.get(), 0f);
-		mutableFloat.setIfMin(75);
-		Assert.assertEquals(50, mutableFloat.get(), 0f);
+		mutableDouble.setIfMin(50);
+		Assert.assertEquals(50, mutableDouble.get(), 0d);
+		mutableDouble.setIfMin(75);
+		Assert.assertEquals(50, mutableDouble.get(), 0d);
 
-		mutableFloat = new MutableFloat(33f);
-		Assert.assertEquals(33, mutableFloat.get(), 0f);
-
+		mutableDouble = new MutableDouble(16d);
+		Assert.assertEquals(16, mutableDouble.get(), 0d);
 	}
 }

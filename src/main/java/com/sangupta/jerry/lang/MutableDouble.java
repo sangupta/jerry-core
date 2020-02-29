@@ -19,7 +19,7 @@
  *
  */
 
-package com.sangupta.jerry.ds.mutable;
+package com.sangupta.jerry.lang;
 
 import java.util.Collections;
 
