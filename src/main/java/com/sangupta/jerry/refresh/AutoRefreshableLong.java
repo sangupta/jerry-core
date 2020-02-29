@@ -22,28 +22,9 @@
 package com.sangupta.jerry.refresh;
 
 /**
- * A value that will auto-refresh when certain time expires using the
- * <code>refresh</code> method provided.
- *
- * The expiration is checked only at access time, when a call to
- * <code>get()</code> method is made.
- *
- * Usage is simple as:
- *
- * <pre>
- * // 60 seconds
- * AutoRefreshableLong config = new AutoRefreshableLong(60000);
- *
- * // calls the refresh method to fetch the value, say at 10:00:00
- * long value = config.get();
- *
- * // any call before 10:01:00 will return the same value
- * value = config.get();
- *
- * // a call on or after 10:01:00 will call the refresh method again
- * // and then return the value
- * value = config.get();
- * </pre>
+ * An {@link AutoRefreshable} implementation for primitive <code>long</code>
+ * values. This allows us to to not box the value every time and prevent
+ * implicit cast operations.
  *
  * @author sangupta
  *
