@@ -19,7 +19,7 @@
  *
  */
 
-package com.sangupta.jerry.ds.bound;
+package com.sangupta.jerry.bounded;
 
 import net.jcip.annotations.NotThreadSafe;
 

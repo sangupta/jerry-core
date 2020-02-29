@@ -20,7 +20,7 @@
  */
 
 
-package com.sangupta.jerry.ds.bound;
+package com.sangupta.jerry.bounded;
 
 import org.junit.Assert;
 import org.junit.Test;
