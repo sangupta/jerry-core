@@ -22,7 +22,7 @@
 
 package com.sangupta.jerry.bitarray;
 
-public class TestFastBitArray extends TestAbstractBitArray {
+public class TestFastBitArray extends AbstractTestBitArray {
 
 	@Override
 	protected BitArray getNewBitArray() {

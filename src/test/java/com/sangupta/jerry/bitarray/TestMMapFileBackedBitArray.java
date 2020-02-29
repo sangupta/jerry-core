@@ -24,7 +24,7 @@ package com.sangupta.jerry.bitarray;
 
 import java.io.File;
 
-public class TestMMapFileBackedBitArray extends TestAbstractBitArray {
+public class TestMMapFileBackedBitArray extends AbstractTestBitArray {
 
 	@Override
 	protected BitArray getNewBitArray() throws Exception {

@@ -33,7 +33,7 @@ import org.junit.Test;
  * @author sangupta
  *
  */
-public abstract class TestAbstractBitArray {
+public abstract class AbstractTestBitArray {
 
 	protected abstract BitArray getNewBitArray() throws Exception;
 	

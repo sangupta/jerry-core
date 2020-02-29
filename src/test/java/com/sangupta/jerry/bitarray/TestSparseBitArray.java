@@ -29,7 +29,7 @@ import com.sangupta.jerry.bitarray.SparseBitArray;
  * @author sangupta
  *
  */
-public class TestSparseBitArray extends TestAbstractBitArray {
+public class TestSparseBitArray extends AbstractTestBitArray {
 
 	private final int BUCKET_SIZE = 1024;
 	

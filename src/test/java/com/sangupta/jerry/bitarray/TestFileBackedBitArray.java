@@ -25,7 +25,7 @@ package com.sangupta.jerry.bitarray;
 import java.io.File;
 import java.io.IOException;
 
-public class TestFileBackedBitArray extends TestAbstractBitArray {
+public class TestFileBackedBitArray extends AbstractTestBitArray {
 	
 	@Override
 	protected BitArray getNewBitArray() throws IOException {
