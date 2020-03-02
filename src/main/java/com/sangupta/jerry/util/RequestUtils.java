@@ -75,12 +75,19 @@ public abstract class RequestUtils {
 		
 		// extract the URL
 		String url = request.getRequestURI();
-		if(url.startsWith(request.getContextPath())) {
-			url = url.substring(request.getContextPath().length());
+		if(AssertUtils.isEmpty(url)) {
+			return url;
+		}
+		
+		String context = request.getContextPath();
+		if(AssertUtils.isNotEmpty(context)) {
+			if(url.startsWith(context)) {
+				url = url.substring(request.getContextPath().length());
+			}
 		}
 
 		int jsessionID = url.indexOf(";jsessionid=");
-		if(jsessionID != -1) {
+		if(jsessionID >= 0) {
 			url = url.substring(0, jsessionID);
 		}
 
