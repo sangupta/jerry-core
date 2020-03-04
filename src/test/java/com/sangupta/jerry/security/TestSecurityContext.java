@@ -19,14 +19,12 @@
  *
  */
 
-
 package com.sangupta.jerry.security;
 
-import java.security.Principal;
-
 import org.junit.Assert;
-
 import org.junit.Test;
+
+import com.sangupta.jerry.entity.UserAwarePrincipal;
 
 /**
  * Unit tests for {@link SecurityContext}.
@@ -41,28 +39,32 @@ public class TestSecurityContext {
 		Assert.assertNull(SecurityContext.getPrincipal());
 		Assert.assertTrue(SecurityContext.isAnonymousUser());
 
-		final Principal anonymous = new Principal() {
+		final UserAwarePrincipal anonymous = new UserAwarePrincipal() {
 
-			@Override
-			public String getName() {
-				return "anonymous";
-			}
+			@Override public String getName() { return "anonymous"; }
+
+            @Override public String getUserID() { return "anonymous"; }
+
+            @Override public void setUserID(String userID) { }
 
 		};
+		
 		SecurityContext.setupAnonymousUserAccount(anonymous);
 		Assert.assertEquals(anonymous, SecurityContext.getPrincipal());
 		Assert.assertTrue(SecurityContext.isAnonymousUser());
 		SecurityContext.setPrincipal(anonymous);
 		Assert.assertTrue(SecurityContext.isAnonymousUser());
 
-		final Principal user = new Principal() {
+		final UserAwarePrincipal user = new UserAwarePrincipal() {
 
-			@Override
-			public String getName() {
-				return "anonymous";
-			}
+            @Override public String getName() { return "anonymous"; }
 
-		};
+            @Override public String getUserID() { return "anonymous"; }
+
+            @Override public void setUserID(String userID) { }
+
+        };
+        
 		SecurityContext.setPrincipal(user);
 		Assert.assertEquals(user, SecurityContext.getPrincipal());
 

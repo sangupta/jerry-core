@@ -23,6 +23,7 @@ package com.sangupta.jerry.security;
 
 import java.security.Principal;
 
+import com.sangupta.jerry.entity.UserAwarePrincipal;
 import com.sangupta.jerry.util.AssertUtils;
 
 /**
@@ -30,6 +31,8 @@ import com.sangupta.jerry.util.AssertUtils;
  * authentication and authorization.
  *
  * @author sangupta
+ * 
+ * @since 1.0.0
  *
  */
 public class SecurityContext {
@@ -37,17 +40,17 @@ public class SecurityContext {
 	/**
 	 * Thread local instance to store the principal per thread
 	 */
-	private static final ThreadLocal<Principal> PRINCIPAL_HOLDER = new ThreadLocal<Principal>();
+	private static final ThreadLocal<UserAwarePrincipal> PRINCIPAL_HOLDER = new ThreadLocal<>();
 
 	/**
 	 * Thread local instance to store the tenant per thread
 	 */
-	private static final ThreadLocal<String> TENANT_HOLDER = new ThreadLocal<String>();
+	private static final ThreadLocal<String> TENANT_HOLDER = new ThreadLocal<>();
 
 	/**
 	 * The anonymous user account
 	 */
-	private static Principal ANONYMOUS_USER_PRINCIPAL = null;
+	private static UserAwarePrincipal ANONYMOUS_USER_PRINCIPAL = null;
 
 	/**
 	 * Method that sets up the anonymous user account. If no user is assigned to the
@@ -55,7 +58,7 @@ public class SecurityContext {
 	 *
 	 * @param principal the {@link Principal} instance to use for anonymous users
 	 */
-	public static void setupAnonymousUserAccount(Principal principal) {
+	public static void setupAnonymousUserAccount(UserAwarePrincipal principal) {
 		ANONYMOUS_USER_PRINCIPAL = principal;
 	}
 
@@ -65,7 +68,7 @@ public class SecurityContext {
 	 * @param principal the {@link Principal} instance of use for the currently
 	 *                  signed-in user
 	 */
-	public static void setPrincipal(Principal principal) {
+	public static void setPrincipal(UserAwarePrincipal principal) {
 		PRINCIPAL_HOLDER.set(principal);
 	}
 
@@ -85,13 +88,29 @@ public class SecurityContext {
 	 * @return the current principal, or the anonymous principal object if set
 	 *
 	 */
-	public static Principal getPrincipal() {
-		Principal principal = PRINCIPAL_HOLDER.get();
+	public static UserAwarePrincipal getPrincipal() {
+	    UserAwarePrincipal principal = PRINCIPAL_HOLDER.get();
 		if (principal != null) {
 			return principal;
 		}
 
 		return ANONYMOUS_USER_PRINCIPAL;
+	}
+	
+	/**
+	 * Returns the user ID for the currently set {@link Principal}.
+	 * 
+	 * @since 4.0.0
+	 * 
+	 * @return
+	 */
+	public static String getUserID() {
+	    UserAwarePrincipal principal = getPrincipal();
+	    if(principal == null) {
+	        return null;
+	    }
+	    
+	    return principal.getUserID();
 	}
 
 	/**
