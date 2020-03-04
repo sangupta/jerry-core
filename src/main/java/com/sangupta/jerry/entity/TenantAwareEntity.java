@@ -9,6 +9,8 @@ package com.sangupta.jerry.entity;
  */
 public interface TenantAwareEntity {
 	
-	public String getTenant();
+	public String getTenantID();
+	
+	public void setTenantID(String tenantID);
 	
 }

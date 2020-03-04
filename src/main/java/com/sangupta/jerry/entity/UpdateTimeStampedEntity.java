@@ -5,7 +5,7 @@ package com.sangupta.jerry.entity;
  * @author sangupta
  * 
  */
-public interface UpdateTimedEntity {
+public interface UpdateTimeStampedEntity {
 	
 	public long getUpdated();
 	

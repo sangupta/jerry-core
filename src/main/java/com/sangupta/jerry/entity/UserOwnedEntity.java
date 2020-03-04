@@ -5,8 +5,10 @@ package com.sangupta.jerry.entity;
  * @author sangupta
  * 
  */
-public interface UserAwareEntity {
+public interface UserOwnedEntity {
 	
 	public String getUserID();
+	
+	public void setUserID(String userID);
 
 }

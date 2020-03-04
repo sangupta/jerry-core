@@ -7,10 +7,20 @@ package com.sangupta.jerry.entity;
  * @author sangupta
  *
  */
-public interface CreationTimedEntity {
+public interface CreationTimeStampedEntity {
 
+    /**
+     * Get the time when the entity was created.
+     * 
+     * @return
+     */
 	public long getCreated();
 
+	/**
+	 * Set the time when the entity was created.
+	 * 
+	 * @param creationTime
+	 */
 	public void setCreated(long creationTime);
 
 }
