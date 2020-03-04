@@ -1,8 +1,8 @@
 package com.sangupta.jerry.entity;
 
 /**
- * Interface to mark properties that can be used to auto-set time when they are
- * inserted in a data store.
+ * Contract for any entity that wishes to track the creation time of the
+ * entity in the data store.
  * 
  * @author sangupta
  *
