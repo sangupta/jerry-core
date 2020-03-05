@@ -20,12 +20,8 @@ out into the `jerry-core` project.
 
 The library is tested on the following JDK versions:
 
-* Oracle JDK 11
-* Oracle JDK 9
-* Open JDK 11
-* Open JDK 10
-* Open JDK 9
-* Open JDK 8
+* Oracle JDK 8, 9, 11, 13
+* Open JDK 8, 9, 10, 11, 12, 13
 
 ## Change Log
 
