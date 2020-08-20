@@ -24,60 +24,95 @@ package com.sangupta.jerry.exceptions;
 import com.sangupta.jerry.constants.HttpStatusCode;
 
 /**
- * Exception that can be used to represent HTTP based exceptions
- * like in REST calls.
- *  
+ * Exception that can be used to represent HTTP based exceptions like in REST
+ * calls.
+ * 
  * @author sangupta
+ * 
  * @since 3.1.0
  */
 public class HttpException extends RuntimeException {
 
-	/**
-	 * Generated via Eclipse
-	 */
-	private static final long serialVersionUID = -3852079813023916088L;
+    /**
+     * Generated via Eclipse
+     */
+    private static final long serialVersionUID = -3852079813023916088L;
 
-	/**
-	 * The http code that this error represents
-	 */
-	public final int httpCode;
+    /**
+     * The http code that this error represents
+     */
+    public final int httpCode;
 
-	/**
-	 * The message that is being carried by this exception instance
-	 */
-	private String message;
+    /**
+     * The message that is being carried by this exception instance
+     */
+    private String message;
 
-	/**
-	 * Convenience constructor
-	 * 
-	 * @param code the {@link HttpStatusCode} that this exception represents
-	 * 
-	 */
-	public HttpException(int code) {
-		this.httpCode = code;
-	}
+    /**
+     * Convenience constructor
+     * 
+     * @param code the {@link HttpStatusCode} that this exception represents
+     * 
+     */
+    public HttpException(int code) {
+        this.httpCode = code;
+    }
 
-	/**
-	 * Convenience constructor
-	 * 
-	 * @param code    the {@link HttpStatusCode} that this exception represents
-	 * 
-	 * @param message the message that needs to be carried
-	 */
-	public HttpException(int code, String message) {
-		this.httpCode = code;
-		this.message = message;
-	}
+    /**
+     * Convenience constructor
+     * 
+     * @param code    the {@link HttpStatusCode} that this exception represents
+     * 
+     * @param message the message that needs to be carried
+     */
+    public HttpException(int code, String message) {
+        super(message);
 
-	// Usual accessors follow
+        this.httpCode = code;
+        this.message = message;
+    }
 
-	/**
-	 * /**
-	 * 
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
+    /**
+     * 
+     * @param code
+     * @param message
+     * @param throwable
+     * 
+     * @since 4.0.0
+     */
+    public HttpException(int code, String message, Throwable throwable) {
+        super(message, throwable);
+
+        this.httpCode = code;
+        this.message = message;
+    }
+
+    /**
+     * 
+     * @param code
+     * @param message
+     * @param throwable
+     * @param enableSuppression
+     * @param writableStackTrace
+     * 
+     * @since 4.0.0
+     */
+    public HttpException(int code, String message, Throwable throwable, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, throwable, enableSuppression, writableStackTrace);
+
+        this.httpCode = code;
+        this.message = message;
+    }
+
+    // Usual accessors follow
+
+    /**
+     * /**
+     * 
+     * @return the message
+     */
+    public String getMessage() {
+        return message;
+    }
 
 }
