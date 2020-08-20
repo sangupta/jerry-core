@@ -48,199 +48,270 @@ import net.jcip.annotations.ThreadSafe;
 @ThreadSafe
 public class SimpleMultiMap<K, V> {
 
-	/**
-	 * The backing {@link ConcurrentHashMap}
-	 */
-	private final ConcurrentMap<K, List<V>> map = new ConcurrentHashMap<K, List<V>>();
+    /**
+     * The backing {@link ConcurrentHashMap}
+     */
+    private final ConcurrentMap<K, List<V>> map;
 
-	/**
-	 * Return the number of keys stored in the map.
-	 *
-	 * @return the size of map
-	 */
-	public int size() {
-		return this.map.size();
-	}
+    /**
+     * Default constructor using default construction of {@link ConcurrentHashMap}
+     */
+    public SimpleMultiMap() {
+        map = new ConcurrentHashMap<K, List<V>>();
+    }
 
-	/**
-	 * Check if there are any keys stored in this map or not
-	 *
-	 * @return <code>true</code> if no keys are present, <code>false</code>
-	 *         otherwise
-	 */
-	public boolean isEmpty() {
-		return this.map.isEmpty();
-	}
+    /**
+     * Create a new instance of {@link SimpleMultiMap} using given parameters for
+     * the underlying {@link ConcurrentHashMap} instance.
+     * 
+     * @param initialCapacity The implementation performs internal sizing to
+     *                        accommodate this many elements.
+     * 
+     * @throws IllegalArgumentException if the initial capacity of elements is
+     *                                  negative
+     * 
+     * @since 4.0.0
+     */
+    public SimpleMultiMap(int initialCapacity) {
+        map = new ConcurrentHashMap<K, List<V>>(initialCapacity);
+    }
 
-	/**
-	 * Check if the given key is present in the map or not
-	 *
-	 * @param key
-	 *            the key being looked for
-	 *
-	 * @return <code>true</code> if key is present, <code>false</code> otherwise
-	 */
-	public boolean containsKey(K key) {
-		return this.map.containsKey(key);
-	}
+    /**
+     * Create a new instance of {@link SimpleMultiMap} using given parameters for
+     * the underlying {@link ConcurrentHashMap} instance.
+     * 
+     * @param initialCapacity the initial capacity. The implementation performs
+     *                        internal sizing to accommodate this many elements,
+     *                        given the specified load factor.
+     * 
+     * @param loadFactor      the load factor (table density) for establishing the
+     *                        initial table size
+     * 
+     * @throws IllegalArgumentException if the initial capacity of elements is
+     *                                  negative or the load factor is nonpositive
+     * 
+     * @since 4.0.0
+     */
+    public SimpleMultiMap(int initialCapacity, float loadFactor) {
+        map = new ConcurrentHashMap<K, List<V>>(initialCapacity, loadFactor);
+    }
 
-	/**
-	 * Return the list of all values stored against the key
-	 *
-	 * @param key
-	 *            the key being looked for
-	 *
-	 * @return the list of all values, <code>null</code> otherwise
-	 */
-	public List<V> getValues(K key) {
-		if(key == null) {
-			return null;
-		}
-		
-		return this.map.get(key);
-	}
-	
-	/**
-	 * Return the very first element from all the values stored against the key
-	 * 
-	 * @param key
-	 *            the key being looked for
-	 * 
-	 * @return the very first value, <code>null</code> otherwise
-	 */
-	public V getOne(K key) {
-		List<V> values = this.getValues(key);
-		if(values == null) {
-			return null;
-		}
-		
-		if(values.isEmpty()) {
-			return null;
-		}
-		
-		return values.get(0);
-	}
-	
-	/**
-	 * Replace the value present at the key with the new value. At the end of
-	 * the operation, only given value exists against the key and all previous
-	 * values have been removed.
-	 * 
-	 * @param key
-	 *            the key to replace values for
-	 * 
-	 * @param value
-	 *            the value to put against the key
-	 * 
-	 * @return the {@link List} of previous values stored against the key, or
-	 *         <code>null</code> if the key was not present
-	 */
-	public List<V> replace(K key, V value) {
-		List<V> values = new ArrayList<V>();
-		values.add(value);
+    /**
+     * Create a new instance of {@link SimpleMultiMap} using given parameters for
+     * the underlying {@link ConcurrentHashMap} instance.
+     * 
+     * @param initialCapacity  the initial capacity. The implementation performs
+     *                         internal sizing to accommodate this many elements,
+     *                         given the specified load factor.
+     * 
+     * @param loadFactor       the load factor (table density) for establishing the
+     *                         initial table size
+     * 
+     * @param concurrencyLevel the estimated number of concurrently updating
+     *                         threads. The implementation may use this value as a
+     *                         sizing hint.
+     * 
+     * @throws IllegalArgumentException if the initial capacity is negative or the
+     *                                  load factor or concurrencyLevel are
+     *                                  nonpositive
+     * 
+     * @since 4.0.0
+     */
+    public SimpleMultiMap(int initialCapacity, float loadFactor, int concurrencyLevel) {
+        map = new ConcurrentHashMap<K, List<V>>(initialCapacity, loadFactor, concurrencyLevel);
+    }
 
-		return this.map.put(key, values);
-	}
-	
-	/**
-	 * Return the number of values stored against the given key.
-	 * 
-	 * @param key
-	 *            the key to check for
-	 * 
-	 * @return the number of values stored, <code>zero</code> otherwise
-	 */
-	public int numValues(K key) {
-		List<V> values = this.getValues(key);
-		if(values == null) {
-			return 0;
-		}
-		
-		return values.size();
-	}
+    /**
+     * Initialize this {@link SimpleMultiMap} using another instance of
+     * {@link SimpleMultiMap}
+     * 
+     * @param initialMap the initial state of this map
+     * 
+     * @since 4.0.0
+     */
+    public SimpleMultiMap(SimpleMultiMap<K, V> initialMap) {
+        map = new ConcurrentHashMap<K, List<V>>(initialMap.map);
+    }
 
-	/**
-	 * Store the given value object against the key.
-	 *
-	 * @param key
-	 *            the key for mapping
-	 *
-	 * @param value
-	 *            the value to be stored
-	 */
-	public void put(K key, V value) {
-		List<V> values;
-		if(this.map.containsKey(key)) {
-			values = this.map.get(key);
-			if(values != null) {
-				values.add(value);
-				return;
-			}
-		}
+    /**
+     * Return the number of keys stored in the map.
+     *
+     * @return the size of map
+     */
+    public int size() {
+        return this.map.size();
+    }
 
-		// no value
-		values = new ArrayList<V>();
-		values.add(value);
+    /**
+     * Check if there are any keys stored in this map or not
+     *
+     * @return <code>true</code> if no keys are present, <code>false</code>
+     *         otherwise
+     */
+    public boolean isEmpty() {
+        return this.map.isEmpty();
+    }
 
-		values = this.map.putIfAbsent(key, values);
-		if(values == null) {
-			// added successfully
-			return;
-		}
+    /**
+     * Check if the given key is present in the map or not
+     *
+     * @param key the key being looked for
+     *
+     * @return <code>true</code> if key is present, <code>false</code> otherwise
+     */
+    public boolean containsKey(K key) {
+        return this.map.containsKey(key);
+    }
 
-		values.add(value);
-	}
-	
-	/**
-	 * Remove and return all values associated with the given key.
-	 *
-	 * @param key
-	 *            the key to remove
-	 *
-	 * @return the list of values stored against the removed key
-	 */
-	public List<V> remove(K key) {
-		return this.map.remove(key);
-	}
+    /**
+     * Return the list of all values stored against the key
+     *
+     * @param key the key being looked for
+     *
+     * @return the list of all values, <code>null</code> otherwise
+     */
+    public List<V> getValues(K key) {
+        if (key == null) {
+            return null;
+        }
 
-	/**
-	 * Return a {@link Set} of all keys in this map.
-	 *
-	 * @return all the keys in the map
-	 */
-	public Set<K> keySet() {
-		return this.map.keySet();
-	}
+        return this.map.get(key);
+    }
 
-	/**
-	 * Clear all keys from this map.
-	 *
-	 */
-	public void clear() {
-		this.map.clear();
-	}
+    /**
+     * Return the very first element from all the values stored against the key
+     * 
+     * @param key the key being looked for
+     * 
+     * @return the very first value, <code>null</code> otherwise
+     */
+    public V getOne(K key) {
+        List<V> values = this.getValues(key);
+        if (values == null) {
+            return null;
+        }
 
-	@Override
-	public int hashCode() {
-		return this.map.hashCode();
-	}
+        if (values.isEmpty()) {
+            return null;
+        }
 
-	@Override
-	public boolean equals(Object obj) {
-		if(obj == null) {
-			return false;
-		}
-		
-		if(this == obj) {
-			return true;
-		}
-		
-		if(!(map instanceof SimpleMultiMap)) {
-			return false;
-		}
-		
-		SimpleMultiMap<?, ?> map = (SimpleMultiMap<?, ?>) obj;
-		return this.map.equals(map.map);
-	}
+        return values.get(0);
+    }
+
+    /**
+     * Replace the value present at the key with the new value. At the end of the
+     * operation, only given value exists against the key and all previous values
+     * have been removed.
+     * 
+     * @param key   the key to replace values for
+     * 
+     * @param value the value to put against the key
+     * 
+     * @return the {@link List} of previous values stored against the key, or
+     *         <code>null</code> if the key was not present
+     */
+    public List<V> replace(K key, V value) {
+        List<V> values = new ArrayList<V>();
+        values.add(value);
+
+        return this.map.put(key, values);
+    }
+
+    /**
+     * Return the number of values stored against the given key.
+     * 
+     * @param key the key to check for
+     * 
+     * @return the number of values stored, <code>zero</code> otherwise
+     */
+    public int numValues(K key) {
+        List<V> values = this.getValues(key);
+        if (values == null) {
+            return 0;
+        }
+
+        return values.size();
+    }
+
+    /**
+     * Store the given value object against the key.
+     *
+     * @param key   the key for mapping
+     *
+     * @param value the value to be stored
+     */
+    public void put(K key, V value) {
+        List<V> values;
+        if (this.map.containsKey(key)) {
+            values = this.map.get(key);
+            if (values != null) {
+                values.add(value);
+                return;
+            }
+        }
+
+        // no value
+        values = new ArrayList<V>();
+        values.add(value);
+
+        values = this.map.putIfAbsent(key, values);
+        if (values == null) {
+            // added successfully
+            return;
+        }
+
+        values.add(value);
+    }
+
+    /**
+     * Remove and return all values associated with the given key.
+     *
+     * @param key the key to remove
+     *
+     * @return the list of values stored against the removed key
+     */
+    public List<V> remove(K key) {
+        return this.map.remove(key);
+    }
+
+    /**
+     * Return a {@link Set} of all keys in this map.
+     *
+     * @return all the keys in the map
+     */
+    public Set<K> keySet() {
+        return this.map.keySet();
+    }
+
+    /**
+     * Clear all keys from this map.
+     *
+     */
+    public void clear() {
+        this.map.clear();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.map.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (!(map instanceof SimpleMultiMap)) {
+            return false;
+        }
+
+        SimpleMultiMap<?, ?> map = (SimpleMultiMap<?, ?>) obj;
+        return this.map.equals(map.map);
+    }
 
 }
