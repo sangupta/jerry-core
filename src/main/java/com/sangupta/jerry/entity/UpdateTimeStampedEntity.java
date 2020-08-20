@@ -6,11 +6,13 @@ package com.sangupta.jerry.entity;
  * 
  * @author sangupta
  * 
+ * @since 4.0.0
+ * 
  */
 public interface UpdateTimeStampedEntity {
 
-    public long getUpdated();
+    public long getUpdateTime();
 
-    public void setUpdated(long updatedTime);
+    public void setUpdateTime(long updatedTime);
 
 }
