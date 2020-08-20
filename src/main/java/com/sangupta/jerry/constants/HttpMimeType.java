@@ -34,18 +34,26 @@ package com.sangupta.jerry.constants;
 public interface HttpMimeType {
 
 	// Image
+    
+    public static final String APNG_IMAGE = "image/apng";
+    
+    public static final String BMP_IMAGE = "image/bmp";
 
 	public static final String GIF_IMAGE = "image/gif";
-
-	public static final String PNG_IMAGE = "image/png";
+	
+	public static final String ICO_IMAGE = "image/ico";
 
 	public static final String JPEG_IMAGE = "image/jpeg";
 
 	public static final String JPG_IMAGE = "image/jpg";
 
+    public static final String PNG_IMAGE = "image/png";
+
 	public static final String SVG_IMAGE = "image/svg+xml";
 
 	public static final String TIFF_IMAGE = "image/tiff";
+	
+	public static final String WEBP_IMAGE = "image/webp";
 
 	// text formats
 

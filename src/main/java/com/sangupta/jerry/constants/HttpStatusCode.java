@@ -105,12 +105,20 @@ public interface HttpStatusCode {
 	public static final int REQUEST_RANGE_NOT_SATISFIABLE = 416;
 
 	public static final int EXPECTATION_FAILED = 417;
+	
+	public static final int UNPROCESSABLE_ENTITY_WEBDAV = 422;
+	
+	public static final int LOCKED_WEBDAV = 423;
+	
+	public static final int FAILED_DEPENDENCY_WEBDAV = 424;
 
 	public static final int UPGRADE_REQUIRED = 426;
 
 	public static final int PRECONDITION_REQUIRED = 428;
 
 	public static final int TOO_MANY_REQUESTS = 429;
+	
+	public static final int REQUEST_HEADER_FIELDS_TOO_LARGE = 431;
 
 	public static final int UNAVAILABLE_FOR_LEGAL_REASONS = 451;
 
@@ -128,4 +136,5 @@ public interface HttpStatusCode {
 
 	public static final int HTTP_VERSION_NOT_SUPPORTED = 505;
 
+	public static final int INSUFFICIENT_STORAGE_WEBDAV = 507;
 }
