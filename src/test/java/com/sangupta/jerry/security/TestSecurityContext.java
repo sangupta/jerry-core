@@ -39,20 +39,6 @@ public class TestSecurityContext {
 		Assert.assertNull(SecurityContext.getPrincipal());
 		Assert.assertTrue(SecurityContext.isAnonymousUser());
 
-		final UserAwarePrincipal anonymous = new UserAwarePrincipal() {
-
-			@Override public String getName() { return "anonymous"; }
-
-            @Override public String getUserID() { return "anonymous"; }
-
-            @Override public void setUserID(String userID) { }
-
-		};
-		
-		SecurityContext.setupAnonymousUserAccount(anonymous);
-		Assert.assertEquals(anonymous, SecurityContext.getPrincipal());
-		Assert.assertTrue(SecurityContext.isAnonymousUser());
-		SecurityContext.setPrincipal(anonymous);
 		Assert.assertTrue(SecurityContext.isAnonymousUser());
 
 		final UserAwarePrincipal user = new UserAwarePrincipal() {
@@ -70,7 +56,7 @@ public class TestSecurityContext {
 
 		Assert.assertFalse(SecurityContext.isAnonymousUser());
 
-		SecurityContext.clearPrincipal();
+		SecurityContext.clear();
 		Assert.assertTrue(SecurityContext.isAnonymousUser());
 	}
 

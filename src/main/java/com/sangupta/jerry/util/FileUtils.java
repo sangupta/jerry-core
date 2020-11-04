@@ -150,7 +150,7 @@ public abstract class FileUtils {
 	 *             not exists
 	 */
 	public static Tree<File> getDirTree(File dir) {
-		CheckUtils.checkDirectoryExists(dir);
+		Check.checkDirectoryExists(dir);
 
 		Tree<File> tree = new Tree<File>(dir);
 		recurseDirInternal(dir, tree);
@@ -464,7 +464,7 @@ public abstract class FileUtils {
 	 * @return the MD5 value represented as byte-array
 	 */
 	public static byte[] getMD5(File file) {
-		CheckUtils.checkFileExists(file);
+		Check.checkFileExists(file);
 
 		final MessageDigest digest;
 
@@ -517,7 +517,7 @@ public abstract class FileUtils {
 	 *             <code>null</code>
 	 */
 	public static byte[] getFileDigestValue(File file, final MessageDigest digest) {
-		CheckUtils.checkFileExists(file);
+		Check.checkFileExists(file);
 
 		if(digest == null) {
 			throw new IllegalArgumentException("MessageDigest instance cannot be null");
@@ -579,7 +579,7 @@ public abstract class FileUtils {
 			throw new IllegalArgumentException("PrintStream cannot be null");
 		}
 
-		CheckUtils.checkFileExists(file);
+		Check.checkFileExists(file);
 
 		InputStream is = null;
 		BufferedInputStream bis = null;

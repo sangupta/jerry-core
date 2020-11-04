@@ -52,8 +52,8 @@ public abstract class BitUtils {
 	 * @return <code>true</code> if bit is set, <code>false</code> otherwise
 	 */
 	public static boolean isBitSet(int value, int bit) {
-	    CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
-	    CheckUtils.checkArgument(bit <= MAX_BIT_INT, "Bit to set cannot be greater than " + MAX_BIT_INT);
+	    Check.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
+	    Check.checkArgument(bit <= MAX_BIT_INT, "Bit to set cannot be greater than " + MAX_BIT_INT);
 	    int mask = 1 << bit;
 	    return (value & mask) != 0;
 	}
@@ -70,8 +70,8 @@ public abstract class BitUtils {
 	 * @return the updated value after setting the bit
 	 */
 	public static int setBit(int value, int bit) {
-		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
-	    CheckUtils.checkArgument(bit <= MAX_BIT_INT, "Bit to set cannot be greater than " + MAX_BIT_INT);
+		Check.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
+	    Check.checkArgument(bit <= MAX_BIT_INT, "Bit to set cannot be greater than " + MAX_BIT_INT);
 		int mask = 1 << bit;
 		return value | mask;
 	}
@@ -88,8 +88,8 @@ public abstract class BitUtils {
 	 * @return the updated value after setting the bit
 	 */
 	public static int clearBit(int value, int bit) {
-		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
-	    CheckUtils.checkArgument(bit <= MAX_BIT_INT, "Bit to set cannot be greater than " + MAX_BIT_INT);
+		Check.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
+	    Check.checkArgument(bit <= MAX_BIT_INT, "Bit to set cannot be greater than " + MAX_BIT_INT);
 		int mask = ~setBit(0, bit);
 		return value & mask;
 	}
@@ -107,8 +107,8 @@ public abstract class BitUtils {
 	 *         otherwise
 	 */
 	public static boolean isBitSet(long value, int bit) {
-	    CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
-	    CheckUtils.checkArgument(bit <= MAX_BIT_LONG, "Bit to set cannot be greater than " + MAX_BIT_LONG);
+	    Check.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
+	    Check.checkArgument(bit <= MAX_BIT_LONG, "Bit to set cannot be greater than " + MAX_BIT_LONG);
 	    long mask = 1l << bit;
 	    return ((long) (value & mask)) != 0l;
 	}
@@ -125,8 +125,8 @@ public abstract class BitUtils {
 	 * @return the updated value after setting the bit
 	 */
 	public static long setBit(long value, int bit) {
-		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
-	    CheckUtils.checkArgument(bit <= MAX_BIT_LONG, "Bit to set cannot be greater than " + MAX_BIT_LONG);
+		Check.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
+	    Check.checkArgument(bit <= MAX_BIT_LONG, "Bit to set cannot be greater than " + MAX_BIT_LONG);
 		long mask = 1L << bit;
 		return value | mask;
 	}
@@ -143,8 +143,8 @@ public abstract class BitUtils {
 	 * @return the updated value after setting the bit
 	 */
 	public static long clearBit(long value, int bit) {
-		CheckUtils.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
-	    CheckUtils.checkArgument(bit <= MAX_BIT_LONG, "Bit to set cannot be greater than " + MAX_BIT_LONG);
+		Check.checkArgument(bit >= LEAST_BIT, "Bit to set cannot be less than zero");
+	    Check.checkArgument(bit <= MAX_BIT_LONG, "Bit to set cannot be greater than " + MAX_BIT_LONG);
 		long mask = ~setBit(0L, bit);
 		return value & mask;
 	}

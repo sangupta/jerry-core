@@ -33,11 +33,23 @@ import java.io.File;
  * @author sangupta
  * @since 1.2.0
  */
-public abstract class CheckUtils {
-	
-	protected CheckUtils() throws InstantiationException {
+public abstract class Check {
+    
+	protected Check() throws InstantiationException {
 		throw new InstantiationException("Instances of this class are forbidden");
 	}
+	
+	public static void notNull(Object obj, String message) {
+	    if(obj == null) {
+	        throw new IllegalArgumentException(message);
+	    }
+	}
+
+    public static void notEmpty(String str, String message) {
+        if(AssertUtils.isEmpty(str)) {
+            throw new IllegalArgumentException(message);
+        }
+    }
 
 	/**
 	 * Check whether the file represented by the given absolute file path is a
@@ -93,7 +105,7 @@ public abstract class CheckUtils {
 	 *         otherwise
 	 */
 	public static boolean checkReadableFile(File absoluteFilePath) {
-		CheckUtils.checkFileExists(absoluteFilePath);
+		Check.checkFileExists(absoluteFilePath);
 
 		if(!absoluteFilePath.canRead()) {
 			throw new IllegalArgumentException("File cannot be read");
@@ -112,7 +124,7 @@ public abstract class CheckUtils {
 	 *         <code>false</code> otherwise
 	 */
 	public static boolean checkWritableFile(File absoluteFilePath) {
-		CheckUtils.checkFileExists(absoluteFilePath);
+		Check.checkFileExists(absoluteFilePath);
 
 		if(!absoluteFilePath.canWrite()) {
 			throw new IllegalArgumentException("File cannot be written to");
@@ -131,7 +143,7 @@ public abstract class CheckUtils {
 	 *         otherwise
 	 */
 	public static boolean checkExecutableFile(File absoluteFilePath) {
-		CheckUtils.checkFileExists(absoluteFilePath);
+		Check.checkFileExists(absoluteFilePath);
 
 		if(!absoluteFilePath.canExecute()) {
 			throw new IllegalArgumentException("File cannot be executed");

@@ -1,0 +1,6 @@
+* Moved jerry.ds.bitarray to jerry.lang
+* Moved jerry.ds.refresh to jerry.refresh
+* Moved jerry.ds.mutable to jerry.lang
+* Moved jerry.ds.bound to jerry.lang
+* Remove DumpUtils in favor of GsonUtils.toJson()
+* 

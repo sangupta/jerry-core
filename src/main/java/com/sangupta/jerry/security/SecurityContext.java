@@ -41,26 +41,15 @@ public class SecurityContext {
 	 * Thread local instance to store the principal per thread
 	 */
 	private static final ThreadLocal<UserAwarePrincipal> PRINCIPAL_HOLDER = new ThreadLocal<>();
+	
+	private static final ThreadLocal<String> TOKEN_HOLDER = new ThreadLocal<>();
 
 	/**
 	 * Thread local instance to store the tenant per thread
 	 */
 	private static final ThreadLocal<String> TENANT_HOLDER = new ThreadLocal<>();
 
-	/**
-	 * The anonymous user account
-	 */
-	private static UserAwarePrincipal ANONYMOUS_USER_PRINCIPAL = null;
-
-	/**
-	 * Method that sets up the anonymous user account. If no user is assigned to the
-	 * request, the anonymous user account will be returned.
-	 *
-	 * @param principal the {@link Principal} instance to use for anonymous users
-	 */
-	public static void setupAnonymousUserAccount(UserAwarePrincipal principal) {
-		ANONYMOUS_USER_PRINCIPAL = principal;
-	}
+	private static Class<? extends UserAwarePrincipal> userClass = null;
 
 	/**
 	 * Setup a principal in this context.
@@ -81,6 +70,10 @@ public class SecurityContext {
 	public static void setTenant(String tenant) {
 		TENANT_HOLDER.set(tenant);
 	}
+	
+	public static void setUserClass(Class<? extends UserAwarePrincipal> userClass) {
+	    SecurityContext.userClass = userClass;
+	}
 
 	/**
 	 * Return the currently set principal
@@ -89,12 +82,29 @@ public class SecurityContext {
 	 *
 	 */
 	public static UserAwarePrincipal getPrincipal() {
-	    UserAwarePrincipal principal = PRINCIPAL_HOLDER.get();
-		if (principal != null) {
-			return principal;
-		}
-
-		return ANONYMOUS_USER_PRINCIPAL;
+	    return PRINCIPAL_HOLDER.get();
+	}
+	
+	@SuppressWarnings("unchecked")
+    public static <T> T getUser() {
+	    if(SecurityContext.userClass == null) {
+	        throw new IllegalStateException("Must set the user class via SecurityContext.setUserClass()");
+	    }
+	    
+	    UserAwarePrincipal principal = getPrincipal();
+	    if(principal == null) {
+	        return null;
+	    }
+	    
+	    return (T) SecurityContext.userClass.cast(principal);
+	}
+	
+	public static String getUserToken() {
+	    return TOKEN_HOLDER.get();
+	}
+	
+	public static void setUserToken(String token) {
+	    TOKEN_HOLDER.set(token);
 	}
 	
 	/**
@@ -126,12 +136,6 @@ public class SecurityContext {
 			return true;
 		}
 
-		// the following == check is intentional for we want to compare
-		// object instances here, and not object values
-		if (principal == ANONYMOUS_USER_PRINCIPAL) {
-			return true;
-		}
-
 		return false;
 	}
 	
@@ -156,27 +160,12 @@ public class SecurityContext {
 	}
 
 	/**
-	 * Clear the security context of set principal value.
-	 *
-	 */
-	public static void clearPrincipal() {
-		PRINCIPAL_HOLDER.remove();
-	}
-
-	/**
-	 * Clear the security context of the set tenant value.
-	 * 
-	 */
-	public static void clearTenant() {
-		TENANT_HOLDER.remove();
-	}
-
-	/**
 	 * Clear the security context of the set principal and tenant values.
 	 * 
 	 */
 	public static void clear() {
 		PRINCIPAL_HOLDER.remove();
 		TENANT_HOLDER.remove();
+		TOKEN_HOLDER.remove();
 	}
 }

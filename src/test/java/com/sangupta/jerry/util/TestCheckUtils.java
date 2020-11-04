@@ -29,7 +29,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 /**
- * Unit tests for {@link CheckUtils} class
+ * Unit tests for {@link Check} class
  *
  * @author sangupta
  *
@@ -38,20 +38,20 @@ public class TestCheckUtils {
 	
 	@Test(expected = InstantiationException.class)
 	public void testConstructor() throws InstantiationException {
-		new CheckUtils() { };
+		new Check() { };
 	}
 
 	@Test
 	public void testCheckFileExists() throws IOException {
 		try {
-			CheckUtils.checkFileExists((String) null);
+			Check.checkFileExists((String) null);
 			Assert.assertTrue(false);
 		} catch(IllegalArgumentException e) {
 			Assert.assertTrue(true);
 		}
 
 		File file = File.createTempFile("test-check", ".file");
-		Assert.assertTrue(CheckUtils.checkFileExists(file.getAbsolutePath()));
+		Assert.assertTrue(Check.checkFileExists(file.getAbsolutePath()));
 	}
 
 }

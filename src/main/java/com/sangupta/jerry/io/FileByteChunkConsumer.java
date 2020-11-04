@@ -28,11 +28,11 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import com.sangupta.jerry.consume.GenericConsumer;
-import com.sangupta.jerry.util.CheckUtils;
+import com.sangupta.jerry.util.Check;
 import com.sangupta.jerry.util.IOUtils;
 
 /**
- * A simple file reader that read a given file chunk by chunk and
+ * A simple file reader that reads a given file chunk by chunk and
  * pass it to a {@link GenericConsumer} of bytes so that the file
  * can be consumed.
  *
@@ -48,7 +48,7 @@ public class FileByteChunkConsumer {
 	private final GenericConsumer<byte[]> consumer;
 
 	public FileByteChunkConsumer(File file, GenericConsumer<byte[]> consumer) {
-		CheckUtils.checkReadableFile(file);
+		Check.checkReadableFile(file);
 
 		if(consumer == null) {
 			throw new IllegalArgumentException("Consumer cannot be null");
