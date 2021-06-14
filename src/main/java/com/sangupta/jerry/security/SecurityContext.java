@@ -42,6 +42,9 @@ public class SecurityContext {
 	 */
 	private static final ThreadLocal<UserAwarePrincipal> PRINCIPAL_HOLDER = new ThreadLocal<>();
 	
+	/**
+	 * Thread local instance to store the auth token if provided by the header
+	 */
 	private static final ThreadLocal<String> TOKEN_HOLDER = new ThreadLocal<>();
 
 	/**
@@ -49,6 +52,9 @@ public class SecurityContext {
 	 */
 	private static final ThreadLocal<String> TENANT_HOLDER = new ThreadLocal<>();
 
+	/**
+	 * 
+	 */
 	private static Class<? extends UserAwarePrincipal> userClass = null;
 
 	/**
@@ -157,6 +163,10 @@ public class SecurityContext {
 		}
 		
 		return current.equals(tenant);
+	}
+	
+	public static void clearPrincipal() {
+		PRINCIPAL_HOLDER.remove();
 	}
 
 	/**

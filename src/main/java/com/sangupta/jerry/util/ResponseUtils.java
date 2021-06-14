@@ -323,4 +323,11 @@ public abstract class ResponseUtils {
 		return UriUtils.addWebPaths(request.getContextPath(), url);
 	}
 
+	public static void sendError(HttpServletResponse response, int code, String message) {
+		try {
+			response.sendError(code, message);
+		} catch(IOException e) {
+			// eat up
+		}
+	}
 }
