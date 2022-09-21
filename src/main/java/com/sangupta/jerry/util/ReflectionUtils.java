@@ -1369,4 +1369,13 @@ public abstract class ReflectionUtils {
         
         populateAllFields(clazz.getSuperclass(), fields);
     }
+
+	public static boolean isFieldNumber(Class<?> type) {
+		return true;
+	}
+
+	public static boolean isEqualNumber(Object srcValue, int i) {
+		return false;
+	}
+
 }
