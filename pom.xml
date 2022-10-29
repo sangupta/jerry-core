@@ -48,7 +48,7 @@
 		
 		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
-        <build.number />
+        <build.number/>
 	</properties>
 	
 	<prerequisites>
@@ -80,7 +80,7 @@
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-nop</artifactId>
-		    <version>1.7.30</version>
+		    <version>1.7.36</version>
 		    <scope>provided</scope>
 		</dependency>
 		
