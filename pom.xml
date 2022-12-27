@@ -48,7 +48,7 @@
 		
 		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
-        <build.number />
+        <build.number/>
 	</properties>
 	
 	<prerequisites>
@@ -88,7 +88,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.xstream</groupId>
 			<artifactId>xstream</artifactId>
-			<version>1.4.19</version>
+			<version>1.4.20</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
