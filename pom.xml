@@ -48,7 +48,7 @@
 		
 		<maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
-        <build.number />
+        <build.number/>
 	</properties>
 	
 	<prerequisites>
@@ -101,7 +101,7 @@
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 			<artifactId>commons-compress</artifactId>
-			<version>1.21</version>
+			<version>1.26.0</version>
 			<scope>provided</scope>
 		</dependency>
 
